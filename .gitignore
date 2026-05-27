@@ -30,3 +30,6 @@ ehthumbs.db
 # Agent/Gemini files
 .gemini/
 .gemini*
+
+# Heavy assets and raw files
+raw-assets/
