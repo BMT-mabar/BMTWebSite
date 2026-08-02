@@ -1,0 +1,377 @@
+
+=== PAGE 1 ===
+1 
+ 
+ 
+ 
+מכון המחקר, מסונף לפקולטה לרפואה  
+ע"ש עזריאלי, אוניברסיטת בר אילן 
+מנהל: פרופ' אבי פרץ 
+ 
+Influenza A+B Lab-On-Time™ Test Device (BMT 51088) 
+CLINICAL VALIDATION REPORT 
+ 
+The purpose of the test is to validate the performance of BMT’s Influenza A+B Lab-On-Time™ Test Device 
+and evaluate the usability of this rapid test in the hands of untrained users and their ability to properly 
+perform it based on the provided IFU and to correctly interpret its result. 
+ 
+1. OBJECTIVES 
+• Direct comparison between the results obtained using the Influenza A+B  Rapid Test 
+Device with freshly obtained patient nasal samples and results obtained with matching 
+samples using a lab-based PCR test (the TaqManTM SARS-CoV-2, Flu A, Flu B Multiplex 
+Assay (AppliedBiosystems, Waltham, MA, USA)). 
+• Evaluate the usability of BMT’s Influenza A+B Lab -On-Time™ Test Device  for the purpose of 
+recommending this device for self-testing in the hands of lay untrained users. 
+ 
+2. PERFORMANCE OF TESTING 
+The test was validated at the Tzafon Medical Center, Poriya, Israel in Feb-Mar 2023 under the supervision 
+of Prof. Avi Peretz. The test was performed according to the test manufacturer's protocol (IFU). The 
+comparison was made with the TaqManTM SARS-CoV-2, Flu A, Flu B Multiplex Assay (AppliedBiosystems) 
+PCR kit in the lab using the QuantStudio™ 5 Real-Time PCR System (Thermo Scientific, Waltham, MA, 
+USA). 
+The test was performed by a lab technician, simulating self-testing conditions by collecting a nasal sample 
+from the patient’s nose and following the protocol provided in the IFU. A matching nasal specimen was 
+collected and used for PCR validation of the results. 
+The lab technician didn’t have any previous experience with performing this test and was therefore only 
+exposed to and educated by the IFU. This assured that the technician operated the test as a lay person 
+would, thereby simulating self-testing. 
+ 
+3. RESULTS 
+Table1 – Lab-On-Time Influenza A+B Rapid Test Results compared with the TaqManTM SARS-CoV-2, Flu A, 
+Flu B Multiplex Assay  Test Results 
+ 
+Test 
+ 
+n 
+Rapid Test Results % Agreement (With 
+PCR Test Results) Negative Positive 
+PCR 
+Test 
+Negative 100 100 0 100.0% 
+Positive 70 17 53 75.7% 
+Total 170 117 53  
+ 
+=== PAGE 2 ===
+2 
+ 
+ 
+ 
+מכון המחקר, מסונף לפקולטה לרפואה  
+ע"ש עזריאלי, אוניברסיטת בר אילן 
+מנהל: פרופ' אבי פרץ 
+ 
+Table2 – Summary of Lab-On-Time Influenza A+B Test Results 
+ 
+ 
+ 
+ 
+ 
+ 
+Next, the Lab-On-Time Influenza A+B Test sensitivity was correlated with t he CT values obtained in the 
+Influenza A+B PCR test results for the PCR -positive samples. The results of this comparison are 
+summarized in Table 3. 
+ 
+Table3 – Summary of Lab-On-Time Influenza A+B Test sensitivity according to PCR CT value range 
+CT Values Positive Negative Total Sensitivity 
+<20 10 0 10 100% 
+20-25 18 0 18 100% 
+25-30 9 2 11 81.8% 
+30-35 16 8 24 66.7% 
+>35 0 7 7 0.0% 
+ 
+A different type of analysis of these results according to CT cutoff values is provided in table 4 below. 
+ 
+Table4 – Summary of Lab-On-Time Influenza A+B Test sensitivity according to CT cutoff values 
+ 
+ 
+ 
+ 
+ 
+ 
+4. OBSERVATIONS AND CONCLUSION 
+The above evaluation study compared the diagnostic test results obtained using BMT Diagnostics Lab -
+On-Time Influenza A+B Rapid Test Device with the diagnostic test results obtained with a PCR test (the 
+TaqManTM SARS-CoV-2, Flu A, Flu B Multiplex Assay (performed in the lab on 170 nasal samples obtained 
+from healthy (100) and inf luenza patients. From this study, it is concluded that the specificity of BMT’s 
+rapid test is 100%, whereas the overall sensitivity was found to be 75.7%. 
+Further analysis performed according to PCR CT values obtained for nasal samples from influenza patients 
+demonstrated that when considering only CT cutoff values of <35 the overall sensitivity of BMT’s rapid 
+test increased to 84.1%. 
+Furthermore, full correlation was observed between influenza types (A or B) determined by the PCR test 
+and the results obtained with BMT’s rapid test. 
+Sensitivity 75.7% 
+Specificity 100.0% 
+PPV 1.00 
+NPV 0.86 
+CT Cutoff value Test sensitivity 
+<25 100.0% 
+<30 94.9% 
+<35 84.1% 
+=== PAGE 3 ===
+3 
+ 
+ 
+ 
+מכון המחקר, מסונף לפקולטה לרפואה  
+ע"ש עזריאלי, אוניברסיטת בר אילן 
+מנהל: פרופ' אבי פרץ 
+Finally, BMT’s rapid test device has been shown to be very user friendly. Test performance is very intuitive 
+and involves only a single step of sample collection and placement of the test device in the provided, pre-
+filled reagent tub e. Test results were clear and obtained in less than 10 min following nasal sample 
+collection by the device. 
+It is my professional opinion that BMT Diagnostics Lab-On-Time Influenza A+B Rapid Test Device could be 
+used by the general population as a self-test due to its simplicity, ease of use, and clear results reading. 
+ 
+ 
+Signature: 
+ 
+ 
+ 
+ 
+ 
+_______________________________ 
+Prof. Avi Peretz 
+Director Research Institute and Clinical Microbiology Laboratory 
+Tzafon Medical Center, Poriya, Israel 
+ 
+ 
+ 
+ 
+
+=== PAGE 4 ===
+4 
+ 
+ 
+ 
+מכון המחקר, מסונף לפקולטה לרפואה  
+ע"ש עזריאלי, אוניברסיטת בר אילן 
+מנהל: פרופ' אבי פרץ 
+Appendix – Results 
+ 
+Table 1 – PCR-positive subjects 
+Sample 
+ID   
+Antigen Test 
+Result  PCR FLU A PCR FLU B CT Value CT<20 
+CT 20-
+25 
+CT 25-
+30 
+CT 30-
+35 CT>35 
+FLU104 Positive  Positive  Negative  26.2     P     
+FLU105 Positive  Positive  Negative  31.6       P   
+FLU106 Positive  Positive  Negative  28.2     P     
+FLU107 Positive  Negative Positive  33.1       P   
+FLU108 Positive  Positive  Negative  30.6       P   
+FLU109 Negative Positive  Negative  34.3       N   
+FLU110 Positive  Positive  Negative  16.8 P         
+FLU111 Negative Negative Positive  31.2       N   
+FLU112 Negative Negative Positive  29.7     N     
+FLU113 Negative Positive  Negative  35.3         N 
+FLU114 Positive  Positive  Negative  21.8   P       
+FLU115 Negative Negative Positive  30.2       N   
+FLU116 Positive  Positive  Negative  27.4     P     
+FLU117 Positive  Positive  Negative  22.8   P       
+FLU118 Negative Positive  Negative  33.9       N   
+FLU119 Negative Negative Positive  30.8       N   
+FLU120 Negative Negative Positive  35.2         N 
+FLU121 Positive  Positive  Negative  24.3   P       
+FLU122 Negative Positive  Negative  36.8         N 
+FLU123 Positive  Positive  Negative  18.5 P         
+FLU124 Positive  Positive  Negative  31.7       P   
+FLU125 Positive  Positive  Negative  23.2   P       
+FLU126 Positive  Positive  Negative  31.2       P   
+FLU127 Positive  Positive  Negative  24.6   P       
+FLU128 Positive Positive  Negative  19.2 P         
+FLU129 Negative Positive  Negative  35.8         N 
+FLU130 Negative Positive  Negative  33.9       N   
+FLU131 Positive  Positive  Negative  28.5     P     
+FLU132 Positive  Positive  Negative  24.8   P       
+FLU133 Positive  Positive  Negative  18.6 P         
+FLU134 Negative Positive  Negative  35.8         N 
+FLU135 Positive  Positive  Negative  24.6   P       
+FLU136 Positive  Positive  Negative 31.8       P   
+=== PAGE 5 ===
+5 
+ 
+ 
+ 
+מכון המחקר, מסונף לפקולטה לרפואה  
+ע"ש עזריאלי, אוניברסיטת בר אילן 
+מנהל: פרופ' אבי פרץ 
+FLU137 Positive  Positive  Negative 30.2       P   
+FLU138 Positive  Positive  Negative 21.5   P       
+FLU139 Positive  Positive  Negative 30.1       P   
+FLU140 Positive  Positive  Negative 24.3   P       
+FLU141 Positive  Negative Positive  19.5 P         
+FLU142 Positive  Positive  Negative 22.7   P       
+FLU143 Positive  Positive  Negative 24.6   P       
+FLU144 Negative Positive  Negative 36.2         N 
+FLU145 Positive  Positive  Negative 30.2       P   
+FLU146 Positive  Positive  Negative 18.5 P         
+FLU147 Positive  Positive  Negative 24.9   P       
+FLU148 Positive  Positive  Negative 23.2   P       
+FLU149 Positive  Positive  Negative 18.6 P         
+FLU150 Positive  Positive  Negative 30.8       P   
+FLU151 Positive  Positive  Negative 31.6       P   
+FLU152 Positive  Positive  Negative 19.5 P         
+FLU153 Positive  Negative Positive  22.7   P       
+FLU154 Positive  Negative Positive  29.6     P     
+FLU155 Negative Positive  Negative 33.8       N   
+FLU156 Positive  Positive  Negative  22.6   P       
+FLU157 Negative Positive  Negative 28.3     N     
+FLU158 Positive  Positive  Negative 30.1       P   
+FLU159 Positive  Positive  Negative 28.2     P     
+FLU160 Positive  Positive  Negative 26.2     P     
+FLU161 Positive  Positive  Negative 30.6       P   
+FLU162 Positive  Positive  Negative 22.5   P       
+FLU163 Positive  Positive  Negative 28.3     P     
+FLU164 Positive  Positive  Negative 18.6 P         
+FLU165 Positive  Positive  Negative 22.6   P       
+FLU166 Positive Positive  Negative 31.3       P   
+FLU167 Negative Negative Positive  35.2         N 
+FLU168 Positive  Positive  Negative 33.6       P   
+FLU169 Positive  Positive  Negative 28.6     P     
+FLU170 Positive  Positive  Negative 30.8       P   
+FLU171 Negative Positive  Negative 34.8       N   
+FLU172 Positive  Positive  Negative  22.3   P       
+FLU173 Positive  Negative Positive  19.5 P         
+ 
+ 
+=== PAGE 6 ===
+6 
+ 
+ 
+ 
+מכון המחקר, מסונף לפקולטה לרפואה  
+ע"ש עזריאלי, אוניברסיטת בר אילן 
+מנהל: פרופ' אבי פרץ 
+ 
+ 
+ 
+ 
+ 
+Table 2 – PCR-negative subjects 
+Sample ID  PCR Test Result Antigen Test Result  
+FLU1 Negative Negative 
+FLU2 Negative Negative 
+FLU3 Negative Negative 
+FLU4 Negative Negative 
+FLU5 Negative Negative 
+FLU6 Negative Negative 
+FLU7 Negative Negative 
+FLU8 Negative Negative 
+FLU9 Negative Negative 
+FLU10 Negative Negative 
+FLU11 Negative Negative 
+FLU12 Negative Negative 
+FLU13 Negative Negative 
+FLU14 Negative Negative 
+FLU15 Negative Negative 
+FLU16 Negative Negative 
+FLU17 Negative Negative 
+FLU18 Negative Negative 
+FLU19 Negative Negative 
+FLU20 Negative Negative 
+FLU21 Negative Negative 
+FLU22 Negative Negative 
+FLU23 Negative Negative 
+FLU24 Negative Negative 
+FLU25 Negative Negative 
+FLU26 Negative Negative 
+FLU27 Negative Negative 
+FLU28 Negative Negative 
+FLU29 Negative Negative 
+FLU30 Negative Negative 
+FLU31 Negative Negative 
+FLU32 Negative Negative 
+FLU33 Negative Negative 
+=== PAGE 7 ===
+7 
+ 
+ 
+ 
+מכון המחקר, מסונף לפקולטה לרפואה  
+ע"ש עזריאלי, אוניברסיטת בר אילן 
+מנהל: פרופ' אבי פרץ 
+FLU34 Negative Negative 
+FLU35 Negative Negative 
+FLU36 Negative Negative 
+FLU37 Negative Negative 
+FLU38 Negative Negative 
+FLU39 Negative Negative 
+FLU40 Negative Negative 
+FLU41 Negative Negative 
+FLU42 Negative Negative 
+FLU43 Negative Negative 
+FLU44 Negative Negative 
+FLU45 Negative Negative 
+FLU46 Negative Negative 
+FLU47 Negative Negative 
+FLU48 Negative Negative 
+FLU49 Negative Negative 
+FLU50 Negative Negative 
+FLU51 Negative Negative 
+FLU52 Negative Negative 
+FLU53 Negative Negative 
+FLU54 Negative Negative 
+FLU55 Negative Negative 
+FLU56 Negative Negative 
+FLU57 Negative Negative 
+FLU58 Negative Negative 
+FLU59 Negative Negative 
+FLU60 Negative Negative 
+FLU61 Negative Negative 
+FLU62 Negative Negative 
+FLU63 Negative Negative 
+FLU64 Negative Negative 
+FLU65 Negative Negative 
+FLU66 Negative Negative 
+FLU67 Negative Negative 
+FLU68 Negative Negative 
+FLU69 Negative Negative 
+FLU70 Negative Negative 
+FLU71 Negative Negative 
+FLU72 Negative Negative 
+=== PAGE 8 ===
+8 
+ 
+ 
+ 
+מכון המחקר, מסונף לפקולטה לרפואה  
+ע"ש עזריאלי, אוניברסיטת בר אילן 
+מנהל: פרופ' אבי פרץ 
+FLU73 Negative Negative 
+FLU74 Negative Negative 
+FLU75 Negative Negative 
+FLU76 Negative Negative 
+FLU77 Negative Negative 
+FLU78 Negative Negative 
+FLU79 Negative Negative 
+FLU80 Negative Negative 
+FLU81 Negative Negative 
+FLU82 Negative Negative 
+FLU83 Negative Negative 
+FLU84 Negative Negative 
+FLU85 Negative Negative 
+FLU86 Negative Negative 
+FLU87 Negative Negative 
+FLU88 Negative Negative 
+FLU89 Negative Negative 
+FLU90 Negative Negative 
+FLU91 Negative Negative 
+FLU92 Negative Negative 
+FLU93 Negative Negative 
+FLU94 Negative Negative 
+FLU95 Negative Negative 
+FLU96 Negative Negative 
+FLU97 Negative Negative 
+FLU98 Negative Negative 
+FLU99 Negative Negative 
+FLU100 Negative Negative 
+FLU101 Negative Negative 
+FLU102 Negative Negative 
+FLU103 Negative Negative 
+ 
+ 

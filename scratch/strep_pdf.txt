@@ -1,0 +1,418 @@
+
+=== PAGE 1 ===
+1 
+ 
+ 
+Streptococcus A Lab-On-Time™  Test Device (BMT 51084) 
+CLINICAL VALIDATION REPORT 
+ 
+ 
+1. OBJECTIVE 
+The purpose of the test is to validate the performance of BMT’s Streptococcus A Lab -On-Time™  Test 
+Device and evaluate the usability of this rapid test in the hands of professional users and their ability to 
+properly perform it based on the provided IFU and to correctly interpret its result. 
+ 
+2. OVERVIEW 
+Streptococcus pyogenes (Strep A) is non-motile gram-positive cocci, which contains the Lancefield group 
+A antigens that can cause serious infections such as pharyngitis, respiratory infection, impetigo,  
+endocarditis, meningitis, puerperal sepsis, and arthritis.  
+Pharyngitis (strep throat) is a common infectious disease among 5–15-year-old and characterized by the 
+rapid appearance of symptoms including: headache, fever, throat and swallowing pain and stomachache. 
+Throat inspection usually reveals erythema at the ba ck of the throat and the larynx with white effluent, 
+swollen tonsils and sometimes also painful and enlarged neck lymph nodes. Left untreated, strep A 
+infections may lead to serious complications, including rheumatic fever and peritonsillar abscess. T he 
+traditional identification procedures for Group A Streptococci infection involve the isolation and 
+identification of viable organisms using techniques that require 24 to 48 hours or longer.  
+The Strep Lab-on-TimeTM Strep A Rapid Test is an integrated device for throat swab sample collection and 
+analysis, employing a qualitative lateral flow immunoassay for the rapid (5-10min) detection of Strep A 
+carbohydrate antigen. In this test, antibody specific to Strep A carbohydrate antigen is coated on the test 
+line region of the test. During testing, the extracted throat swab specimen reacts with an antibody to 
+Strep A that is coated onto  gold nano particles. The mixture migrates by capillary forces along the 
+membrane to react with the antibody to Strep A on the membrane and generate a colored line in the test 
+line region. The presence of this color ed line in the test line region indicates a positive result, while its 
+absence indicates a negative result. To serve as a procedural control, a colored line will always appear in 
+the control li ne region, indicating that  proper volume of specimen has been added and membrane 
+wicking has occurred.  This test is qualitative, displaying an analytical sensitivity (limit of detection) of 
+1*10^5 Strep A organisms. It is not intended for the quantitative determination of Strep A bacteria. 
+Use of this device in the hospital, clinic, or even self -use by the patient will provide a rapid result 
+indicating the need for antibiotic treatment (such as by Penicillin and its derivatives) and may eliminate 
+the need for complicated, time-consuming, and expensive tests, such as PCR or microbiological culture. 
+ 
+3. SPECIFIC STUDY GOALS 
+• Directly compare between the results obtained using the Strep A Lab-On-Time™ Rapid Test Device 
+with freshly obtained throat swab samples from symptomatic patients and results obtained with 
+=== PAGE 2 ===
+2 
+ 
+ 
+matching samples using a lab-based culture procedure.  
+• Determine test sensitivity and specificity in comparison with the results obtained by the 
+microbiological laboratory.  
+• Evaluate the usability of BMT’s Strep A Test Device for the purpose of recommending this device 
+for self-testing in the hands of lay untrained users. 
+ 
+4. VALIDATION STUDY OUTLINE  
+The test was validated at the Tzafon Medical Center, Poriya, Israel in Feb-Mar 2023 under the supervision 
+of Prof. Avi Peretz (PI) using kits provided by BMT Diagnostics (BMT 51084, LOT , Expiry ).  
+Study recruitment was performed using a Consent Form that was signed by the patients. All data 
+regarding the patients was encoded and available only to the PI. Age of recruited patents was over 3 
+years, and the study was open to both women and man. Excluded from this study were individuals who 
+lack judgement or are employees/students supervised by the PI. Also excluded are patients who have 
+received antibiotics of any kind 24 (or less) prior to test performance.  
+The study was conducted on 181 patients, of which 70 were positive and 111 negatives to Strep A 
+according to the microbiological culture test. The test was performed according to the test 
+manufacturer's protocol (IFU). The comparison was made using duplicate patient samples sent to the 
+microbiological lab for culture and analysis. 
+The test was performed by a lab technician, simulating self-testing conditions by collecting a throat sample 
+from the patient by the device swab and following the protocol provided in the IFU. A matching throat swab 
+specimen was collected and used for microbiological validation of the results. 
+The lab technician didn’t have any previous experience with performing this test and was therefore only 
+exposed to and educated by the IFU. This assured that the technician operated the test as a lay person 
+would, thereby simulating self-testing. 
+The following information was collected for each recruited patient: test results (irrespective of the 
+current study), age and sex, and how long prior to the test has the patient observed fever and throat 
+pain. Test validation results will be reported to the Israeli Ministry of Health according to the clinical 
+validation protocol, including the observed test sensitivity and specificity.  
+ 
+ 
+5. TEST PERFORMANCE 
+The following picture details the Strep A Lab-On-Time Device, showing the integrated swab and results 
+window: 
+ 
+ 
+ 
+Strep A Lab-On-Time Device Components 
+
+=== PAGE 3 ===
+3 
+ 
+ 
+The Strep A Lab-On-Time device is indicated for professional use by a trained medical practitioner 
+(nurse/physician) in the physician’s office or in the lab. The test is performed by extracting the device and 
+reagent tube from their respective aluminum pou ches, followed by removing the device cap, collecting 
+the throat sample using the swab end of the device and transferring the device into the reagent tube 
+such that the swab end of the device is being soaked in the tube reagent. The device end is then mixe d 
+in the tube for around 10 seconds, followed by reading the test results in the device’s results window 
+(see also product IFU in the Appendix for additional detail).  
+ 
+6. RESULTS 
+Table1 – Lab-On-Time Strep A Rapid Test Results compared with microbiological culture: 
+Method Culture 
+Total 
+Results 
+Lab-On-Time Strep A 
+rapid test device 
+Results Positive  Few 
+colonies  Negative 
+Positive 62 0 0 62 
+Negative 2  6  111 119 
+Total results 64 6 111 181 
+ 
+As shown in the above table, some of the microbiological cultures for Strep A positive patients displayed 
+only a few (less than 10) bacterial colonies, indicating that the initial bacterial load was low.  
+ 
+Table2 – Summary of Lab-On-Time Strep A Test Results: 
+ 
+Overall Lower 
+C.I. 
+(95%) 
+Upper 
+C.I. 
+(95%) 
+ExcludingRare 
+Culture  
+Lower 
+C.I. 
+(95%) 
+Upper 
+C.I. 
+(95%) 
+Relative Sensitivity 88.6% 81.1% 96.0% 96.9% 92.6% 100.0% 
+Relative Specificity 100.0% 100.0% 100.0% 100.0% 100.0% 100.0% 
+Relative Accuracy 95.6%     98.9%     
+PPV 1.00     1.00     
+NPV 0.93     0.98     
+ 
+ 
+7. OBSERVATIONS AND CONCLUSION 
+The above evaluation study compared the diagnostic test results obtained using BMT Diagnostics Lab -
+=== PAGE 4 ===
+4 
+ 
+ 
+On-Time Strep A Rapid Test Device with culture test results obtained by the microbiological laboratory 
+using standard culture techniques performed using 181 throat swab samples obtained from healthy (111) 
+and strep A patients. From this study, it is concluded that the specificity of BMT’s rapid test is 100%, 
+whereas the overall sensitivity was found to be 88.6%. 
+Further analysis performed according to the number of strep A colonies appearing following 
+microbiological culture demonstrated that when considering only colony -rich bacterial culture, the 
+sensitivity of BMT’s rapid test increased to 96.9%. 
+BMT’s rapid test device has been shown to be very user friendly. Test performance is very intuitive and 
+involves only a single step of sample collection and placement of the test device in the provided, pre -
+filled reagent tube. Test results were clear and obtained in less than 10 min following throat sample 
+collection by the device’s swab. 
+It is my professional opinion that BMT Diagnostics Lab -On-Time Strep A Rapid Test Device is very similar 
+in its results to those obtained by bacterial culture and could be easily adopted by professional users due 
+to its simplicity, ease of use, and clear results reading. 
+ 
+ 
+Signature: 
+ 
+_______________________________ 
+Prof. Avi Peretz 
+Director Research Institute and Clinical Microbiology Clinic 
+Tzafon Medical Center, Poriya, Israel 
+ 
+ 
+ 
+ 
+
+=== PAGE 5 ===
+5 
+ 
+ 
+Appendix – Results 
+ 
+Table 1 – Culture-positive subjects 
+Sample 
+ID   
+M/F Antigen Test 
+Result   
+Culture result  Comments 
+#00 1 F Positive Positive   
+#00 2 M Positive  Positive   
+#00 3 F Negative   Positive  Poor growth 
+#00 9 F Positive  Positive  
+#00 15 M Positive  Positive   
+#00 16 M Positive  Positive   
+#00 24 M Positive  Positive   
+#00 25 F Positive Positive  
+#00 32 M Positive Positive   
+#00 33 F Positive Positive   
+#00 34 F Positive Positive   
+#00 35 M Positive Positive   
+#00 36 M Positive Positive   
+#00 37 F Positive Positive   
+#00 38 M Positive Positive   
+#00 39 F Positive Positive   
+#00 40 F Positive Positive   
+#00 41 M Positive Positive   
+#00 42 M Positive Positive   
+#00 43 F Positive Positive   
+#00 44 M Positive Positive   
+=== PAGE 6 ===
+6 
+ 
+ 
+#00 45 M Positive Positive   
+#00 46 F Positive Positive   
+#00 47 F Positive Positive   
+#00 49 M Negative Positive  Poor growth 
+#00 55 M Positive Positive   
+#00 61 F Positive Positive   
+#00 65 F Positive  Positive   
+#00 70 F Positive  Positive   
+#00 71 M Positive  Positive   
+#00 77 F Positive Positive   
+#00 82 F Positive  Positive   
+#00 85 F Positive  Positive   
+#00 86 F Positive  Positive   
+#00 87 F Positive  Positive   
+#00 88 F Positive  Positive   
+#00 89 M Positive  Positive   
+#00 90 M Negative Positive  Poor growth 
+#00 93 M Negative Positive  Poor growth 
+#00 94 F Positive  Positive   
+#00 98 M Positive Positive   
+#00 99 F Positive  Positive   
+#00 100 M Positive  Positive   
+#00 101 M Positive  Positive   
+#00 103 M Positive  Positive   
+#00 107 F Negative Positive  Rich growth, increased gag reflex observed 
+#00 112 M Positive  Positive   
+=== PAGE 7 ===
+7 
+ 
+ 
+#00 115 M Negative Positive  Poor growth 
+#00 123 M Positive  Positive   
+#00 127 M Positive Positive   
+#00 132 M Positive  Positive   
+#00 136 F Negative Positive  Rich growth 
+#00 139 M Positive  Positive   
+#00 142 F Positive Positive   
+#00 143 F Positive  Positive   
+#00 146 M Positive  Positive   
+#00 147 M Negative Positive  Poor growth, possible antibiotic treatment 
+#00 151 F Positive  Positive   
+#00 155 M Positive  Positive   
+#00 156 F Positive  Positive   
+#00 157 F Positive  Positive   
+#00 158 F Positive  Positive   
+#00 159 F Positive Positive   
+#00 161 M Positive Positive   
+#00 165 M Positive Positive   
+#00 169 M Positive Positive   
+#00 173 M Positive Positive   
+#00 175 F Positive Positive   
+#00 176 F Positive Positive   
+#00 179 F Positive Positive   
+ 
+ 
+ 
+ 
+ 
+ 
+=== PAGE 8 ===
+8 
+ 
+ 
+ 
+Table 2 – Culture-negative subjects 
+Sample 
+ID   
+M/F Antigen Test 
+Result   
+Culture result  Comments 
+#00 4 M Negative   Negative    
+#00 5 F Negative   Negative    
+#00 6 M Negative   Negative    
+#00 7 M Negative   Negative    
+#00 8 M Negative   Negative    
+#00 10 M Negative   Negative    
+#00 11 F Negative   Negative    
+#00 12 F Negative   Negative    
+#00 13 F Negative   Negative    
+#00 14 M Negative   Negative    
+#00 17 M Negative   Negative    
+#00 18 M Negative   Negative    
+#00 19 M Negative   Negative    
+#00 20 M Negative   Negative    
+#00 21 M Negative   Negative    
+#00 22 F Negative   Negative    
+#00 23 F Negative   Negative    
+#00 26 M Negative   Negative    
+#00 27 F Negative   Negative    
+#00 28 F Negative   Negative    
+#00 29 M Negative   Negative    
+#00 30 F Negative   Negative    
+#00 31 M Negative   Negative    
+=== PAGE 9 ===
+9 
+ 
+ 
+#00 48 M Negative   Negative    
+#00 50 M Negative   Negative    
+#00 51 M Negative   Negative    
+#00 52 M Negative   Negative    
+#00 53 M Negative   Negative    
+#00 54 M Negative   Negative    
+#00 56 M Negative   Negative    
+#00 57 M Negative   Negative    
+#00 58 M Negative   Negative    
+#00 59 M Negative   Negative    
+#00 60 M Negative   Negative    
+#00 62 F Negative   Negative    
+#00 63 F Negative   Negative    
+#00 64 F Negative   Negative    
+#00 66 M Negative   Negative    
+#00 67 F Negative   Negative    
+#00 68 F Negative   Negative    
+#00 69 F Negative   Negative    
+#00 72 M Negative   Negative    
+#00 73 F Negative   Negative    
+#00 74 F Negative   Negative    
+#00 75 M Negative   Negative    
+#00 76 F Negative   Negative    
+#00 78 F Negative   Negative    
+#00 79 F Negative   Negative    
+#00 80 M Negative   Negative    
+=== PAGE 10 ===
+10 
+ 
+ 
+#00 81 M Negative   Negative    
+#00 83 F Negative   Negative    
+#00 84 F Negative   Negative    
+#00 91 M Negative   Negative    
+#00 92 M Negative   Negative    
+#00 95 F Negative   Negative    
+#00 96 M Negative   Negative    
+#00 97 F Negative   Negative    
+#00 102 F Negative   Negative    
+#00 104 M Negative   Negative    
+#00 105 F Negative   Negative    
+#00 106 F Negative   Negative    
+#00 108 F Negative   Negative    
+#00 109 M Negative   Negative    
+#00 110 M Negative   Negative    
+#00 111 M Negative   Negative    
+#00 113 F Negative   Negative    
+#00 114 F Negative   Negative    
+#00 116 F Negative   Negative    
+#00 117 M Negative   Negative    
+#00 118 M Negative   Negative    
+#00 119 M Negative   Negative    
+#00 120 F Negative   Negative    
+#00 121 F Negative   Negative    
+#00 122 F Negative   Negative    
+#00 124 M Negative   Negative    
+=== PAGE 11 ===
+11 
+ 
+ 
+#00 125 F Negative   Negative    
+#00 126 M Negative   Negative    
+#00 128 M Negative   Negative    
+#00 129 M Negative   Negative    
+#00 130 M Negative   Negative    
+#00 131 F Negative   Negative    
+#00 133 M Negative   Negative    
+#00 134 M Negative   Negative    
+#00 135 F Negative   Negative    
+#00 137 M Negative   Negative    
+#00 138 M Negative   Negative    
+#00 140 M Negative   Negative    
+#00 141 M Negative   Negative    
+#00 144 F Negative   Negative    
+#00 145 F Negative   Negative    
+#00 148 M Negative   Negative    
+#00 149 F Negative   Negative    
+#00 150 F Negative   Negative    
+#00 152 F Negative   Negative    
+#00 153 F Negative   Negative    
+#00 154 F Negative   Negative    
+#00 160 F Negative   Negative    
+#00 162 F Negative   Negative    
+#00 163 F Negative   Negative    
+#00 164 F Negative   Negative    
+#00 166 M Negative   Negative    
+=== PAGE 12 ===
+12 
+ 
+ 
+#00 167 F Negative   Negative    
+#00 168 F Negative   Negative    
+#00 170 M Negative   Negative    
+#00 171 F Negative   Negative    
+#00 172 F Negative   Negative    
+#00 174 F Negative   Negative    
+#00 177 F Negative   Negative    
+#00 178 M Negative   Negative    
+#00 180 M Negative   Negative    
+#00 181 F Negative   Negative    
+ 
+  
+=== PAGE 13 ===
+13 
+ 
+ 
+
+=== PAGE 14 ===
+ מעבדה למיקרוביולוגיה  
+מנהל פרופ' אבי פרץ  
+ מרכז רפואי צפון, ת.ד. 3111 טבריה15280011  aperetz@tzmc.gov.il   www.tzmc.gov.il   
+Table 3 – Instructions For Use (IFU) 
+ 
+ 
+ 
