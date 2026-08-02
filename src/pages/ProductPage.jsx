@@ -21,7 +21,7 @@ export default function ProductPage({ onOpenRfq }) {
     return (
       <div className="py-24 text-center text-slate-500">
         <h2 className="text-3xl font-extrabold mb-4">Product Not Found</h2>
-        <button onClick={() => navigate('/')} className="bg-blue-600 text-white px-6 py-2.5 rounded-xl font-bold">
+        <button onClick={() => navigate('/')} className="bg-blue-600 text-white px-6 py-2.5 rounded-full font-bold">
           Go to Homepage
         </button>
       </div>
@@ -50,10 +50,10 @@ export default function ProductPage({ onOpenRfq }) {
 
       {/* Navigation breadcrumbs bar */}
       <div className="bg-slate-50 border-b border-slate-200/60 py-4 shadow-sm relative z-20">
-        <div className="max-w-7xl mx-auto px-4 flex items-center gap-3 text-sm font-medium text-slate-500">
+        <div className="max-w-7xl mx-auto px-4 flex items-center gap-3 text-sm font-semibold text-slate-500">
           <button 
-            onClick={() => navigate(`/catalog/${p.category}`)} 
-            className="hover:text-blue-700 transition-colors flex items-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white border border-slate-200 px-4 py-2 rounded-xl shadow-sm"
+            onClick={() => navigate(`/catalog/${Array.isArray(p.category) ? p.category[0] : p.category}`)} 
+            className="hover:text-blue-700 transition-colors flex items-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white border border-slate-200 px-4 py-2 rounded-full shadow-sm"
           >
             {isRtl ? <ArrowRight className="w-4 h-4" /> : <ArrowLeft className="w-4 h-4" />} 
             {_('product.back')}
@@ -66,28 +66,31 @@ export default function ProductPage({ onOpenRfq }) {
       </div>
 
       {/* Main product presentation */}
-      <div className="max-w-7xl mx-auto px-4 py-12 md:py-24">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-24">
+      <div className="max-w-7xl mx-auto px-4 py-12 md:py-20 relative">
+        <div aria-hidden="true" className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-blue-500/[0.02] rounded-full blur-[100px] pointer-events-none" />
+        
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
           
           {/* Images Section */}
           <div className="w-full lg:w-1/2">
-            <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-[3rem] p-10 mb-6 border border-slate-200/60 flex items-center justify-center min-h-[400px] shadow-xl relative overflow-hidden group">
+            <div className="bg-white border border-slate-200/80 shadow-xl rounded-[3rem] p-10 mb-6 flex items-center justify-center min-h-[400px] relative overflow-hidden group">
+              <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-tr from-blue-50/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
               {isPlaceholder ? (
-                 <div className="text-center opacity-30 group-hover:scale-110 transition duration-700">
-                   <Icon className="w-32 h-32 mx-auto text-blue-900 mb-6" strokeWidth={1.5}/>
+                 <div className="text-center opacity-30 group-hover:scale-105 transition duration-700">
+                   <Icon className="w-24 h-24 mx-auto text-blue-900 mb-6" strokeWidth={1.5}/>
                    <div className="font-extrabold tracking-widest uppercase text-xl text-blue-900">BMT Diagnostics</div>
                  </div>
               ) : (
-                 <img src={p.image} className="max-h-[350px] object-contain drop-shadow-2xl mix-blend-multiply group-hover:scale-105 transition duration-700 ease-out" alt="Product Main" />
+                 <img src={p.image.startsWith('/') ? p.image : `/${p.image}`} className="max-h-[350px] max-w-full object-contain group-hover:scale-103 transition duration-500 ease-out shadow-sm rounded-2xl" alt="Product Main" onError={(e) => { e.target.style.display = 'none'; }} />
               )}
             </div>
             {p.img2 && !isPlaceholder && (
               <div className="grid grid-cols-2 gap-6">
-                <div className="bg-white rounded-[2rem] p-6 border border-slate-100 h-40 flex items-center justify-center shadow-md hover:shadow-xl transition duration-300">
-                  <img src={p.img2} className="max-h-full mix-blend-multiply object-contain hover:scale-105 transition duration-500" alt="Angle 2"/>
+                <div className="bg-slate-50/50 border border-slate-200/80 rounded-[2rem] p-6 h-40 flex items-center justify-center shadow-sm">
+                  <img src={p.img2.startsWith('/') ? p.img2 : `/${p.img2}`} className="max-h-full object-contain hover:scale-103 transition duration-500 rounded-xl" alt="Angle 2" onError={(e) => { e.target.style.display = 'none'; }} />
                 </div>
-                <div className="bg-white rounded-[2rem] p-6 border border-slate-100 h-40 flex items-center justify-center shadow-md hover:shadow-xl transition duration-300">
-                  <img src={p.image} className="max-h-full mix-blend-multiply object-contain hover:scale-105 transition duration-500" alt="Angle 1"/>
+                <div className="bg-slate-50/50 border border-slate-200/80 rounded-[2rem] p-6 h-40 flex items-center justify-center shadow-sm">
+                  <img src={p.image.startsWith('/') ? p.image : `/${p.image}`} className="max-h-full object-contain hover:scale-103 transition duration-500 rounded-xl" alt="Angle 1" onError={(e) => { e.target.style.display = 'none'; }} />
                 </div>
               </div>
             )}
@@ -96,24 +99,38 @@ export default function ProductPage({ onOpenRfq }) {
           {/* Product description and Specs */}
           <div className="w-full lg:w-1/2 flex flex-col justify-center">
             {p.id.includes('strep-a-pen') && (
-              <img src="LabOnTime LOGO.jpg" className="h-8 mb-8 object-contain object-left opacity-80" alt="LabOnTime" onError={(e)=>{e.target.style.display='none'}}/>
+              <img src="LabOnTime LOGO.jpg" className="h-8 mb-8 object-contain object-left opacity-80 mix-blend-multiply" alt="LabOnTime" onError={(e)=>{e.target.style.display='none'}}/>
             )}
-            <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest w-fit mb-6 shadow-sm border border-blue-100">
-               {_(`catalog.cat${p.subCat}`)}
+            
+            <div className="flex flex-wrap gap-3 items-center mb-6">
+              <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest w-fit shadow-sm border border-blue-100">
+                 {_(`catalog.cat${p.subCat}`)}
+              </div>
+              
+              {p.isProfessionalOnly && (
+                <div className="inline-flex items-center gap-2 bg-burgundy/5 text-burgundy px-5 py-2 rounded-full text-xs font-extrabold uppercase tracking-widest w-fit shadow-sm border border-burgundy/10">
+                  {lang === 'he' ? 'לשימוש מקצועי בלבד' : lang === 'ru' ? 'Для профессионалов' : lang === 'ar' ? 'للاستخدام المهني فقط' : 'Professional Use Only'}
+                </div>
+              )}
             </div>
-            <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-slate-900 mb-6 leading-tight tracking-tight">{productTitle}</h1>
-            <p className="text-xl text-slate-600 mb-12 leading-relaxed font-light">{productDesc}</p>
+
+            <h1 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 leading-tight tracking-tight">{productTitle}</h1>
+            <p className="text-slate-600 text-lg md:text-xl mb-10 leading-relaxed font-light">{productDesc}</p>
             
             {p.specs && (
-              <div className="bg-white border border-slate-100 shadow-xl shadow-slate-200/40 rounded-[2rem] p-8 md:p-10 mb-12">
-                <h4 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-8 flex items-center gap-2"><FileText className="w-4 h-4"/> {_('product.specs')}</h4>
-                <div className="grid grid-cols-2 gap-y-10 gap-x-6">
+              <div className="bg-white border border-slate-200/80 rounded-[2.5rem] p-8 md:p-10 mb-12 shadow-md relative overflow-hidden">
+                <div aria-hidden="true" className="absolute top-0 right-0 w-32 h-32 bg-blue-500/[0.01] rounded-full blur-[40px] pointer-events-none" />
+                <h4 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-8 flex items-center gap-2">
+                  <FileText className="w-4.5 h-4.5 text-blue-600"/> 
+                  {_('product.specs')}
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-8 gap-x-6">
                   {Object.entries(p.specs).map(([key, value]) => {
                     const specValue = typeof value === 'object' ? (value[lang] || value.en || value.he) : value;
                     return (
-                      <div key={key}>
-                        <div className="text-xl md:text-2xl font-black text-slate-900 leading-none mb-2">{specValue}</div>
-                        <div className="text-xs font-bold text-slate-400 uppercase tracking-widest">{_(`specs.${key}`)}</div>
+                      <div key={key} className="min-w-0 break-words border-b border-slate-100 pb-4 sm:border-0 sm:pb-0">
+                        <div className="text-2xl font-black text-slate-900 leading-none mb-2 tracking-tight">{specValue}</div>
+                        <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{_(`specs.${key}`)}</div>
                       </div>
                     )
                   })}
@@ -124,82 +141,91 @@ export default function ProductPage({ onOpenRfq }) {
             {/* Inquiry/RFQ trigger button */}
             <button 
               onClick={onOpenRfq} 
-              className="bg-red-800 text-white px-8 py-5 rounded-2xl font-extrabold hover:bg-red-900 transition-all duration-300 shadow-xl hover:shadow-red-900/30 text-center flex items-center justify-center gap-3 text-lg group focus:outline-none focus:ring-4 focus:ring-red-800/30"
+              className="bg-burgundy text-white px-8 py-5 rounded-full font-extrabold hover:brightness-110 transition-all duration-300 shadow-lg hover:shadow-xl text-center flex items-center justify-center gap-3 text-lg group focus:outline-none focus:ring-4 focus:ring-burgundy/30"
             >
-              <Mail className="w-5 h-5 group-hover:scale-110 transition-transform"/> {_('product.contact')}
+              <Mail className="w-5 h-5 group-hover:scale-105 transition-transform"/> {_('product.contact')}
             </button>
-
-            {/* Video Player Section: Pre-configured YouTube embed takes priority */}
-            {youtubeId ? (
-              <div className="mt-16 rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-800 bg-slate-900 group relative">
-                <div className="absolute top-0 left-0 right-0 bg-slate-800/80 backdrop-blur-md text-white px-8 py-5 text-sm font-bold flex items-center gap-3 border-b border-white/10 tracking-wider z-10">
-                   <PlayCircle className="w-6 h-6 text-red-500 group-hover:scale-110 transition-transform"/> {_('product.video')}
-                </div>
-                <div className="w-full aspect-video pt-16">
-                  <iframe 
-                    className="w-full h-full"
-                    src={`https://www.youtube.com/embed/${youtubeId}?autoplay=0&rel=0`}
-                    title="Product Demonstration"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              </div>
-            ) : p.videoFile ? (
-              <div className="mt-16 rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-800 bg-slate-900 group relative">
-                <div className="absolute top-0 left-0 right-0 bg-slate-800/80 backdrop-blur-md text-white px-8 py-5 text-sm font-bold flex items-center gap-3 border-b border-white/10 tracking-wider z-10">
-                   <PlayCircle className="w-6 h-6 text-red-500 group-hover:scale-110 transition-transform"/> {_('product.video')}
-                </div>
-                <video controls className="w-full h-auto aspect-video object-cover pt-16" poster={!isPlaceholder ? p.image : undefined}>
-                   <source src={p.videoFile} type="video/mp4" />
-                </video>
-              </div>
-            ) : null}
 
           </div>
         </div>
       </div>
 
-      {/* B2B Workflows Comparison Matrix */}
+      {/* Centered Video Showcase Section - Spacious and Premium */}
+      {(youtubeId || p.videoFile) && (
+        <div className="bg-slate-50 py-20 md:py-28 border-y border-slate-200/60 mt-12 relative overflow-hidden">
+          <div aria-hidden="true" className="absolute top-0 left-1/3 w-[500px] h-[300px] bg-blue-500/[0.01] rounded-full blur-[100px] pointer-events-none" />
+          
+          <div className="max-w-4xl mx-auto px-4 relative z-10">
+            <div className="text-center mb-16">
+              <div className="w-16 h-16 bg-white border border-slate-200 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-md">
+                <PlayCircle className="w-8 h-8 text-burgundy" />
+              </div>
+              <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">{_('product.video')}</h2>
+              <div className="w-12 h-1 bg-burgundy mx-auto mt-5 rounded-full" />
+            </div>
+            
+            <div className="rounded-[3rem] overflow-hidden shadow-2xl border border-slate-200/80 bg-slate-950 p-2 md:p-3">
+              {youtubeId ? (
+                <div className="w-full aspect-video rounded-[2.5rem] overflow-hidden">
+                  <iframe 
+                    className="w-full h-full"
+                    src={`https://www.youtube.com/embed/${youtubeId}?autoplay=0&rel=0`}
+                    title="Product Demonstration"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              ) : p.videoFile ? (
+                <div className="w-full aspect-video rounded-[2.5rem] overflow-hidden">
+                  <video controls className="w-full h-full object-cover" poster={!isPlaceholder ? p.image : undefined}>
+                     <source src={p.videoFile} type="video/mp4" />
+                  </video>
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* B2B Workflows Comparison Matrix - Premium Sterile Theme */}
       {p.comparison && (
-        <div className="bg-slate-900 py-24 text-white mt-10 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-blue-900/20 to-transparent mix-blend-overlay pointer-events-none"></div>
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-red-800/10 rounded-full blur-[120px] mix-blend-multiply pointer-events-none"></div>
+        <div className="bg-white py-24 text-slate-800 mt-10 relative overflow-hidden border-b border-slate-100">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,94,173,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,94,173,0.01)_1px,transparent_1px)] bg-[size:40px_40px] opacity-40 pointer-events-none"></div>
           
           <div className="max-w-5xl mx-auto px-4 relative z-10">
             <div className="text-center mb-20">
-              <div className="w-20 h-20 bg-blue-500/10 border border-blue-500/20 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-inner">
-                 <FileBadge className="w-10 h-10 text-blue-400"/>
+              <div className="w-20 h-20 bg-blue-50 border border-blue-100 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-md">
+                 <FileBadge className="w-10 h-10 text-blue-600"/>
               </div>
-              <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">{_('product.comparison')}</h2>
-              <p className="text-slate-400 text-xl max-w-2xl mx-auto font-light leading-relaxed">{_('product.compSub')}</p>
+              <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">{_('product.comparison')}</h2>
+              <p className="text-slate-650 text-xl max-w-2xl mx-auto font-light leading-relaxed">{_('product.compSub')}</p>
             </div>
             
-            <div className="bg-white/5 rounded-[3rem] border border-white/10 p-4 md:p-12 backdrop-blur-xl overflow-x-auto shadow-2xl">
+            <div className="bg-white rounded-[3rem] border border-slate-200/80 p-4 md:p-12 overflow-x-auto shadow-md">
               <table className="w-full text-start border-collapse min-w-[700px]">
                 <thead>
                   <tr>
-                    <th className="p-6 text-slate-400 font-bold tracking-widest uppercase text-xs md:text-sm border-b border-white/10 w-1/3">{_('product.metric')}</th>
-                    <th className="p-6 font-black text-2xl md:text-3xl text-white bg-blue-600/20 rounded-t-3xl border-b border-blue-500/30 text-center shadow-inner tracking-tight w-1/3">{_('product.us')}</th>
-                    <th className="p-6 text-slate-400 font-bold tracking-widest uppercase text-xs md:text-sm border-b border-white/10 text-center w-1/3">{_('product.them')}</th>
+                    <th className="p-6 text-slate-500 font-extrabold tracking-widest uppercase text-xs md:text-sm border-b border-slate-150 w-1/3 text-start">{_('product.metric')}</th>
+                    <th className="p-6 font-black text-2xl md:text-3xl text-blue-900 bg-blue-50/60 rounded-t-3xl border-b border-blue-100 text-center tracking-tight w-1/3 shadow-sm">{_('product.us')}</th>
+                    <th className="p-6 text-slate-500 font-extrabold tracking-widest uppercase text-xs md:text-sm border-b border-slate-150 text-center w-1/3">{_('product.them')}</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td className="p-6 md:p-10 font-bold text-slate-200 border-b border-white/5 flex items-center gap-5 text-xl"><Users className="w-8 h-8 text-slate-500"/> {_('product.handsOn')}</td>
-                    <td className="p-6 md:p-10 font-black text-5xl text-emerald-400 bg-blue-600/20 border-b border-blue-500/20 text-center shadow-inner">{p.comparison.us.steps}</td>
-                    <td className="p-6 md:p-10 text-slate-400 border-b border-white/5 text-center text-3xl font-bold">{p.comparison.them.steps}</td>
+                <tbody className="font-semibold text-slate-800">
+                  <tr className="hover:bg-slate-50/50 transition-colors">
+                    <td className="p-6 md:p-10 border-b border-slate-100 flex items-center gap-5 text-lg text-start"><Users className="w-6 h-6 text-blue-600 shrink-0"/> {_('product.handsOn')}</td>
+                    <td className="p-6 md:p-10 font-black text-5xl text-blue-900 bg-blue-50/60 border-b border-blue-100 text-center">{p.comparison.us.steps}</td>
+                    <td className="p-6 md:p-10 text-slate-500 border-b border-slate-100 text-center text-xl font-bold">{p.comparison.them.steps}</td>
                   </tr>
-                  <tr>
-                    <td className="p-6 md:p-10 font-bold text-slate-200 border-b border-white/5 flex items-center gap-5 text-xl"><Activity className="w-8 h-8 text-slate-500"/> {_('product.time')}</td>
-                    <td className="p-6 md:p-10 font-bold text-3xl text-emerald-400 bg-blue-600/20 border-b border-blue-500/20 text-center shadow-inner">{p.comparison.us.time}</td>
-                    <td className="p-6 md:p-10 text-slate-400 border-b border-white/5 text-center text-3xl font-bold">{p.comparison.them.time}</td>
+                  <tr className="hover:bg-slate-50/50 transition-colors">
+                    <td className="p-6 md:p-10 border-b border-slate-100 flex items-center gap-5 text-lg text-start"><Activity className="w-6 h-6 text-blue-600 shrink-0"/> {_('product.time')}</td>
+                    <td className="p-6 md:p-10 font-black text-3xl text-blue-900 bg-blue-50/60 border-b border-blue-100 text-center">{p.comparison.us.time}</td>
+                    <td className="p-6 md:p-10 text-slate-500 border-b border-slate-100 text-center text-xl font-bold">{p.comparison.them.time}</td>
                   </tr>
-                  <tr>
-                    <td className="p-6 md:p-10 font-bold text-slate-200 flex items-center gap-5 text-xl"><Beaker className="w-8 h-8 text-slate-500"/> {_('product.risk')}</td>
-                    <td className="p-6 md:p-10 font-bold text-emerald-400 bg-blue-600/20 rounded-b-3xl text-center shadow-inner text-2xl">{_('product.zeroTransfers')}</td>
-                    <td className="p-6 md:p-10 text-red-400 text-center font-bold text-2xl">{_('product.fourTransfers')}</td>
+                  <tr className="hover:bg-slate-50/50 transition-colors">
+                    <td className="p-6 md:p-10 flex items-center gap-5 text-lg text-start"><Beaker className="w-6 h-6 text-blue-600 shrink-0"/> {_('product.risk')}</td>
+                    <td className="p-6 md:p-10 font-black text-emerald-600 bg-blue-50/60 rounded-b-3xl text-center text-xl shadow-inner">{_('product.zeroTransfers')}</td>
+                    <td className="p-6 md:p-10 text-burgundy text-center font-black text-xl">{_('product.fourTransfers')}</td>
                   </tr>
                 </tbody>
               </table>
