@@ -1,5 +1,6 @@
 import React from 'react';
 import { Microscope, HeartPulse, Target, Fingerprint, Droplet, Crosshair, ArrowRight, ArrowLeft } from 'lucide-react';
+import { getAssetPath } from '../utils/imagePath';
 
 // --- CATEGORY ICONS MAPPING ---
 export const CategoryIcons = {
@@ -30,7 +31,7 @@ export default function ProductCard({ prod, lang, isRtl, _, nav }) {
           </div>
         ) : (
           <img 
-            src={prod.image.startsWith('/') ? prod.image : `/${prod.image}`} 
+            src={getAssetPath(prod.image)} 
             alt={prod.id} 
             className="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-500 ease-out shadow-sm rounded-xl"
             onError={(e) => { e.target.style.display = 'none'; }} 

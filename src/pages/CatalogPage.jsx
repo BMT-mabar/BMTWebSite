@@ -380,18 +380,20 @@ export default function CatalogPage({ category, onOpenRfq }) {
           </div>
         </div>
 
-        {/* --- SECTION 3: CONTACT US BANNER AT PAGE BOTTOM --- */}
-        <div className="text-center bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white rounded-[3rem] p-12 md:p-16 shadow-2xl border border-blue-500/20 relative overflow-hidden mt-16 max-w-5xl mx-auto">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
-          <h3 className="relative z-10 text-2xl md:text-4xl font-black mb-4 tracking-tight max-w-3xl mx-auto leading-tight">
+        {/* --- SECTION 3: CONTACT US BANNER AT PAGE BOTTOM (LIGHT HERO PALETTE) --- */}
+        <div className="text-center bg-gradient-to-br from-blue-50/90 via-sky-50 to-slate-50 text-slate-900 rounded-[3rem] p-12 md:p-16 shadow-lg border border-sky-200/80 relative overflow-hidden mt-16 max-w-5xl mx-auto">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/[0.05] rounded-full blur-3xl pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-sky-400/[0.08] rounded-full blur-3xl pointer-events-none"></div>
+          
+          <h3 className="relative z-10 text-2xl md:text-4xl font-black mb-4 tracking-tight max-w-3xl mx-auto leading-tight text-slate-900">
             {lang === 'he' ? 'מעוניינים בהצעת מחיר או ייעוץ קליני מותאם?' : 'Interested in Commercial Pricing or Custom Clinical Consultation?'}
           </h3>
-          <p className="relative z-10 text-slate-300 text-base md:text-lg mb-8 max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="relative z-10 text-slate-600 text-base md:text-lg mb-8 max-w-2xl mx-auto font-normal leading-relaxed">
             {lang === 'he' ? 'צוות המומחים של BMT Diagnostics זמין לכל פנייה, דרישת מק"ט או פיתוח מותאם למוסדות רפואיים ורשתות פארם.' : 'Our team is ready to assist with catalog parameters, commercial terms, or custom OEM manufacturing.'}
           </p>
           <button 
             onClick={onOpenRfq} 
-            className="relative z-10 bg-burgundy text-white px-10 py-5 rounded-full font-extrabold hover:brightness-110 transition-all duration-300 shadow-xl text-base md:text-lg btn-bouncy"
+            className="relative z-10 bg-burgundy text-white px-10 py-5 rounded-full font-extrabold hover:brightness-110 transition-all duration-300 shadow-lg text-base md:text-lg btn-bouncy"
           >
             {_('nav.quote')}
           </button>

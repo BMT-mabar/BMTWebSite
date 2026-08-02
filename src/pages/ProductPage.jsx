@@ -9,6 +9,7 @@ import {
 import { useLanguage } from '../context/LanguageContext';
 import productsDatabase from '../data/productsDatabase';
 import { CategoryIcons } from '../components/ProductCard';
+import { getAssetPath } from '../utils/imagePath';
 
 export default function ProductPage({ onOpenRfq }) {
   const { id } = useParams();
@@ -81,16 +82,16 @@ export default function ProductPage({ onOpenRfq }) {
                    <div className="font-extrabold tracking-widest uppercase text-xl text-blue-900">BMT Diagnostics</div>
                  </div>
               ) : (
-                 <img src={p.image.startsWith('/') ? p.image : `/${p.image}`} className="max-h-[350px] max-w-full object-contain group-hover:scale-103 transition duration-500 ease-out shadow-sm rounded-2xl" alt="Product Main" onError={(e) => { e.target.style.display = 'none'; }} />
+                 <img src={getAssetPath(p.image)} className="max-h-[350px] max-w-full object-contain group-hover:scale-103 transition duration-500 ease-out shadow-sm rounded-2xl" alt="Product Main" onError={(e) => { e.target.style.display = 'none'; }} />
               )}
             </div>
             {p.img2 && !isPlaceholder && (
               <div className="grid grid-cols-2 gap-6">
                 <div className="bg-slate-50/50 border border-slate-200/80 rounded-[2rem] p-6 h-40 flex items-center justify-center shadow-sm">
-                  <img src={p.img2.startsWith('/') ? p.img2 : `/${p.img2}`} className="max-h-full object-contain hover:scale-103 transition duration-500 rounded-xl" alt="Angle 2" onError={(e) => { e.target.style.display = 'none'; }} />
+                  <img src={getAssetPath(p.img2)} className="max-h-full object-contain hover:scale-103 transition duration-500 rounded-xl" alt="Angle 2" onError={(e) => { e.target.style.display = 'none'; }} />
                 </div>
                 <div className="bg-slate-50/50 border border-slate-200/80 rounded-[2rem] p-6 h-40 flex items-center justify-center shadow-sm">
-                  <img src={p.image.startsWith('/') ? p.image : `/${p.image}`} className="max-h-full object-contain hover:scale-103 transition duration-500 rounded-xl" alt="Angle 1" onError={(e) => { e.target.style.display = 'none'; }} />
+                  <img src={getAssetPath(p.image)} className="max-h-full object-contain hover:scale-103 transition duration-500 rounded-xl" alt="Angle 1" onError={(e) => { e.target.style.display = 'none'; }} />
                 </div>
               </div>
             )}
@@ -99,7 +100,7 @@ export default function ProductPage({ onOpenRfq }) {
           {/* Product description and Specs */}
           <div className="w-full lg:w-1/2 flex flex-col justify-center">
             {p.id.includes('strep-a-pen') && (
-              <img src="LabOnTime LOGO.jpg" className="h-8 mb-8 object-contain object-left opacity-80 mix-blend-multiply" alt="LabOnTime" onError={(e)=>{e.target.style.display='none'}}/>
+              <img src={getAssetPath('LabOnTime LOGO.jpg')} className="h-8 mb-8 object-contain object-left opacity-80 mix-blend-multiply" alt="LabOnTime" onError={(e)=>{e.target.style.display='none'}}/>
             )}
             
             <div className="flex flex-wrap gap-3 items-center mb-6">

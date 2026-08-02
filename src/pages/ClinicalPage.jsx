@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Award, ShieldCheck, Microscope, BookOpen, Quote, Download, ArrowUpRight, ExternalLink, Sparkles, Stethoscope, Activity, HeartPulse, FileText, Smartphone } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { getAssetPath } from '../utils/imagePath';
 
 export default function ClinicalPage() {
   const { lang, _ } = useLanguage();
@@ -172,7 +173,7 @@ export default function ClinicalPage() {
         {/* Blue Lab Team Background Image ("האנשים בכחול") */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <img 
-            src="/home-main-image.png" 
+            src={getAssetPath('home-main-image.png')} 
             alt="BMT Blue Healthcare Team" 
             className="w-full h-full object-cover opacity-30 mix-blend-overlay scale-105"
             onError={(e) => { e.target.style.display = 'none'; }}
@@ -409,10 +410,10 @@ export default function ClinicalPage() {
                 <div>
                   <div className="h-52 w-full bg-slate-100 relative overflow-hidden border-b border-slate-100">
                     <img 
-                      src={art.img} 
+                      src={getAssetPath(art.img)} 
                       alt={art.title} 
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                      onError={(e) => { e.target.src = '/dr-kids-bear.jpg'; }}
+                      onError={(e) => { e.target.src = getAssetPath('dr-kids-bear.jpg'); }}
                     />
                     <div className="absolute top-3 right-3 rtl:right-3 rtl:left-auto bg-emerald-600 text-white text-[10px] font-black px-3 py-1 rounded-full shadow-md uppercase tracking-wider">
                       {art.tag}
@@ -467,7 +468,7 @@ export default function ClinicalPage() {
                 <div>
                   <div className="h-44 w-full bg-slate-100 relative overflow-hidden border-b border-slate-100">
                     <img 
-                      src={item.img} 
+                      src={getAssetPath(item.img)} 
                       alt={item.title} 
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                       onError={(e) => { e.target.style.display = 'none'; }}
@@ -525,7 +526,7 @@ export default function ClinicalPage() {
                 <div>
                   <div className="h-48 w-full bg-slate-100 relative overflow-hidden border-b border-slate-100">
                     <img 
-                      src={item.img} 
+                      src={getAssetPath(item.img)} 
                       alt={item.title} 
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                       onError={(e) => { e.target.style.display = 'none'; }}
@@ -583,7 +584,7 @@ export default function ClinicalPage() {
                 <div>
                   <div className="h-48 w-full bg-slate-100 relative overflow-hidden border-b border-slate-100">
                     <img 
-                      src={item.img} 
+                      src={getAssetPath(item.img)} 
                       alt={item.title} 
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                       onError={(e) => { e.target.style.display = 'none'; }}

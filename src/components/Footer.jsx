@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MapPin, Phone, Mail, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { getAssetPath } from '../utils/imagePath';
 
 export default function Footer() {
   const { _, isRtl } = useLanguage();
@@ -33,7 +34,7 @@ export default function Footer() {
           <div className="md:col-span-5 flex flex-col justify-start">
             <div className="bg-white inline-block p-5 rounded-[2rem] mb-8 shadow-md border border-slate-100 max-w-[240px]">
               <img 
-                src="BMT Logo.jpg" 
+                src={getAssetPath('BMT Logo.jpg')} 
                 alt="BMT Diagnostics" 
                 className="h-10 md:h-12 object-contain mix-blend-multiply" 
                 onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='block'; }}

@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { ShieldCheck, Microscope, Activity, Award, Factory, Briefcase, ArrowRight, ArrowLeft, CheckCircle, Calendar, ChevronLeft, ChevronRight, ShoppingBag } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import productsDatabase from '../data/productsDatabase';
+import { getAssetPath } from '../utils/imagePath';
 
 /* ─── Hand-crafted high-fidelity grayscale vector logos for partners ─── */
 const getPartnerLogos = (isHe) => [
@@ -262,10 +263,10 @@ export default function HomePage({ onOpenRfq }) {
               >
                 <div className="h-56 w-full bg-slate-50 relative p-6 flex items-center justify-center overflow-hidden border-b border-slate-100">
                   <img 
-                    src={prod.image} 
+                    src={getAssetPath(prod.image)} 
                     alt={prod.title[lang] || prod.title.en || prod.title.he} 
                     className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500"
-                    onError={(e) => { e.target.src = '/LabOnTime Device.jpg'; }}
+                    onError={(e) => { e.target.src = getAssetPath('LabOnTime Device.jpg'); }}
                   />
                   <span className={`absolute top-4 right-4 rtl:right-4 rtl:left-auto text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm ${prod.isProfessionalOnly ? 'bg-blue-600 text-white' : 'bg-emerald-500 text-white'}`}>
                     {prod.isProfessionalOnly ? (isHe ? 'לשימוש מקצועי בלבד' : _('specs.setting') || 'Professional Only') : (isHe ? 'לשימוש עצמי' : 'Self-Use')}
@@ -304,10 +305,10 @@ export default function HomePage({ onOpenRfq }) {
               >
                 <div className="h-56 w-full bg-slate-50 relative p-6 flex items-center justify-center overflow-hidden border-b border-slate-100">
                   <img 
-                    src={prod.image} 
+                    src={getAssetPath(prod.image)} 
                     alt={prod.title[lang] || prod.title.en || prod.title.he} 
                     className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500"
-                    onError={(e) => { e.target.src = '/LabOnTime Device.jpg'; }}
+                    onError={(e) => { e.target.src = getAssetPath('LabOnTime Device.jpg'); }}
                   />
                   <span className={`absolute top-4 right-4 rtl:right-4 rtl:left-auto text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm ${prod.isProfessionalOnly ? 'bg-blue-600 text-white' : 'bg-emerald-500 text-white'}`}>
                     {prod.isProfessionalOnly ? (isHe ? 'לשימוש מקצועי בלבד' : _('specs.setting') || 'Professional Only') : (isHe ? 'לשימוש עצמי' : 'Self-Use')}
@@ -379,7 +380,7 @@ export default function HomePage({ onOpenRfq }) {
               <div className="p-7 md:p-9 flex flex-col flex-grow">
                 <div className="mb-4">
                   <img
-                    src="LabOnTime%20LOGO.jpg"
+                    src={getAssetPath('LabOnTime LOGO.jpg')}
                     alt="LabOnTime"
                     className="h-6 object-contain"
                     style={{ mixBlendMode: 'multiply', opacity: 0.75 }}
@@ -517,7 +518,7 @@ export default function HomePage({ onOpenRfq }) {
               <div>
                 <div className="relative h-48 overflow-hidden bg-slate-900">
                   <img 
-                    src="Patent cover.jpeg" 
+                    src={getAssetPath('Patent cover.jpeg')} 
                     alt="BMT Patent Cover" 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80"
                     onError={(e) => { e.target.style.display = 'none'; }}
@@ -561,7 +562,7 @@ export default function HomePage({ onOpenRfq }) {
                 <div className="relative h-48 overflow-hidden bg-gradient-to-br from-emerald-950 via-slate-900 to-emerald-900 p-6 flex items-center justify-center">
                   <div className="bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-2xl border border-white/30 flex items-center gap-4 max-w-xs group-hover:scale-105 transition-transform duration-500">
                     <img 
-                      src="moh-logo.png" 
+                      src={getAssetPath('moh-logo.png')} 
                       alt="משרד הבריאות אמ-ר" 
                       className="h-14 w-auto object-contain shrink-0"
                       onError={(e) => { e.target.style.display = 'none'; }}
@@ -609,7 +610,7 @@ export default function HomePage({ onOpenRfq }) {
               <div>
                 <div className="relative h-48 overflow-hidden bg-slate-900">
                   <img 
-                    src="home-main-image.png" 
+                    src={getAssetPath('home-main-image.png')} 
                     alt="Digital Health Integration" 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80"
                     onError={(e) => { e.target.style.display = 'none'; }}
@@ -683,7 +684,7 @@ export default function HomePage({ onOpenRfq }) {
                 <div className="shrink-0 flex items-center justify-center w-32 h-32 md:w-36 md:h-36 bg-slate-50 rounded-3xl p-4 border border-slate-100 shadow-sm group-hover:scale-105 transition-transform">
                   {logo.imgUrl ? (
                     <img 
-                      src={logo.imgUrl} 
+                      src={getAssetPath(logo.imgUrl)} 
                       alt={logo.name} 
                       className="w-full h-full object-contain transition-all duration-300 filter drop-shadow-sm"
                       onError={(e) => { e.target.style.display = 'none'; }}
@@ -706,7 +707,7 @@ export default function HomePage({ onOpenRfq }) {
                 <div className="shrink-0 flex items-center justify-center w-32 h-32 md:w-36 md:h-36 bg-slate-50 rounded-3xl p-4 border border-slate-100 shadow-sm group-hover:scale-105 transition-transform">
                   {logo.imgUrl ? (
                     <img 
-                      src={logo.imgUrl} 
+                      src={getAssetPath(logo.imgUrl)} 
                       alt={logo.name} 
                       className="w-full h-full object-contain transition-all duration-300 filter drop-shadow-sm"
                       onError={(e) => { e.target.style.display = 'none'; }}
@@ -737,10 +738,10 @@ export default function HomePage({ onOpenRfq }) {
               <div>
                 <div className="h-52 w-full relative overflow-hidden bg-slate-900">
                   <img 
-                    src="/Gemini_Generated_Image_izsl9zizsl9zizsl.png" 
+                    src={getAssetPath('Gemini_Generated_Image_izsl9zizsl9zizsl.png')} 
                     alt="BMT R&D Manufacturing Capabilities" 
                     className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700"
-                    onError={(e) => { e.target.src = '/home-main-image.png'; }}
+                    onError={(e) => { e.target.src = getAssetPath('home-main-image.png'); }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent" />
                   <div className="absolute bottom-4 right-4 rtl:right-4 rtl:left-auto bg-blue-600 text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg">

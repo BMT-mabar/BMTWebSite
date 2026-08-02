@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Factory, TestTube, Briefcase, CheckCircle, Users, Milestone, Award, Flame, Calendar, Play, Video, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { getAssetPath } from '../utils/imagePath';
 
 export default function AboutPage() {
   const { lang, _ } = useLanguage();
@@ -143,10 +144,10 @@ export default function AboutPage() {
              <div>
                <div className="h-48 w-full relative overflow-hidden bg-slate-900">
                  <img 
-                   src="/Gemini_Generated_Image_2ldwn72ldwn72ldw.png" 
+                   src={getAssetPath('Gemini_Generated_Image_2ldwn72ldwn72ldw.png')} 
                    alt="Cleanroom Manufacturing" 
                    className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700"
-                   onError={(e) => { e.target.src = '/solution_background.png'; }}
+                   onError={(e) => { e.target.src = getAssetPath('solution_background.png'); }}
                  />
                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent" />
                  <div className="absolute bottom-4 right-4 rtl:right-4 rtl:left-auto bg-burgundy text-white text-[11px] font-black px-3.5 py-1 rounded-full shadow-md">
@@ -165,7 +166,7 @@ export default function AboutPage() {
              <div>
                <div className="h-48 w-full relative overflow-hidden bg-slate-900">
                  <img 
-                   src="/DSC_2098.JPG" 
+                   src={getAssetPath('DSC_2098.JPG')} 
                    alt="Clinical Portfolio" 
                    className="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-700"
                    onError={(e) => { e.target.style.display = 'none'; }}
@@ -187,7 +188,7 @@ export default function AboutPage() {
              <div>
                <div className="h-48 w-full relative overflow-hidden bg-slate-900">
                  <img 
-                   src="/LabOnTime platform.png" 
+                   src={getAssetPath('LabOnTime platform.png')} 
                    alt="Patented Innovation" 
                    className="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-700"
                    onError={(e) => { e.target.style.display = 'none'; }}

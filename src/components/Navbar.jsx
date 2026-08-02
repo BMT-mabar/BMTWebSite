@@ -3,6 +3,7 @@ import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import LanguageSelector from './LanguageSelector';
+import { getAssetPath } from '../utils/imagePath';
 
 export default function Navbar({ onOpenRfq }) {
   const { _, isRtl } = useLanguage();
@@ -54,7 +55,7 @@ export default function Navbar({ onOpenRfq }) {
             aria-label="Go to Home"
           >
             <img 
-              src="BMT Logo.jpg" 
+              src={getAssetPath('BMT Logo.jpg')} 
               alt="BMT Diagnostics Logo" 
               className="h-20 md:h-24 max-h-[95px] object-contain group-hover:opacity-90 transition-all duration-300 mix-blend-multiply filter drop-shadow-sm" 
               onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='block'; }}

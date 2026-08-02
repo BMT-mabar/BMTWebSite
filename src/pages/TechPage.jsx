@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Smartphone, Globe, ShieldCheck, Microscope, Activity, Flame, Cpu, Eye, Check, Play, X, Video } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import TestToEmrAnimation from '../components/TestToEmrAnimation';
+import { getAssetPath } from '../utils/imagePath';
 
 export default function TechPage() {
   const { lang, _ } = useLanguage();
@@ -95,7 +96,7 @@ export default function TechPage() {
         {/* Blue Lab Team Background Image ("האנשים בכחול") */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <img 
-            src="/home-main-image.png" 
+            src={getAssetPath('home-main-image.png')} 
             alt="BMT Blue Healthcare Team" 
             className="w-full h-full object-cover opacity-30 mix-blend-overlay scale-105"
             onError={(e) => { e.target.style.display = 'none'; }}
@@ -155,7 +156,7 @@ export default function TechPage() {
               {/* LabOnTime Platform Showcase Image */}
               <div className="bg-slate-50 border border-slate-200/90 rounded-3xl p-4 shadow-sm flex items-center gap-4">
                 <img 
-                  src="/LabOnTime platform.png" 
+                  src={getAssetPath('LabOnTime platform.png')} 
                   alt="LabOnTime Platform Architecture" 
                   className="h-20 w-auto object-contain rounded-xl bg-white p-2 border border-slate-200 shrink-0"
                   onError={(e) => { e.target.style.display = 'none'; }}
