@@ -471,7 +471,7 @@ export default function ClinicalPage() {
                       src={getAssetPath(item.img)} 
                       alt={item.title} 
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                      onError={(e) => { e.target.style.display = 'none'; }}
+                      onError={(e) => { e.target.src = getAssetPath('dr_kids_flu_ss.png'); }}
                     />
                     <div className="absolute top-3 right-3 rtl:right-3 rtl:left-auto bg-sky-900/80 backdrop-blur-md text-sky-100 text-[11px] font-black px-3 py-1 rounded-full border border-sky-400/30 uppercase tracking-wider shadow-md">
                       {item.source}
@@ -529,7 +529,7 @@ export default function ClinicalPage() {
                       src={getAssetPath(item.img)} 
                       alt={item.title} 
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                      onError={(e) => { e.target.style.display = 'none'; }}
+                      onError={(e) => { e.target.src = getAssetPath('cancer_fob_ss.png'); }}
                     />
                     <div className="absolute top-3 right-3 rtl:right-3 rtl:left-auto bg-rose-900/80 backdrop-blur-md text-rose-100 text-[11px] font-black px-3 py-1 rounded-full border border-rose-400/30 uppercase tracking-wider shadow-md">
                       {item.source}
@@ -587,7 +587,7 @@ export default function ClinicalPage() {
                       src={getAssetPath(item.img)} 
                       alt={item.title} 
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                      onError={(e) => { e.target.style.display = 'none'; }}
+                      onError={(e) => { e.target.src = getAssetPath('maccabi_hpylori_ss.png'); }}
                     />
                     <div className="absolute top-3 right-3 rtl:right-3 rtl:left-auto bg-amber-900/80 backdrop-blur-md text-amber-100 text-[11px] font-black px-3 py-1 rounded-full border border-amber-400/30 uppercase tracking-wider shadow-md">
                       {item.source}

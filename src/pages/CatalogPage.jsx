@@ -241,13 +241,13 @@ export default function CatalogPage({ category, onOpenRfq }) {
                   onChange={(e) => handleTableFilterChange(e.target.value)}
                   className="w-full bg-slate-50/50 border border-slate-200 p-4 rounded-2xl focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:bg-white outline-none transition text-sm font-extrabold appearance-none cursor-pointer pr-10 rtl:pr-4"
                 >
-                  <option value="All">{lang === 'he' ? 'כל הקטגוריות' : 'All Categories'}</option>
-                  <option value="Infectious">{lang === 'he' ? 'מחלות זיהומיות (Infectious)' : 'Infectious Diseases'}</option>
-                  <option value="Womens">{lang === 'he' ? 'בריאות האישה (Women\'s Health)' : 'Women\'s Health'}</option>
-                  <option value="Doa">{lang === 'he' ? 'סמים ואלכוהול (Drugs of Abuse)' : 'Drugs of Abuse'}</option>
-                  <option value="Tumor">{lang === 'he' ? 'סמני סרטן (Tumor Markers)' : 'Tumor Markers'}</option>
-                  <option value="Cardiac">{lang === 'he' ? 'סמני לב (Cardiac Markers)' : 'Cardiac Markers'}</option>
-                  <option value="Other">{lang === 'he' ? 'בדיקות שתן ומיוחדים (Others)' : 'Others & Urinalysis'}</option>
+                  <option value="All">{lang === 'he' ? 'כל הקטגוריות (538 בדיקות)' : 'All Categories (538 Tests)'}</option>
+                  <option value="Infectious Diseases">{lang === 'he' ? 'מחלות זיהומיות (Infectious Diseases)' : 'Infectious Diseases'}</option>
+                  <option value="Women's Health">{lang === 'he' ? 'בריאות האישה והריון (Women\'s Health)' : 'Women\'s Health'}</option>
+                  <option value="Drugs of Abuse">{lang === 'he' ? 'סמים ואלכוהול (Drugs of Abuse)' : 'Drugs of Abuse'}</option>
+                  <option value="Tumor Markers">{lang === 'he' ? 'סמני סרטן (Tumor Markers)' : 'Tumor Markers'}</option>
+                  <option value="Cardiac Markers">{lang === 'he' ? 'סמני לב (Cardiac Markers)' : 'Cardiac Markers'}</option>
+                  <option value="Others">{lang === 'he' ? 'בדיקות שתן ומיוחדים (Others)' : 'Others & Urinalysis'}</option>
                 </select>
               </div>
               <div className="md:col-span-3">

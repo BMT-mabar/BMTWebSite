@@ -143,7 +143,7 @@ export default function HomePage({ onOpenRfq }) {
             {/* Micro Stats Row */}
             <div className="mt-14 pt-6 border-t border-white/20 flex flex-wrap gap-8 sm:gap-12" aria-label={isHe ? 'נתוני מפתח' : 'Key figures'}>
               {[
-                { value: '2004', label: isHe ? 'שנת הקמה' : 'Established' },
+                { value: '2004', label: isHe ? 'תחילת פעילות ב-2004' : 'Activity Since 2004' },
                 { value: '+200', label: isHe ? 'פאנלים אבחוניים' : 'Diagnostic Products' },
                 { value: '+40', label: isHe ? 'מדינות יצוא' : 'Global Export Markets' },
                 { value: 'CE & ISO', label: isHe ? 'תקנים בינלאומיים' : 'Certified Standards' },
@@ -772,10 +772,10 @@ export default function HomePage({ onOpenRfq }) {
               <div>
                 <div className="h-52 w-full relative overflow-hidden bg-slate-900">
                   <img 
-                    src="/Gemini_Generated_Image_ohxmz9ohxmz9ohxm.png" 
+                    src={getAssetPath('Gemini_Generated_Image_ohxmz9ohxmz9ohxm.png')} 
                     alt="BMT Custom OEM Solutions" 
                     className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700"
-                    onError={(e) => { e.target.src = '/Patent cover.jpeg'; }}
+                    onError={(e) => { e.target.src = getAssetPath('Patent cover.jpeg'); }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent" />
                   <div className="absolute bottom-4 right-4 rtl:right-4 rtl:left-auto bg-burgundy text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg">

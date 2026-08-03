@@ -37,11 +37,11 @@ export default function TestToEmrAnimation() {
     {
       id: 2,
       stepNum: '02',
-      title: isHe ? 'סריקה ופענוח אופטי AI' : 'Optical AI Scanning & Verification',
+      title: isHe ? 'סריקה מכל טלפון חכם' : 'Scan from Any Smartphone',
       desc: isHe 
-        ? 'אלגוריתם ראייה ממוחשבת מנתח בצורה אוטומטית את עוצמת פסי הבדיקה והביקורת בזמן אמת.'
-        : 'Computer vision algorithms automatically analyze test and control line signals in real time.',
-      tag: isHe ? 'פענוח אופטי אוטומטי' : 'Automated Optical AI'
+        ? 'אלגוריתם ראייה ממוחשבת מנתח בצורה אוטומטית את עוצמת פסי הבדיקה והביקורת בזמן אמת מסריקה פשוטה בסמארטפון.'
+        : 'Computer vision algorithms automatically analyze test and control line signals in real time from a simple smartphone scan.',
+      tag: isHe ? 'סריקה מכל טלפון חכם' : 'Scan from Any Smartphone'
     },
     {
       id: 3,
@@ -162,19 +162,19 @@ export default function TestToEmrAnimation() {
                 <div className="animate-in fade-in zoom-in duration-300 flex flex-col items-center">
                   <div className="relative mb-6">
                     <img
-                      src={getAssetPath('DSC_2078.JPG')}
+                      src={getAssetPath('pending_1766070663274_.jpg')}
                       alt="Self-Test Diagnostic Cassette"
                       className="h-44 object-contain rounded-xl shadow-2xl border border-sky-400/30 p-2 bg-white"
-                      onError={(e) => { e.target.src = getAssetPath('20260323_161807.jpg'); }}
+                      onError={(e) => { e.target.src = getAssetPath('DSC_2078.JPG'); }}
                     />
                     <div className="absolute top-2 right-2 bg-blue-600 text-white font-black text-[10px] px-2 py-0.5 rounded-md uppercase">
                       SELF-TEST
                     </div>
                   </div>
-                  <span className="text-sm font-extrabold text-white mb-1">
+                  <span className="text-sm font-extrabold text-slate-900 mb-1">
                     {isHe ? 'קסטת אבחון מהירה לשימוש עצמי' : 'Rapid Self-Test Cassette'}
                   </span>
-                  <span className="text-xs text-sky-300 font-mono">
+                  <span className="text-xs text-sky-600 font-mono font-bold">
                     {isHe ? 'מוכנה לקריאה אופטית' : 'Ready for Optical Scan'}
                   </span>
                 </div>
@@ -190,11 +190,11 @@ export default function TestToEmrAnimation() {
                     />
                     <Smartphone className="w-16 h-16 text-sky-400 animate-pulse" />
                   </div>
-                  <span className="text-sm font-extrabold text-white mb-1">
-                    {isHe ? 'פענוח אופטי בלייזר AI' : 'AI Optical Laser Scan'}
+                  <span className="text-sm font-extrabold text-slate-900 mb-1">
+                    {isHe ? 'סריקה מכל טלפון חכם' : 'Scan from Any Smartphone'}
                   </span>
-                  <span className="text-xs text-emerald-400 font-mono font-bold">
-                    {isHe ? 'אות קליני מאומת 99.1%+' : 'Signal Confirmed 99.1%+'}
+                  <span className="text-xs text-emerald-600 font-mono font-bold">
+                    {isHe ? 'פענוח אופטי אוטומטי AI (דיוק 99.1%+)' : 'Automated AI Signal Confirmed (99.1%+)'}
                   </span>
                 </div>
               )}
