@@ -181,7 +181,7 @@ export default function HomePage({ onOpenRfq }) {
 
             {/* Clickable Accessible ISO Certificate Link with PDF integration */}
             <a 
-              href="/ISO_40519_rev0 (1).pdf"
+              href={getAssetPath('ISO_40519_rev0.pdf')}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 hover:text-blue-700 transition-colors group cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg px-2 py-1"

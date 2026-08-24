@@ -6,6 +6,7 @@ import { useLanguage } from '../context/LanguageContext';
 import productsDatabase from '../data/productsDatabase';
 import fullCatalogDatabase from '../data/fullCatalogDatabase';
 import ProductCard from '../components/ProductCard';
+import { getAssetPath } from '../utils/imagePath';
 
 export default function CatalogPage({ category, onOpenRfq }) {
   const { lang, _, isRtl } = useLanguage();
@@ -496,7 +497,7 @@ export default function CatalogPage({ category, onOpenRfq }) {
             </p>
             
             <a
-              href={category === 'b2b' ? './BMT-Products-Catalogue.pdf' : './BMT-Products-Catalogue2.pdf'}
+              href={category === 'b2b' ? getAssetPath('BMT-Products-Catalogue.pdf') : getAssetPath('BMT-Products-Catalogue2.pdf')}
               download
               className="inline-flex items-center gap-3 bg-burgundy text-white hover:bg-burgundy-650 font-extrabold px-10 py-5 rounded-full transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-burgundy/30 text-sm md:text-base uppercase tracking-wider"
             >
