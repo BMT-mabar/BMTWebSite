@@ -21,19 +21,19 @@ export default function TechPage() {
       num: 1,
       title: _('tech.s1Title'),
       desc: _('tech.s1Desc'),
-      highlight: isHe ? 'מבטל לחלוטין העברות דגימה חיצוניות' : 'Completely eliminates external sample mix-ups.'
+      highlight: isHe ? 'מבטל לחלוטין טיפטוף טיפות והעברות דגימה' : 'Completely eliminates droplet spills and sample transfers.'
     },
     {
       num: 2,
       title: _('tech.s2Title'),
       desc: _('tech.s2Desc'),
-      highlight: isHe ? 'ראגנטים מדודים מראש למיצוי מיידי' : 'Pre-measured clinical reagents for instant activation.'
+      highlight: isHe ? 'ללא שלבים — ריאגנטים מוכנים מראש בשיטת פטנט' : 'No Steps — Pre-prepared patented reagents.'
     },
     {
       num: 3,
       title: _('tech.s3Title'),
       desc: _('tech.s3Desc'),
-      highlight: isHe ? 'מנגנון נעילה קבוע המונע זיהום ביולוגי' : 'Permanent locking mechanism preventing bio-contamination.'
+      highlight: isHe ? 'קריאה ויזואלית ברורה ומדויקת בתוך דקות ספורות' : 'Clear, accurate visual reading within minutes.'
     }
   ];
 
@@ -111,16 +111,33 @@ export default function TechPage() {
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none z-10" />
 
         <div className="max-w-6xl mx-auto px-4 text-center relative z-10">
-          <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md px-6 py-3 rounded-full border border-white/20 shadow-xl mb-8">
+          <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md px-6 py-3 rounded-full border border-white/20 shadow-xl mb-6">
             <span className="w-3 h-3 rounded-full bg-sky-400 animate-ping"></span>
-            <span className="text-2xl md:text-3xl font-black text-white tracking-widest font-sans">LabOn<span className="text-sky-300">Time</span></span>
+            <span className="text-xl md:text-2xl font-black text-white tracking-widest font-sans">
+              {isHe ? 'מעבדה בזמן • LabOnTime' : 'LabOnTime'}
+            </span>
           </div>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-8 tracking-tight leading-tight">
-            {title}
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-8 tracking-tight leading-tight flex items-center justify-center flex-wrap gap-2">
+            {isHe ? (
+              <span className="inline-flex items-center gap-2" dir="rtl">
+                <span>מהפכת מעבדה בזמן</span>
+                <span className="bg-gradient-to-r from-white via-sky-100 to-sky-300 bg-clip-text text-transparent font-sans inline-block" dir="ltr">(LabOnTime)</span>
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-2" dir="ltr">
+                <span>The </span>
+                <span className="bg-gradient-to-r from-white via-sky-100 to-sky-300 bg-clip-text text-transparent font-sans inline-block">LabOnTime</span>
+                <span>Revolution</span>
+              </span>
+            )}
           </h1>
-          <p className="text-lg md:text-2xl text-slate-100 font-light leading-relaxed max-w-4xl mx-auto opacity-95">
-            {desc}
-          </p>
+          <div className="text-base sm:text-lg md:text-xl text-slate-100 font-light leading-relaxed max-w-4xl mx-auto opacity-95 space-y-4 text-start sm:text-center">
+            {desc.split('\n\n').map((paragraph, pIdx) => (
+              <p key={pIdx} className="leading-relaxed">
+                {paragraph}
+              </p>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -131,40 +148,42 @@ export default function TechPage() {
           <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/[0.01] rounded-full blur-[100px] pointer-events-none" />
           
           <div className="text-center mb-16 max-w-2xl mx-auto">
-            <span className="text-[10px] font-extrabold uppercase tracking-widest text-blue-600 bg-blue-50 border border-blue-100/50 px-4 py-2 rounded-full mb-4 inline-block">
-              {isHe ? 'פירוק הנדסי וסרטון הדגמה' : 'Patented Device Video Demonstration'}
+            <span className="text-[11px] font-extrabold uppercase tracking-widest text-blue-600 bg-blue-50 border border-blue-100/60 px-5 py-2 rounded-full mb-4 inline-block shadow-sm">
+              {isHe ? 'פטנט עולמי רשום' : 'Globally Patented'}
             </span>
-            <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight">
-              {isHe ? 'איך פועלת מערכת ה-"no step"?' : 'How does the "no step" system work?'}
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+              {isHe ? 'פלטפורמת מעבדה בזמן (LabOnTime)' : 'LabOnTime Platform'}
             </h2>
           </div>
 
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-stretch">
-            {/* Left Col: Product Demonstration Video & LabOnTime Platform Image */}
+            {/* Left Col: LabOnTime Platform Image & Demonstration Video */}
             <div className="lg:col-span-6 flex flex-col space-y-6 justify-center">
-              <div className="relative rounded-[2.5rem] overflow-hidden border-2 border-slate-200 bg-slate-900 shadow-2xl flex items-center justify-center min-h-[280px] md:min-h-[340px] group">
+              {/* LabOnTime Platform Showcase Image - Prominent Top Position */}
+              <div className="bg-gradient-to-br from-slate-50 to-blue-50/50 border border-slate-200/90 rounded-[2.5rem] p-6 shadow-sm flex flex-col items-center text-center">
+                <h4 className="text-lg md:text-xl font-black text-slate-900 mb-4 tracking-tight">
+                  {isHe ? 'תצורת התקן אבחוני משולב' : 'Integrated Diagnostic Device Format'}
+                </h4>
+                <div className="w-full bg-white p-4 rounded-2xl border border-slate-200/90 shadow-sm flex items-center justify-center">
+                  <img 
+                    src={getAssetPath('LabOnTime platform.png')} 
+                    alt={isHe ? 'תצורת התקן אבחוני משולב' : 'Integrated Diagnostic Device Format'}
+                    className="w-full max-h-40 sm:max-h-48 object-contain rounded-xl hover:scale-102 transition-transform duration-300"
+                    onError={(e) => { e.target.style.display = 'none'; }}
+                  />
+                </div>
+              </div>
+
+              {/* Product Demonstration Video Below Image */}
+              <div className="relative rounded-[2.5rem] overflow-hidden border-2 border-slate-200 bg-slate-900 shadow-2xl flex items-center justify-center min-h-[260px] md:min-h-[300px] group">
                 <iframe
-                  className="w-full h-full min-h-[280px] md:min-h-[340px] rounded-[2.3rem] object-cover"
-                  src="https://www.youtube.com/embed/x92STpm-v9w?autoplay=1&mute=1&loop=1&playlist=x92STpm-v9w&controls=1"
-                  title="Strep A No-Step Product Video"
+                  className="w-full h-full min-h-[260px] md:min-h-[300px] rounded-[2.3rem] object-cover"
+                  src="https://www.youtube.com/embed/x92STpm-v9w?autoplay=0&controls=1&rel=0&modestbranding=1"
+                  title="Strep A Product Video"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
-              </div>
-
-              {/* LabOnTime Platform Showcase Image */}
-              <div className="bg-slate-50 border border-slate-200/90 rounded-3xl p-4 shadow-sm flex items-center gap-4">
-                <img 
-                  src={getAssetPath('LabOnTime platform.png')} 
-                  alt="LabOnTime Platform Architecture" 
-                  className="h-20 w-auto object-contain rounded-xl bg-white p-2 border border-slate-200 shrink-0"
-                  onError={(e) => { e.target.style.display = 'none'; }}
-                />
-                <div className="text-start">
-                  <div className="text-sm font-extrabold text-slate-900">{isHe ? 'פלטפורמת LabOnTime™ המוגנת בפטנט' : 'Patented LabOnTime™ Platform'}</div>
-                  <div className="text-xs text-slate-500 font-normal mt-0.5">{isHe ? 'תצורת עט אבחוני משולב לבטיחות ביולוגית מלאה' : 'Integrated diagnostic pen format ensuring zero exposure.'}</div>
-                </div>
               </div>
             </div>
 

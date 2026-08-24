@@ -14,53 +14,146 @@ export default function AboutPage() {
   // Interactive timeline state
   const [activeMilestoneIndex, setActiveMilestoneIndex] = useState(0);
 
-  // Custom historical milestones for the visual timeline
+  // Custom historical milestones for the visual timeline across all languages
   const milestones = [
     {
-      year: '2004',
-      titleHe: 'תחילת פעילות מחקרית ורפואית',
-      titleEn: 'Operations & Medical Vision',
-      descHe: 'תחילת הפעילות המחקרית והקלינית של חברת BMT Diagnostics במטרה להנגיש אבחון מהיר ומדויק.',
-      descEn: 'Commenced initial research and clinical operations focused on point-of-care medical diagnostics.'
-    },
-    {
-      year: '2008',
-      titleHe: 'התאגדות רשמית של חברת BMT',
-      titleEn: 'Official Corporate Incorporation',
-      descHe: 'התאגדות רשמית ורישום חברת BMT Diagnostics בישראל ומעבר לפיתוח וייצור תעשייתי מתקדם.',
-      descEn: 'Official corporate incorporation of BMT Diagnostics in Israel and transition to industrial development.'
-    },
-    {
       year: '2012',
-      titleHe: 'פיתוח פטנט ה-"no step"',
-      titleEn: 'Patenting "no step" Device',
-      descHe: 'פריצת דרך הנדסית ורפואית: המצאה ורישום פטנט בינלאומי על התקן ה-LabOnTime המשולב המונע חשיפה ביולוגית.',
-      descEn: 'Engineering breakthrough: Invention and global patenting of the completely integrated, zero-exposure diagnostic pen.'
+      title: {
+        he: 'התרחבות והקמת תשתיות',
+        en: 'Infrastructure & Facility Scaling',
+        de: 'Ausbau von Infrastruktur und Kapazitäten',
+        fr: 'Expansion des infrastructures et capacités',
+        ru: 'Расширение инфраструктуры и мощностей',
+        ar: 'توسيع البنية التحتية والمنشآت'
+      },
+      desc: {
+        he: 'התרחבות והקמת תשתיות תעשייתיות וקליניות מתקדמות לתמיכה בגידול פעילות החברה.',
+        en: 'Scaling industrial and clinical infrastructure to support company growth and diagnostic operations.',
+        de: 'Erweiterung fortschrittlicher Produktions- und Reinraumkapazitäten für wachsende Diagnostikprojekte.',
+        fr: 'Déploiement d\'infrastructures industrielles de pointe pour soutenir la croissance des opérations.',
+        ru: 'Масштабирование производственной и клинической инфраструктуры для роста компании.',
+        ar: 'توسيع البنية التحتية الصناعية والسريرية المتقدمة لدعم نمو أنشطة الشركة.'
+      }
+    },
+    {
+      year: '2014',
+      title: {
+        he: 'פיתוח וכתיבת פטנט למערכת NO STEP',
+        en: 'NO STEP System Patent Development',
+        de: 'Patententwicklung des NO STEP-Systems',
+        fr: 'Développement du brevet du système NO STEP',
+        ru: 'Разработка и патентование системы NO STEP',
+        ar: 'تطوير وتسجيل براءة اختراع لنظام NO STEP'
+      },
+      desc: {
+        he: 'פיתוח וכתיבת פטנט בינלאומי למערכת NO STEP — התקן משולב פורץ דרך המונע חשיפה ביולוגית ומייתר העברות נוזלים פתוחות.',
+        en: 'Development and international patent filing for the NO STEP integrated closed diagnostic platform.',
+        de: 'Entwicklung und weltweite Patentanmeldung der geschlossenen NO STEP-Schnelldiagnostikplattform.',
+        fr: 'Dépôt de brevet international pour le dispositif de diagnostic intégré et fermé NO STEP.',
+        ru: 'Разработка и международное патентование закрытой платформы экспресс-диагностики NO STEP.',
+        ar: 'تطوير وتسجيل براءة اختراع دولية لنظام NO STEP المغلق بالكامل لمنع المخاطر البيولوجية.'
+      }
     },
     {
       year: '2018',
-      titleHe: 'ייצור אוטומטי בחדר נקי',
-      titleEn: 'Automated Cleanroom Manufacturing',
-      descHe: 'הקמת מערכי ייצור אוטומטיים בחדר נקי באור עקיבא, התומכים בתקן ISO 13485:2016 ומאפשרים ייצור המוני מדויק.',
-      descEn: 'Established state-of-the-art automated manufacturing lines in climate-controlled cleanrooms in Or Akiva, Israel.'
+      title: {
+        he: 'הקמת מפעל קווי ייצור וחדרים נקיים',
+        en: 'Manufacturing Facility & Cleanrooms',
+        de: 'Errichtung von Reinräumen & Produktionsanlagen',
+        fr: 'Création d\'usines de production et salles blanches',
+        ru: 'Строительство завода и чистых помещений',
+        ar: 'إنشاء مصنع وخطوط إنتاج وغرف نظيفة'
+      },
+      desc: {
+        he: 'הקמת מפעל מתקדם, קווי ייצור וחדרים נקיים בתקן ISO 13485:2016 המאפשרים ייצור מבוקר באיכות רפואית עקבית.',
+        en: 'Establishment of state-of-the-art cleanrooms and manufacturing facility under ISO 13485:2016.',
+        de: 'Aufbau zertifizierter Reinräume und Produktionslinien nach ISO 13485:2016 für gleichbleibende Qualität.',
+        fr: 'Création de salles blanches de pointe conformes à la norme ISO 13485:2016.',
+        ru: 'Создание чистых помещений и производственных линий по стандарту ISO 13485:2016.',
+        ar: 'إنشاء مصنع متطور وخطوط إنتاج وغرف نظيفة معتمدة وفق ISO 13485:2016.'
+      }
+    },
+    {
+      year: '2021',
+      title: {
+        he: 'הקמת קווי ייצור אוטומטיים והתרחבות',
+        en: 'Automated Production Lines & Expansion',
+        de: 'Automatisierte Produktionslinien & Skalierung',
+        fr: 'Lignes de production automatisées et expansion',
+        ru: 'Запуск автоматизированных линий и расширение',
+        ar: 'إنشاء خطوط إنتاج آلية والتوسع الصناعي'
+      },
+      desc: {
+        he: 'הקמת קווי ייצור רובוטיים אוטומטיים והתרחבות תעשייתית להגדלת כושר הייצור והאמינות התפעולית.',
+        en: 'Deployment of automated robotic production lines and industrial scale-up.',
+        de: 'Inbetriebnahme hochautomatisierter robotischer Fertigungslinien zur Erhöhung der Kapazitäten.',
+        fr: 'Mise en service de lignes de production robotisées pour maximiser le rendement.',
+        ru: 'Внедрение роботизированных линий и промышленное масштабирование выпуска тестов.',
+        ar: 'تشغيل خطوط إنتاج روبوتية آلية وتوسع صناعي لزيادة الطاقة الإنتاجية.'
+      }
+    },
+    {
+      year: '2022',
+      title: {
+        he: 'קבלת פטנט על מערכת ראייה ממוחשבת לקריאת תוצאות בדיקה ושידורן',
+        en: 'Computer Vision Test Reading & Transmission Patent',
+        de: 'Patent für KI-gestützte optische Testergebnis-Auswertung',
+        fr: 'Brevet de lecture et transmission de tests par vision artificielle',
+        ru: 'Патент на компьютерное зрение для считывания тестов',
+        ar: 'براءة اختراع لنظام الرؤية الحاسوبية لقراءة النتائج وبثها'
+      },
+      desc: {
+        he: 'קבלת פטנט על מערכת ראייה ממוחשבת לקריאת תוצאות בדיקה ושידורן המאובטח למערכות רפואיות.',
+        en: 'Patent grant for computer vision algorithms reading and securely transmitting diagnostic test results.',
+        de: 'Patenterteilung für Computer-Vision-Algorithmen zur optischen Analyse und Übertragung von Schnelltests.',
+        fr: 'Obtention d\'un brevet pour les algorithmes d\'analyse optique et de transmission sécurisée des résultats.',
+        ru: 'Получение патента на алгоритмы компьютерного зрения для анализа и передачи результатов тестов.',
+        ar: 'الحصول على براءة اختراع لخوارزميات الرؤية الحاسوبية لقراءة نتائج الفحوصات وإرسالها بأمان.'
+      }
     },
     {
       year: '2024',
-      titleHe: 'אישורי אמ"ר ופענוח AI',
-      titleEn: 'MOH Clearance & AI Analytics',
-      descHe: 'קבלת אישורי משרד הבריאות לסדרות בדיקה נרחבות ושילוב מערכת סקירה מבוססת בינה מלאכותית לקופות החולים.',
-      descEn: 'Secured official Ministry of Health (MOH) clearances and deployed AI-powered non-invasive population screening.'
+      title: {
+        he: 'קבלת אישורי משרד הבריאות לסדרת בדיקות נרחבת לשימוש עצמי בשילוב אפליקצייה יעודית מבוססת פטנט',
+        en: 'MOH Regulatory Clearance for Self-Test Suite & App',
+        de: 'Zulassung der Selbsttest-Reihe & patentierten App durch das Gesundheitsministerium',
+        fr: 'Autorisations réglementaires pour la gamme d\'autotests et application brevetée',
+        ru: 'Одобрение Минздравом линейки домашних тестов и мобильного приложения',
+        ar: 'موافقات وزارة الصحة لمجموعة الفحوصات الذاتية وتطبيق مخصص'
+      },
+      desc: {
+        he: 'קבלת אישורי משרד הבריאות לסדרת בדיקות נרחבת לשימוש עצמי בשילוב אפליקצייה יעודית מבוססת פטנט.',
+        en: 'Secured Israeli Ministry of Health (MOH) regulatory clearance for broad self-testing portfolio with patented dedicated app.',
+        de: 'Erhalt der MOH-Zulassungen für eine breite Palette von Schnelltests zur Selbstanwendung mit patentierter App.',
+        fr: 'Homologations obtenues auprès du Ministère de la Santé pour la gamme d\'autotests connectés.',
+        ru: 'Получение разрешений Минздрава на обширную серию домашних тестов с запатентованным приложением.',
+        ar: 'الحصول على موافقات وزارة الصحة لسلسلة فحوصات واسعة للاستخدام الذاتي مع تطبيق ذكي محمي ببراءة اختراع.'
+      }
     },
     {
       year: '2026',
-      titleHe: 'אינטגרציה מלאה בקופות החולים בישראל',
-      titleEn: 'Full HMO Integration in Israel',
-      descHe: 'אימוץ קליני ורוקחי נרחב בכלל קופות החולים ורשתות הפארם בישראל (כללית, מכבי, מאוחדת, לאומית, סופר-פארם ו-Be).',
-      descEn: 'Comprehensive clinical and pharmacy adoption across major Israeli HMOs (Clalit, Maccabi, Meuhedet, Leumit, Super-Pharm, Be).'
+      title: {
+        he: 'תחילת שיתוף פעולה עם קופות חולים בישראל לסקר סרטן המעי הגס',
+        en: 'Collaboration with Israeli HMOs for Colorectal Cancer Screening',
+        de: 'Kooperation mit israelischen Krankenkassen zur Darmkrebsvorsorge',
+        fr: 'Partenariat avec les caisses de santé pour le dépistage du cancer colorectal',
+        ru: 'Сотрудничество с больничными кассами по скринингу рака кишечника',
+        ar: 'بدء التعاون مع صناديق المرضى في إسرائيل لمسح سرطان القولون'
+      },
+      desc: {
+        he: 'תחילת שיתוף פעולה עם קופות חולים בישראל לסקר סרטן המעי הגס בשילוב פתרונות אבחון ביתיים ודיגיטליים מתקדמים.',
+        en: 'Commenced partnership with Israeli HMOs for nationwide at-home colorectal cancer screening and direct EMR interface.',
+        de: 'Start der Kooperation mit Krankenkassen für landesweite Darmkrebs-Früherkennung mit direkter EMR-Anbindung.',
+        fr: 'Lancement du partenariat avec les caisses de santé pour le dépistage à domicile et connexion directe EMR.',
+        ru: 'Старт партнерства с больничными кассами по скринингу рака кишечника и интеграции с электронными картами.',
+        ar: 'بدء الشراكة مع صناديق المرضى لإجراء المسح السكاني لسرطان القولون والربط المباشر مع السجلات الطبية.'
+      }
     }
   ];
 
   const currentMilestone = milestones[activeMilestoneIndex];
+  const milestoneTitle = currentMilestone.title[lang] || currentMilestone.title.en || currentMilestone.title.he;
+  const milestoneDesc = currentMilestone.desc[lang] || currentMilestone.desc.en || currentMilestone.desc.he;
 
   return (
     <div className="animate-fade-in bg-white pb-32">
@@ -124,12 +217,26 @@ export default function AboutPage() {
                 <Video className="w-5 h-5" />
               </div>
               <div className="text-start">
-                <div className="text-base font-extrabold">{isHe ? 'סרטון תדמית רשמי — BMT Diagnostics' : 'Official Corporate Film — BMT Diagnostics'}</div>
-                <div className="text-xs text-slate-400 font-medium">{isHe ? 'סיפור המהפכה הדיאגנוסטית, הטכנולוגיה ויכולות הייצור' : 'The story of diagnostic innovation, patented technology, and manufacturing.'}</div>
+                <div className="text-base font-extrabold">
+                  {isHe ? 'סרטון תדמית רשמי — BMT Diagnostics' 
+                  : (lang === 'ar' ? 'فيديو الشركة التعريفي الرسمي — BMT Diagnostics' 
+                  : (lang === 'fr' ? 'Film Institutionnel Officiel — BMT Diagnostics' 
+                  : (lang === 'de' ? 'Offizieller Imagefilm — BMT Diagnostics' 
+                  : (lang === 'ru' ? 'Официальный фильм о компании — BMT Diagnostics' 
+                  : 'Official Corporate Film — BMT Diagnostics'))))}
+                </div>
+                <div className="text-xs text-slate-400 font-medium">
+                  {isHe ? 'סיפור המהפכה הדיאגנוסטית, הטכנולוגיה ויכולות הייצור' 
+                  : (lang === 'ar' ? 'قصة ثورة التشخيص السريع والتقنيات وقدرات التصنيع المتقدمة' 
+                  : (lang === 'fr' ? 'L\'histoire de la révolution diagnostique et de l\'excellence industrielle.' 
+                  : (lang === 'de' ? 'Die Geschichte diagnostischer Innovation und Fertigungskompetenz.' 
+                  : (lang === 'ru' ? 'История диагностических инноваций и производственных возможностей.' 
+                  : 'The story of diagnostic innovation, patented technology, and manufacturing.'))))}
+                </div>
               </div>
             </div>
             <div className="text-xs font-black text-sky-400 bg-sky-500/10 px-4 py-2 rounded-full border border-sky-400/20 uppercase tracking-widest shrink-0">
-              Corporate Film
+              {isHe ? 'סרטון תדמית' : (lang === 'ar' ? 'فيديو تعريفي' : (lang === 'fr' ? 'Film Institutionnel' : (lang === 'de' ? 'Unternehmensfilm' : (lang === 'ru' ? 'Видео о компании' : 'Corporate Film'))))}
             </div>
           </div>
         </div>
@@ -151,7 +258,12 @@ export default function AboutPage() {
                  />
                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent" />
                  <div className="absolute bottom-4 right-4 rtl:right-4 rtl:left-auto bg-burgundy text-white text-[11px] font-black px-3.5 py-1 rounded-full shadow-md">
-                   {isHe ? 'תשתיות ייצור אוטומטיות' : 'Automated Production'}
+                   {isHe ? 'תשתיות ייצור אוטומטיות' 
+                   : (lang === 'ar' ? 'خطوط إنتاج آلية' 
+                   : (lang === 'fr' ? 'Production Automatisée' 
+                   : (lang === 'de' ? 'Automatisierte Fertigung' 
+                   : (lang === 'ru' ? 'Автоматизированное производство' 
+                   : 'Automated Production'))))}
                  </div>
                </div>
                <div className="p-8">
@@ -173,7 +285,12 @@ export default function AboutPage() {
                  />
                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent" />
                  <div className="absolute bottom-4 right-4 rtl:right-4 rtl:left-auto bg-blue-600 text-white text-[11px] font-black px-3.5 py-1 rounded-full shadow-md">
-                   {isHe ? 'מעל 200 סוגי בדיקות' : '200+ Clinical Panels'}
+                   {isHe ? 'מעל 200 סוגי בדיקות' 
+                   : (lang === 'ar' ? 'أكثر من 200 فحص طبي' 
+                   : (lang === 'fr' ? '+200 Tests Cliniques' 
+                   : (lang === 'de' ? '200+ Diagnostik-Panels' 
+                   : (lang === 'ru' ? 'Более 200 клинических тестов' 
+                   : '200+ Clinical Panels'))))}
                  </div>
                </div>
                <div className="p-8">
@@ -195,7 +312,12 @@ export default function AboutPage() {
                  />
                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent" />
                  <div className="absolute bottom-4 right-4 rtl:right-4 rtl:left-auto bg-emerald-600 text-white text-[11px] font-black px-3.5 py-1 rounded-full shadow-md">
-                   {isHe ? 'פטנטים רשומים' : 'Patented Innovation'}
+                   {isHe ? 'פטנטים רשומים' 
+                   : (lang === 'ar' ? 'براءات اختراع مسجلة' 
+                   : (lang === 'fr' ? 'Brevets Enregistrés' 
+                   : (lang === 'de' ? 'Registrierte Patente' 
+                   : (lang === 'ru' ? 'Запатентованные технологии' 
+                   : 'Patented Innovation'))))}
                  </div>
                </div>
                <div className="p-8">
@@ -223,10 +345,20 @@ export default function AboutPage() {
           <div className="text-center mb-10">
             <div className="inline-flex items-center gap-2 bg-blue-600 text-white text-xs font-black px-4 py-2 rounded-full uppercase tracking-widest mb-3 shadow-md">
               <Milestone className="w-4 h-4 text-sky-200" />
-              {isHe ? 'היסטוריית החברה ואבני דרך' : 'Company History & Milestones'}
+              {isHe ? 'היסטוריית החברה ואבני דרך' 
+              : (lang === 'ar' ? 'تاريخ الشركة وأبرز المحطات' 
+              : (lang === 'fr' ? 'Histoire de l\'Entreprise & Jalons' 
+              : (lang === 'de' ? 'Unternehmensgeschichte & Meilensteine' 
+              : (lang === 'ru' ? 'История компании и вехи развития' 
+              : 'Company History & Milestones'))))}
             </div>
             <h2 className="text-2xl md:text-4xl font-black tracking-tight text-slate-900">
-              {isHe ? 'התפתחות חברת BMT Diagnostics (2004–2026)' : 'Evolution of BMT Diagnostics (2004–2026)'}
+              {isHe ? 'התפתחות חברת BMT Diagnostics' 
+              : (lang === 'ar' ? 'تطور ونمو شركة BMT Diagnostics' 
+              : (lang === 'fr' ? 'Évolution de BMT Diagnostics' 
+              : (lang === 'de' ? 'Entwicklung von BMT Diagnostics' 
+              : (lang === 'ru' ? 'Развитие компании BMT Diagnostics' 
+              : 'Evolution of BMT Diagnostics'))))}
             </h2>
           </div>
 
@@ -269,10 +401,10 @@ export default function AboutPage() {
                 {currentMilestone.year} Milestone
               </div>
               <h3 className="text-xl md:text-2xl font-extrabold text-slate-900 mb-2">
-                {isHe ? currentMilestone.titleHe : currentMilestone.titleEn}
+                {milestoneTitle}
               </h3>
               <p className="text-slate-600 text-sm md:text-base font-normal leading-relaxed">
-                {isHe ? currentMilestone.descHe : currentMilestone.descEn}
+                {milestoneDesc}
               </p>
             </div>
 
@@ -306,7 +438,12 @@ export default function AboutPage() {
            <div className="text-center mb-20">
              <div className="inline-flex items-center gap-2 bg-burgundy/5 border border-burgundy/10 text-burgundy text-xs font-bold px-5 py-2 rounded-full uppercase tracking-widest mb-6 shadow-sm">
                <Award className="w-4 h-4 text-burgundy" />
-               {isHe ? 'הנהגת ביוטק מנוסה' : 'Pioneering Leadership'}
+                {isHe ? 'הנהגת ביוטק מנוסה' 
+                : (lang === 'ar' ? 'قيادة التكنولوجيا الحيوية الرائدة' 
+                : (lang === 'fr' ? 'Leadership Médical Pionnier' 
+                : (lang === 'de' ? 'Erfahrene Führungskräfte' 
+                : (lang === 'ru' ? 'Опытное руководство' 
+                : 'Pioneering Leadership'))))}
              </div>
              <h2 id="team-heading" className="text-3xl md:text-5xl font-black text-slate-900 mb-6 text-center tracking-tight">
                {_('about.team')}
@@ -314,14 +451,14 @@ export default function AboutPage() {
              <div className="w-16 h-1 bg-burgundy mx-auto rounded-full" />
            </div>
 
-           <div className="grid md:grid-cols-2 gap-12 lg:gap-16 max-w-5xl mx-auto">
+           <div className="grid md:grid-cols-3 gap-8 lg:gap-10 max-w-7xl mx-auto">
              
              {/* Profile Card: Nili Tamir */}
-             <div className="bg-slate-50/50 p-8 md:p-12 rounded-[2.5rem] border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-500 flex flex-col justify-between card-3d-lift">
+             <div className="bg-slate-50/50 p-8 md:p-10 rounded-[2.5rem] border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-500 flex flex-col justify-between card-3d-lift">
                 <div>
-                  <h3 className="text-3xl font-extrabold text-slate-900 mb-3 tracking-tight">Nili Tamir</h3>
+                  <h3 className="text-2xl lg:text-3xl font-extrabold text-slate-900 mb-3 tracking-tight">Nili Tamir</h3>
                   <div className="text-burgundy font-black mb-8 text-xs md:text-sm uppercase tracking-widest bg-burgundy/10 border border-burgundy/20 inline-block px-5 py-2 rounded-full shadow-sm">
-                    {isHe ? 'מייסדים' : 'Founders'}
+                    {_('about.roleCeo')}
                   </div>
                   <ul className="space-y-4 text-slate-600 text-sm leading-relaxed font-normal">
                     <li className="flex items-start gap-3">
@@ -345,11 +482,11 @@ export default function AboutPage() {
              </div>
 
              {/* Profile Card: Dr. Idan Tamir */}
-             <div className="bg-slate-50/50 p-8 md:p-12 rounded-[2.5rem] border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-500 flex flex-col justify-between card-3d-lift">
+             <div className="bg-slate-50/50 p-8 md:p-10 rounded-[2.5rem] border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-500 flex flex-col justify-between card-3d-lift">
                 <div>
-                  <h3 className="text-3xl font-extrabold text-slate-900 mb-3 tracking-tight">Dr. Idan Tamir</h3>
+                  <h3 className="text-2xl lg:text-3xl font-extrabold text-slate-900 mb-3 tracking-tight">Dr. Idan Tamir</h3>
                   <div className="text-blue-700 font-black mb-8 text-xs md:text-sm uppercase tracking-widest bg-blue-50 border border-blue-100 inline-block px-5 py-2 rounded-full shadow-sm">
-                    {isHe ? 'מייסדים' : 'Founders'}
+                    {_('about.roleCto')}
                   </div>
                   <ul className="space-y-4 text-slate-600 text-sm leading-relaxed font-normal">
                     <li className="flex items-start gap-3">
@@ -367,6 +504,34 @@ export default function AboutPage() {
                     <li className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
                       <span>{_('about.i4')}</span>
+                    </li>
+                  </ul>
+                </div>
+             </div>
+
+             {/* Profile Card: Roey Tamir */}
+             <div className="bg-slate-50/50 p-8 md:p-10 rounded-[2.5rem] border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-500 flex flex-col justify-between card-3d-lift">
+                <div>
+                  <h3 className="text-2xl lg:text-3xl font-extrabold text-slate-900 mb-3 tracking-tight">Roey Tamir</h3>
+                  <div className="text-emerald-700 font-black mb-8 text-xs md:text-sm uppercase tracking-widest bg-emerald-50 border border-emerald-200 inline-block px-5 py-2 rounded-full shadow-sm">
+                    {_('about.roleRoey')}
+                  </div>
+                  <ul className="space-y-4 text-slate-600 text-sm leading-relaxed font-normal">
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                      <span>{_('about.r1')}</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                      <span>{_('about.r2')}</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                      <span>{_('about.r3')}</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                      <span>{_('about.r4')}</span>
                     </li>
                   </ul>
                 </div>

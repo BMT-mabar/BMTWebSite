@@ -54,11 +54,11 @@ export default function SocialFloatingWidget() {
 
   return (
     <div 
-      className={`fixed bottom-24 ${isRtl ? 'right-6' : 'left-6'} z-[85] flex flex-col items-center gap-3 transition-all duration-300`}
+      className={`fixed bottom-20 sm:bottom-24 ${isRtl ? 'right-4 sm:right-6' : 'left-4 sm:left-6'} z-[85] flex flex-col items-center gap-2.5 transition-all duration-300`}
       dir={isRtl ? 'rtl' : 'ltr'}
     >
       {isExpanded ? (
-        <div className="flex flex-col gap-3 animate-in fade-in slide-in-from-bottom-4 duration-300">
+        <div className="flex flex-col items-center gap-2.5 animate-in fade-in slide-in-from-bottom-3 duration-300">
           {socialLinks.map((social) => {
             const Icon = social.icon;
             const tooltip = lang === 'he' ? social.tooltipHe : social.tooltipEn;
@@ -69,29 +69,40 @@ export default function SocialFloatingWidget() {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group relative flex items-center justify-center w-12 h-12 rounded-full ${social.bg} ${social.shadow} transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-blue-500/40`}
+                className={`group relative flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full ${social.bg} ${social.shadow} transition-all duration-300 hover:scale-110 active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-500/40 btn-bouncy`}
                 aria-label={tooltip}
                 title={tooltip}
               >
-                <Icon className="w-5 h-5 fill-current shrink-0" />
+                <Icon className="w-4 h-4 sm:w-5 sm:h-5 fill-current shrink-0" />
                 
                 {/* Floating Tooltip Bubble */}
                 <span 
-                  className={`absolute ${isRtl ? 'right-14' : 'left-14'} whitespace-nowrap bg-slate-900/90 text-white text-[11px] font-bold px-3 py-1.5 rounded-xl backdrop-blur-md opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 shadow-lg`}
+                  className={`absolute ${isRtl ? 'right-12 sm:right-14' : 'left-12 sm:left-14'} whitespace-nowrap bg-slate-900/90 text-white text-[11px] font-bold px-3 py-1.5 rounded-xl backdrop-blur-md opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 shadow-lg`}
                 >
                   {tooltip}
                 </span>
               </a>
             );
           })}
+
+          {/* Minimize / Toggle button */}
+          <button
+            onClick={() => setIsExpanded(false)}
+            className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-800/80 hover:bg-slate-900 text-white flex items-center justify-center shadow-md hover:scale-105 transition-all text-xs focus:outline-none opacity-70 hover:opacity-100"
+            title={lang === 'he' ? 'צמצם רשתות חברתיות' : 'Collapse Social Links'}
+            aria-label={lang === 'he' ? 'צמצם' : 'Collapse'}
+          >
+            <Share2 className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+          </button>
         </div>
       ) : (
         <button
           onClick={() => setIsExpanded(true)}
-          className="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg hover:scale-110 transition focus:outline-none"
+          className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-all focus:outline-none focus:ring-4 focus:ring-blue-500/40 btn-bouncy"
           title={lang === 'he' ? 'פתח רשתות חברתיות' : 'Open Social Links'}
+          aria-label={lang === 'he' ? 'פתח רשתות חברתיות' : 'Open Social Links'}
         >
-          <Share2 className="w-5 h-5" />
+          <Share2 className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
       )}
     </div>

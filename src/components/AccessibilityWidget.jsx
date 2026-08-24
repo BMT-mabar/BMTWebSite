@@ -308,7 +308,7 @@ export default function AccessibilityWidget() {
   const curr = t[lang] || t.en;
 
   return (
-    <div className={`fixed bottom-6 ${isRtl ? 'right-6' : 'left-6'} z-[90] flex items-end justify-start font-sans`} ref={widgetRef} dir={isRtl ? 'rtl' : 'ltr'}>
+    <div className={`fixed bottom-4 sm:bottom-6 ${isRtl ? 'right-4 sm:right-6' : 'left-4 sm:left-6'} z-[90] flex items-end justify-start font-sans`} ref={widgetRef} dir={isRtl ? 'rtl' : 'ltr'}>
       
       {/* Horizontal Focused Reading Guide Overlay */}
       {readingGuide && (
@@ -321,18 +321,18 @@ export default function AccessibilityWidget() {
       {/* Floating Accessibility Trigger Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 rounded-full bg-gradient-to-tr from-[#005EAD] to-[#008AE6] text-white flex items-center justify-center shadow-[0_8px_30px_rgba(0,94,173,0.3)] hover:shadow-[0_8px_30px_rgba(16,185,129,0.4)] hover:from-[#10b981] hover:to-[#059669] transition-all duration-500 focus:outline-none focus:ring-4 focus:ring-blue-500/50 hover:scale-110 floating-widget-btn relative shrink-0"
+        className="w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#005EAD] to-[#008AE6] text-white flex items-center justify-center shadow-[0_8px_30px_rgba(0,94,173,0.3)] hover:shadow-[0_8px_30px_rgba(16,185,129,0.4)] hover:from-[#10b981] hover:to-[#059669] transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-500/50 hover:scale-105 active:scale-95 floating-widget-btn relative shrink-0"
         aria-label={curr.btnLabel}
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
         <span className="absolute inset-0 rounded-full bg-blue-500/20 animate-ping pointer-events-none scale-105" aria-hidden="true" />
-        {isOpen ? <X className="w-6 h-6 animate-in spin-in-90" /> : <Accessibility className="w-7 h-7" />}
+        {isOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6 animate-in spin-in-90" /> : <Accessibility className="w-6 h-6 sm:w-7 sm:h-7" />}
       </button>
 
       {/* Accessibility Settings Panel Overlay */}
       {isOpen && (
-        <div className={`absolute bottom-18 ${isRtl ? 'right-0' : 'left-0'} w-[340px] sm:w-[420px] bg-white/95 backdrop-blur-2xl border border-slate-200/80 rounded-[2.5rem] shadow-2xl p-6 sm:p-8 animate-in slide-in-from-bottom-4 duration-300 origin-bottom-${isRtl ? 'right' : 'left'} z-20`}>
+        <div className={`absolute bottom-16 sm:bottom-18 ${isRtl ? 'right-0' : 'left-0'} w-[320px] sm:w-[420px] max-w-[90vw] bg-white/95 backdrop-blur-2xl border border-slate-200/80 rounded-[2.5rem] shadow-2xl p-5 sm:p-8 animate-in slide-in-from-bottom-4 duration-300 origin-bottom-${isRtl ? 'right' : 'left'} z-20`}>
           
           {/* Header Title with quick reset */}
           <div className="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">

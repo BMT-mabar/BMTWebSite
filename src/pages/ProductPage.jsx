@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { 
   ArrowLeft, ArrowRight, FileText, Mail, PlayCircle, 
   Users, Activity, Beaker, FileBadge, Microscope,
-  HeartPulse, Target, Fingerprint, Droplet, Crosshair 
+  Smartphone, ShieldCheck, CheckCircle2, Clock, XCircle, Sparkles
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import productsDatabase from '../data/productsDatabase';
@@ -15,22 +15,22 @@ export default function ProductPage({ onOpenRfq }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const { lang, _, isRtl } = useLanguage();
+  const isHe = lang === 'he';
 
   const p = productsDatabase.find(prod => prod.id === id);
 
   if (!p) {
     return (
       <div className="py-24 text-center text-slate-500">
-        <h2 className="text-3xl font-extrabold mb-4">Product Not Found</h2>
+        <h2 className="text-3xl font-extrabold mb-4">{isHe ? 'המוצר לא נמצא' : 'Product Not Found'}</h2>
         <button onClick={() => navigate('/')} className="bg-blue-600 text-white px-6 py-2.5 rounded-full font-bold">
-          Go to Homepage
+          {isHe ? 'חזרה לעמוד הבית' : 'Go to Homepage'}
         </button>
       </div>
     );
   }
 
-  // Check if product is Strep A pen or FOB and map their YouTube IDs
-  const youtubeId = p.id === 'strep-a-pen' ? 'x92STpm-v9w' : p.id === 'fob-b2b' ? '51ECod0uUy4' : p.youtubeId;
+  const youtubeId = p.youtubeId;
 
   const isPlaceholder = p.image.startsWith('Placeholder');
   const Icon = isPlaceholder ? (CategoryIcons[p.image] || Microscope) : Microscope;
@@ -77,12 +77,12 @@ export default function ProductPage({ onOpenRfq }) {
             <div className="bg-white border border-slate-200/80 shadow-xl rounded-[3rem] p-10 mb-6 flex items-center justify-center min-h-[400px] relative overflow-hidden group">
               <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-tr from-blue-50/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
               {isPlaceholder ? (
-                 <div className="text-center opacity-30 group-hover:scale-105 transition duration-700">
+                 <div className="text-center opacity-40 group-hover:scale-105 transition duration-700">
                    <Icon className="w-24 h-24 mx-auto text-blue-900 mb-6" strokeWidth={1.5}/>
                    <div className="font-extrabold tracking-widest uppercase text-xl text-blue-900">BMT Diagnostics</div>
                  </div>
               ) : (
-                 <img src={getAssetPath(p.image)} className="max-h-[350px] max-w-full object-contain group-hover:scale-103 transition duration-500 ease-out shadow-sm rounded-2xl" alt="Product Main" onError={(e) => { e.target.style.display = 'none'; }} />
+                 <img src={getAssetPath(p.image)} className="max-h-[350px] max-w-full object-contain group-hover:scale-103 transition duration-500 ease-out shadow-sm rounded-2xl" alt={productTitle} onError={(e) => { e.target.style.display = 'none'; }} />
               )}
             </div>
             {p.img2 && !isPlaceholder && (
@@ -105,12 +105,27 @@ export default function ProductPage({ onOpenRfq }) {
             
             <div className="flex flex-wrap gap-3 items-center mb-6">
               <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest w-fit shadow-sm border border-blue-100">
-                 {_(`catalog.cat${p.subCat}`)}
+                 {_(`catalog.cat${p.subCat}`) || p.subCat}
               </div>
+
+              {(p.isPatented || p.patentBadge || p.id.includes('strep') || p.id.includes('covid-otc') || p.id.includes('fob-b2c') || p.id.includes('h-pylori')) && (
+                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-burgundy to-burgundy-600 text-white px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest w-fit shadow-md">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-300 animate-pulse"></span>
+                  <span>
+                    {p.patentBadge 
+                      ? (typeof p.patentBadge === 'object' ? (p.patentBadge[lang] || p.patentBadge.he || p.patentBadge.en) : p.patentBadge)
+                      : (isHe ? 'פטנט רשום' : 'Patented')}
+                  </span>
+                </div>
+              )}
               
-              {p.isProfessionalOnly && (
-                <div className="inline-flex items-center gap-2 bg-burgundy/5 text-burgundy px-5 py-2 rounded-full text-xs font-extrabold uppercase tracking-widest w-fit shadow-sm border border-burgundy/10">
-                  {lang === 'he' ? 'לשימוש מקצועי בלבד' : lang === 'ru' ? 'Для профессионалов' : lang === 'ar' ? 'للاستخدام المهني فقط' : 'Professional Use Only'}
+              {p.isProfessionalOnly ? (
+                <div className="inline-flex items-center gap-2 bg-blue-900/10 text-blue-950 px-5 py-2 rounded-full text-xs font-extrabold uppercase tracking-widest w-fit shadow-sm border border-blue-900/20">
+                  {isHe ? 'לשימוש מקצועי בלבד' : 'Professional Use Only'}
+                </div>
+              ) : (
+                <div className="inline-flex items-center gap-2 bg-emerald-500/10 text-emerald-800 px-5 py-2 rounded-full text-xs font-extrabold uppercase tracking-widest w-fit shadow-sm border border-emerald-500/20">
+                  {isHe ? 'לשימוש עצמי' : 'Self-Use'}
                 </div>
               )}
             </div>
@@ -131,7 +146,7 @@ export default function ProductPage({ onOpenRfq }) {
                     return (
                       <div key={key} className="min-w-0 break-words border-b border-slate-100 pb-4 sm:border-0 sm:pb-0">
                         <div className="text-2xl font-black text-slate-900 leading-none mb-2 tracking-tight">{specValue}</div>
-                        <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{_(`specs.${key}`)}</div>
+                        <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{_(`specs.${key}`) || key}</div>
                       </div>
                     )
                   })}
@@ -142,7 +157,7 @@ export default function ProductPage({ onOpenRfq }) {
             {/* Inquiry/RFQ trigger button */}
             <button 
               onClick={onOpenRfq} 
-              className="bg-burgundy text-white px-8 py-5 rounded-full font-extrabold hover:brightness-110 transition-all duration-300 shadow-lg hover:shadow-xl text-center flex items-center justify-center gap-3 text-lg group focus:outline-none focus:ring-4 focus:ring-burgundy/30"
+              className="bg-burgundy text-white px-8 py-5 rounded-full font-extrabold hover:brightness-110 transition-all duration-300 shadow-lg hover:shadow-xl text-center flex items-center justify-center gap-3 text-lg group focus:outline-none focus:ring-4 focus:ring-burgundy/30 btn-bouncy"
             >
               <Mail className="w-5 h-5 group-hover:scale-105 transition-transform"/> {_('product.contact')}
             </button>
@@ -151,7 +166,7 @@ export default function ProductPage({ onOpenRfq }) {
         </div>
       </div>
 
-      {/* Centered Video Showcase Section - Spacious and Premium */}
+      {/* Centered Video Showcase Section */}
       {(youtubeId || p.videoFile) && (
         <div className="bg-slate-50 py-20 md:py-28 border-y border-slate-200/60 mt-12 relative overflow-hidden">
           <div aria-hidden="true" className="absolute top-0 left-1/3 w-[500px] h-[300px] bg-blue-500/[0.01] rounded-full blur-[100px] pointer-events-none" />
@@ -189,7 +204,104 @@ export default function ProductPage({ onOpenRfq }) {
         </div>
       )}
 
-      {/* B2B Workflows Comparison Matrix - Premium Sterile Theme */}
+      {/* ═══════════════════════════════════════════════════════════════
+          FOB SPECIAL INNOVATION SHOWCASE: APP-LEVEL PATENT FOR HMOS
+          (Replaces the outdated comparison table with a stunning flow)
+          ═══════════════════════════════════════════════════════════════ */}
+      {p.id === 'fob-b2c' && (
+        <div className="bg-gradient-to-b from-slate-50 to-blue-50/30 py-24 border-t border-slate-200/80 mt-12 relative overflow-hidden">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 bg-blue-600/10 text-blue-700 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4">
+                <Sparkles className="w-4 h-4 text-blue-600" />
+                {isHe ? 'פטנט ייחודי ברמת האפליקציה לקופות החולים' : 'App-Level Patent for Healthcare Providers'}
+              </div>
+              <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight mb-4">
+                {isHe ? 'מהפכת הנוחות והזמינות: סקר FIT ללא מעבדה' : 'The At-Home FIT Screening Revolution'}
+              </h2>
+              <p className="text-slate-500 text-lg max-w-2xl mx-auto font-light leading-relaxed">
+                {isHe
+                  ? 'השוואה בין התהליך המעבדתי המיושן והמסורבל לבין הפתרון החדשני והמיידי של BMT Diagnostics'
+                  : 'Comparing the traditional cumbersome lab route with BMT\'s instant, patient-centric at-home solution.'}
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+              {/* Old Traditional Lab Process Card */}
+              <div className="bg-white rounded-[2.5rem] p-8 md:p-10 border border-red-100 shadow-md flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-3 text-red-600 font-extrabold text-sm uppercase tracking-wider mb-6">
+                    <XCircle className="w-5 h-5" />
+                    <span>{isHe ? 'התהליך המיושן והמסורבל' : 'Traditional Cumbersome Route'}</span>
+                  </div>
+                  <h3 className="text-2xl font-black text-slate-800 mb-6">
+                    {isHe ? 'טרחה, עיכובים והמתנה של ימים' : 'Delays, Lab Visits & Long Waiting'}
+                  </h3>
+                  <ul className="space-y-4 text-sm text-slate-500 font-medium">
+                    <li className="flex items-start gap-3">
+                      <span className="w-6 h-6 rounded-full bg-red-50 text-red-500 flex items-center justify-center font-bold shrink-0 mt-0.5">1</span>
+                      <span>{isHe ? 'הגעה פיזית למרפאה או למעבדה כדי לקבל בקבוקון איסוף' : 'Physical travel to clinic/lab just to pick up a collection vial'}</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="w-6 h-6 rounded-full bg-red-50 text-red-500 flex items-center justify-center font-bold shrink-0 mt-0.5">2</span>
+                      <span>{isHe ? 'נסיעה חוזרת למעבדה להחזרת הדגימה (טרחה גדולה והיענות נמוכה)' : 'Second physical trip to drop off the sample at the lab'}</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="w-6 h-6 rounded-full bg-red-50 text-red-500 flex items-center justify-center font-bold shrink-0 mt-0.5">3</span>
+                      <span>{isHe ? 'המתנה של ימים עד שבועות לקבלת תוצאה מהמעבדה המרכזית' : 'Days or weeks of waiting for central lab processing'}</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="mt-8 pt-6 border-t border-slate-100 flex items-center gap-2 text-slate-400 text-xs">
+                  <Clock className="w-4 h-4 text-red-400" />
+                  <span>{isHe ? 'זמן כולל: מספר ימים עד שבועות' : 'Total duration: 3–14 days'}</span>
+                </div>
+              </div>
+
+              {/* BMT Innovative App Solution Card */}
+              <div className="bg-gradient-to-br from-blue-900 to-blue-950 text-white rounded-[2.5rem] p-8 md:p-10 shadow-2xl flex flex-col justify-between relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-sky-400/10 rounded-full blur-3xl pointer-events-none" />
+                
+                <div>
+                  <div className="flex items-center gap-3 text-sky-400 font-extrabold text-sm uppercase tracking-wider mb-6">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                    <span>{isHe ? 'החדשנות של BMT — פטנט ברמת האפליקציה' : 'BMT Innovation — App-Level Patent'}</span>
+                  </div>
+                  <h3 className="text-2xl font-black text-white mb-6">
+                    {isHe ? 'דיוק ופשטות מיידית בבית הלקוח' : 'Immediate Precision & Comfort at Home'}
+                  </h3>
+                  <ul className="space-y-4 text-sm text-slate-200 font-medium">
+                    <li className="flex items-start gap-3">
+                      <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold shrink-0 mt-0.5">✓</span>
+                      <span>{isHe ? 'ביצוע עצמאי, היגייני ונוח בבית ללא צורך לצאת מהבית' : 'Hygienic self-use at home without travelling to clinics'}</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold shrink-0 mt-0.5">✓</span>
+                      <span>{isHe ? 'סריקה ופענוח אופטי מיידי באמצעות אפליקציית קופת החולים (AI)' : 'Instant smartphone camera AI interpretation in the HMO app'}</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold shrink-0 mt-0.5">✓</span>
+                      <span>{isHe ? 'שידור מאובטח ישירות לתיק הרפואי (EMR) — תוצאה מהירה במקום' : 'Direct encrypted transmission straight to the EMR system'}</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-sky-200 text-xs">
+                  <div className="flex items-center gap-2">
+                    <Smartphone className="w-4 h-4 text-sky-400" />
+                    <span>{isHe ? 'תוצאה דיגיטלית בתוך 5 דקות' : 'Digital result in 5 minutes'}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-emerald-400 font-bold">
+                    <ShieldCheck className="w-4 h-4" />
+                    <span>{isHe ? 'ללא מעבדה' : 'Zero Lab Required'}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* B2B Workflows Comparison Matrix for other products */}
       {p.comparison && (
         <div className="bg-white py-24 text-slate-800 mt-10 relative overflow-hidden border-b border-slate-100">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,94,173,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,94,173,0.01)_1px,transparent_1px)] bg-[size:40px_40px] opacity-40 pointer-events-none"></div>

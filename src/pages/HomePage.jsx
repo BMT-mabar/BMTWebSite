@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { ShieldCheck, Microscope, Activity, Award, Factory, Briefcase, ArrowRight, ArrowLeft, CheckCircle, Calendar, ChevronLeft, ChevronRight, ShoppingBag } from 'lucide-react';
+import { ShieldCheck, Microscope, Activity, Award, Factory, Briefcase, ArrowRight, ArrowLeft, CheckCircle, Calendar, ChevronLeft, ChevronRight, ShoppingBag, FileText, Download } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import productsDatabase from '../data/productsDatabase';
 import { getAssetPath } from '../utils/imagePath';
@@ -111,12 +111,12 @@ export default function HomePage({ onOpenRfq }) {
 
             {/* H1 Title — Closely aligned with header logo */}
             <h1
-              className="text-4xl sm:text-5xl lg:text-[3.75rem] xl:text-[4rem] font-extrabold leading-[1.12] mb-6 text-white tracking-tight drop-shadow-sm"
+              className="text-4xl sm:text-5xl lg:text-[3.75rem] xl:text-[4rem] font-black leading-[1.12] mb-6 text-white tracking-tight drop-shadow-md"
               dangerouslySetInnerHTML={{ __html: _('hero.title') }}
             />
 
-            {/* Subtitle */}
-            <p className="text-lg sm:text-xl mb-10 leading-relaxed font-light text-white/95 max-w-2xl drop-shadow-sm">
+            {/* Subtitle with WCAG compliant high contrast */}
+            <p className="text-lg sm:text-xl mb-10 leading-relaxed font-normal text-white max-w-2xl drop-shadow">
               {_('hero.sub')}
             </p>
 
@@ -125,7 +125,7 @@ export default function HomePage({ onOpenRfq }) {
               <button
                 id="hero-btn-b2b"
                 onClick={() => navigate('/catalog/b2b')}
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-extrabold text-base text-white bg-burgundy hover:brightness-110 transition-all duration-300 shadow-xl hover:shadow-burgundy/30 hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-white/40 btn-bouncy"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-extrabold text-base text-white bg-burgundy hover:brightness-110 transition-all duration-300 shadow-xl hover:shadow-burgundy/40 hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-white/40 btn-bouncy"
               >
                 <Microscope className="w-5 h-5" aria-hidden="true" />
                 {_('hero.btnB2b')}
@@ -133,7 +133,7 @@ export default function HomePage({ onOpenRfq }) {
               <button
                 id="hero-btn-b2c"
                 onClick={() => navigate('/catalog/b2c')}
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-bold text-base text-blue-700 bg-white hover:bg-slate-50 transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-white/40 btn-bouncy"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-bold text-base text-blue-700 bg-white hover:bg-slate-50 transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-white/40 btn-bouncy"
               >
                 <Activity className="w-5 h-5 text-blue-500" aria-hidden="true" />
                 {_('hero.btnB2c')}
@@ -146,11 +146,11 @@ export default function HomePage({ onOpenRfq }) {
                 { value: '2004', label: isHe ? 'תחילת פעילות ב-2004' : 'Activity Since 2004' },
                 { value: '+200', label: isHe ? 'פאנלים אבחוניים' : 'Diagnostic Products' },
                 { value: '+40', label: isHe ? 'מדינות יצוא' : 'Global Export Markets' },
-                { value: 'CE & ISO', label: isHe ? 'תקנים בינלאומיים' : 'Certified Standards' },
+                { value: 'ISO', label: isHe ? 'תקני איכות בינלאומיים' : 'Certified Standards' },
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col">
-                  <span className="text-2xl sm:text-3xl font-black text-white tracking-tight drop-shadow-sm">{stat.value}</span>
-                  <span className="text-[11px] text-white/80 font-semibold uppercase tracking-wider mt-0.5">{stat.label}</span>
+                  <span className="text-2xl sm:text-3xl font-black text-white tracking-tight drop-shadow-md">{stat.value}</span>
+                  <span className="text-[11px] text-sky-100 font-semibold uppercase tracking-wider mt-0.5 drop-shadow-sm">{stat.label}</span>
                 </div>
               ))}
             </div>
@@ -171,25 +171,40 @@ export default function HomePage({ onOpenRfq }) {
           ═══════════════════════════════════════════════════════ */}
       <section className="bg-slate-100/90 py-5 border-b border-slate-200/80 text-slate-700 text-xs md:text-sm font-semibold relative z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12 text-center">
-            <div className="flex items-center gap-2 hover:text-blue-700 transition-colors">
-              <ShieldCheck className="w-4 h-4 text-blue-600" />
+          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 text-center">
+            
+            {/* Highlighted Registered Patents Badge */}
+            <div className="flex items-center gap-2 bg-blue-50/90 text-blue-900 border border-blue-200 px-3.5 py-1.5 rounded-full shadow-sm hover:bg-blue-100 hover:border-blue-300 transition-all duration-300 font-bold">
+              <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0" />
               <span>{isHe ? 'פטנטים בינלאומיים רשומים' : 'Patented Diagnostics'}</span>
             </div>
+
+            {/* Clickable Accessible ISO Certificate Link with PDF integration */}
+            <a 
+              href="/ISO_40519_rev0 (1).pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 hover:text-blue-700 transition-colors group cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg px-2 py-1"
+              title={isHe ? 'צפייה בתעודת ISO 13485:2016 (PDF)' : 'View ISO 13485:2016 Certificate (PDF)'}
+              aria-label={isHe ? 'תעודת ISO 13485:2016 - פתיחת קובץ PDF' : 'ISO 13485:2016 Certificate - Open PDF'}
+            >
+              <Award className="w-4 h-4 text-blue-600 group-hover:scale-110 transition-transform shrink-0" />
+              <span className="group-hover:underline underline-offset-4">ISO 13485:2016 Certified</span>
+              <span className="text-[10px] font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded border border-blue-200">PDF</span>
+            </a>
+
             <div className="flex items-center gap-2 hover:text-blue-700 transition-colors">
-              <Award className="w-4 h-4 text-blue-600" />
-              <span>ISO 13485:2016 Certified</span>
-            </div>
-            <div className="flex items-center gap-2 hover:text-blue-700 transition-colors">
-              <ShieldCheck className="w-4 h-4 text-blue-600" />
+              <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0" />
               <span>ISO 27001 Security</span>
             </div>
-            <div className="flex items-center gap-2 hover:text-blue-700 transition-colors">
-              <Award className="w-4 h-4 text-blue-600" />
-              <span>CE MARKED</span>
+
+            <div className="flex items-center gap-2 bg-emerald-50/80 text-emerald-900 border border-emerald-200 px-3 py-1 rounded-full shadow-sm">
+              <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span className="font-bold">{isHe ? 'ספק חיוני' : 'Essential Supplier'}</span>
             </div>
+
             <div className="flex items-center gap-2 hover:text-emerald-700 transition-colors">
-              <CheckCircle className="w-4 h-4 text-emerald-600" />
+              <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
               <span>{isHe ? 'אישורי משרד הבריאות (אמ"ר)' : 'Israeli MOH Permits'}</span>
             </div>
           </div>
@@ -271,6 +286,16 @@ export default function HomePage({ onOpenRfq }) {
                   <span className={`absolute top-4 right-4 rtl:right-4 rtl:left-auto text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm ${prod.isProfessionalOnly ? 'bg-blue-600 text-white' : 'bg-emerald-500 text-white'}`}>
                     {prod.isProfessionalOnly ? (isHe ? 'לשימוש מקצועי בלבד' : _('specs.setting') || 'Professional Only') : (isHe ? 'לשימוש עצמי' : 'Self-Use')}
                   </span>
+                  {(prod.isPatented || prod.id.includes('strep') || prod.id.includes('covid-otc') || prod.id.includes('fob-b2c') || prod.id.includes('h-pylori')) && (
+                    <span className="absolute top-4 left-4 rtl:left-4 rtl:right-auto text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm bg-gradient-to-r from-burgundy to-burgundy-600 text-white flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-300 animate-pulse"></span>
+                      <span>
+                        {prod.patentBadge 
+                          ? (typeof prod.patentBadge === 'object' ? (prod.patentBadge[lang] || prod.patentBadge.he || prod.patentBadge.en) : prod.patentBadge)
+                          : (isHe ? 'פטנט' : 'Patent')}
+                      </span>
+                    </span>
+                  )}
                 </div>
 
                 <div className="p-6 flex flex-col justify-between flex-grow">
@@ -313,6 +338,16 @@ export default function HomePage({ onOpenRfq }) {
                   <span className={`absolute top-4 right-4 rtl:right-4 rtl:left-auto text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm ${prod.isProfessionalOnly ? 'bg-blue-600 text-white' : 'bg-emerald-500 text-white'}`}>
                     {prod.isProfessionalOnly ? (isHe ? 'לשימוש מקצועי בלבד' : _('specs.setting') || 'Professional Only') : (isHe ? 'לשימוש עצמי' : 'Self-Use')}
                   </span>
+                  {(prod.isPatented || prod.id.includes('strep') || prod.id.includes('covid-otc') || prod.id.includes('fob-b2c') || prod.id.includes('h-pylori')) && (
+                    <span className="absolute top-4 left-4 rtl:left-4 rtl:right-auto text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm bg-gradient-to-r from-burgundy to-burgundy-600 text-white flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-300 animate-pulse"></span>
+                      <span>
+                        {prod.patentBadge 
+                          ? (typeof prod.patentBadge === 'object' ? (prod.patentBadge[lang] || prod.patentBadge.he || prod.patentBadge.en) : prod.patentBadge)
+                          : (isHe ? 'פטנט' : 'Patent')}
+                      </span>
+                    </span>
+                  )}
                 </div>
 
                 <div className="p-6 flex flex-col justify-between flex-grow">
@@ -395,20 +430,22 @@ export default function HomePage({ onOpenRfq }) {
                 </div>
 
                 <h3 className="text-xl md:text-2xl font-extrabold text-slate-900 mb-3 leading-snug">
-                  {isHe ? 'בדיקת Strep A — הפטנט המוגן (no step)' : 'Strep A Test — Patented Design (no step)'}
+                  {isHe ? 'בדיקת Strep A — הפטנט (no step)' : 'Strep A Test — Patented (no step)'}
                 </h3>
                 <p className="text-slate-500 text-sm leading-relaxed flex-grow">
                   {_('home.strepDesc')}
                 </p>
 
                 <div className="flex gap-3 mt-6" role="list">
-                  <div className="bg-blue-50 px-4 py-3 rounded-xl border border-blue-100/80 flex-1 text-center">
-                    <span className="block text-xl font-black text-blue-900 leading-none mb-1">100%</span>
-                    <span className="text-[10px] font-bold text-blue-600 tracking-wider block leading-tight">{_('home.strepSpec')}</span>
+                  <div className="bg-blue-50 px-4 py-3.5 rounded-2xl border border-blue-100/80 flex-1 text-center flex items-center justify-center shadow-inner">
+                    <span className="text-sm sm:text-base font-black text-blue-900 leading-tight">
+                      {isHe ? 'בדיקה אינטואיטיבית' : 'Intuitive Testing'}
+                    </span>
                   </div>
-                  <div className="bg-emerald-50 px-4 py-3 rounded-xl border border-emerald-100 flex-1 text-center">
-                    <span className="block text-xl font-black text-emerald-600 leading-none mb-1">0</span>
-                    <span className="text-[10px] font-bold text-emerald-700 tracking-wider block leading-tight">{_('home.strepTrans')}</span>
+                  <div className="bg-emerald-50 px-4 py-3.5 rounded-2xl border border-emerald-100 flex-1 text-center flex items-center justify-center shadow-inner">
+                    <span className="text-sm sm:text-base font-black text-emerald-800 leading-tight">
+                      {isHe ? 'ללא שלבים' : 'No Steps (Closed System)'}
+                    </span>
                   </div>
                 </div>
 
@@ -463,7 +500,7 @@ export default function HomePage({ onOpenRfq }) {
 
                 <div className="flex gap-3 mt-6" role="list">
                   <div className="bg-blue-50 px-4 py-3 rounded-xl border border-blue-100/80 flex-1 text-center">
-                    <span className="block text-xl font-black text-blue-900 leading-none mb-1">99.1%</span>
+                    <span className="block text-base sm:text-lg font-black text-blue-900 leading-tight mb-1">{isHe ? 'בדיקה ביתית' : 'At-Home'}</span>
                     <span className="text-[10px] font-bold text-blue-600 tracking-wider block leading-tight">{_('home.fitAcc')}</span>
                   </div>
                   <div className="bg-blue-50/60 px-4 py-3 rounded-xl border border-blue-100/50 flex-1 text-center">
@@ -506,7 +543,7 @@ export default function HomePage({ onOpenRfq }) {
             </h2>
             <p className="text-slate-500 text-lg max-w-2xl mx-auto font-light leading-relaxed">
               {isHe 
-                ? 'סקירת הפטנטים האחרונים, אישורי משרד הבריאות והאינטגרציות הדיגיטליות של BMT Diagnostics לשמירה על בריאות הציבור.' 
+                ? 'סקירת הפטנטים האחרונים, אישורי משרד הבריאות והאינטגרציות הדיגיטליות של BMT לשמירה על בריאות הציבור.' 
                 : 'Oversight on recent global patents, Ministry of Health clearances, and digital health integrations.'}
             </p>
             <div className="w-16 h-1 bg-burgundy mx-auto mt-6 rounded-full" aria-hidden="true" />
@@ -539,8 +576,8 @@ export default function HomePage({ onOpenRfq }) {
                   </h3>
                   <p className="text-slate-500 text-sm leading-relaxed font-normal">
                     {isHe 
-                      ? 'אישור פטנט רשמי נוסף באירופה וארה"ב המגן על פלטפורמת האבחון המהירה המונעת לחלוטין זיהומים ביולוגיים באבחון מהיר בנקודת הטיפול.' 
-                      : 'Official patent approval secured in the US and Europe protecting our self-contained rapid testing pen designed to eliminate biohazard exposure.'}
+                      ? 'אישור פטנט רשמי נוסף באירופה וארה"ב המגן על פלטפורמת האבחון המהירה המקטינה זיהומים ביולוגיים באבחון מהיר בנקודת הטיפול.' 
+                      : 'Official patent approval secured in the US and Europe protecting our self-contained rapid testing platform designed to reduce biohazard exposure at point-of-care.'}
                   </p>
                 </div>
               </div>
@@ -588,8 +625,8 @@ export default function HomePage({ onOpenRfq }) {
                   </h3>
                   <p className="text-slate-500 text-sm leading-relaxed font-normal">
                     {isHe 
-                      ? 'התרחבות משמעותית בסל הבדיקות המאושרות לשיווק: קבלת אישורי משרד הבריאות הישראלי לסדרות בדיקה נשימתיות וקרדיאליות רחבות.' 
-                      : 'Significant expansion of our certified portfolio: standard regulatory approval secured for advanced respiratory and cardiac testing suites.'}
+                      ? 'התרחבות משמעותית בסל הבדיקות המאושרות לשיווק: קבלת אישורי משרד הבריאות הישראלי לסדרה נרחבת של בדיקות ביתיות.' 
+                      : 'Significant expansion of our certified portfolio: standard regulatory approval secured from the Israeli MOH for an extensive suite of home testing kits.'}
                   </p>
                 </div>
               </div>

@@ -39,10 +39,14 @@ export default function ProductCard({ prod, lang, isRtl, _, nav }) {
         )}
         
         {/* Patent / Innovation Badge */}
-        {(prod.id.includes('strep-a-pen') || prod.id.includes('flu-ab')) && (
-          <div className="absolute top-4 right-4 bg-gradient-to-r from-burgundy to-burgundy-600 text-white text-[10px] font-black px-3.5 py-1.5 rounded-full shadow-md uppercase tracking-wider flex items-center gap-1.5">
+        {(prod.isPatented || prod.patentBadge || prod.id.includes('strep') || prod.id.includes('covid-otc') || prod.id.includes('fob-b2c') || prod.id.includes('h-pylori')) && (
+          <div className="absolute top-4 right-4 rtl:right-4 rtl:left-auto bg-gradient-to-r from-burgundy to-burgundy-600 text-white text-[10px] font-black px-3.5 py-1.5 rounded-full shadow-md uppercase tracking-wider flex items-center gap-1.5 z-20">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-300 animate-pulse"></span>
-            Patent
+            <span>
+              {prod.patentBadge 
+                ? (typeof prod.patentBadge === 'object' ? (prod.patentBadge[lang] || prod.patentBadge.he || prod.patentBadge.en) : prod.patentBadge)
+                : (lang === 'he' ? 'פטנט רשום' : 'Patent')}
+            </span>
           </div>
         )}
 

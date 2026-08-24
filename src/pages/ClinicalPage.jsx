@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Award, ShieldCheck, Microscope, BookOpen, Quote, Download, ArrowUpRight, ExternalLink, Sparkles, Stethoscope, Activity, HeartPulse, FileText, Smartphone } from 'lucide-react';
+import { Sparkles, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { getAssetPath } from '../utils/imagePath';
 
@@ -8,45 +8,10 @@ export default function ClinicalPage() {
   const { lang, _ } = useLanguage();
   const isHe = lang === 'he';
 
-  const title = _('clinical.title');
-  const desc = _('clinical.desc');
-
-  // Peer-reviewed studies summary table
-  const studiesSummary = [
-    {
-      assayHe: 'Strep A Lab-On-Time (BMT 51084)',
-      assayEn: 'Strep A Rapid Test (BMT 51084)',
-      centerHe: 'המרכז הרפואי צפון (פוריה)',
-      centerEn: 'Tzafon Medical Center (Poriya)',
-      sampleSize: '181',
-      sens: '96.9% (Colony-rich) / 88.6%',
-      spec: '100.0%',
-      ref: 'Prof. Avi Peretz (PI)',
-      pdfLink: '/Clinical validation of BMT 51084 Strep A Lab-On-Time test device at Puriya Medical Center_final_signed (1).pdf'
-    },
-    {
-      assayHe: 'Influenza A+B Lab-On-Time (BMT 51088)',
-      assayEn: 'Influenza A+B Rapid Test (BMT 51088)',
-      centerHe: 'המרכז הרפואי צפון (פוריה)',
-      centerEn: 'Tzafon Medical Center (Poriya)',
-      sampleSize: '170',
-      sens: '94.9% (CT < 30) / 84.1% (CT < 35)',
-      spec: '100.0%',
-      ref: 'Prof. Avi Peretz (PI)',
-      pdfLink: '/Clinical validation of BMT 51088 Influenza A+B test at Puriya Medical Center_clean.pdf'
-    },
-    {
-      assayHe: 'RapidTest AI Mobile Application',
-      assayEn: 'RapidTest AI Clinical Usability',
-      centerHe: 'המרכז הרפואי צפון (פוריה)',
-      centerEn: 'Tzafon Medical Center (Poriya)',
-      sampleSize: '100',
-      sens: '97.1% AI Accuracy',
-      spec: '87.0% Independent (Ages 50-74)',
-      ref: 'Prof. Avi Peretz (PI)',
-      pdfLink: '/Clinical Usabilty validation of RapidTest AI at Puriya Medical Center_final_signed.pdf'
-    }
-  ];
+  const title = isHe ? 'מאמרים ומדריכים רפואיים' : 'Scientific & Medical Articles';
+  const desc = isHe 
+    ? 'סקירה מקיפה של מאמרים קליניים, מדריכי הדרכה רפואיים ומקורות מידע מקצועיים ממוסדות הבריאות המובילים בישראל.'
+    : 'Comprehensive overview of clinical articles, medical guides, and reference resources from leading Israeli healthcare institutions.';
 
   // Dr. Kids Articles collection with real screenshots from site
   const drKidsArticles = [
@@ -158,11 +123,11 @@ export default function ClinicalPage() {
   return (
     <div className="animate-fade-in bg-white pb-24 min-h-screen">
       <Helmet>
-        <title>{`Scientific Articles & Research | BMT Diagnostics`}</title>
+        <title>{`Scientific & Medical Articles | BMT Diagnostics`}</title>
         <meta name="description" content={desc} />
-        <meta property="og:title" content="Scientific Articles & Research | BMT Diagnostics" />
+        <meta property="og:title" content="Scientific & Medical Articles | BMT Diagnostics" />
         <meta property="og:description" content={desc} />
-        <meta name="keywords" content="Clinical Validation, Strep A Research, Influenza A+B, RapidTest AI, Dr. Kids, Tzafon Medical Center, Puriya, MedTech Validation" />
+        <meta name="keywords" content="Medical Articles, Strep A, Influenza A+B, Dr. Kids, Schneider, Clalit, Maccabi, Meuhedet, Leumit, FOB, H. Pylori" />
       </Helmet>
 
       {/* Majestic Widescreen Header Banner with Blue People Image ("האנשים בכחול") */}
@@ -170,7 +135,7 @@ export default function ClinicalPage() {
         className="relative py-24 md:py-32 overflow-hidden text-white border-b border-slate-100"
         style={{ background: 'linear-gradient(135deg, #0267B5 0%, #01417A 100%)' }}
       >
-        {/* Blue Lab Team Background Image ("האנשים בכחול") */}
+        {/* Blue Lab Team Background Image */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <img 
             src={getAssetPath('home-main-image.png')} 
@@ -189,7 +154,7 @@ export default function ClinicalPage() {
 
         <div className="max-w-6xl mx-auto px-4 text-center relative z-20">
           <div className="inline-block bg-sky-400/20 text-sky-200 border border-sky-300/30 text-xs font-black px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest">
-            {isHe ? 'מאמרים מדעיים ומחקרים קליניים' : 'Scientific Articles & Clinical Validation Reports'}
+            {isHe ? 'מאמרים מדעיים ומדריכים קליניים' : 'Scientific & Medical Articles'}
           </div>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-8 tracking-tight leading-tight drop-shadow-md">
             {title}
@@ -202,194 +167,7 @@ export default function ClinicalPage() {
 
       <div className="max-w-7xl mx-auto px-4 mt-16">
 
-        {/* --- SECTION 1: PEER-REVIEWED CLINICAL VALIDATION REPORTS (PURYA MEDICAL CENTER) --- */}
-        <section className="mb-24">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 text-blue-800 text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest mb-3 shadow-sm">
-              <Microscope className="w-4 h-4 text-blue-600" />
-              {isHe ? 'מחקרי תיקוף קליניים רשמיים — המרכז הרפואי צפון (פוריה)' : 'Official Clinical Validation Reports — Tzafon Medical Center'}
-            </div>
-            <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
-              {isHe ? 'תיקוף קליני ומחקרי שימושיות בלתי תלויים' : 'Independent Clinical Validations & Usability Studies'}
-            </h2>
-            <p className="text-slate-500 text-sm md:text-base max-w-3xl mx-auto mt-2 font-normal">
-              {isHe ? 'דוחות התיקוף הקליניים שנערכו במעבדה למיקרוביולוגיה במרכז הרפואי צפון (פוריה) בראשות פרופ׳ אבי פרץ' : 'Clinical validation protocols conducted at Tzafon Medical Center (Poriya) under the supervision of Prof. Avi Peretz'}
-            </p>
-          </div>
-
-          <div className="grid lg:grid-cols-3 gap-8">
-            
-            {/* Card 1: Strep A Rapid Test (BMT 51084) */}
-            <article className="bg-white rounded-[2.5rem] p-8 border border-slate-200/90 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group card-3d-lift relative overflow-hidden">
-               <div className="absolute top-0 right-0 w-48 h-48 bg-burgundy/[0.02] rounded-full blur-3xl pointer-events-none" />
-               
-               <div>
-                 <div className="inline-flex items-center gap-2 bg-burgundy/5 text-burgundy text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6 border border-burgundy/10 shadow-sm">
-                   <Microscope className="w-3.5 h-3.5" />
-                   {isHe ? 'Strep A (מק"ט 51084)' : 'Strep A (BMT 51084)'}
-                 </div>
-                 
-                 <h3 className="text-xl font-black text-slate-900 mb-4 leading-tight tracking-tight group-hover:text-burgundy transition-colors">
-                   {isHe ? 'תיקוף קליני - בדיקת Strep A Lab-On-Time' : 'Clinical Validation - Strep A Lab-On-Time Test'}
-                 </h3>
-
-                 <div className="text-xs text-slate-500 font-semibold mb-6 flex items-center gap-2">
-                   <Award className="w-4 h-4 text-amber-500 shrink-0" />
-                   <span>{isHe ? 'המרכז הרפואי צפון (פוריה) • פרופ׳ אבי פרץ' : 'Tzafon Medical Center (Poriya) • Prof. Avi Peretz'}</span>
-                 </div>
-                 
-                 <div className="relative mb-8 bg-slate-50 border-s-4 border-burgundy p-5 rounded-e-2xl shadow-sm">
-                   <Quote className="absolute top-3 right-3 w-8 h-8 text-burgundy/10 transform rotate-180 pointer-events-none" />
-                   <p className="text-slate-700 italic text-xs md:text-sm leading-relaxed font-serif relative z-10">
-                     {isHe 
-                       ? '"ספציפיות בדיקת הסטרפטוקוק המהירה של BMT הינה 100%, והרגישות מגיעה ל-96.9% מול תרביות מעבדה. התקן האבחון נמצא נוח וידידותי במיוחד למשתמש."'
-                       : '"BMT Strep A rapid test displayed 100% specificity and 96.9% sensitivity for colony-rich cultures, proving intuitive and highly reliable for point-of-care."'}
-                   </p>
-                 </div>
-               </div>
-               
-               <div>
-                 <div className="grid grid-cols-2 gap-3 mb-6">
-                    <div className="bg-slate-50 border border-slate-200/70 rounded-xl p-3 text-center shadow-inner group-hover:bg-white transition-colors">
-                      <div className="text-2xl font-black text-emerald-600 mb-0.5 leading-none">100%</div>
-                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{isHe ? 'ספציפיות' : 'Specificity'}</div>
-                    </div>
-                    
-                    <div className="bg-slate-50 border border-slate-200/70 rounded-xl p-3 text-center shadow-inner group-hover:bg-white transition-colors">
-                      <div className="text-2xl font-black text-blue-600 mb-0.5 leading-none">96.9%</div>
-                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{isHe ? 'רגישות (תרביות)' : 'Sensitivity (Rich)'}</div>
-                    </div>
-                 </div>
-
-                 <a 
-                   href="/Clinical validation of BMT 51084 Strep A Lab-On-Time test device at Puriya Medical Center_final_signed (1).pdf" 
-                   download
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   className="w-full inline-flex items-center justify-center gap-2 bg-burgundy hover:brightness-110 text-white py-3.5 rounded-2xl font-extrabold text-xs transition-all shadow-sm hover:shadow-md focus:outline-none btn-bouncy"
-                 >
-                   <Download className="w-4 h-4" />
-                   <span>{isHe ? 'הורד דוח תיקוף סטרפ A (PDF)' : 'Download Strep A Report (PDF)'}</span>
-                 </a>
-               </div>
-            </article>
-
-            {/* Card 2: Influenza A+B Rapid Test (BMT 51088) with CT < 30 Stat Display */}
-            <article className="bg-white rounded-[2.5rem] p-8 border border-slate-200/90 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group card-3d-lift relative overflow-hidden">
-               <div className="absolute top-0 right-0 w-48 h-48 bg-blue-500/[0.02] rounded-full blur-3xl pointer-events-none" />
-               
-               <div>
-                 <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6 border border-blue-100 shadow-sm">
-                   <Microscope className="w-3.5 h-3.5" />
-                   {isHe ? 'שפעת A+B (מק"ט 51088)' : 'Influenza A+B (BMT 51088)'}
-                 </div>
-                 
-                 <h3 className="text-xl font-black text-slate-900 mb-4 leading-tight tracking-tight group-hover:text-blue-600 transition-colors">
-                   {isHe ? 'תיקוף קליני - בדיקת שפעת Influenza A+B' : 'Clinical Validation - Influenza A+B Rapid Test'}
-                 </h3>
-
-                 <div className="text-xs text-slate-500 font-semibold mb-6 flex items-center gap-2">
-                   <Award className="w-4 h-4 text-amber-500 shrink-0" />
-                   <span>{isHe ? 'המרכז הרפואי צפון (פוריה) • פרופ׳ אבי פרץ' : 'Tzafon Medical Center (Poriya) • Prof. Avi Peretz'}</span>
-                 </div>
-                 
-                 <div className="relative mb-8 bg-slate-50 border-s-4 border-blue-600 p-5 rounded-e-2xl shadow-sm">
-                   <Quote className="absolute top-3 right-3 w-8 h-8 text-blue-600/10 transform rotate-180 pointer-events-none" />
-                   <p className="text-slate-700 italic text-xs md:text-sm leading-relaxed font-serif relative z-10">
-                     {isHe 
-                       ? '"להערכתי המקצועית, בדיקת Influenza A+B Lab-On-Time של BMT מתאימה לשימוש עצמי בקרב הציבור הרחב הודות לפשטותה, נוחות תפעולה ובהירות קריאת התוצאות."'
-                       : '"It is my professional opinion that BMT Lab-On-Time Influenza A+B Rapid Test Device could be used by the general population due to simplicity and clear results reading."'}
-                   </p>
-                 </div>
-               </div>
-               
-               <div>
-                 <div className="grid grid-cols-2 gap-3 mb-6">
-                    <div className="bg-slate-50 border border-slate-200/70 rounded-xl p-3 text-center shadow-inner group-hover:bg-white transition-colors">
-                      <div className="text-2xl font-black text-emerald-600 mb-0.5 leading-none">100%</div>
-                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{isHe ? 'ספציפיות' : 'Specificity'}</div>
-                    </div>
-                    
-                    <div className="bg-slate-50 border border-slate-200/70 rounded-xl p-3 text-center shadow-inner group-hover:bg-white transition-colors">
-                      <div className="text-2xl font-black text-blue-600 mb-0.5 leading-none">94.9%</div>
-                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{isHe ? 'רגישות (CT < 30)' : 'Sensitivity (CT<30)'}</div>
-                    </div>
-                 </div>
-
-                 <a 
-                   href="/Clinical validation of BMT 51088 Influenza A+B test at Puriya Medical Center_clean.pdf" 
-                   download
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3.5 rounded-2xl font-extrabold text-xs transition-all shadow-sm hover:shadow-md focus:outline-none btn-bouncy"
-                 >
-                   <Download className="w-4 h-4" />
-                   <span>{isHe ? 'הורד דוח תיקוף שפעת (PDF)' : 'Download Flu Report (PDF)'}</span>
-                 </a>
-               </div>
-            </article>
-
-            {/* Card 3: RapidTest AI Mobile Usability Validation with 87% Ages 50-74 Explicit Subtext */}
-            <article className="bg-white rounded-[2.5rem] p-8 border border-slate-200/90 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group card-3d-lift relative overflow-hidden">
-               <div className="absolute top-0 right-0 w-48 h-48 bg-purple-500/[0.02] rounded-full blur-3xl pointer-events-none" />
-               
-               <div>
-                 <div className="inline-flex items-center gap-2 bg-purple-50 text-purple-700 text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6 border border-purple-100 shadow-sm">
-                   <Smartphone className="w-3.5 h-3.5 text-purple-600" />
-                   {isHe ? 'אלגוריתם AI ושימושיות' : 'RapidTest AI Mobile'}
-                 </div>
-                 
-                 <h3 className="text-xl font-black text-slate-900 mb-4 leading-tight tracking-tight group-hover:text-purple-600 transition-colors">
-                   {isHe ? 'מחקר שימושיות קלינית - RapidTest AI' : 'Clinical Usability - RapidTest AI App'}
-                 </h3>
-
-                 <div className="text-xs text-slate-500 font-semibold mb-6 flex items-center gap-2">
-                   <Award className="w-4 h-4 text-amber-500 shrink-0" />
-                   <span>{isHe ? 'המרכז הרפואי צפון (פוריה) • פרופ׳ אבי פרץ' : 'Tzafon Medical Center (Poriya) • Prof. Avi Peretz'}</span>
-                 </div>
-                 
-                 <div className="relative mb-8 bg-slate-50 border-s-4 border-purple-600 p-5 rounded-e-2xl shadow-sm">
-                   <Quote className="absolute top-3 right-3 w-8 h-8 text-purple-600/10 transform rotate-180 pointer-events-none" />
-                   <p className="text-slate-700 italic text-xs md:text-sm leading-relaxed font-serif relative z-10">
-                     {isHe 
-                       ? '"מחקר השימושיות הקליני מדגים אמינות אלגוריתמית גבוהה של 97.1% בפענוח אוטומטי של בדיקות FIT באמצעות סמארטפון ושיעור ביצוע עצמאי ללא עזרה של 87% בקרב נבדקים מגיל 50 עד 74."'
-                       : '"The clinical usability study provides compelling evidence supporting RapidTest AI with 97.1% automated accuracy and 87% independent completion among ages 50-74."'}
-                   </p>
-                 </div>
-               </div>
-               
-               <div>
-                 <div className="grid grid-cols-2 gap-3 mb-6">
-                    <div className="bg-slate-50 border border-slate-200/70 rounded-xl p-3 text-center shadow-inner group-hover:bg-white transition-colors">
-                      <div className="text-2xl font-black text-purple-600 mb-0.5 leading-none">97.1%</div>
-                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{isHe ? 'דיוק פענוח AI' : 'AI Accuracy'}</div>
-                    </div>
-                    
-                    <div className="bg-slate-50 border border-slate-200/70 rounded-xl p-3 text-center shadow-inner group-hover:bg-white transition-colors">
-                      <div className="text-2xl font-black text-emerald-600 mb-0.5 leading-none">87.0%</div>
-                      <div className="text-[9px] font-extrabold text-slate-500 leading-tight mt-0.5">
-                        {isHe ? 'ביצוע עצמאי ללא עזרה (גילאי 50-74)' : 'Self Completion (Ages 50-74)'}
-                      </div>
-                    </div>
-                 </div>
-
-                 <a 
-                   href="/Clinical Usabilty validation of RapidTest AI at Puriya Medical Center_final_signed.pdf" 
-                   download
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   className="w-full inline-flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-700 text-white py-3.5 rounded-2xl font-extrabold text-xs transition-all shadow-sm hover:shadow-md focus:outline-none btn-bouncy"
-                 >
-                   <Download className="w-4 h-4" />
-                   <span>{isHe ? 'הורד דוח RapidTest AI (PDF)' : 'Download AI Report (PDF)'}</span>
-                 </a>
-               </div>
-            </article>
-
-          </div>
-        </section>
-
-        {/* --- SECTION 2: DR. KIDS CLINICAL GUIDES WITH REAL ARTICLE SCREENSHOTS --- */}
+        {/* --- SECTION 1: DR. KIDS CLINICAL GUIDES WITH REAL ARTICLE SCREENSHOTS --- */}
         <section className="mb-24">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest mb-3 shadow-sm">
@@ -397,7 +175,7 @@ export default function ClinicalPage() {
               {isHe ? 'מאמרים בשיתוף ד״ר אפי (Dr. Kids)' : 'Dr. Kids Collaboration Articles'}
             </div>
             <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
-              {isHe ? 'מדריכים קליניים ומאמרי הדרכה' : 'Clinical Guides & Parental Educational Articles'}
+              {isHe ? 'מדריכים קליניים ומאמרי הדרכה' : 'Clinical Guides & Educational Articles'}
             </h2>
           </div>
 
@@ -446,7 +224,7 @@ export default function ClinicalPage() {
           </div>
         </section>
 
-        {/* --- SECTION 3: STREPTOCCOCUS (STREP A) & THROAT INFECTIONS WITH REAL ARTICLE SCREENSHOTS --- */}
+        {/* --- SECTION 2: STREPTOCCOCUS (STREP A) & THROAT INFECTIONS WITH REAL ARTICLE SCREENSHOTS --- */}
         <section className="mb-24">
           <div className="flex items-center gap-3 border-b border-slate-200 pb-5 mb-10 max-w-7xl mx-auto">
             <div className="w-12 h-12 rounded-2xl bg-sky-50 text-sky-600 border border-sky-100 flex items-center justify-center font-black text-xl shadow-sm">
@@ -504,7 +282,7 @@ export default function ClinicalPage() {
           </div>
         </section>
 
-        {/* --- SECTION 4: FECAL OCCULT BLOOD (FOB) & COLORECTAL SCREENING WITH REAL ARTICLE SCREENSHOTS --- */}
+        {/* --- SECTION 3: FECAL OCCULT BLOOD (FOB) & COLORECTAL SCREENING WITH REAL ARTICLE SCREENSHOTS --- */}
         <section className="mb-24">
           <div className="flex items-center gap-3 border-b border-slate-200 pb-5 mb-10 max-w-7xl mx-auto">
             <div className="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 border border-rose-100 flex items-center justify-center font-black text-xl shadow-sm">
@@ -562,7 +340,7 @@ export default function ClinicalPage() {
           </div>
         </section>
 
-        {/* --- SECTION 5: HELICOBACTER PYLORI (H. PYLORI) WITH REAL ARTICLE SCREENSHOTS --- */}
+        {/* --- SECTION 4: HELICOBACTER PYLORI (H. PYLORI) WITH REAL ARTICLE SCREENSHOTS --- */}
         <section className="mb-24">
           <div className="flex items-center gap-3 border-b border-slate-200 pb-5 mb-10 max-w-7xl mx-auto">
             <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 border border-amber-100 flex items-center justify-center font-black text-xl shadow-sm">
@@ -617,64 +395,6 @@ export default function ClinicalPage() {
                 </div>
               </article>
             ))}
-          </div>
-        </section>
-
-        {/* Global Clinical Validation Grid Table */}
-        <section className="bg-white border border-slate-200/80 rounded-[3rem] p-8 md:p-14 shadow-md relative overflow-hidden mb-16">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/[0.01] rounded-full blur-[100px] pointer-events-none" />
-          
-          <div className="flex items-center gap-4 border-b border-slate-100 pb-8 mb-10">
-            <div className="w-14 h-14 bg-blue-50 text-blue-600 border border-blue-100/50 rounded-2xl shadow-sm flex items-center justify-center shrink-0">
-              <Award className="w-7 h-7" />
-            </div>
-            <div>
-              <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
-                {isHe ? 'מפתח תיקוף וביצועים מדעיים' : 'EBM Peer-Reviewed Validation Summary'}
-              </h2>
-              <p className="text-slate-450 text-sm font-light mt-1">
-                {isHe ? 'ריכוז תוצאות מחקרי התיקוף הקליניים העיקריים של הבדיקות המהירות מתוצרתנו' : 'Aggregated scientific performance characteristics for key diagnostic suites'}
-              </p>
-            </div>
-          </div>
-
-          <div className="overflow-x-auto rounded-2xl border border-slate-200/70 shadow-inner">
-            <table className="min-w-full divide-y divide-slate-100">
-              <thead className="bg-slate-50 text-slate-700 font-extrabold text-xs uppercase tracking-widest text-start">
-                <tr>
-                  <th scope="col" className="px-6 py-4.5 text-start">{isHe ? 'פאנל אבחוני / מחקר' : 'Diagnostic Study'}</th>
-                  <th scope="col" className="px-6 py-4.5 text-start">{isHe ? 'מרכז רפואי' : 'Medical Center'}</th>
-                  <th scope="col" className="px-6 py-4.5 text-start w-28">{isHe ? 'גודל מדגם' : 'Sample Size'}</th>
-                  <th scope="col" className="px-6 py-4.5 text-start">{isHe ? 'רגישות / דיוק' : 'Sensitivity / Accuracy'}</th>
-                  <th scope="col" className="px-6 py-4.5 text-start w-28">{isHe ? 'ספציפיות' : 'Specificity'}</th>
-                  <th scope="col" className="px-6 py-4.5 text-start">{isHe ? 'חוקר ראשי' : 'Principal Investigator'}</th>
-                  <th scope="col" className="px-6 py-4.5 text-center w-28">{isHe ? 'מסמך PDF' : 'Report'}</th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-slate-100 text-sm font-medium text-slate-800">
-                {studiesSummary.map((s, idx) => (
-                  <tr key={idx} className="hover:bg-blue-50/20 transition-colors">
-                    <td className="px-6 py-4.5 font-bold text-slate-900">{isHe ? s.assayHe : s.assayEn}</td>
-                    <td className="px-6 py-4.5 text-slate-650">{isHe ? s.centerHe : s.centerEn}</td>
-                    <td className="px-6 py-4.5 text-slate-600 font-bold">{s.sampleSize}</td>
-                    <td className="px-6 py-4.5 text-blue-700 font-extrabold">{s.sens}</td>
-                    <td className="px-6 py-4.5 text-emerald-600 font-extrabold">{s.spec}</td>
-                    <td className="px-6 py-4.5 text-slate-500 font-semibold">{s.ref}</td>
-                    <td className="px-6 py-4.5 text-center">
-                      <a 
-                        href={s.pdfLink} 
-                        download
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-xs bg-slate-100 hover:bg-blue-50 text-blue-700 font-bold px-3 py-1.5 rounded-xl border border-slate-200 transition"
-                      >
-                        <Download className="w-3.5 h-3.5" /> PDF
-                      </a>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
           </div>
         </section>
 

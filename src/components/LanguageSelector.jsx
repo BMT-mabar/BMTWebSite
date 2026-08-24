@@ -42,15 +42,16 @@ export default function LanguageSelector({ isMobile = false, onCloseMobileMenu }
     <div className={`relative ${isMobile ? 'w-full mt-4' : ''}`} ref={isMobile ? null : dropdownRef}>
       <button 
         onClick={(e) => { e.stopPropagation(); setIsOpen(!isOpen); }} 
-        className="flex items-center justify-between w-full gap-2 text-slate-700 font-bold bg-white/80 backdrop-blur-md border border-slate-200/80 px-4 py-2.5 rounded-xl hover:bg-white hover:shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="flex items-center justify-between w-full gap-2.5 text-slate-700 font-bold bg-white/80 backdrop-blur-md border border-slate-200/80 px-3.5 py-2.5 rounded-xl hover:bg-white hover:shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
         aria-haspopup="true" 
         aria-expanded={isOpen}
       >
         <div className="flex items-center gap-2">
+          <Globe className="w-4 h-4 text-blue-600 shrink-0" />
           <span className="text-base">{currentLangObj.flag}</span> 
-          <span className="uppercase text-sm tracking-wider">{lang}</span>
+          <span className="uppercase text-xs font-black tracking-wider text-slate-800">{lang}</span>
         </div>
-        <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}/>
+        <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}/>
       </button>
       
       {isOpen && (
