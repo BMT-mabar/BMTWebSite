@@ -16,8 +16,7 @@ import { useLanguage } from '../context/LanguageContext';
 // FORMSPREE EMAIL INTEGRATION PLACEHOLDER:
 // Replace the placeholder string below with your active Formspree Form ID endpoint.
 // Example: 'https://formspree.io/f/xanybjqy'
-const PRIMARY_EMAIL = 'info@bmtdx.com';
-const CC_EMAIL = 'roey@bmtdx.com';
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xbgrvlyr';
 
 export default function RfqModal({ isOpen, onClose }) {
   const { lang, _ } = useLanguage();
@@ -76,63 +75,39 @@ export default function RfqModal({ isOpen, onClose }) {
     }
   }, [isOpen]);
 
-  /* ── Submit via FormSubmit directly to info@bmtdx.com & cc roey@bmtdx.com ── */
+  /* ── Submit directly to Formspree endpoint ── */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
     setErrorMsg(null);
 
     const form = formRef.current;
-    const payload = Object.fromEntries(new FormData(form).entries());
-
-    const userEmail = payload['כתובת מייל'] || payload.email || '';
-    const userName = payload['שם מלא'] || payload.name || 'לקוח חדש';
-    const userOrg = payload['מוסד / חברה'] || payload.clinic || 'כללי';
-
-    const targetUrl = `https://formsubmit.co/ajax/${PRIMARY_EMAIL}`;
-
-    // Structure request payload
-    const requestBody = {
-      ...payload,
-      _cc: CC_EMAIL,
-      _subject: `פנייה חדשה מאתר BMT Diagnostics — ${userName} (${userOrg})`,
-      _template: 'table',
-      _captcha: 'false',
-      _replyto: userEmail
-    };
+    const formData = new FormData(form);
+    const payload = Object.fromEntries(formData.entries());
 
     try {
-      const res = await fetch(targetUrl, {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json', 
           'Accept': 'application/json' 
         },
-        body: JSON.stringify(requestBody),
+        body: JSON.stringify(payload),
       });
 
       const data = await res.json();
 
-      if (res.ok || data.success === 'true' || data.success === true) {
+      if (res.ok) {
         setSuccess(true);
         form.reset();
-        setTimeout(() => { setSuccess(false); onClose(); }, 5000);
+        setTimeout(() => { setSuccess(false); onClose(); }, 4000);
       } else {
-        // If it's an activation pending message, it's still a success, FormSubmit just needs the first-time activation click
-        if (data.message && (data.message.includes('activate') || data.message.includes('confirm'))) {
-          setSuccess(true);
-          form.reset();
-          setTimeout(() => { setSuccess(false); onClose(); }, 5000);
-        } else {
-          throw new Error(data.error || data.message || 'Submission failed');
-        }
+        const errText = data.error || (data.errors && data.errors.map(err => err.message).join(', ')) || 'Submission failed';
+        throw new Error(errText);
       }
     } catch (err) {
-      console.error('AJAX Lead submission failed:', err);
-      // Graceful fallback to guarantee smooth UI experience
-      setSuccess(true);
-      form.reset();
-      setTimeout(() => { setSuccess(false); onClose(); }, 5000);
+      console.error('Formspree submission error:', err);
+      setErrorMsg(lang === 'he' ? 'אירעה שגיאה בעת שליחת הטופס. אנא פנו ישירות ל-info@bmtdx.com' : 'An error occurred while submitting the form. Please contact info@bmtdx.com');
     } finally {
       setSubmitting(false);
     }
@@ -221,7 +196,7 @@ export default function RfqModal({ isOpen, onClose }) {
                     {_('rfq.name')} <span className="text-burgundy" aria-hidden="true">*</span>
                   </label>
                   <input
-                    id="rfq-name" required type="text" name="שם מלא"
+                    id="rfq-name" required type="text" name="name"
                     autoComplete="name" aria-required="true"
                     className={inputCls}
                   />
@@ -233,7 +208,7 @@ export default function RfqModal({ isOpen, onClose }) {
                     {_('rfq.role')} <span className="text-burgundy" aria-hidden="true">*</span>
                   </label>
                   <select
-                    id="rfq-role" required name="תפקיד"
+                    id="rfq-role" required name="role"
                     aria-required="true"
                     className={inputCls + ' appearance-none cursor-pointer'}
                   >
@@ -252,7 +227,7 @@ export default function RfqModal({ isOpen, onClose }) {
                     {_('rfq.clinic')} <span className="text-burgundy" aria-hidden="true">*</span>
                   </label>
                   <input
-                    id="rfq-clinic" required type="text" name="מוסד / חברה"
+                    id="rfq-clinic" required type="text" name="organization"
                     autoComplete="organization" aria-required="true"
                     className={inputCls}
                   />
@@ -264,7 +239,7 @@ export default function RfqModal({ isOpen, onClose }) {
                     {_('rfq.email')} <span className="text-burgundy" aria-hidden="true">*</span>
                   </label>
                   <input
-                    id="rfq-email" required type="email" name="כתובת מייל"
+                    id="rfq-email" required type="email" name="email"
                     dir="ltr" autoComplete="email" aria-required="true"
                     className={inputCls}
                   />
@@ -276,7 +251,7 @@ export default function RfqModal({ isOpen, onClose }) {
                     {_('rfq.phone')} <span className="text-burgundy" aria-hidden="true">*</span>
                   </label>
                   <input
-                    id="rfq-phone" required type="tel" name="טלפון"
+                    id="rfq-phone" required type="tel" name="phone"
                     dir="ltr" autoComplete="tel" aria-required="true"
                     className={inputCls}
                   />
@@ -288,7 +263,7 @@ export default function RfqModal({ isOpen, onClose }) {
                     {_('rfq.message')}
                   </label>
                   <textarea
-                    id="rfq-message" name="הודעה" rows={4}
+                    id="rfq-message" name="message" rows={4}
                     placeholder={lang === 'he' ? 'פרטו את בקשתכם (פרמטרים, כמויות ועוד)...' : 'Detail your request (parameters, quantities, etc.)...'}
                     className={inputCls + ' resize-y'}
                   />
