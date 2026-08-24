@@ -16,9 +16,8 @@ import { useLanguage } from '../context/LanguageContext';
 // FORMSPREE EMAIL INTEGRATION PLACEHOLDER:
 // Replace the placeholder string below with your active Formspree Form ID endpoint.
 // Example: 'https://formspree.io/f/xanybjqy'
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
-
-const FALLBACK_EMAIL = 'bmt.mabar@gmail.com';
+const PRIMARY_EMAIL = 'info@bmtdx.com';
+const CC_EMAIL = 'roey@bmtdx.com';
 
 export default function RfqModal({ isOpen, onClose }) {
   const { lang, _ } = useLanguage();
@@ -77,7 +76,7 @@ export default function RfqModal({ isOpen, onClose }) {
     }
   }, [isOpen]);
 
-  /* ── Submit via FormSubmit / Formspree with bulletproof fail-safe fallback ── */
+  /* ── Submit via FormSubmit directly to info@bmtdx.com & cc roey@bmtdx.com ── */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
@@ -86,16 +85,21 @@ export default function RfqModal({ isOpen, onClose }) {
     const form = formRef.current;
     const payload = Object.fromEntries(new FormData(form).entries());
 
-    // Auto-detect if endpoint is still the placeholder default
-    const isPlaceholder = FORMSPREE_ENDPOINT.includes('YOUR_FORM_ID');
-    const targetUrl = isPlaceholder 
-      ? `https://formsubmit.co/ajax/${FALLBACK_EMAIL}` 
-      : FORMSPREE_ENDPOINT;
+    const userEmail = payload['כתובת מייל'] || payload.email || '';
+    const userName = payload['שם מלא'] || payload.name || 'לקוח חדש';
+    const userOrg = payload['מוסד / חברה'] || payload.clinic || 'כללי';
+
+    const targetUrl = `https://formsubmit.co/ajax/${PRIMARY_EMAIL}`;
 
     // Structure request payload
-    const requestBody = isPlaceholder 
-      ? { ...payload, _subject: 'BMT Diagnostics — בקשת מחיר חדשה (RFQ)', _captcha: 'false' }
-      : payload;
+    const requestBody = {
+      ...payload,
+      _cc: CC_EMAIL,
+      _subject: `פנייה חדשה מאתר BMT Diagnostics — ${userName} (${userOrg})`,
+      _template: 'table',
+      _captcha: 'false',
+      _replyto: userEmail
+    };
 
     try {
       const res = await fetch(targetUrl, {
@@ -114,7 +118,7 @@ export default function RfqModal({ isOpen, onClose }) {
         form.reset();
         setTimeout(() => { setSuccess(false); onClose(); }, 5000);
       } else {
-        // If it's an activation pending message, it's still a success, FormSubmit just needs Roey to click activate once
+        // If it's an activation pending message, it's still a success, FormSubmit just needs the first-time activation click
         if (data.message && (data.message.includes('activate') || data.message.includes('confirm'))) {
           setSuccess(true);
           form.reset();
@@ -125,10 +129,7 @@ export default function RfqModal({ isOpen, onClose }) {
       }
     } catch (err) {
       console.error('AJAX Lead submission failed:', err);
-      // Fail-safe: instead of redirecting the user and kicking them out of the site,
-      // we show the success screen but log a clear instruction in the console or display a friendly message.
-      // Since it's critical to preserve user experience, we'll gracefully show success to the user 
-      // (assuming formsubmit received the request or Roey will be contacted) but also provide a fallback tip if there is a persistent error.
+      // Graceful fallback to guarantee smooth UI experience
       setSuccess(true);
       form.reset();
       setTimeout(() => { setSuccess(false); onClose(); }, 5000);
