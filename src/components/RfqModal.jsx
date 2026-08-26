@@ -13,10 +13,9 @@ import { useLanguage } from '../context/LanguageContext';
  *  2. Paste your active Formspree endpoint URL into the constant below.
  */
 
-// FORMSPREE EMAIL INTEGRATION PLACEHOLDER:
-// Replace the placeholder string below with your active Formspree Form ID endpoint.
-// Example: 'https://formspree.io/f/xanybjqy'
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xbgrvlyr';
+// GOOGLE APPS SCRIPT & GOOGLE SHEETS LIVE INTEGRATION:
+// Appends leads to Google Sheets spreadsheet and triggers instant email to info@bmtdx.com and roey@bmtdx.com
+const GOOGLE_SCRIPT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxymJ-tYHSLlnFcTMCsLOvUt6nCtIuV91zjtGN_qsYI2zU79iEIKftFaTRRTdw-Oaspag/exec';
 
 export default function RfqModal({ isOpen, onClose }) {
   const { lang, _ } = useLanguage();
@@ -75,7 +74,7 @@ export default function RfqModal({ isOpen, onClose }) {
     }
   }, [isOpen]);
 
-  /* ── Submit directly to Formspree endpoint ── */
+  /* ── Submit directly to Google Apps Script / Google Sheets endpoint ── */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
@@ -86,27 +85,20 @@ export default function RfqModal({ isOpen, onClose }) {
     const payload = Object.fromEntries(formData.entries());
 
     try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      await fetch(GOOGLE_SCRIPT_ENDPOINT, {
         method: 'POST',
+        mode: 'no-cors',
         headers: { 
-          'Content-Type': 'application/json', 
-          'Accept': 'application/json' 
+          'Content-Type': 'application/json' 
         },
         body: JSON.stringify(payload),
       });
 
-      const data = await res.json();
-
-      if (res.ok) {
-        setSuccess(true);
-        form.reset();
-        setTimeout(() => { setSuccess(false); onClose(); }, 4000);
-      } else {
-        const errText = data.error || (data.errors && data.errors.map(err => err.message).join(', ')) || 'Submission failed';
-        throw new Error(errText);
-      }
+      setSuccess(true);
+      form.reset();
+      setTimeout(() => { setSuccess(false); onClose(); }, 4000);
     } catch (err) {
-      console.error('Formspree submission error:', err);
+      console.error('Google Sheets submission error:', err);
       setErrorMsg(lang === 'he' ? 'אירעה שגיאה בעת שליחת הטופס. אנא פנו ישירות ל-info@bmtdx.com' : 'An error occurred while submitting the form. Please contact info@bmtdx.com');
     } finally {
       setSubmitting(false);
