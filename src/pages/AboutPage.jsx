@@ -218,25 +218,15 @@ export default function AboutPage() {
               </div>
               <div className="text-start">
                 <div className="text-base font-extrabold">
-                  {isHe ? 'סרטון תדמית רשמי — BMT Diagnostics' 
-                  : (lang === 'ar' ? 'فيديو الشركة التعريفي الرسمي — BMT Diagnostics' 
-                  : (lang === 'fr' ? 'Film Institutionnel Officiel — BMT Diagnostics' 
-                  : (lang === 'de' ? 'Offizieller Imagefilm — BMT Diagnostics' 
-                  : (lang === 'ru' ? 'Официальный фильм о компании — BMT Diagnostics' 
-                  : 'Official Corporate Film — BMT Diagnostics'))))}
+                  {_('about.filmTitle')}
                 </div>
                 <div className="text-xs text-slate-400 font-medium">
-                  {isHe ? 'סיפור המהפכה הדיאגנוסטית, הטכנולוגיה ויכולות הייצור' 
-                  : (lang === 'ar' ? 'قصة ثورة التشخيص السريع والتقنيات وقدرات التصنيع المتقدمة' 
-                  : (lang === 'fr' ? 'L\'histoire de la révolution diagnostique et de l\'excellence industrielle.' 
-                  : (lang === 'de' ? 'Die Geschichte diagnostischer Innovation und Fertigungskompetenz.' 
-                  : (lang === 'ru' ? 'История диагностических инноваций и производственных возможностей.' 
-                  : 'The story of diagnostic innovation, patented technology, and manufacturing.'))))}
+                  {_('about.filmDesc')}
                 </div>
               </div>
             </div>
             <div className="text-xs font-black text-sky-400 bg-sky-500/10 px-4 py-2 rounded-full border border-sky-400/20 uppercase tracking-widest shrink-0">
-              {isHe ? 'סרטון תדמית' : (lang === 'ar' ? 'فيديو تعريفي' : (lang === 'fr' ? 'Film Institutionnel' : (lang === 'de' ? 'Unternehmensfilm' : (lang === 'ru' ? 'Видео о компании' : 'Corporate Film'))))}
+              {_('about.filmBadge')}
             </div>
           </div>
         </div>
@@ -258,12 +248,7 @@ export default function AboutPage() {
                  />
                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent" />
                  <div className="absolute bottom-4 right-4 rtl:right-4 rtl:left-auto bg-burgundy text-white text-[11px] font-black px-3.5 py-1 rounded-full shadow-md">
-                   {isHe ? 'תשתיות ייצור אוטומטיות' 
-                   : (lang === 'ar' ? 'خطوط إنتاج آلية' 
-                   : (lang === 'fr' ? 'Production Automatisée' 
-                   : (lang === 'de' ? 'Automatisierte Fertigung' 
-                   : (lang === 'ru' ? 'Автоматизированное производство' 
-                   : 'Automated Production'))))}
+                   {_('about.c1Badge')}
                  </div>
                </div>
                <div className="p-8">
@@ -285,12 +270,7 @@ export default function AboutPage() {
                  />
                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent" />
                  <div className="absolute bottom-4 right-4 rtl:right-4 rtl:left-auto bg-blue-600 text-white text-[11px] font-black px-3.5 py-1 rounded-full shadow-md">
-                   {isHe ? 'מעל 200 סוגי בדיקות' 
-                   : (lang === 'ar' ? 'أكثر من 200 فحص طبي' 
-                   : (lang === 'fr' ? '+200 Tests Cliniques' 
-                   : (lang === 'de' ? '200+ Diagnostik-Panels' 
-                   : (lang === 'ru' ? 'Более 200 клинических тестов' 
-                   : '200+ Clinical Panels'))))}
+                   {_('about.c2Badge')}
                  </div>
                </div>
                <div className="p-8">
@@ -312,12 +292,7 @@ export default function AboutPage() {
                  />
                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent" />
                  <div className="absolute bottom-4 right-4 rtl:right-4 rtl:left-auto bg-emerald-600 text-white text-[11px] font-black px-3.5 py-1 rounded-full shadow-md">
-                   {isHe ? 'פטנטים רשומים' 
-                   : (lang === 'ar' ? 'براءات اختراع مسجلة' 
-                   : (lang === 'fr' ? 'Brevets Enregistrés' 
-                   : (lang === 'de' ? 'Registrierte Patente' 
-                   : (lang === 'ru' ? 'Запатентованные технологии' 
-                   : 'Patented Innovation'))))}
+                   {_('about.c3Badge')}
                  </div>
                </div>
                <div className="p-8">
@@ -345,20 +320,10 @@ export default function AboutPage() {
           <div className="text-center mb-10">
             <div className="inline-flex items-center gap-2 bg-blue-600 text-white text-xs font-black px-4 py-2 rounded-full uppercase tracking-widest mb-3 shadow-md">
               <Milestone className="w-4 h-4 text-sky-200" />
-              {isHe ? 'היסטוריית החברה ואבני דרך' 
-              : (lang === 'ar' ? 'تاريخ الشركة وأبرز المحطات' 
-              : (lang === 'fr' ? 'Histoire de l\'Entreprise & Jalons' 
-              : (lang === 'de' ? 'Unternehmensgeschichte & Meilensteine' 
-              : (lang === 'ru' ? 'История компании и вехи развития' 
-              : 'Company History & Milestones'))))}
+              {_('about.milestoneBadge')}
             </div>
             <h2 className="text-2xl md:text-4xl font-black tracking-tight text-slate-900">
-              {isHe ? 'התפתחות חברת BMT Diagnostics' 
-              : (lang === 'ar' ? 'تطور ونمو شركة BMT Diagnostics' 
-              : (lang === 'fr' ? 'Évolution de BMT Diagnostics' 
-              : (lang === 'de' ? 'Entwicklung von BMT Diagnostics' 
-              : (lang === 'ru' ? 'Развитие компании BMT Diagnostics' 
-              : 'Evolution of BMT Diagnostics'))))}
+              {_('about.milestoneTitle')}
             </h2>
           </div>
 
@@ -438,12 +403,7 @@ export default function AboutPage() {
            <div className="text-center mb-20">
              <div className="inline-flex items-center gap-2 bg-burgundy/5 border border-burgundy/10 text-burgundy text-xs font-bold px-5 py-2 rounded-full uppercase tracking-widest mb-6 shadow-sm">
                <Award className="w-4 h-4 text-burgundy" />
-                {isHe ? 'הנהגת ביוטק מנוסה' 
-                : (lang === 'ar' ? 'قيادة التكنولوجيا الحيوية الرائدة' 
-                : (lang === 'fr' ? 'Leadership Médical Pionnier' 
-                : (lang === 'de' ? 'Erfahrene Führungskräfte' 
-                : (lang === 'ru' ? 'Опытное руководство' 
-                : 'Pioneering Leadership'))))}
+               {_('about.leaderBadge')}
              </div>
              <h2 id="team-heading" className="text-3xl md:text-5xl font-black text-slate-900 mb-6 text-center tracking-tight">
                {_('about.team')}

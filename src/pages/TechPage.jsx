@@ -16,24 +16,51 @@ export default function TechPage() {
   const [activeStep, setActiveStep] = useState(1);
   const [activeVideoModal, setActiveVideoModal] = useState(null);
 
+  const stepHighlights = {
+    1: {
+      he: 'מבטל לחלוטין טיפטוף טיפות והעברות דגימה',
+      en: 'Completely eliminates droplet spills and open sample transfers.',
+      de: 'Verhindert Tropfverluste und offene Probentransfers vollständig.',
+      fr: 'Élimine totalement les gouttes et les transferts d\'échantillons ouverts.',
+      ru: 'Полностью исключает проливание капель и открытый перенос образцов.',
+      ar: 'يلغي تماماً تساقط القطرات ونقل العينات المفتوحة.'
+    },
+    2: {
+      he: 'ללא שלבים — ריאגנטים מוכנים מראש בשיטת פטנט',
+      en: 'No Steps — Pre-prepared patented reagents ready for use.',
+      de: 'Keine Zwischenschritte — Patentierte, gebrauchsfertige Reagenzien.',
+      fr: 'Sans étapes complexes — Réactifs brevetés prêts à l\'emploi.',
+      ru: 'Без этапов — Запатентованные готовые к использованию реагенты.',
+      ar: 'بدون خطوات معقدة — كواشف جاهزة ومحمية ببراءة اختراع.'
+    },
+    3: {
+      he: 'קריאה ויזואלית ברורה ומדויקת בתוך דקות ספורות',
+      en: 'Clear, accurate visual reading within minutes for optimal care.',
+      de: 'Klare, präzise visuelle Ablesung innerhalb weniger Minuten.',
+      fr: 'Lecture visuelle claire et précise en quelques minutes.',
+      ru: 'Четкое визуальное считывание результата за несколько минут.',
+      ar: 'قراءة بصرية واضحة ودقيقة في غضون دقائق لعلاج مثالي.'
+    }
+  };
+
   const stepDetails = [
     {
       num: 1,
       title: _('tech.s1Title'),
       desc: _('tech.s1Desc'),
-      highlight: isHe ? 'מבטל לחלוטין טיפטוף טיפות והעברות דגימה' : 'Completely eliminates droplet spills and sample transfers.'
+      highlight: stepHighlights[1][lang] || stepHighlights[1].en || stepHighlights[1].he
     },
     {
       num: 2,
       title: _('tech.s2Title'),
       desc: _('tech.s2Desc'),
-      highlight: isHe ? 'ללא שלבים — ריאגנטים מוכנים מראש בשיטת פטנט' : 'No Steps — Pre-prepared patented reagents.'
+      highlight: stepHighlights[2][lang] || stepHighlights[2].en || stepHighlights[2].he
     },
     {
       num: 3,
       title: _('tech.s3Title'),
       desc: _('tech.s3Desc'),
-      highlight: isHe ? 'קריאה ויזואלית ברורה ומדויקת בתוך דקות ספורות' : 'Clear, accurate visual reading within minutes.'
+      highlight: stepHighlights[3][lang] || stepHighlights[3].en || stepHighlights[3].he
     }
   ];
 
@@ -42,40 +69,115 @@ export default function TechPage() {
     {
       id: 'strep-a',
       youtubeId: 'x92STpm-v9w',
-      titleHe: 'בדיקת Strep A (פטנט no step)',
-      titleEn: 'Strep A Rapid Test (no step Patent)',
-      descHe: 'הדגמת תהליך אבחון מהיר בשלב 1 ללא העברות נוזל פתוחות.',
-      descEn: '1-step diagnostic workflow eliminating open fluid transfers.',
-      tag: 'PATENTED DEVICE'
+      title: {
+        he: 'בדיקת Strep A (פטנט no step)',
+        en: 'Strep A Rapid Test (no step Patent)',
+        de: 'Strep A Schnelltest (no step Patent)',
+        fr: 'Test Rapide Strep A (Brevet no step)',
+        ru: 'Экспресс-тест Strep A (Патент no step)',
+        ar: 'فحص Strep A (براءة اختراع no step)'
+      },
+      desc: {
+        he: 'הדגמת תהליך אבחון מהיר בשלב 1 ללא העברות נוזל פתוחות.',
+        en: '1-step diagnostic workflow eliminating open fluid transfers.',
+        de: '1-Schritt-Diagnoseablauf ohne offene Flüssigkeitsübertragung.',
+        fr: 'Flux de diagnostic en 1 étape éliminant les transferts de liquide.',
+        ru: 'Диагностический процесс в 1 шаг без открытого переноса жидкостей.',
+        ar: 'سير العمل التشخيصي في خطوة واحدة بدون نقل سوائل مفتوحة.'
+      },
+      tag: 'PATENTED'
     },
     {
       id: 'fob',
       youtubeId: '51ECod0uUy4',
-      titleHe: 'בדיקת דם סמוי בצואה (FOB)',
-      titleEn: 'Colorectal FOB Rapid Test',
-      descHe: 'הדגמה קלינית של סקר דם סמוי בצואה עם תאימות לדיגיטל.',
-      descEn: 'Clinical demonstration of FOB colorectal screening.',
+      title: {
+        he: 'בדיקת דם סמוי בצואה (FOB)',
+        en: 'Colorectal FOB Rapid Test',
+        de: 'Darmkrebs-Vorsorge FOB Schnelltest',
+        fr: 'Dépistage FOB Sang Occulte',
+        ru: 'Экспресс-тест FOB (Скрытая кровь)',
+        ar: 'فحص الدم الخفي في البراز (FOB)'
+      },
+      desc: {
+        he: 'הדגמה קלינית של סקר דם סמוי בצואה עם תאימות לדיגיטל.',
+        en: 'Clinical demonstration of at-home FOB screening with AI.',
+        de: 'Klinische Demonstration des FIT-Screenings mit digitaler Anbindung.',
+        fr: 'Démonstration clinique du dépistage FIT à domicile avec IA.',
+        ru: 'Клиническая демонстрация скрининга FOB с интеграцией в ЭМК.',
+        ar: 'شرح سريري لفحص الدم الخفي في البراز مع الربط الرقمي بالملف الطبي.'
+      },
       tag: 'DIGITAL HEALTH'
     },
     {
       id: 'flu',
       youtubeId: '8cZ12wTlitA',
-      titleHe: 'בדיקת שפעת A+B (Influenza A+B)',
-      titleEn: 'Influenza A+B Rapid Test',
-      descHe: 'אבחון מוקדם ומהיר של שפעת עונתית בתצורת עט ואריזה.',
-      descEn: 'Early rapid detection of seasonal flu A+B.',
+      title: {
+        he: 'בדיקת שפעת A+B (Influenza A+B)',
+        en: 'Influenza A+B Rapid Test',
+        de: 'Influenza A+B Schnelltest',
+        fr: 'Test Rapide Grippe A+B',
+        ru: 'Экспресс-тест на грипп А+В',
+        ar: 'فحص الإنفلونزا السريع A+B'
+      },
+      desc: {
+        he: 'אבחון מוקדם ומהיר של שפעת עונתית בתצורת עט ואריזה.',
+        en: 'Early rapid differential detection of seasonal flu A+B.',
+        de: 'Frühzeitige Schnelldiagnose der saisonalen Grippe A+B.',
+        fr: 'Diagnostic différentiel précoce de la grippe saisonnière A+B.',
+        ru: 'Ранняя дифференциальная экспресс-диагностика сезонного гриппа А+В.',
+        ar: 'تشخيص مبكر وسريع للإنفلونزا الموسمية A+B في عيادات الرعاية.'
+      },
       tag: 'RESPIRATORY'
     },
     {
       id: 'hpylori',
       youtubeId: '01NQD6egYF4',
-      titleHe: 'בדיקת הליקובקטר פילורי (H. Pylori)',
-      titleEn: 'H. Pylori Rapid Diagnostic Test',
-      descHe: 'אבחון מהיר ואיכותי של חיידק הליקובקטר פילורי.',
-      descEn: 'High sensitivity rapid detection of H. Pylori bacteria.',
-      tag: 'GASTROENTEROLOGY'
+      title: {
+        he: 'בדיקת הליקובקטר פילורי (H. Pylori)',
+        en: 'H. Pylori Rapid Diagnostic Test',
+        de: 'H. Pylori Schnelldiagnostik',
+        fr: 'Test Rapide H. Pylori',
+        ru: 'Экспресс-тест на H. Pylori',
+        ar: 'فحص جرثومة المعدة H. Pylori'
+      },
+      desc: {
+        he: 'אבחון מהיר ואיכותי של חיידק הליקובקטר פילורי.',
+        en: 'High sensitivity rapid detection of H. Pylori bacteria.',
+        de: 'Hochempfindlicher Schnelltest auf H. Pylori Bakterien.',
+        fr: 'Détection rapide et hautement sensible de la bactérie H. Pylori.',
+        ru: 'Высокочувствительное выявление бактерии Helicobacter Pylori.',
+        ar: 'كشف سريع وعالي الحساسية لبكتيريا الملوية البوابية.'
+      },
+      tag: 'GASTRO'
     }
   ];
+
+  const galleryHeadings = {
+    badge: {
+      he: 'גלריית סרטוני וידאו קליניים',
+      en: 'Clinical Demonstration Video Gallery',
+      de: 'Klinische Video-Demonstrationsgalerie',
+      fr: 'Galerie de Démonstrations Vidéo Cliniques',
+      ru: 'Галерея клинических видеодемонстраций',
+      ar: 'معرض مقاطع الفيديو السريرية والتوضيحية'
+    },
+    title: {
+      he: 'צפו בהדגמות הווידאו של פלטפורמות האבחון',
+      en: 'Watch Live Video Demonstrations',
+      de: 'Sehen Sie Live-Videodemonstrationen',
+      fr: 'Regardez les Démonstrations Vidéo en Direct',
+      ru: 'Смотрите видеодемонстрации диагностических платформ',
+      ar: 'شاهد العروض التوضيحية الحية لمنصات التشخيص'
+    },
+    sub: {
+      he: 'סרטוני הדגמה מלאים של תהליכי העבודה, הבדיקות והטכנולוגיות מבית BMT Diagnostics',
+      en: 'Step-by-step diagnostic workflows across key BMT diagnostic test suites.',
+      de: 'Schritt-für-Schritt-Abläufe aller zentralen BMT-Diagnostiksysteme.',
+      fr: 'Flux diagnostiques étape par étape des principales gammes BMT Diagnostics.',
+      ru: 'Пошаговые процессы тестирования ключевых диагностических линеек BMT.',
+      ar: 'خطوات العمل السريرية الكاملة لمجموعات الفحوصات والتقنيات من BMT Diagnostics.'
+    }
+  };
 
   return (
     <div className="animate-fade-in bg-slate-50 pb-24 min-h-screen">
@@ -149,10 +251,10 @@ export default function TechPage() {
           
           <div className="text-center mb-16 max-w-2xl mx-auto">
             <span className="text-[11px] font-extrabold uppercase tracking-widest text-blue-600 bg-blue-50 border border-blue-100/60 px-5 py-2 rounded-full mb-4 inline-block shadow-sm">
-              {isHe ? 'פטנט עולמי רשום' : 'Globally Patented'}
+              {_('home.strepBadge')}
             </span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
-              {isHe ? 'פלטפורמת מעבדה בזמן (LabOnTime)' : 'LabOnTime Platform'}
+              {_('tech.title')}
             </h2>
           </div>
 
@@ -162,12 +264,12 @@ export default function TechPage() {
               {/* LabOnTime Platform Showcase Image - Prominent Top Position */}
               <div className="bg-gradient-to-br from-slate-50 to-blue-50/50 border border-slate-200/90 rounded-[2.5rem] p-6 shadow-sm flex flex-col items-center text-center">
                 <h4 className="text-lg md:text-xl font-black text-slate-900 mb-4 tracking-tight">
-                  {isHe ? 'תצורת התקן אבחוני משולב' : 'Integrated Diagnostic Device Format'}
+                  {_('tech.deviceCardTitle')}
                 </h4>
                 <div className="w-full bg-white p-4 rounded-2xl border border-slate-200/90 shadow-sm flex items-center justify-center">
                   <img 
                     src={getAssetPath('LabOnTime platform.png')} 
-                    alt={isHe ? 'תצורת התקן אבחוני משולב' : 'Integrated Diagnostic Device Format'}
+                    alt={_('tech.deviceCardTitle')}
                     className="w-full max-h-40 sm:max-h-48 object-contain rounded-xl hover:scale-102 transition-transform duration-300"
                     onError={(e) => { e.target.style.display = 'none'; }}
                   />
@@ -224,61 +326,65 @@ export default function TechPage() {
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 bg-sky-100 border border-sky-200 text-sky-800 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest mb-3">
               <Video className="w-4 h-4 text-sky-600" />
-              {isHe ? 'גלריית סרטוני וידאו קליניים' : 'Clinical Demonstration Video Gallery'}
+              {galleryHeadings.badge[lang] || galleryHeadings.badge.en || galleryHeadings.badge.he}
             </div>
             <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
-              {isHe ? 'צפו בהדגמות הווידאו של פלטפורמות האבחון' : 'Watch Live Video Demonstrations'}
+              {galleryHeadings.title[lang] || galleryHeadings.title.en || galleryHeadings.title.he}
             </h2>
             <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto mt-3 font-light">
-              {isHe ? 'סרטוני הדגמה מלאים של תהליכי העבודה, הבדיקות והטכנולוגיות מבית BMT Diagnostics' : 'Step-by-step diagnostic workflows across key BMT diagnostic test suites.'}
+              {galleryHeadings.sub[lang] || galleryHeadings.sub.en || galleryHeadings.sub.he}
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {galleryVideos.map((vid) => (
-              <div 
-                key={vid.id}
-                onClick={() => setActiveVideoModal(vid.youtubeId)}
-                className="group bg-white rounded-3xl border border-slate-200/80 shadow-md hover:shadow-2xl overflow-hidden cursor-pointer transition-all duration-300 card-3d-lift flex flex-col justify-between"
-              >
-                <div className="relative h-48 bg-slate-900 overflow-hidden">
-                  <img 
-                    src={`https://img.youtube.com/vi/${vid.youtubeId}/hqdefault.jpg`} 
-                    alt={isHe ? vid.titleHe : vid.titleEn}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
-                    onError={(e) => { e.target.src = '/LabOnTime Device.jpg'; }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
-                  
-                  {/* Tag Pill */}
-                  <span className="absolute top-3 right-3 rtl:right-3 rtl:left-auto bg-sky-500/90 backdrop-blur-md text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
-                    {vid.tag}
-                  </span>
+            {galleryVideos.map((vid) => {
+              const vidTitle = vid.title[lang] || vid.title.en || vid.title.he;
+              const vidDesc = vid.desc[lang] || vid.desc.en || vid.desc.he;
+              return (
+                <div 
+                  key={vid.id}
+                  onClick={() => setActiveVideoModal(vid.youtubeId)}
+                  className="group bg-white rounded-3xl border border-slate-200/80 shadow-md hover:shadow-2xl overflow-hidden cursor-pointer transition-all duration-300 card-3d-lift flex flex-col justify-between"
+                >
+                  <div className="relative h-48 bg-slate-900 overflow-hidden">
+                    <img 
+                      src={`https://img.youtube.com/vi/${vid.youtubeId}/hqdefault.jpg`} 
+                      alt={vidTitle}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+                      onError={(e) => { e.target.src = '/LabOnTime Device.jpg'; }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
+                    
+                    {/* Tag Pill */}
+                    <span className="absolute top-3 right-3 rtl:right-3 rtl:left-auto bg-sky-500/90 backdrop-blur-md text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                      {vid.tag}
+                    </span>
 
-                  {/* Play Button Overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-14 h-14 rounded-full bg-burgundy/90 text-white flex items-center justify-center shadow-xl group-hover:scale-110 group-hover:bg-burgundy transition-all duration-300 border-2 border-white/40 btn-bouncy">
-                      <Play className="w-6 h-6 fill-current translate-x-0.5" />
+                    {/* Play Button Overlay */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-14 h-14 rounded-full bg-burgundy/90 text-white flex items-center justify-center shadow-xl group-hover:scale-110 group-hover:bg-burgundy transition-all duration-300 border-2 border-white/40 btn-bouncy">
+                        <Play className="w-6 h-6 fill-current translate-x-0.5" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-6 flex flex-col flex-grow justify-between">
+                    <div>
+                      <h3 className="font-extrabold text-slate-900 text-lg mb-2 leading-snug group-hover:text-blue-600 transition-colors">
+                        {vidTitle}
+                      </h3>
+                      <p className="text-slate-500 text-xs leading-relaxed font-normal">
+                        {vidDesc}
+                      </p>
+                    </div>
+                    <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-blue-600 group-hover:text-burgundy transition-colors">
+                      <span>{_('product.video')}</span>
+                      <Play className="w-3.5 h-3.5" />
                     </div>
                   </div>
                 </div>
-
-                <div className="p-6 flex flex-col flex-grow justify-between">
-                  <div>
-                    <h3 className="font-extrabold text-slate-900 text-lg mb-2 leading-snug group-hover:text-blue-600 transition-colors">
-                      {isHe ? vid.titleHe : vid.titleEn}
-                    </h3>
-                    <p className="text-slate-500 text-xs leading-relaxed font-normal">
-                      {isHe ? vid.descHe : vid.descEn}
-                    </p>
-                  </div>
-                  <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-blue-600 group-hover:text-burgundy transition-colors">
-                    <span>{isHe ? 'צפה בסרטון ההדגמה' : 'Watch Video Demo'}</span>
-                    <Play className="w-3.5 h-3.5" />
-                  </div>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 

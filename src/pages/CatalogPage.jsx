@@ -42,12 +42,23 @@ export default function CatalogPage({ category, onOpenRfq }) {
       
       const titleHe = p.title?.he?.toLowerCase() || '';
       const titleEn = p.title?.en?.toLowerCase() || '';
+      const titleDe = p.title?.de?.toLowerCase() || '';
+      const titleFr = p.title?.fr?.toLowerCase() || '';
+      const titleRu = p.title?.ru?.toLowerCase() || '';
+      const titleAr = p.title?.ar?.toLowerCase() || '';
       const descHe = p.shortDesc?.he?.toLowerCase() || '';
       const descEn = p.shortDesc?.en?.toLowerCase() || '';
       const id = p.id.toLowerCase();
-      const specType = p.specs?.type?.toLowerCase() || '';
 
-      const matchSearch = titleHe.includes(term) || titleEn.includes(term) || descHe.includes(term) || descEn.includes(term) || id.includes(term) || specType.includes(term);
+      const matchSearch = titleHe.includes(term) || 
+                          titleEn.includes(term) || 
+                          titleDe.includes(term) || 
+                          titleFr.includes(term) || 
+                          titleRu.includes(term) || 
+                          titleAr.includes(term) || 
+                          descHe.includes(term) || 
+                          descEn.includes(term) || 
+                          id.includes(term);
       return matchCat && matchSearch;
     });
   }, [allFeatured, filter, searchTerm]);
@@ -87,10 +98,10 @@ export default function CatalogPage({ category, onOpenRfq }) {
       const titleHe = p.title?.he ? p.title.he.toLowerCase() : '';
       const format = p.format ? p.format.toLowerCase() : '';
       
-      const isBloodSearch = /דם|blood|wb|serum|plasma|סרום|פלזמה/i.test(term) && /wb|blood|s\/p|s \/ p|serum|plasma/i.test(spec);
-      const isSwabSearch = /מטוש|משטח|גרון|swab|throat|nasal/i.test(term) && /swab|throat|nasal/i.test(spec);
-      const isUrineSearch = /שתן|urine/i.test(term) && /urine/i.test(spec);
-      const isFecesSearch = /צואה|feces|stool/i.test(term) && /feces/i.test(spec);
+      const isBloodSearch = /דם|blood|wb|serum|plasma|סרום|פלזמה|blut|sang|кровь|دم/i.test(term) && /wb|blood|s\/p|s \/ p|serum|plasma/i.test(spec);
+      const isSwabSearch = /מטוש|משטח|גרון|swab|throat|nasal|abstrich|écouvillon|мазок|مسحة/i.test(term) && /swab|throat|nasal/i.test(spec);
+      const isUrineSearch = /שתן|urine|urin|моча|بول/i.test(term) && /urine/i.test(spec);
+      const isFecesSearch = /צואה|feces|stool|stuhl|selles|кал|براز/i.test(term) && /feces/i.test(spec);
       
       const matchSearch = 
         catNo.includes(term) || 
@@ -139,6 +150,14 @@ export default function CatalogPage({ category, onOpenRfq }) {
       if (textarea) {
         if (lang === 'he') {
           textarea.value = `שלום, אבקש לקבל הצעת מחיר עבור מוצר מהקטלוג:\nמק"ט: ${catNo}\nשם פריט: ${productName}\nתודה.`;
+        } else if (lang === 'ar') {
+          textarea.value = `مرحباً، أود طلب تسعيرة لمنتج من الكتالوج:\nرقم الصنف: ${catNo}\nاسم المنتج: ${productName}\nشكراً.`;
+        } else if (lang === 'de') {
+          textarea.value = `Hallo, ich möchte ein Angebot für folgendes Produkt anfordern:\nArt.-Nr.: ${catNo}\nProdukt: ${productName}\nVielen Dank.`;
+        } else if (lang === 'fr') {
+          textarea.value = `Bonjour, je souhaite obtenir un devis pour le produit suivant:\nRéf.: ${catNo}\nProduit: ${productName}\nMerci.`;
+        } else if (lang === 'ru') {
+          textarea.value = `Здравствуйте, прошу предоставить ценовое предложение на товар:\nАртикул: ${catNo}\nНаименование: ${productName}\nСпасибо.`;
         } else {
           textarea.value = `Hello, I would like to request a quote for catalog item:\nCat No: ${catNo}\nProduct Name: ${productName}\nThank you.`;
         }
@@ -147,27 +166,40 @@ export default function CatalogPage({ category, onOpenRfq }) {
     }, 100);
   };
 
+  const formatCategoryName = (cat) => {
+    if (!cat) return '-';
+    return _(`categories.${cat}`) || cat;
+  };
+
+  const formatFormatName = (fmt) => {
+    if (!fmt) return '-';
+    return _(`formats.${fmt}`) || fmt;
+  };
+
   const formatSpecimenName = (specimen) => {
     if (!specimen) return '-';
     if (/wb/i.test(specimen) || /s\/p/i.test(specimen) || /plasma/i.test(specimen) || /blood/i.test(specimen)) {
-      return isHe ? `דם / סרום / פלזמה (${specimen})` : `Blood / Serum / Plasma (${specimen})`;
+      return _('specimens.Whole Blood / Serum / Plasma');
     }
     if (/throat/i.test(specimen)) {
-      return isHe ? 'מטוש גרון (Throat Swab)' : 'Throat Swab';
+      return _('specimens.Throat Swab');
     }
     if (/nasal/i.test(specimen)) {
-      return isHe ? 'מטוש אף (Nasal Swab)' : 'Nasal Swab';
+      return _('specimens.Nasal Swab');
     }
     if (/swab/i.test(specimen)) {
-      return isHe ? 'מטוש (Swab)' : 'Swab';
+      return _('specimens.Swab');
     }
     if (/urine/i.test(specimen)) {
-      return isHe ? 'שתן (Urine)' : 'Urine';
+      return _('specimens.Urine');
     }
-    if (/feces/i.test(specimen)) {
-      return isHe ? 'צואה (Feces)' : 'Feces';
+    if (/feces|stool/i.test(specimen)) {
+      return _('specimens.Feces');
     }
-    return specimen;
+    if (/saliva/i.test(specimen)) {
+      return _('specimens.Saliva');
+    }
+    return _(`specimens.${specimen}`) || specimen;
   };
 
   const getSubCatName = (sc) => {
@@ -185,22 +217,6 @@ export default function CatalogPage({ category, onOpenRfq }) {
 
   const pageTitle = category === 'b2b' ? _('nav.b2b') : _('nav.b2c');
   const pageDesc = category === 'b2b' ? _('catalog.b2bDesc') : _('catalog.b2cDesc');
-
-  const featuredHeader = isHe 
-    ? 'מוצרים מובילים ומערכות פטנט' 
-    : (lang === 'ar' ? 'أبرز المنتجات والأنظمة المحمية ببراءات اختراع' 
-    : (lang === 'fr' ? 'Produits Phares & Systèmes Brevetés' 
-    : (lang === 'de' ? 'Ausgewählte Produkte & Patentsysteme' 
-    : (lang === 'ru' ? 'Ведущие продукты и запатентованные системы' 
-    : 'Featured Highlight Solutions'))));
-
-  const countSuffix = isHe 
-    ? 'מוצרים' 
-    : (lang === 'ar' ? 'منتجات' 
-    : (lang === 'fr' ? 'Produits' 
-    : (lang === 'de' ? 'Produkte' 
-    : (lang === 'ru' ? 'Продуктов' 
-    : 'Products'))));
 
   return (
     <div className="animate-fade-in pb-24 bg-white min-h-screen relative overflow-hidden">
@@ -236,10 +252,10 @@ export default function CatalogPage({ category, onOpenRfq }) {
           <>
             <div className="mb-12 flex items-center justify-between border-b border-slate-200 pb-5 max-w-5xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
-                {featuredHeader}
+                {_('catalog.featuredTitle')}
               </h2>
               <span className="text-xs bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-black border border-blue-100/50 uppercase tracking-widest shadow-sm">
-                {filteredFeatured.length} {countSuffix}
+                {filteredFeatured.length} {_('catalog.productsCount')}
               </span>
             </div>
 
@@ -288,13 +304,13 @@ export default function CatalogPage({ category, onOpenRfq }) {
               </div>
             ) : (
               <div className="bg-slate-50 border border-slate-200 rounded-3xl p-12 text-center max-w-2xl mx-auto mb-16">
-                <p className="text-slate-500 font-medium mb-4">{isHe ? 'לא נמצאו מוצרים התואמים את החיפוש.' : 'No products matched your search filters.'}</p>
+                <p className="text-slate-500 font-medium mb-4">{_('catalog.noItemsFound')}</p>
                 <button
                   onClick={() => { setSearchTerm(''); setFilter('All'); }}
                   className="inline-flex items-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm"
                 >
                   <RotateCcw className="w-4 h-4" />
-                  <span>{isHe ? 'איפוס סינונים' : 'Reset Filters'}</span>
+                  <span>{_('catalog.resetFilters')}</span>
                 </button>
               </div>
             )}
@@ -314,17 +330,17 @@ export default function CatalogPage({ category, onOpenRfq }) {
                 </div>
                 <div>
                   <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
-                    {isHe ? 'מפתח קטלוג מלא (538 בדיקות)' : 'Complete Catalog Index (538 Parameters)'}
+                    {_('catalog.tableTitle')}
                   </h2>
                   <p className="text-sm text-slate-500 font-light mt-1">
-                    {isHe ? 'חיפוש וסינון קליני רחב לפי מק"ט, שם, דגימה או פורמט מתוך הקטלוג הרשמי' : 'Comprehensive PDF database mapping for hospitals, laboratories, and clinics'}
+                    {_('catalog.tableSub')}
                   </p>
                 </div>
               </div>
               
               <div className="shrink-0 flex items-center gap-3">
                 <span className="text-sm bg-blue-50 text-blue-700 px-4 py-2 rounded-xl font-extrabold border border-blue-100 shadow-sm">
-                  {fullTableProducts.length} {isHe ? 'מוצרים נמצאו' : 'Products Found'}
+                  {fullTableProducts.length} {_('catalog.itemsFound')}
                 </span>
                 {(tableSearch || tableFilter !== 'All' || specimenFilter !== 'All') && (
                   <button
@@ -332,7 +348,7 @@ export default function CatalogPage({ category, onOpenRfq }) {
                     className="text-xs text-slate-500 hover:text-blue-600 flex items-center gap-1 border border-slate-200 px-3 py-2 rounded-xl bg-slate-50 font-bold transition"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
-                    <span>{isHe ? 'איפוס' : 'Reset'}</span>
+                    <span>{_('catalog.resetFilters')}</span>
                   </button>
                 )}
               </div>
@@ -346,7 +362,7 @@ export default function CatalogPage({ category, onOpenRfq }) {
                 </div>
                 <input
                   type="text"
-                  placeholder={isHe ? 'חפש לפי מק"ט BMT, שם בדיקה, דגימה (למשל Throat, Urine, Swab)...' : 'Search by BMT Cat No, parameter, specimen format...'}
+                  placeholder={_('catalog.tableSearchPh')}
                   value={tableSearch}
                   onChange={handleTableSearchChange}
                   className="block w-full pl-14 pr-5 py-4 border border-slate-200 rounded-2xl bg-slate-50/50 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 focus:bg-white transition-all text-base font-medium shadow-inner"
@@ -358,13 +374,13 @@ export default function CatalogPage({ category, onOpenRfq }) {
                   onChange={(e) => handleTableFilterChange(e.target.value)}
                   className="w-full bg-slate-50/50 border border-slate-200 p-4 rounded-2xl focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:bg-white outline-none transition text-sm font-extrabold appearance-none cursor-pointer pr-10 rtl:pr-4"
                 >
-                  <option value="All">{isHe ? 'כל הקטגוריות (538 בדיקות)' : 'All Categories (538 Tests)'}</option>
-                  <option value="Infectious Diseases">{isHe ? 'מחלות זיהומיות (Infectious Diseases)' : 'Infectious Diseases'}</option>
-                  <option value="Women's Health">{isHe ? 'בריאות האישה והריון (Women\'s Health)' : 'Women\'s Health'}</option>
-                  <option value="Drugs of Abuse">{isHe ? 'סמים ואלכוהול (Drugs of Abuse)' : 'Drugs of Abuse'}</option>
-                  <option value="Tumor Markers">{isHe ? 'סמני סרטן (Tumor Markers)' : 'Tumor Markers'}</option>
-                  <option value="Cardiac Markers">{isHe ? 'סמני לב (Cardiac Markers)' : 'Cardiac Markers'}</option>
-                  <option value="Others">{isHe ? 'בדיקות שתן ומיוחדים (Others)' : 'Others & Urinalysis'}</option>
+                  <option value="All">{_('catalog.allCategories')}</option>
+                  <option value="Infectious Diseases">{_('categories.Infectious Diseases')}</option>
+                  <option value="Women's Health">{_('categories.Women\'s Health')}</option>
+                  <option value="Drugs of Abuse">{_('categories.Drugs of Abuse')}</option>
+                  <option value="Tumor Markers">{_('categories.Tumor Markers')}</option>
+                  <option value="Cardiac Markers">{_('categories.Cardiac Markers')}</option>
+                  <option value="Others">{_('categories.Others')}</option>
                 </select>
               </div>
               <div className="md:col-span-3">
@@ -373,11 +389,11 @@ export default function CatalogPage({ category, onOpenRfq }) {
                   onChange={(e) => { setSpecimenFilter(e.target.value); setTablePage(1); }}
                   className="w-full bg-slate-50/50 border border-slate-200 p-4 rounded-2xl focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:bg-white outline-none transition text-sm font-extrabold appearance-none cursor-pointer pr-10 rtl:pr-4"
                 >
-                  <option value="All">{isHe ? 'כל סוגי הדגימות' : 'All Specimen Types'}</option>
-                  <option value="Swab">{isHe ? 'מטוש / גרון (Swab / Throat)' : 'Swab / Throat'}</option>
-                  <option value="Blood">{isHe ? 'דם מלא / סרום / פלזמה' : 'Whole Blood / Serum'}</option>
-                  <option value="Urine">{isHe ? 'שתן (Urine)' : 'Urine'}</option>
-                  <option value="Feces">{isHe ? 'צואה (Feces)' : 'Feces'}</option>
+                  <option value="All">{_('catalog.allSpecimens')}</option>
+                  <option value="Swab">{_('specimens.Throat Swab')} / {_('specimens.Swab')}</option>
+                  <option value="Blood">{_('specimens.Whole Blood / Serum / Plasma')}</option>
+                  <option value="Urine">{_('specimens.Urine')}</option>
+                  <option value="Feces">{_('specimens.Feces')}</option>
                 </select>
               </div>
             </div>
@@ -388,25 +404,25 @@ export default function CatalogPage({ category, onOpenRfq }) {
                 <thead className="bg-slate-50 text-slate-700 font-extrabold text-xs uppercase tracking-widest text-start">
                   <tr>
                     <th scope="col" className="px-6 py-5 text-start w-24 font-black">
-                      {isHe ? 'מק"ט BMT' : (lang === 'ar' ? 'رقم الصنف BMT' : (lang === 'fr' ? 'Réf. BMT' : (lang === 'de' ? 'BMT Art.-Nr.' : (lang === 'ru' ? 'Артикул BMT' : 'BMT Cat No'))))}
+                      {_('catalog.colCatNo')}
                     </th>
                     <th scope="col" className="px-6 py-5 text-start">
-                      {isHe ? 'תיאור בדיקה קלינית' : (lang === 'ar' ? 'وصف الفحص السريري' : (lang === 'fr' ? 'Description Clinique' : (lang === 'de' ? 'Klinische Beschreibung' : (lang === 'ru' ? 'Клиническое описание' : 'Clinical Description'))))}
+                      {_('catalog.colTitle')}
                     </th>
-                    <th scope="col" className="px-6 py-5 text-start w-32">
-                      {isHe ? 'קטגוריה' : (lang === 'ar' ? 'الفئة' : (lang === 'fr' ? 'Catégorie' : (lang === 'de' ? 'Kategorie' : (lang === 'ru' ? 'Категория' : 'Category'))))}
+                    <th scope="col" className="px-6 py-5 text-start w-36">
+                      {_('catalog.colCategory')}
                     </th>
-                    <th scope="col" className="px-6 py-5 text-start w-32">
-                      {isHe ? 'סוג דגימה' : (lang === 'ar' ? 'نوع العينة' : (lang === 'fr' ? 'Échantillon' : (lang === 'de' ? 'Probentyp' : (lang === 'ru' ? 'Образец' : 'Specimen'))))}
-                    </th>
-                    <th scope="col" className="px-6 py-5 text-start w-32">
-                      {isHe ? 'פורמט' : (lang === 'ar' ? 'الشكل' : (lang === 'fr' ? 'Format' : (lang === 'de' ? 'Format' : (lang === 'ru' ? 'Формат' : 'Format'))))}
+                    <th scope="col" className="px-6 py-5 text-start w-36">
+                      {_('catalog.colSpecimen')}
                     </th>
                     <th scope="col" className="px-6 py-5 text-start w-28">
-                      {isHe ? 'מארז' : (lang === 'ar' ? 'حجم العبوة' : (lang === 'fr' ? 'Conditionnement' : (lang === 'de' ? 'Packungsgröße' : (lang === 'ru' ? 'Упаковка' : 'Kit Size'))))}
+                      {_('catalog.colFormat')}
+                    </th>
+                    <th scope="col" className="px-6 py-5 text-start w-28">
+                      {_('catalog.colKitSize')}
                     </th>
                     <th scope="col" className="px-6 py-5 text-center w-36">
-                      {isHe ? 'פעולה' : (lang === 'ar' ? 'طلب تسعيرة' : (lang === 'fr' ? 'Action' : (lang === 'de' ? 'Aktion' : (lang === 'ru' ? 'Запрос' : 'Action'))))}
+                      {_('catalog.colAction')}
                     </th>
                   </tr>
                 </thead>
@@ -419,24 +435,24 @@ export default function CatalogPage({ category, onOpenRfq }) {
                           <td className="px-6 py-4 font-mono font-bold text-slate-900">{p.catNo}</td>
                           <td className="px-6 py-4 font-bold text-slate-900">
                             <div>{titleStr}</div>
-                            {p.title?.en && p.title?.he && (
+                            {p.title?.en && (p.title?.he || lang !== 'en') && (
                               <div className="text-xs text-slate-400 font-normal font-mono">{p.title.en}</div>
                             )}
                           </td>
                           <td className="px-6 py-4">
                             <span className="inline-block bg-slate-100 text-slate-700 text-xs px-3 py-1 rounded-lg font-bold border border-slate-200">
-                              {p.category}
+                              {formatCategoryName(p.category)}
                             </span>
                           </td>
                           <td className="px-6 py-4 text-slate-600 font-semibold">{formatSpecimenName(p.specimen)}</td>
-                          <td className="px-6 py-4 text-slate-600 font-semibold">{p.format}</td>
+                          <td className="px-6 py-4 text-slate-600 font-semibold">{formatFormatName(p.format)}</td>
                           <td className="px-6 py-4 font-mono text-slate-700 font-bold">{p.kitSize}</td>
                           <td className="px-6 py-4 text-center">
                             <button
                               onClick={() => handleRequestQuote(p.catNo, titleStr)}
                               className="bg-burgundy hover:brightness-110 text-white font-extrabold text-xs px-4 py-2 rounded-xl transition shadow-sm btn-bouncy"
                             >
-                              {isHe ? 'צור קשר' : 'RFQ'}
+                              {_('catalog.rfqAction')}
                             </button>
                           </td>
                         </tr>
@@ -445,7 +461,7 @@ export default function CatalogPage({ category, onOpenRfq }) {
                   ) : (
                     <tr>
                       <td colSpan="7" className="px-6 py-12 text-center text-slate-400 font-medium">
-                        {isHe ? 'לא נמצאו מוצרים התואמים את החיפוש.' : 'No catalog items found matching search filters.'}
+                        {_('catalog.noItemsFound')}
                       </td>
                     </tr>
                   )}
@@ -461,11 +477,11 @@ export default function CatalogPage({ category, onOpenRfq }) {
                   onClick={() => setTablePage(prev => Math.max(1, prev - 1))}
                   className="inline-flex items-center gap-2 border border-slate-200 bg-white text-slate-650 hover:bg-slate-55 px-5 py-3 rounded-2xl transition disabled:opacity-55 disabled:cursor-not-allowed font-bold"
                 >
-                  <ChevronLeft className="w-4 h-4 rtl:rotate-180" /> {isHe ? 'הקודם' : 'Previous'}
+                  <ChevronLeft className="w-4 h-4 rtl:rotate-180" /> {_('catalog.prevPage')}
                 </button>
 
                 <div className="font-mono text-slate-500 text-xs">
-                  {isHe ? `עמוד ${tablePage} מתוך ${totalPages}` : `Page ${tablePage} of ${totalPages}`}
+                  {_('catalog.pageOf').replace('{current}', tablePage).replace('{total}', totalPages)}
                 </div>
 
                 <button
@@ -473,7 +489,7 @@ export default function CatalogPage({ category, onOpenRfq }) {
                   onClick={() => setTablePage(prev => Math.min(totalPages, prev + 1))}
                   className="inline-flex items-center gap-2 border border-slate-200 bg-white text-slate-650 hover:bg-slate-55 px-5 py-3 rounded-2xl transition disabled:opacity-55 disabled:cursor-not-allowed font-bold"
                 >
-                  {isHe ? 'הבא' : 'Next'} <ChevronRight className="w-4 h-4 rtl:rotate-180" />
+                  {_('catalog.nextPage')} <ChevronRight className="w-4 h-4 rtl:rotate-180" />
                 </button>
               </div>
             )}
@@ -486,14 +502,10 @@ export default function CatalogPage({ category, onOpenRfq }) {
             <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/[0.02] rounded-full blur-[60px] pointer-events-none"></div>
             
             <h3 className="text-2xl font-black text-slate-900 mb-4 tracking-tight leading-snug">
-              {category === 'b2b'
-                ? (isHe ? 'זקוקים למפרט המלא של כל 538 הבדיקות הקליניות?' : 'Need the complete specifications for all 538 clinical parameters?')
-                : (isHe ? 'רוצים להכיר את כל פורטפוליו מוצרי הפארם לשימוש ביתי?' : 'Want to explore the entire pharmacy retail home testing portfolio?')}
+              {category === 'b2b' ? _('catalog.downloadB2bPdf') : _('catalog.downloadB2cPdf')}
             </h3>
             <p className="text-slate-500 text-base leading-relaxed mb-8 max-w-2xl mx-auto font-normal">
-              {category === 'b2b'
-                ? (isHe ? 'הורידו כעת את הקטלוג הקליני הרשמי המלא בפורמט PDF הכולל רגישויות, ספציפיות, סוגי דגימות ומק"טים של BMT Diagnostics.' : 'Download the official, comprehensive Clinical Catalog PDF mapping all rapid test suites, sensitivity, and clinical validations.')
-                : (isHe ? 'הורידו את קטלוג מוצרי הצריכה והרוקחות המלא בפורמט PDF לעיון נוח בבית או במשרד.' : 'Download the complete consumer pharmacy catalog PDF for comprehensive details on home diagnostic kits.')}
+              {category === 'b2b' ? _('catalog.downloadB2bDesc') : _('catalog.downloadB2cDesc')}
             </p>
             
             <a
@@ -502,11 +514,7 @@ export default function CatalogPage({ category, onOpenRfq }) {
               className="inline-flex items-center gap-3 bg-burgundy text-white hover:bg-burgundy-650 font-extrabold px-10 py-5 rounded-full transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-burgundy/30 text-sm md:text-base uppercase tracking-wider"
             >
               <FileSpreadsheet className="w-5 h-5 text-white/95" />
-              <span>
-                {category === 'b2b'
-                  ? (isHe ? 'הורד קטלוג מלא (PDF)' : 'Download Full Catalog (PDF)')
-                  : (isHe ? 'הורד קטלוג פארם מלא (PDF)' : 'Download Full Catalog (PDF)')}
-              </span>
+              <span>{_('catalog.downloadPdfBtn')}</span>
             </a>
           </div>
         </div>
@@ -517,10 +525,10 @@ export default function CatalogPage({ category, onOpenRfq }) {
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-sky-400/[0.08] rounded-full blur-3xl pointer-events-none"></div>
           
           <h3 className="relative z-10 text-2xl md:text-4xl font-black mb-4 tracking-tight max-w-3xl mx-auto leading-tight text-slate-900">
-            {isHe ? 'מעוניינים בהצעת מחיר או ייעוץ קליני מותאם?' : 'Interested in Commercial Pricing or Custom Clinical Consultation?'}
+            {_('rfq.title')}
           </h3>
           <p className="relative z-10 text-slate-600 text-base md:text-lg mb-8 max-w-2xl mx-auto font-normal leading-relaxed">
-            {isHe ? 'צוות המומחים של BMT Diagnostics זמין לכל פנייה, דרישת מק"ט או פיתוח מותאם למוסדות רפואיים ורשתות פארם.' : 'Our team is ready to assist with catalog parameters, commercial terms, or custom OEM manufacturing.'}
+            {_('about.sub')}
           </p>
           <button 
             onClick={onOpenRfq} 

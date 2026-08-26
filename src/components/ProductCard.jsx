@@ -45,7 +45,7 @@ export default function ProductCard({ prod, lang, isRtl, _, nav }) {
             <span>
               {prod.patentBadge 
                 ? (typeof prod.patentBadge === 'object' ? (prod.patentBadge[lang] || prod.patentBadge.he || prod.patentBadge.en) : prod.patentBadge)
-                : (lang === 'he' ? 'פטנט רשום' : 'Patent')}
+                : _('product.patentBadge')}
             </span>
           </div>
         )}
@@ -53,11 +53,11 @@ export default function ProductCard({ prod, lang, isRtl, _, nav }) {
         {/* Usage Classification Badge */}
         {prod.isProfessionalOnly ? (
           <div className="absolute top-4 left-4 bg-blue-900/10 border border-blue-900/20 text-blue-950 text-[10px] font-black px-3 py-1 rounded-full shadow-sm tracking-wider">
-            {lang === 'he' ? 'לשימוש מקצועי בלבד' : lang === 'de' ? 'Nur für Fachpersonal' : lang === 'fr' ? 'Usage professionnel' : lang === 'ru' ? 'Для профессионалов' : lang === 'ar' ? 'للاستخدام المهني' : 'Professional Use'}
+            {_('product.professionalOnly')}
           </div>
         ) : (
           <div className="absolute top-4 left-4 bg-emerald-500/10 border border-emerald-500/20 text-emerald-800 text-[10px] font-black px-3 py-1 rounded-full shadow-sm tracking-wider">
-            {lang === 'he' ? 'לשימוש עצמי' : lang === 'de' ? 'Für Eigenanwendung' : lang === 'fr' ? 'Usage autotest' : lang === 'ru' ? 'Для дома' : lang === 'ar' ? 'للاستخدام الذاتي' : 'Self-Use'}
+            {_('product.selfUse')}
           </div>
         )}
       </div>
@@ -67,7 +67,7 @@ export default function ProductCard({ prod, lang, isRtl, _, nav }) {
         {specimenType && (
           <div className="mb-2">
             <span className="inline-block text-[10px] font-black text-cyan-700 bg-cyan-50 border border-cyan-200/60 px-3 py-1 rounded-lg uppercase tracking-wider">
-              {typeof specimenType === 'object' ? (specimenType[lang] || specimenType.en || specimenType.he) : specimenType}
+              {typeof specimenType === 'object' ? (specimenType[lang] || specimenType.en || specimenType.he) : (_(`specsVal.${specimenType}`) || specimenType)}
             </span>
           </div>
         )}

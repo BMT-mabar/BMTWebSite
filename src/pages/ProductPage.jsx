@@ -114,18 +114,18 @@ export default function ProductPage({ onOpenRfq }) {
                   <span>
                     {p.patentBadge 
                       ? (typeof p.patentBadge === 'object' ? (p.patentBadge[lang] || p.patentBadge.he || p.patentBadge.en) : p.patentBadge)
-                      : (isHe ? 'פטנט רשום' : 'Patented')}
+                      : _('product.patentBadge')}
                   </span>
                 </div>
               )}
               
               {p.isProfessionalOnly ? (
                 <div className="inline-flex items-center gap-2 bg-blue-900/10 text-blue-950 px-5 py-2 rounded-full text-xs font-extrabold uppercase tracking-widest w-fit shadow-sm border border-blue-900/20">
-                  {isHe ? 'לשימוש מקצועי בלבד' : 'Professional Use Only'}
+                  {_('product.professionalOnly')}
                 </div>
               ) : (
                 <div className="inline-flex items-center gap-2 bg-emerald-500/10 text-emerald-800 px-5 py-2 rounded-full text-xs font-extrabold uppercase tracking-widest w-fit shadow-sm border border-emerald-500/20">
-                  {isHe ? 'לשימוש עצמי' : 'Self-Use'}
+                  {_('product.selfUse')}
                 </div>
               )}
             </div>
@@ -142,13 +142,13 @@ export default function ProductPage({ onOpenRfq }) {
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-8 gap-x-6">
                   {Object.entries(p.specs).map(([key, value]) => {
-                    const specValue = typeof value === 'object' ? (value[lang] || value.en || value.he) : value;
+                    const specValue = typeof value === 'object' ? (value[lang] || value.en || value.he) : (_(`specsVal.${value}`) || value);
                     return (
                       <div key={key} className="min-w-0 break-words border-b border-slate-100 pb-4 sm:border-0 sm:pb-0">
                         <div className="text-2xl font-black text-slate-900 leading-none mb-2 tracking-tight">{specValue}</div>
                         <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{_(`specs.${key}`) || key}</div>
                       </div>
-                    )
+                    );
                   })}
                 </div>
               </div>
@@ -214,15 +214,13 @@ export default function ProductPage({ onOpenRfq }) {
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-2 bg-blue-600/10 text-blue-700 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4">
                 <Sparkles className="w-4 h-4 text-blue-600" />
-                {isHe ? 'פטנט ייחודי ברמת האפליקציה לקופות החולים' : 'App-Level Patent for Healthcare Providers'}
+                {_('product.fobSectionBadge')}
               </div>
               <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight mb-4">
-                {isHe ? 'מהפכת הנוחות והזמינות: סקר FIT ללא מעבדה' : 'The At-Home FIT Screening Revolution'}
+                {_('product.fobSectionTitle')}
               </h2>
               <p className="text-slate-500 text-lg max-w-2xl mx-auto font-light leading-relaxed">
-                {isHe
-                  ? 'השוואה בין התהליך המעבדתי המיושן והמסורבל לבין הפתרון החדשני והמיידי של BMT Diagnostics'
-                  : 'Comparing the traditional cumbersome lab route with BMT\'s instant, patient-centric at-home solution.'}
+                {_('product.fobSectionSub')}
               </p>
             </div>
 
@@ -232,29 +230,29 @@ export default function ProductPage({ onOpenRfq }) {
                 <div>
                   <div className="flex items-center gap-3 text-red-600 font-extrabold text-sm uppercase tracking-wider mb-6">
                     <XCircle className="w-5 h-5" />
-                    <span>{isHe ? 'התהליך המיושן והמסורבל' : 'Traditional Cumbersome Route'}</span>
+                    <span>{_('product.fobOldTag')}</span>
                   </div>
                   <h3 className="text-2xl font-black text-slate-800 mb-6">
-                    {isHe ? 'טרחה, עיכובים והמתנה של ימים' : 'Delays, Lab Visits & Long Waiting'}
+                    {_('product.fobOldH3')}
                   </h3>
                   <ul className="space-y-4 text-sm text-slate-500 font-medium">
                     <li className="flex items-start gap-3">
                       <span className="w-6 h-6 rounded-full bg-red-50 text-red-500 flex items-center justify-center font-bold shrink-0 mt-0.5">1</span>
-                      <span>{isHe ? 'הגעה פיזית למרפאה או למעבדה כדי לקבל בקבוקון איסוף' : 'Physical travel to clinic/lab just to pick up a collection vial'}</span>
+                      <span>{_('product.fobOld1')}</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-6 h-6 rounded-full bg-red-50 text-red-500 flex items-center justify-center font-bold shrink-0 mt-0.5">2</span>
-                      <span>{isHe ? 'נסיעה חוזרת למעבדה להחזרת הדגימה (טרחה גדולה והיענות נמוכה)' : 'Second physical trip to drop off the sample at the lab'}</span>
+                      <span>{_('product.fobOld2')}</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-6 h-6 rounded-full bg-red-50 text-red-500 flex items-center justify-center font-bold shrink-0 mt-0.5">3</span>
-                      <span>{isHe ? 'המתנה של ימים עד שבועות לקבלת תוצאה מהמעבדה המרכזית' : 'Days or weeks of waiting for central lab processing'}</span>
+                      <span>{_('product.fobOld3')}</span>
                     </li>
                   </ul>
                 </div>
                 <div className="mt-8 pt-6 border-t border-slate-100 flex items-center gap-2 text-slate-400 text-xs">
                   <Clock className="w-4 h-4 text-red-400" />
-                  <span>{isHe ? 'זמן כולל: מספר ימים עד שבועות' : 'Total duration: 3–14 days'}</span>
+                  <span>{_('product.fobOldDuration')}</span>
                 </div>
               </div>
 
@@ -265,34 +263,34 @@ export default function ProductPage({ onOpenRfq }) {
                 <div>
                   <div className="flex items-center gap-3 text-sky-400 font-extrabold text-sm uppercase tracking-wider mb-6">
                     <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-                    <span>{isHe ? 'החדשנות של BMT — פטנט ברמת האפליקציה' : 'BMT Innovation — App-Level Patent'}</span>
+                    <span>{_('product.fobBmtTag')}</span>
                   </div>
                   <h3 className="text-2xl font-black text-white mb-6">
-                    {isHe ? 'דיוק ופשטות מיידית בבית הלקוח' : 'Immediate Precision & Comfort at Home'}
+                    {_('product.fobBmtH3')}
                   </h3>
                   <ul className="space-y-4 text-sm text-slate-200 font-medium">
                     <li className="flex items-start gap-3">
                       <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold shrink-0 mt-0.5">✓</span>
-                      <span>{isHe ? 'ביצוע עצמאי, היגייני ונוח בבית ללא צורך לצאת מהבית' : 'Hygienic self-use at home without travelling to clinics'}</span>
+                      <span>{_('product.fobBmt1')}</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold shrink-0 mt-0.5">✓</span>
-                      <span>{isHe ? 'סריקה ופענוח אופטי מיידי באמצעות אפליקציית קופת החולים (AI)' : 'Instant smartphone camera AI interpretation in the HMO app'}</span>
+                      <span>{_('product.fobBmt2')}</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold shrink-0 mt-0.5">✓</span>
-                      <span>{isHe ? 'שידור מאובטח ישירות לתיק הרפואי (EMR) — תוצאה מהירה במקום' : 'Direct encrypted transmission straight to the EMR system'}</span>
+                      <span>{_('product.fobBmt3')}</span>
                     </li>
                   </ul>
                 </div>
                 <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-sky-200 text-xs">
                   <div className="flex items-center gap-2">
                     <Smartphone className="w-4 h-4 text-sky-400" />
-                    <span>{isHe ? 'תוצאה דיגיטלית בתוך 5 דקות' : 'Digital result in 5 minutes'}</span>
+                    <span>{_('product.fobBmtDuration')}</span>
                   </div>
                   <div className="flex items-center gap-1.5 text-emerald-400 font-bold">
                     <ShieldCheck className="w-4 h-4" />
-                    <span>{isHe ? 'ללא מעבדה' : 'Zero Lab Required'}</span>
+                    <span>{_('product.fobBmtNoLab')}</span>
                   </div>
                 </div>
               </div>
@@ -327,7 +325,9 @@ export default function ProductPage({ onOpenRfq }) {
                 <tbody className="font-semibold text-slate-800">
                   <tr className="hover:bg-slate-50/50 transition-colors">
                     <td className="p-6 md:p-10 border-b border-slate-100 flex items-center gap-5 text-lg text-start"><Users className="w-6 h-6 text-blue-600 shrink-0"/> {_('product.handsOn')}</td>
-                    <td className="p-6 md:p-10 font-black text-5xl text-blue-900 bg-blue-50/60 border-b border-blue-100 text-center">{p.comparison.us.steps}</td>
+                    <td className="p-6 md:p-10 font-black text-5xl text-blue-900 bg-blue-50/60 border-b border-blue-100 text-center">
+                      {p.comparison.us.steps === 'no step' ? _('specsVal.noStep') : p.comparison.us.steps}
+                    </td>
                     <td className="p-6 md:p-10 text-slate-500 border-b border-slate-100 text-center text-xl font-bold">{p.comparison.them.steps}</td>
                   </tr>
                   <tr className="hover:bg-slate-50/50 transition-colors">
