@@ -310,6 +310,9 @@ export default function TechPage() {
           </div>
         </section>
 
+        {/* Rapidtest.ai Inspired Ecosystem Section — Interactive Animated Flow */}
+        <TestToEmrAnimation />
+
         {/* --- HIGH-TECH VIDEO GALLERY GRID --- */}
         <section className="mb-24">
           <div className="text-center mb-12">
@@ -401,9 +404,6 @@ export default function TechPage() {
             </div>
           </div>
         )}
-
-        {/* Rapidtest.ai Inspired Ecosystem Section — Interactive Animated Flow */}
-        <TestToEmrAnimation />
 
       </div>
     </div>

@@ -429,14 +429,23 @@ export default function CatalogPage({ category, onOpenRfq }) {
                 <tbody className="bg-white divide-y divide-slate-200 text-sm font-medium text-slate-800">
                   {paginatedTableProducts.length > 0 ? (
                     paginatedTableProducts.map((p) => {
-                      const titleStr = typeof p.title === 'object' ? (p.title[lang] || p.title.he || p.title.en) : p.title;
+                      let mainTitle = '';
+                      let subTitle = null;
+                      if (lang === 'he') {
+                        mainTitle = p.title?.he || p.title?.en || '';
+                        subTitle = p.title?.en && p.title?.he ? p.title.en : null;
+                      } else {
+                        mainTitle = p.title?.[lang] || p.title?.en || p.title?.he || '';
+                        subTitle = null;
+                      }
+
                       return (
                         <tr key={p.catNo} className="hover:bg-blue-50/40 transition-colors">
                           <td className="px-6 py-4 font-mono font-bold text-slate-900">{p.catNo}</td>
                           <td className="px-6 py-4 font-bold text-slate-900">
-                            <div>{titleStr}</div>
-                            {p.title?.en && (p.title?.he || lang !== 'en') && (
-                              <div className="text-xs text-slate-400 font-normal font-mono">{p.title.en}</div>
+                            <div>{mainTitle}</div>
+                            {subTitle && (
+                              <div className="text-xs text-slate-400 font-normal font-mono">{subTitle}</div>
                             )}
                           </td>
                           <td className="px-6 py-4">
@@ -449,7 +458,7 @@ export default function CatalogPage({ category, onOpenRfq }) {
                           <td className="px-6 py-4 font-mono text-slate-700 font-bold">{p.kitSize}</td>
                           <td className="px-6 py-4 text-center">
                             <button
-                              onClick={() => handleRequestQuote(p.catNo, titleStr)}
+                              onClick={() => handleRequestQuote(p.catNo, mainTitle)}
                               className="bg-burgundy hover:brightness-110 text-white font-extrabold text-xs px-4 py-2 rounded-xl transition shadow-sm btn-bouncy"
                             >
                               {_('catalog.rfqAction')}
