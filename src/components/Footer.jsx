@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MapPin, Phone, Mail, ArrowUpRight, ShieldCheck, FileText, X, AlertCircle, Scale, Lock, Stethoscope } from 'lucide-react';
+import { MapPin, Phone, Mail, ArrowUpRight, ShieldCheck, X, AlertCircle, Scale, Lock, Stethoscope } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { getAssetPath } from '../utils/imagePath';
 
 export default function Footer() {
-  const { lang, _, isRtl } = useLanguage();
-  const isHe = lang === 'he';
+  const { _, isRtl } = useLanguage();
   const navigate = useNavigate();
   const [legalModal, setLegalModal] = useState(null); // 'privacy' | 'terms' | null
 
@@ -47,7 +46,7 @@ export default function Footer() {
             {/* Controlled Version Badge */}
             <div className="inline-flex items-center gap-2 bg-slate-100/90 border border-slate-200/80 px-3.5 py-1.5 rounded-xl text-slate-600 text-xs font-mono font-bold w-fit shadow-inner">
               <span className="w-2 h-2 rounded-full bg-blue-500"></span>
-              <span>{isHe ? 'Web001 (מסמך מבוקר)' : 'Controlled Document: Web001'}</span>
+              <span>{_('footer.controlledDoc')}</span>
             </div>
           </div>
 
@@ -131,14 +130,14 @@ export default function Footer() {
                 onClick={() => setLegalModal('privacy')}
                 className="text-blue-600 hover:text-blue-800 underline decoration-blue-300 underline-offset-4 transition-colors focus:outline-none"
               >
-                {isHe ? 'מדיניות פרטיות (Privacy Policy)' : 'Privacy Policy'}
+                {_('legal.privacyTitle')}
               </button>
               <span className="text-slate-300">•</span>
               <button
                 onClick={() => setLegalModal('terms')}
                 className="text-blue-600 hover:text-blue-800 underline decoration-blue-300 underline-offset-4 transition-colors focus:outline-none"
               >
-                {isHe ? 'תנאי שימוש ואחריות רפואית (Terms & Conditions)' : 'Terms & Conditions'}
+                {_('legal.termsTitle')}
               </button>
             </div>
           </div>
@@ -155,6 +154,7 @@ export default function Footer() {
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md animate-fade-in"
           role="dialog"
           aria-modal="true"
+          dir={isRtl ? 'rtl' : 'ltr'}
         >
           <div className="bg-white rounded-[2.5rem] border border-slate-200 shadow-2xl max-w-3xl w-full p-6 sm:p-10 relative max-h-[88vh] overflow-y-auto flex flex-col justify-between">
             
@@ -175,14 +175,14 @@ export default function Footer() {
                   className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all duration-300 ${legalModal === 'privacy' ? 'bg-white text-blue-900 shadow-md scale-102' : 'text-slate-500 hover:text-slate-900'}`}
                 >
                   <ShieldCheck className="w-4 h-4 text-blue-600" />
-                  <span>{isHe ? 'מדיניות פרטיות' : 'Privacy Policy'}</span>
+                  <span>{_('legal.privacyTab')}</span>
                 </button>
                 <button
                   onClick={() => setLegalModal('terms')}
                   className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all duration-300 ${legalModal === 'terms' ? 'bg-white text-blue-900 shadow-md scale-102' : 'text-slate-500 hover:text-slate-900'}`}
                 >
                   <Scale className="w-4 h-4 text-burgundy" />
-                  <span>{isHe ? 'תנאי שימוש והבהרה רפואית' : 'Terms & Medical Disclaimer'}</span>
+                  <span>{_('legal.termsTab')}</span>
                 </button>
               </div>
 
@@ -191,59 +191,49 @@ export default function Footer() {
                 <div className="space-y-6 text-slate-600 text-sm leading-relaxed">
                   <div className="border-b border-slate-100 pb-4">
                     <h3 className="text-2xl font-black text-slate-900 mb-2">
-                      {isHe ? 'מדיניות פרטיות והגנת מידע (Privacy Policy)' : 'Privacy & Data Protection Policy'}
+                      {_('legal.privacyTitle')}
                     </h3>
                     <p className="text-xs text-slate-400 font-mono">
-                      {isHe ? 'חברת בי.אמ.טי דיאגנוסטיקס בע"מ (BMT Diagnostics Ltd) • מסמך מבוקר Web001' : 'BMT Diagnostics Ltd. • Controlled Document Web001'}
+                      {_('legal.privacyDocMeta')}
                     </p>
                   </div>
 
                   <div className="bg-blue-50/80 border border-blue-200/80 p-5 rounded-2xl text-blue-950 font-medium text-xs sm:text-sm leading-relaxed">
-                    <strong>{isHe ? 'מחויבות יסוד:' : 'Core Commitment:'}</strong>{' '}
-                    {isHe
-                      ? 'חברת BMT Diagnostics רואה בהגנה על פרטיות המשתמשים ערך עליון. האתר הינו אינפורמטיבי-טכנולוגי ואינו אוסף או אוגר מידע רפואי אישי מזהה של משתמשי קצה.'
-                      : 'BMT Diagnostics holds user privacy with the utmost priority. This website is purely informative and does not collect or store Protected Health Information (PHI).'}
+                    <strong>{_('legal.privacyCommitmentTitle')}</strong>{' '}
+                    {_('legal.privacyCommitmentText')}
                   </div>
 
                   <div className="space-y-4">
                     <h4 className="font-extrabold text-slate-900 text-base flex items-center gap-2">
                       <Lock className="w-4 h-4 text-blue-600" />
-                      {isHe ? '1. אי-איסוף מידע רפואי אישי (PHI)' : '1. No Medical Data Collection'}
+                      {_('legal.privacyS1Title')}
                     </h4>
                     <p className="text-xs sm:text-sm">
-                      {isHe 
-                        ? 'אתר BMT Diagnostics אינו דורש הרשמה אישית, אינו מבצע רישום של תוצאות בדיקות רפואיות של מטופלים ואינו מעבד מידע בריאותי רגיש. כל שימוש באפליקציות ייעודיות של קופות החולים נעשה ישירות מול שרתי ארגוני הבריאות המאובטחים.'
-                        : 'This website does not require registration, does not log personal test results, and does not process clinical health data. Diagnostic integration with healthcare providers operates exclusively via the HMOs\' secure environments.'}
+                      {_('legal.privacyS1Text')}
                     </p>
 
                     <h4 className="font-extrabold text-slate-900 text-base flex items-center gap-2">
                       <Mail className="w-4 h-4 text-blue-600" />
-                      {isHe ? '2. מידע שנמסר בטפסי יצירת קשר ובקשות להצעת מחיר (RFQ)' : '2. Contact & Commercial Inquiries'}
+                      {_('legal.privacyS2Title')}
                     </h4>
                     <p className="text-xs sm:text-sm">
-                      {isHe 
-                        ? 'בעת שליחת פנייה בטופס יצירת הקשר או בקשה להצעת מחיר, נאספים פרטים הנמסרים מרצון בלבד (שם, כתובת דוא"ל, מספר טלפון, מוסד רפואי ותוכן הפנייה). מידע זה משמש אך ורק לצורך מתן מענה ישיר לפנייתכם, אספקת הצעות מחיר מסחריות וייעוץ מקצועי.'
-                        : 'Information voluntarily submitted via commercial RFQ or contact forms (name, email, organization, phone) is exclusively used to respond to your technical and commercial queries.'}
+                      {_('legal.privacyS2Text')}
                     </p>
 
                     <h4 className="font-extrabold text-slate-900 text-base flex items-center gap-2">
                       <ShieldCheck className="w-4 h-4 text-blue-600" />
-                      {isHe ? '3. עוגיות (Cookies), אבטחת מידע ואי-העברה לצדדים שלישיים' : '3. Security, Cookies & Non-Disclosure'}
+                      {_('legal.privacyS3Title')}
                     </h4>
                     <p className="text-xs sm:text-sm">
-                      {isHe 
-                        ? 'האתר משתמש בעוגיות טכניות בלבד לצורך תפעול תקין, אבטחת הגלישה וסטטיסטיקה אנונימית. חברת BMT Diagnostics אינה מוכרת, משכירה או מעבירה מידע אישי של משתמשים לצדדים שלישיים לצרכים שיווקיים או מסחריים.'
-                        : 'We utilize essential technical cookies for operational stability and analytics. We strictly do not sell, rent, or trade any contact details with third-party commercial vendors.'}
+                      {_('legal.privacyS3Text')}
                     </p>
 
                     <h4 className="font-extrabold text-slate-900 text-base flex items-center gap-2">
                       <MapPin className="w-4 h-4 text-blue-600" />
-                      {isHe ? '4. יצירת קשר וזכויות עיון' : '4. Contact & User Rights'}
+                      {_('legal.privacyS4Title')}
                     </h4>
                     <p className="text-xs sm:text-sm">
-                      {isHe 
-                        ? 'בהתאם לחוק הגנת הפרטיות הישראלי (התשמ"א-1981), הנכם רשאים לעיין במידע שנמסר על ידכם בטופס, לבקש את תיקונו או מחיקתו בכל עת באמצעות פנייה לכתובת: info@bmtdx.com או בדואר לכתובת: רחוב האילן 12, פארק תעשיות אור עקיבא.'
-                        : 'Under applicable privacy laws, you may review, correct, or request deletion of contact inquiries by emailing info@bmtdx.com or writing to 12 Ha\'ilan St., Or Akiva, Israel.'}
+                      {_('legal.privacyS4Text')}
                     </p>
                   </div>
                 </div>
@@ -254,10 +244,10 @@ export default function Footer() {
                 <div className="space-y-6 text-slate-600 text-sm leading-relaxed">
                   <div className="border-b border-slate-100 pb-4">
                     <h3 className="text-2xl font-black text-slate-900 mb-2">
-                      {isHe ? 'תנאי שימוש והבהרה רפואית (Terms & Conditions)' : 'Terms of Use & Medical Disclaimer'}
+                      {_('legal.termsTitle')}
                     </h3>
                     <p className="text-xs text-slate-400 font-mono">
-                      {isHe ? 'חברת בי.אמ.טי דיאגנוסטיקס בע"מ (BMT Diagnostics Ltd) • מסמך מבוקר Web001' : 'BMT Diagnostics Ltd. • Controlled Document Web001'}
+                      {_('legal.termsDocMeta')}
                     </p>
                   </div>
 
@@ -266,43 +256,35 @@ export default function Footer() {
                     <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
                     <div>
                       <strong className="block text-amber-900 font-bold mb-1">
-                        {isHe ? 'הבהרה רפואית ואבחונית מחייבת (Medical Disclaimer):' : 'Mandatory Medical & Clinical Disclaimer:'}
+                        {_('legal.termsDisclaimerTitle')}
                       </strong>
-                      {isHe
-                        ? 'המידע המוצג באתר (לרבות קטלוגים, מפרטי בדיקות ומאמרים מדעיים) נועד למטרות לימודיות ואינפורמטיביות בלבד ואינו מהווה ייעוץ רפואי, אבחון קליני, חוות דעת רפואית או תחליף להיוועצות עם רופא מוסמך.'
-                        : 'Information provided on this site (including catalogues, specs, and articles) is for informational and educational purposes only. It does not constitute medical advice or substitute professional medical consultation.'}
+                      {_('legal.termsDisclaimerText')}
                     </div>
                   </div>
 
                   <div className="space-y-4">
                     <h4 className="font-extrabold text-slate-900 text-base flex items-center gap-2">
                       <Scale className="w-4 h-4 text-burgundy" />
-                      {isHe ? '1. פטנטים מוגנים וקניין רוחני (Patents & IP)' : '1. Patented Technology & Intellectual Property'}
+                      {_('legal.termsS1Title')}
                     </h4>
                     <p className="text-xs sm:text-sm">
-                      {isHe 
-                        ? 'כלל הטכנולוגיות, הפטנטים הבינלאומיים הרשומים (לרבות תצורת No-Step, מערכות LabOnTime Swab והתקני האבחון), סימני המסחר, הטקסטים, התמונות והעיצובים באתר הינם קניינה הבלעדי של חברת BMT Diagnostics Ltd ומוגנים בחוקי זכויות יוצרים ופטנטים בינלאומיים. חל איסור מוחלט על העתקה, שכפול או הפצה ללא היתר מפורש בכתב.'
-                        : 'All international patents, proprietary No-Step platforms, LabOnTime devices, trademarks, texts, and graphics are the exclusive intellectual property of BMT Diagnostics Ltd. Any unauthorized copying or reproduction is strictly prohibited.'}
+                      {_('legal.termsS1Text')}
                     </p>
 
                     <h4 className="font-extrabold text-slate-900 text-base flex items-center gap-2">
                       <Stethoscope className="w-4 h-4 text-burgundy" />
-                      {isHe ? '2. סיווג מוצרים: שימוש מקצועי לעומת שימוש עצמי' : '2. Product Classification & Instructions for Use'}
+                      {_('legal.termsS2Title')}
                     </h4>
                     <p className="text-xs sm:text-sm">
-                      {isHe 
-                        ? 'בדיקות המסומנות כ-"לשימוש מקצועי בלבד" (Professional Use Only) מיועדות לשימוש ע"י אנשי צוות רפואי מוסמך, מעבדות ובתי חולים בלבד. ביצוע כל בדיקה בפועל כפוף להוראות השימוש המצורפות לערכה (IFU) ולהנחיות משרד הבריאות.'
-                        : 'Products designated for Professional Use Only are intended solely for qualified healthcare personnel and clinical institutions. All testing must strictly adhere to the package insert Instructions for Use (IFU).'}
+                      {_('legal.termsS2Text')}
                     </p>
 
                     <h4 className="font-extrabold text-slate-900 text-base flex items-center gap-2">
                       <ShieldCheck className="w-4 h-4 text-burgundy" />
-                      {isHe ? '3. הגבלת אחריות ודין חל' : '3. Limitation of Liability & Governing Law'}
+                      {_('legal.termsS3Title')}
                     </h4>
                     <p className="text-xs sm:text-sm">
-                      {isHe 
-                        ? 'חברת BMT Diagnostics לא תישא באחריות לכל נזק ישיר או עקיף הנובע משימוש או הסתמכות על מידע המופיע באתר. על תנאי שימוש אלו יחולו אך ורק דיני מדינת ישראל, וסמכות השיפוט הבלעדית בכל עניין נתונה לבתי המשפט המוסמכים במחוז חיפה / תל אביב.'
-                        : 'BMT Diagnostics is not liable for direct or consequential damages resulting from reliance on website content. These terms are governed solely by the laws of the State of Israel, with exclusive jurisdiction in relevant Israeli courts.'}
+                      {_('legal.termsS3Text')}
                     </p>
                   </div>
                 </div>
@@ -313,13 +295,13 @@ export default function Footer() {
             <div className="mt-8 pt-5 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="text-xs text-slate-400 font-mono flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-                <span>{isHe ? 'מזהה תצורה: Web001 (מסמך מבוקר)' : 'Doc ID: Web001 (Controlled)'}</span>
+                <span>{_('legal.docId')}</span>
               </div>
               <button
                 onClick={() => setLegalModal(null)}
                 className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-2xl font-bold text-sm transition focus:outline-none shadow-md btn-bouncy"
               >
-                {isHe ? 'הבנתי וסגור' : 'Acknowledge & Close'}
+                {_('legal.acknowledgeBtn')}
               </button>
             </div>
 

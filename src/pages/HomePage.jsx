@@ -1,51 +1,51 @@
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { ShieldCheck, Microscope, Activity, Award, Factory, Briefcase, ArrowRight, ArrowLeft, CheckCircle, Calendar, ChevronLeft, ChevronRight, ShoppingBag, FileText, Download } from 'lucide-react';
+import { ShieldCheck, Microscope, Activity, Award, ArrowRight, ArrowLeft, CheckCircle, Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import productsDatabase from '../data/productsDatabase';
 import { getAssetPath } from '../utils/imagePath';
 
-/* ─── Hand-crafted high-fidelity grayscale vector logos for partners ─── */
-const getPartnerLogos = (isHe) => [
+/* ─── Hand-crafted high-fidelity logos for partners ─── */
+const getPartnerLogos = (_) => [
   {
     name: 'ISRAEL MOH',
-    label: isHe ? 'משרד הבריאות' : 'Ministry of Health',
+    label: _('home.partnerMoh') || 'Ministry of Health',
     imgUrl: 'moh-logo.png'
   },
   {
     name: 'SII NOTIFIED BODY',
-    label: isHe ? 'מכון התקנים CERTIFIED' : 'SII Certified',
+    label: _('home.partnerSii') || 'SII Certified',
     imgUrl: 'sii-logo.jpeg'
   },
   {
     name: 'CLALIT HEALTH',
-    label: isHe ? 'שירותי בריאות כללית' : 'Clalit Health Services',
+    label: _('home.partnerClalit') || 'Clalit Health Services',
     imgUrl: 'clalit-logo.jpg'
   },
   {
     name: 'MACCABI HEALTH',
-    label: isHe ? 'מכבי שירותי בריאות' : 'Maccabi Healthcare',
+    label: _('home.partnerMaccabi') || 'Maccabi Healthcare',
     imgUrl: 'maccabi-logo.webp'
   },
   {
     name: 'MEUHEDET HEALTH',
-    label: isHe ? 'קופת חולים מאוחדת' : 'Meuhedet Healthcare',
+    label: _('home.partnerMeuhedet') || 'Meuhedet Healthcare',
     imgUrl: 'meuhedet-logo.png'
   },
   {
     name: 'LEUMIT HEALTH',
-    label: isHe ? 'לאומית שירותי בריאות' : 'Leumit Healthcare',
+    label: _('home.partnerLeumit') || 'Leumit Healthcare',
     imgUrl: 'leumit-logo.jpg'
   },
   {
     name: 'SUPER-PHARM',
-    label: isHe ? 'רשת סופר-פארם' : 'Super-Pharm Israel',
+    label: _('home.partnerSuperPharm') || 'Super-Pharm Israel',
     imgUrl: 'superpharm-logo.png'
   },
   {
     name: 'BE PHARM',
-    label: isHe ? 'רשת Be פארם' : 'Be Pharm Israel',
+    label: _('home.partnerBePharm') || 'Be Pharm Israel',
     imgUrl: 'bepharm-logo.jpg'
   }
 ];
@@ -57,9 +57,8 @@ const FOB_YT_ID      = '51ECod0uUy4';
 
 export default function HomePage({ onOpenRfq }) {
   const navigate = useNavigate();
-  const { lang, _ } = useLanguage();
-  const isHe = lang === 'he';
-  const logos = getPartnerLogos(isHe);
+  const { lang, _, isRtl } = useLanguage();
+  const logos = getPartnerLogos(_);
 
   const carouselRef = useRef(null);
 
@@ -85,12 +84,11 @@ export default function HomePage({ onOpenRfq }) {
 
       {/* ═══════════════════════════════════════════════════════
           HIGH-END OCEAN BLUE MEDTECH HERO SECTION
-          (Matching exact reference colors #0267B5 -> #01417A, clear left video, white bottom wave)
           ═══════════════════════════════════════════════════════ */}
       <section
         className="relative text-white overflow-hidden"
         style={{ background: 'linear-gradient(135deg, #0267B5 0%, #01417A 100%)' }}
-        aria-label={isHe ? 'אזור ראשי' : 'Hero Section'}
+        aria-label="Hero Section"
       >
         {/* Seamless Full-Bleed Corporate Video Background */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -101,27 +99,27 @@ export default function HomePage({ onOpenRfq }) {
             allow="autoplay; encrypted-media"
             loading="eager"
           />
-          {/* Full-Bleed Ocean Blue Gradient Overlay — Seamless 100% Blend */}
+          {/* Full-Bleed Ocean Blue Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#0267B5]/75 via-[#01417A]/85 to-[#01417A]/95 rtl:bg-gradient-to-l rtl:from-[#0267B5]/75 rtl:via-[#01417A]/85 rtl:to-[#01417A]/95" />
         </div>
 
-        {/* Content Container — Compact top padding perfectly aligned with navbar logo */}
+        {/* Content Container */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-4 lg:pt-6 xl:pt-8 pb-20 md:pb-28">
           <div className="max-w-3xl">
 
-            {/* H1 Title — Closely aligned with header logo */}
+            {/* H1 Title */}
             <h1
               className="text-4xl sm:text-5xl lg:text-[3.75rem] xl:text-[4rem] font-black leading-[1.12] mb-6 text-white tracking-tight drop-shadow-md"
               dangerouslySetInnerHTML={{ __html: _('hero.title') }}
             />
 
-            {/* Subtitle with WCAG compliant high contrast */}
+            {/* Subtitle */}
             <p className="text-lg sm:text-xl mb-10 leading-relaxed font-normal text-white max-w-2xl drop-shadow">
               {_('hero.sub')}
             </p>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4" role="group" aria-label={isHe ? 'כפתורי פעולה ראשיים' : 'Primary actions'}>
+            <div className="flex flex-col sm:flex-row gap-4" role="group" aria-label="Primary actions">
               <button
                 id="hero-btn-b2b"
                 onClick={() => navigate('/catalog/b2b')}
@@ -141,12 +139,12 @@ export default function HomePage({ onOpenRfq }) {
             </div>
 
             {/* Micro Stats Row */}
-            <div className="mt-14 pt-6 border-t border-white/20 flex flex-wrap gap-8 sm:gap-12" aria-label={isHe ? 'נתוני מפתח' : 'Key figures'}>
+            <div className="mt-14 pt-6 border-t border-white/20 flex flex-wrap gap-8 sm:gap-12" aria-label="Key figures">
               {[
-                { value: '2004', label: isHe ? 'תחילת פעילות ב-2004' : 'Activity Since 2004' },
-                { value: '+200', label: isHe ? 'פאנלים אבחוניים' : 'Diagnostic Products' },
-                { value: '+40', label: isHe ? 'מדינות יצוא' : 'Global Export Markets' },
-                { value: 'ISO', label: isHe ? 'תקני איכות בינלאומיים' : 'Certified Standards' },
+                { value: _('stats.stat1Val') || '2004', label: _('stats.stat1Label') || 'Activity Since 2004' },
+                { value: _('stats.stat2Val') || '+200', label: _('stats.stat2Label') || 'Diagnostic Products' },
+                { value: _('stats.stat3Val') || '+40', label: _('stats.stat3Label') || 'Global Export Markets' },
+                { value: _('stats.stat4Val') || 'ISO', label: _('stats.stat4Label') || 'Certified Standards' },
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col">
                   <span className="text-2xl sm:text-3xl font-black text-white tracking-tight drop-shadow-md">{stat.value}</span>
@@ -158,10 +156,17 @@ export default function HomePage({ onOpenRfq }) {
           </div>
         </div>
 
-        {/* --- DYNAMIC PURE WHITE WAVY SVG BOTTOM DIVIDER (Matching Reference Site) --- */}
-        <div className="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none z-10 pointer-events-none">
-          <svg className="relative block w-full h-12 md:h-16 text-slate-100" viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path d="M0,32L48,42.7C96,53,192,75,288,80C384,85,480,75,576,64C672,53,768,43,864,48C960,53,1056,75,1152,80C1248,85,1344,75,1392,69.3L1440,64L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z" fill="currentColor"></path>
+        {/* Crisp Pure White Wave Divider */}
+        <div className="w-full overflow-hidden leading-none absolute bottom-0 left-0 right-0 z-20 pointer-events-none">
+          <svg
+            className="relative block w-full h-8 sm:h-12 text-slate-100/90"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M0,0 C150,90 350,-40 500,60 C650,160 900,10 1200,40 L1200,120 L0,120 Z"
+              fill="currentColor"
+            />
           </svg>
         </div>
       </section>
@@ -176,7 +181,7 @@ export default function HomePage({ onOpenRfq }) {
             {/* Highlighted Registered Patents Badge */}
             <div className="flex items-center gap-2 bg-blue-50/90 text-blue-900 border border-blue-200 px-3.5 py-1.5 rounded-full shadow-sm hover:bg-blue-100 hover:border-blue-300 transition-all duration-300 font-bold">
               <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0" />
-              <span>{isHe ? 'פטנטים בינלאומיים רשומים' : 'Patented Diagnostics'}</span>
+              <span>{_('trust.pat')}</span>
             </div>
 
             {/* Clickable Accessible ISO Certificate Link with PDF integration */}
@@ -185,91 +190,86 @@ export default function HomePage({ onOpenRfq }) {
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 hover:text-blue-700 transition-colors group cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg px-2 py-1"
-              title={isHe ? 'צפייה בתעודת ISO 13485:2016 (PDF)' : 'View ISO 13485:2016 Certificate (PDF)'}
-              aria-label={isHe ? 'תעודת ISO 13485:2016 - פתיחת קובץ PDF' : 'ISO 13485:2016 Certificate - Open PDF'}
+              title={_('trust.iso1PdfTitle')}
+              aria-label={_('trust.iso1PdfAria')}
             >
               <Award className="w-4 h-4 text-blue-600 group-hover:scale-110 transition-transform shrink-0" />
-              <span className="group-hover:underline underline-offset-4">ISO 13485:2016 Certified</span>
+              <span className="group-hover:underline underline-offset-4">{_('trust.iso1')}</span>
               <span className="text-[10px] font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded border border-blue-200">PDF</span>
             </a>
 
             <div className="flex items-center gap-2 hover:text-blue-700 transition-colors">
               <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0" />
-              <span>ISO 27001 Security</span>
+              <span>{_('trust.iso2')}</span>
             </div>
 
             <div className="flex items-center gap-2 bg-emerald-50/80 text-emerald-900 border border-emerald-200 px-3 py-1 rounded-full shadow-sm">
               <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span className="font-bold">{isHe ? 'ספק חיוני' : 'Essential Supplier'}</span>
+              <span className="font-bold">{_('trust.ce')}</span>
             </div>
 
             <div className="flex items-center gap-2 hover:text-emerald-700 transition-colors">
               <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>{isHe ? 'אישורי משרד הבריאות (אמ"ר)' : 'Israeli MOH Permits'}</span>
+              <span>{_('trust.moh')}</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          PHARMA PRODUCTS CAROUSEL (TOP POSITION WITH SMOOTH CHEVRON SCROLL)
+          PHARMA PRODUCTS CAROUSEL
           ═══════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-gradient-to-b from-slate-100/60 via-slate-50/80 to-blue-50/20 border-b border-slate-200/80 relative overflow-hidden" aria-label={isHe ? 'קרוסלת מוצרי פארם' : 'Pharma Products Carousel'}>
+      <section className="py-20 bg-gradient-to-b from-slate-100/60 via-slate-50/80 to-blue-50/20 border-b border-slate-200/80 relative overflow-hidden" aria-label="Pharma Products Carousel">
         <div aria-hidden="true" className="absolute top-1/2 left-0 w-[500px] h-[300px] bg-blue-500/[0.03] rounded-full blur-[100px] pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-12">
-          
-          {/* Header & Controls */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
-              <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-blue-700 text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest mb-3 shadow-sm">
-                <ShoppingBag className="w-4 h-4 text-blue-600" />
-                {isHe ? 'קטלוג פארם וצריכה ביתית' : 'Pharma & OTC Product Lineup'}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-bold uppercase tracking-wider mb-3">
+                <span className="w-2 h-2 rounded-full bg-blue-600"></span>
+                <span>{_('home.productsBadge')}</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
-                {isHe ? 'מגוון ערכות האבחון ברשתות הפארם' : 'Leading OTC Rapid Diagnostic Kits'}
+              <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                {_('home.productsTitle')}
               </h2>
-              <p className="text-slate-500 text-base md:text-lg font-light mt-2 max-w-2xl">
-                {isHe 
-                  ? 'ערכות אבחון מהירות, מדויקות ונגישות לשימוש עצמי וביתי הזמינות בבתי המרקחת וברשתות הפארם בישראל' 
-                  : 'Fast, highly sensitive and intuitive self-testing kits available across Israeli retail pharmacy chains.'}
+              <p className="text-slate-500 text-base md:text-lg mt-2 max-w-2xl font-light">
+                {_('home.productsSub')}
               </p>
             </div>
 
-            {/* Scroll Navigation Controls */}
-            <div className="flex items-center gap-3 shrink-0">
+            <div className="flex items-center gap-3">
               <button
                 onClick={() => scrollCarousel('left')}
-                className="w-12 h-12 rounded-2xl bg-white border border-slate-200 text-slate-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 shadow-md flex items-center justify-center transition-all duration-300 btn-bouncy"
-                aria-label={isHe ? 'הקודם' : 'Previous'}
+                className="w-12 h-12 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-center text-slate-700 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all active:scale-95 focus:outline-none"
+                aria-label="Scroll left"
               >
-                <ChevronRight className="w-6 h-6 rtl:rotate-0 rotate-180" />
+                <ChevronLeft className="w-6 h-6" />
               </button>
               <button
                 onClick={() => scrollCarousel('right')}
-                className="w-12 h-12 rounded-2xl bg-white border border-slate-200 text-slate-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 shadow-md flex items-center justify-center transition-all duration-300 btn-bouncy"
-                aria-label={isHe ? 'הבא' : 'Next'}
+                className="w-12 h-12 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-center text-slate-700 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all active:scale-95 focus:outline-none"
+                aria-label="Scroll right"
               >
-                <ChevronLeft className="w-6 h-6 rtl:rotate-0 rotate-180" />
+                <ChevronRight className="w-6 h-6" />
               </button>
               <button
                 onClick={() => navigate('/catalog/b2c')}
-                className="px-6 py-3 rounded-2xl bg-burgundy hover:brightness-110 text-white font-extrabold text-xs uppercase tracking-wider shadow-md transition-all btn-bouncy hidden sm:inline-flex items-center gap-2"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-md transition-all active:scale-95 focus:outline-none"
               >
-                <span>{isHe ? 'לכל מוצרי הפארם' : 'View Full Pharma Catalog'}</span>
-                <ArrowLeft className="w-4 h-4 rtl:rotate-0 rotate-180" />
+                <span>{_('nav.b2c')}</span>
+                {isRtl ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
               </button>
             </div>
           </div>
         </div>
 
-        {/* --- SCROLLABLE CONTAINER WITH INFINITE AUTOMATIC UNBROKEN MARQUEE --- */}
-        <div ref={carouselRef} className="w-full relative py-4 overflow-x-auto scroll-smooth no-scrollbar" dir="ltr">
-          <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-slate-100/60 via-slate-100/40 to-transparent z-25 pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-28 bg-gradient-to-l from-slate-100/60 via-slate-100/40 to-transparent z-25 pointer-events-none" />
-
-          <div className="animate-infinite-scroll flex gap-6 px-4">
-            {/* First Set of Pharma Product Cards */}
+        {/* Carousel Tracks with Auto Infinite Loop Simulation */}
+        <div 
+          ref={carouselRef}
+          className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth px-4 sm:px-6 lg:px-8 py-4"
+          dir="ltr"
+        >
+          <div className="flex gap-6 animate-infinite-scroll hover:pause-animation">
             {pharmaProducts.map((prod, idx) => (
               <div 
                 key={`pharma-1-${prod.id}-${idx}`}
@@ -284,7 +284,7 @@ export default function HomePage({ onOpenRfq }) {
                     onError={(e) => { e.target.src = getAssetPath('LabOnTime Device.jpg'); }}
                   />
                   <span className={`absolute top-4 right-4 rtl:right-4 rtl:left-auto text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm ${prod.isProfessionalOnly ? 'bg-blue-600 text-white' : 'bg-emerald-500 text-white'}`}>
-                    {prod.isProfessionalOnly ? (isHe ? 'לשימוש מקצועי בלבד' : _('specs.setting') || 'Professional Only') : (isHe ? 'לשימוש עצמי' : 'Self-Use')}
+                    {prod.isProfessionalOnly ? _('product.professionalOnly') : _('product.selfUse')}
                   </span>
                   {(prod.isPatented || prod.id.includes('strep') || prod.id.includes('covid-otc') || prod.id.includes('fob-b2c') || prod.id.includes('h-pylori')) && (
                     <span className="absolute top-4 left-4 rtl:left-4 rtl:right-auto text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm bg-gradient-to-r from-burgundy to-burgundy-600 text-white flex items-center gap-1">
@@ -292,7 +292,7 @@ export default function HomePage({ onOpenRfq }) {
                       <span>
                         {prod.patentBadge 
                           ? (typeof prod.patentBadge === 'object' ? (prod.patentBadge[lang] || prod.patentBadge.he || prod.patentBadge.en) : prod.patentBadge)
-                          : (isHe ? 'פטנט' : 'Patent')}
+                          : _('product.patentBadge')}
                       </span>
                     </span>
                   )}
@@ -310,18 +310,18 @@ export default function HomePage({ onOpenRfq }) {
 
                   <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
                     <span className="text-[11px] font-extrabold text-slate-400">
-                      {prod.specs?.barcode ? `ברקוד: ${prod.specs.barcode}` : 'BMT OTC'}
+                      {prod.specs?.barcode ? `Barcode: ${prod.specs.barcode}` : 'BMT OTC'}
                     </span>
                     <span className="inline-flex items-center gap-1 text-xs font-black text-blue-600 group-hover:text-burgundy transition-colors">
-                      <span>{isHe ? 'לפרטים' : 'Details'}</span>
-                      <ArrowLeft className="w-3.5 h-3.5 rtl:rotate-0 rotate-180" />
+                      <span>{_('home.viewDetails')}</span>
+                      {isRtl ? <ArrowLeft className="w-3.5 h-3.5" /> : <ArrowRight className="w-3.5 h-3.5" />}
                     </span>
                   </div>
                 </div>
               </div>
             ))}
 
-            {/* Second Identical Set for Seamless 100% Unbroken Infinite Looping */}
+            {/* Second Identical Set for Seamless Unbroken Looping */}
             {pharmaProducts.map((prod, idx) => (
               <div 
                 key={`pharma-2-${prod.id}-${idx}`}
@@ -336,7 +336,7 @@ export default function HomePage({ onOpenRfq }) {
                     onError={(e) => { e.target.src = getAssetPath('LabOnTime Device.jpg'); }}
                   />
                   <span className={`absolute top-4 right-4 rtl:right-4 rtl:left-auto text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm ${prod.isProfessionalOnly ? 'bg-blue-600 text-white' : 'bg-emerald-500 text-white'}`}>
-                    {prod.isProfessionalOnly ? (isHe ? 'לשימוש מקצועי בלבד' : _('specs.setting') || 'Professional Only') : (isHe ? 'לשימוש עצמי' : 'Self-Use')}
+                    {prod.isProfessionalOnly ? _('product.professionalOnly') : _('product.selfUse')}
                   </span>
                   {(prod.isPatented || prod.id.includes('strep') || prod.id.includes('covid-otc') || prod.id.includes('fob-b2c') || prod.id.includes('h-pylori')) && (
                     <span className="absolute top-4 left-4 rtl:left-4 rtl:right-auto text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm bg-gradient-to-r from-burgundy to-burgundy-600 text-white flex items-center gap-1">
@@ -344,7 +344,7 @@ export default function HomePage({ onOpenRfq }) {
                       <span>
                         {prod.patentBadge 
                           ? (typeof prod.patentBadge === 'object' ? (prod.patentBadge[lang] || prod.patentBadge.he || prod.patentBadge.en) : prod.patentBadge)
-                          : (isHe ? 'פטנט' : 'Patent')}
+                          : _('product.patentBadge')}
                       </span>
                     </span>
                   )}
@@ -362,11 +362,11 @@ export default function HomePage({ onOpenRfq }) {
 
                   <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
                     <span className="text-[11px] font-extrabold text-slate-400">
-                      {prod.specs?.barcode ? `ברקוד: ${prod.specs.barcode}` : 'BMT OTC'}
+                      {prod.specs?.barcode ? `Barcode: ${prod.specs.barcode}` : 'BMT OTC'}
                     </span>
                     <span className="inline-flex items-center gap-1 text-xs font-black text-blue-600 group-hover:text-burgundy transition-colors">
-                      <span>{isHe ? 'לפרטים' : 'Details'}</span>
-                      <ArrowLeft className="w-3.5 h-3.5 rtl:rotate-0 rotate-180" />
+                      <span>{_('home.viewDetails')}</span>
+                      {isRtl ? <ArrowLeft className="w-3.5 h-3.5" /> : <ArrowRight className="w-3.5 h-3.5" />}
                     </span>
                   </div>
                 </div>
@@ -377,7 +377,7 @@ export default function HomePage({ onOpenRfq }) {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          INNOVATION HIGHLIGHT CARDS (Autoplay set to 0 for lightweight fast load)
+          INNOVATION HIGHLIGHT CARDS
           ═══════════════════════════════════════════════════════ */}
       <section className="py-24 bg-slate-50" aria-labelledby="innovation-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -393,7 +393,7 @@ export default function HomePage({ onOpenRfq }) {
             {/* ── Strep A Card ── */}
             <article
               className="group bg-white rounded-[2rem] shadow-sm border border-slate-200/70 relative overflow-hidden flex flex-col hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 card-3d-lift"
-              aria-label={isHe ? 'מוצר LabOnTime Strep A' : 'LabOnTime Strep A product'}
+              aria-label="LabOnTime Strep A product"
             >
               <div
                 className="absolute top-0 right-0 bg-burgundy text-white text-[10px] font-bold px-5 py-2 rounded-bl-2xl uppercase tracking-widest z-10"
@@ -405,7 +405,7 @@ export default function HomePage({ onOpenRfq }) {
                 <iframe
                   className="w-full h-full border-0 absolute inset-0"
                   src={`https://www.youtube.com/embed/${STREP_YT_ID}?autoplay=0&controls=1&rel=0&modestbranding=1&playsinline=1`}
-                  title={isHe ? 'הדגמת בדיקת Strep A' : 'Strep A Test Demonstration'}
+                  title="Strep A Test Demonstration"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   frameBorder="0"
                   loading="lazy"
@@ -425,12 +425,12 @@ export default function HomePage({ onOpenRfq }) {
 
                 <div className="mb-3">
                   <span className="inline-block text-[11px] font-black text-cyan-700 bg-cyan-50 border border-cyan-200/60 px-3.5 py-1.5 rounded-xl uppercase tracking-wider">
-                    {isHe ? 'סוג דגימה: סוואב גרון/לוע (Throat Swab)' : 'Specimen: Throat / Pharyngeal Swab'}
+                    {_('home.strepSpecimenTag')}
                   </span>
                 </div>
 
                 <h3 className="text-xl md:text-2xl font-extrabold text-slate-900 mb-3 leading-snug">
-                  {isHe ? 'בדיקת Strep A — הפטנט (no step)' : 'Strep A Test — Patented (no step)'}
+                  {_('home.strepTitle')}
                 </h3>
                 <p className="text-slate-500 text-sm leading-relaxed flex-grow">
                   {_('home.strepDesc')}
@@ -439,12 +439,12 @@ export default function HomePage({ onOpenRfq }) {
                 <div className="flex gap-3 mt-6" role="list">
                   <div className="bg-blue-50 px-4 py-3.5 rounded-2xl border border-blue-100/80 flex-1 text-center flex items-center justify-center shadow-inner">
                     <span className="text-sm sm:text-base font-black text-blue-900 leading-tight">
-                      {isHe ? 'בדיקה אינטואיטיבית' : 'Intuitive Testing'}
+                      {_('home.strepSpec')}
                     </span>
                   </div>
                   <div className="bg-emerald-50 px-4 py-3.5 rounded-2xl border border-emerald-100 flex-1 text-center flex items-center justify-center shadow-inner">
                     <span className="text-sm sm:text-base font-black text-emerald-800 leading-tight">
-                      {isHe ? 'ללא שלבים' : 'No Steps (Closed System)'}
+                      {_('home.strepTrans')}
                     </span>
                   </div>
                 </div>
@@ -471,7 +471,7 @@ export default function HomePage({ onOpenRfq }) {
             {/* ── FOB Card ── */}
             <article
               className="group bg-white rounded-[2rem] shadow-sm border border-slate-200/70 relative overflow-hidden flex flex-col hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 card-3d-lift"
-              aria-label={isHe ? 'מוצר FOB בדיקת דם סמוי' : 'FOB Colorectal Cancer Screening product'}
+              aria-label="FOB Colorectal Cancer Screening product"
             >
               <div
                 className="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-bold px-5 py-2 rounded-bl-2xl uppercase tracking-widest z-10"
@@ -483,7 +483,7 @@ export default function HomePage({ onOpenRfq }) {
                 <iframe
                   className="w-full h-full border-0 absolute inset-0"
                   src={`https://www.youtube.com/embed/${FOB_YT_ID}?autoplay=0&controls=1&rel=0&modestbranding=1&playsinline=1`}
-                  title={isHe ? 'הדגמת בדיקת FOB דם סמוי בצואה' : 'FOB Colorectal Cancer Screening Demonstration'}
+                  title="FOB Colorectal Cancer Screening Demonstration"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   frameBorder="0"
                   loading="lazy"
@@ -500,7 +500,7 @@ export default function HomePage({ onOpenRfq }) {
 
                 <div className="flex gap-3 mt-6" role="list">
                   <div className="bg-blue-50 px-4 py-3 rounded-xl border border-blue-100/80 flex-1 text-center">
-                    <span className="block text-base sm:text-lg font-black text-blue-900 leading-tight mb-1">{isHe ? 'בדיקה ביתית' : 'At-Home'}</span>
+                    <span className="block text-base sm:text-lg font-black text-blue-900 leading-tight mb-1">{_('home.atHomeTag')}</span>
                     <span className="text-[10px] font-bold text-blue-600 tracking-wider block leading-tight">{_('home.fitAcc')}</span>
                   </div>
                   <div className="bg-blue-50/60 px-4 py-3 rounded-xl border border-blue-100/50 flex-1 text-center">
@@ -533,18 +533,16 @@ export default function HomePage({ onOpenRfq }) {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          LATEST NEWS & ACHIEVEMENTS SECTION (Strategic Milestones)
+          LATEST NEWS & ACHIEVEMENTS SECTION
           ═══════════════════════════════════════════════════════ */}
       <section className="py-24 bg-slate-50 border-t border-b border-slate-200/60" aria-labelledby="news-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 id="news-heading" className="text-3xl md:text-[2.75rem] font-extrabold text-slate-900 mb-5 tracking-tight leading-tight">
-              {isHe ? 'חדשות ואבני דרך בפעילות חברת BMT' : 'Latest News & Corporate Milestones'}
+              {_('home.newsTitle')}
             </h2>
             <p className="text-slate-500 text-lg max-w-2xl mx-auto font-light leading-relaxed">
-              {isHe 
-                ? 'סקירת הפטנטים האחרונים, אישורי משרד הבריאות והאינטגרציות הדיגיטליות של BMT לשמירה על בריאות הציבור.' 
-                : 'Oversight on recent global patents, Ministry of Health clearances, and digital health integrations.'}
+              {_('home.newsSub')}
             </p>
             <div className="w-16 h-1 bg-burgundy mx-auto mt-6 rounded-full" aria-hidden="true" />
           </div>
@@ -562,22 +560,20 @@ export default function HomePage({ onOpenRfq }) {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent" />
                   <div className="absolute top-4 right-4 rtl:right-4 rtl:left-auto left-auto bg-blue-600/90 backdrop-blur-md text-white text-[10px] font-black px-3.5 py-1.5 rounded-full uppercase tracking-widest border border-white/20 shadow-lg">
-                    {isHe ? 'פטנט עולמי רשום' : 'Global Patent'}
+                    {_('home.news1Badge')}
                   </div>
                   <div className="absolute bottom-4 right-4 rtl:right-4 rtl:left-auto left-auto text-white text-xs font-bold flex items-center gap-1.5">
                     <Calendar className="w-3.5 h-3.5 text-sky-400" />
-                    May 2026
+                    {_('home.news1Date')}
                   </div>
                 </div>
 
                 <div className="p-7">
                   <h3 className="text-xl font-extrabold text-slate-900 mb-3 leading-snug group-hover:text-blue-600 transition-colors">
-                    {isHe ? 'אישור פטנט בינלאומי נוסף למערכת no step' : 'New Patent Granted for "no step" Platform'}
+                    {_('home.news1Title')}
                   </h3>
                   <p className="text-slate-500 text-sm leading-relaxed font-normal">
-                    {isHe 
-                      ? 'אישור פטנט רשמי נוסף באירופה וארה"ב המגן על פלטפורמת האבחון המהירה המקטינה זיהומים ביולוגיים באבחון מהיר בנקודת הטיפול.' 
-                      : 'Official patent approval secured in the US and Europe protecting our self-contained rapid testing platform designed to reduce biohazard exposure at point-of-care.'}
+                    {_('home.news1Desc')}
                   </p>
                 </div>
               </div>
@@ -587,8 +583,8 @@ export default function HomePage({ onOpenRfq }) {
                   onClick={() => navigate('/tech')}
                   className="w-full inline-flex items-center justify-center gap-2 text-blue-600 font-extrabold text-xs uppercase tracking-wider bg-blue-50 hover:bg-blue-600 hover:text-white py-3 rounded-2xl transition-all duration-300 btn-bouncy"
                 >
-                  <span>{isHe ? 'לפרטי הפטנט והטכנולוגיה' : 'View Patent Specs'}</span>
-                  <ArrowLeft className="w-4 h-4 rtl:rotate-0 rotate-180" />
+                  <span>{_('home.news1Btn')}</span>
+                  {isRtl ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
                 </button>
               </div>
             </article>
@@ -600,33 +596,31 @@ export default function HomePage({ onOpenRfq }) {
                   <div className="bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-2xl border border-white/30 flex items-center gap-4 max-w-xs group-hover:scale-105 transition-transform duration-500">
                     <img 
                       src={getAssetPath('moh-logo.png')} 
-                      alt="משרד הבריאות אמ-ר" 
+                      alt="Ministry of Health" 
                       className="h-14 w-auto object-contain shrink-0"
                       onError={(e) => { e.target.style.display = 'none'; }}
                     />
                     <div className="text-start">
-                      <div className="text-xs font-black text-slate-900 leading-tight">משרד הבריאות</div>
-                      <div className="text-[10px] font-extrabold text-emerald-700 uppercase tracking-wider mt-0.5">אישורי אמ"ר רשמיים</div>
+                      <div className="text-xs font-black text-slate-900 leading-tight">{_('home.partnerMoh')}</div>
+                      <div className="text-[10px] font-extrabold text-emerald-700 uppercase tracking-wider mt-0.5">{_('home.news2Badge')}</div>
                     </div>
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent pointer-events-none" />
                   <div className="absolute top-4 right-4 rtl:right-4 rtl:left-auto left-auto bg-emerald-600/90 backdrop-blur-md text-white text-[10px] font-black px-3.5 py-1.5 rounded-full uppercase tracking-widest border border-white/20 shadow-lg">
-                    {isHe ? 'אישור אמ"ר רשמי' : 'MOH Clearance'}
+                    {_('home.news2Badge')}
                   </div>
                   <div className="absolute bottom-4 right-4 rtl:right-4 rtl:left-auto left-auto text-white text-xs font-bold flex items-center gap-1.5">
                     <Calendar className="w-3.5 h-3.5 text-emerald-400" />
-                    April 2026
+                    {_('home.news2Date')}
                   </div>
                 </div>
 
                 <div className="p-7">
                   <h3 className="text-xl font-extrabold text-slate-900 mb-3 leading-snug group-hover:text-emerald-600 transition-colors">
-                    {isHe ? 'אישורי אמ"ר (משרד הבריאות) לבדיקות משולבות' : 'Ministry of Health (MOH) Clearances'}
+                    {_('home.news2Title')}
                   </h3>
                   <p className="text-slate-500 text-sm leading-relaxed font-normal">
-                    {isHe 
-                      ? 'התרחבות משמעותית בסל הבדיקות המאושרות לשיווק: קבלת אישורי משרד הבריאות הישראלי לסדרה נרחבת של בדיקות ביתיות.' 
-                      : 'Significant expansion of our certified portfolio: standard regulatory approval secured from the Israeli MOH for an extensive suite of home testing kits.'}
+                    {_('home.news2Desc')}
                   </p>
                 </div>
               </div>
@@ -636,8 +630,8 @@ export default function HomePage({ onOpenRfq }) {
                   onClick={() => navigate('/catalog/b2b')}
                   className="w-full inline-flex items-center justify-center gap-2 text-emerald-700 font-extrabold text-xs uppercase tracking-wider bg-emerald-50 hover:bg-emerald-600 hover:text-white py-3 rounded-2xl transition-all duration-300 btn-bouncy"
                 >
-                  <span>{isHe ? 'לקטלוג המאושר' : 'View Certified Tests'}</span>
-                  <ArrowLeft className="w-4 h-4 rtl:rotate-0 rotate-180" />
+                  <span>{_('home.news2Btn')}</span>
+                  {isRtl ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
                 </button>
               </div>
             </article>
@@ -654,22 +648,20 @@ export default function HomePage({ onOpenRfq }) {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent" />
                   <div className="absolute top-4 right-4 rtl:right-4 rtl:left-auto left-auto bg-burgundy/90 backdrop-blur-md text-white text-[10px] font-black px-3.5 py-1.5 rounded-full uppercase tracking-widest border border-white/20 shadow-lg">
-                    {isHe ? 'Digital Health AI' : 'EMR Integration'}
+                    {_('home.news3Badge')}
                   </div>
                   <div className="absolute bottom-4 right-4 rtl:right-4 rtl:left-auto left-auto text-white text-xs font-bold flex items-center gap-1.5">
                     <Calendar className="w-3.5 h-3.5 text-sky-400" />
-                    March 2026
+                    {_('home.news3Date')}
                   </div>
                 </div>
 
                 <div className="p-7">
                   <h3 className="text-xl font-extrabold text-slate-900 mb-3 leading-snug group-hover:text-burgundy transition-colors">
-                    {isHe ? 'שילוב פתרונות FIT דיגיטליים במרכזים רפואיים' : 'New Digital Health Clinic Integrations'}
+                    {_('home.news3Title')}
                   </h3>
                   <p className="text-slate-500 text-sm leading-relaxed font-normal">
-                    {isHe 
-                      ? 'השלמת פיילוט אינטגרציה רחב עם קופות החולים. בדיקות ה-FIT הביתיות מתחברות כעת ישירות ובצורה מאובטחת לאפליקציית התיק הרפואי.' 
-                      : 'Successful HMO pilot completed: non-invasive colon screening kits now transmit direct, secure AI-verified results to the medical record systems.'}
+                    {_('home.news3Desc')}
                   </p>
                 </div>
               </div>
@@ -679,8 +671,8 @@ export default function HomePage({ onOpenRfq }) {
                   onClick={() => navigate('/tech')}
                   className="w-full inline-flex items-center justify-center gap-2 text-burgundy font-extrabold text-xs uppercase tracking-wider bg-burgundy/5 hover:bg-burgundy hover:text-white py-3 rounded-2xl transition-all duration-300 btn-bouncy"
                 >
-                  <span>{isHe ? 'לקריאה על אינטגרציית AI' : 'Explore Digital Health'}</span>
-                  <ArrowLeft className="w-4 h-4 rtl:rotate-0 rotate-180" />
+                  <span>{_('home.news3Btn')}</span>
+                  {isRtl ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
                 </button>
               </div>
             </article>
@@ -689,21 +681,21 @@ export default function HomePage({ onOpenRfq }) {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          STRATEGIC PARTNERSHIPS MARQUEE (BOTTOM POSITION)
+          STRATEGIC PARTNERSHIPS MARQUEE
           ═══════════════════════════════════════════════════════ */}
       <section 
         className="bg-slate-50/70 py-16 border-b border-slate-200/80 overflow-hidden relative" 
-        aria-label={isHe ? 'שותפים רגולטוריים ועסקיים' : 'Strategic Partners & Regulators'}
+        aria-label="Strategic Partners"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 text-center">
           <span className="text-xs font-black uppercase tracking-widest text-blue-700 bg-blue-50 border border-blue-100 px-4 py-1.5 rounded-full inline-block mb-2">
-            {isHe ? 'פיקוח רגולטורי ושותפויות קליניות מובילות' : 'Regulatory Oversight & Strategic Health Ecosystems'}
+            {_('home.partnersBadge')}
           </span>
           <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight mt-1 mb-2">
-            {isHe ? 'שותפויות אסטרטגיות וגופי בריאות מובילים' : 'Strategic Partnerships & Health Leaders'}
+            {_('home.partnersTitle')}
           </h2>
           <p className="text-slate-500 text-sm font-medium max-w-xl mx-auto">
-            {isHe ? 'חברת BMT Diagnostics פועלת בשיתוף פעולה הדוק עם קופות החולים, רשתות הפארם המובילות וגופי הבריאות בישראל' : 'Working closely with leading HMOs, retail pharmacy chains and Israeli medical centers'}
+            {_('home.partnersSub')}
           </p>
         </div>
 
@@ -726,9 +718,7 @@ export default function HomePage({ onOpenRfq }) {
                       className="w-full h-full object-contain transition-all duration-300 filter drop-shadow-sm"
                       onError={(e) => { e.target.style.display = 'none'; }}
                     />
-                  ) : (
-                    logo.svg
-                  )}
+                  ) : null}
                 </div>
                 <div className="text-start">
                   <div className="text-base md:text-lg font-black text-slate-900 tracking-tight leading-snug">{logo.name}</div>
@@ -749,9 +739,7 @@ export default function HomePage({ onOpenRfq }) {
                       className="w-full h-full object-contain transition-all duration-300 filter drop-shadow-sm"
                       onError={(e) => { e.target.style.display = 'none'; }}
                     />
-                  ) : (
-                    logo.svg
-                  )}
+                  ) : null}
                 </div>
                 <div className="text-start">
                   <div className="text-base md:text-lg font-black text-slate-900 tracking-tight leading-snug">{logo.name}</div>
@@ -782,7 +770,7 @@ export default function HomePage({ onOpenRfq }) {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent" />
                   <div className="absolute bottom-4 right-4 rtl:right-4 rtl:left-auto bg-blue-600 text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg">
-                    {isHe ? 'תשתיות ייצור ופיתוח גלובליות' : 'Global R&D Facilities'}
+                    {_('home.oem1Badge')}
                   </div>
                 </div>
                 <div className="p-8 md:p-10">
@@ -798,8 +786,8 @@ export default function HomePage({ onOpenRfq }) {
                   onClick={() => navigate('/about')}
                   className="inline-flex items-center gap-2 text-blue-600 font-extrabold hover:text-blue-700 bg-blue-50 px-6 py-3 rounded-2xl border border-blue-100 transition-all btn-bouncy"
                 >
-                  {isHe ? 'קרא עוד על יכולות הייצור' : 'Learn More'}
-                  <ArrowRight className="w-4 h-4 rtl:rotate-180" aria-hidden="true" />
+                  {_('home.oem1Btn')}
+                  {isRtl ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
                 </button>
               </div>
             </div>
@@ -816,7 +804,7 @@ export default function HomePage({ onOpenRfq }) {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent" />
                   <div className="absolute bottom-4 right-4 rtl:right-4 rtl:left-auto bg-burgundy text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg">
-                    {isHe ? 'שותפויות OEM ופיתוח מותאם' : 'Custom OEM Partnerships'}
+                    {_('home.oem2Badge')}
                   </div>
                 </div>
                 <div className="p-8 md:p-10">
@@ -831,7 +819,7 @@ export default function HomePage({ onOpenRfq }) {
                   className="inline-flex items-center gap-2 text-burgundy font-extrabold hover:brightness-110 bg-burgundy/5 px-6 py-3 rounded-2xl border border-burgundy/10 transition-all btn-bouncy"
                 >
                   {_('nav.quote')}
-                  <ArrowRight className="w-4 h-4 rtl:rotate-180" aria-hidden="true" />
+                  {isRtl ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
                 </button>
               </div>
             </div>

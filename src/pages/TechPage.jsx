@@ -216,22 +216,11 @@ export default function TechPage() {
           <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md px-6 py-3 rounded-full border border-white/20 shadow-xl mb-6">
             <span className="w-3 h-3 rounded-full bg-sky-400 animate-ping"></span>
             <span className="text-xl md:text-2xl font-black text-white tracking-widest font-sans">
-              {isHe ? 'מעבדה בזמן • LabOnTime' : 'LabOnTime'}
+              LabOnTime
             </span>
           </div>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-8 tracking-tight leading-tight flex items-center justify-center flex-wrap gap-2">
-            {isHe ? (
-              <span className="inline-flex items-center gap-2" dir="rtl">
-                <span>מהפכת מעבדה בזמן</span>
-                <span className="bg-gradient-to-r from-white via-sky-100 to-sky-300 bg-clip-text text-transparent font-sans inline-block" dir="ltr">(LabOnTime)</span>
-              </span>
-            ) : (
-              <span className="inline-flex items-center gap-2" dir="ltr">
-                <span>The </span>
-                <span className="bg-gradient-to-r from-white via-sky-100 to-sky-300 bg-clip-text text-transparent font-sans inline-block">LabOnTime</span>
-                <span>Revolution</span>
-              </span>
-            )}
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-8 tracking-tight leading-tight">
+            {_('tech.title')}
           </h1>
           <div className="text-base sm:text-lg md:text-xl text-slate-100 font-light leading-relaxed max-w-4xl mx-auto opacity-95 space-y-4 text-start sm:text-center">
             {desc.split('\n\n').map((paragraph, pIdx) => (

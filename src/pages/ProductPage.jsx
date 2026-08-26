@@ -22,9 +22,9 @@ export default function ProductPage({ onOpenRfq }) {
   if (!p) {
     return (
       <div className="py-24 text-center text-slate-500">
-        <h2 className="text-3xl font-extrabold mb-4">{isHe ? 'המוצר לא נמצא' : 'Product Not Found'}</h2>
+        <h2 className="text-3xl font-extrabold mb-4">{_('catalog.noItemsFound')}</h2>
         <button onClick={() => navigate('/')} className="bg-blue-600 text-white px-6 py-2.5 rounded-full font-bold">
-          {isHe ? 'חזרה לעמוד הבית' : 'Go to Homepage'}
+          {_('nav.home')}
         </button>
       </div>
     );

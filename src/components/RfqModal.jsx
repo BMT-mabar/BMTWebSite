@@ -3,22 +3,17 @@ import { X, CheckCircle, AlertTriangle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 /**
- * RfqModal — Uses FormSubmit.co (zero account/config required).
+ * RfqModal — Integrates directly with Google Apps Script & Google Sheets Web App.
  *
  * HOW IT WORKS:
- *  - Submits to Formspree, routing leads cleanly to your MedTech inbox.
- * 
- * CONFIGURATION:
- *  1. Create a free form at https://formspree.io
- *  2. Paste your active Formspree endpoint URL into the constant below.
+ *  - Submits to Google Apps Script Web App.
+ *  - Appends submission to Google Sheets and sends instant email to info@bmtdx.com and roey@bmtdx.com.
  */
 
-// GOOGLE APPS SCRIPT & GOOGLE SHEETS LIVE INTEGRATION:
-// Appends leads to Google Sheets spreadsheet and triggers instant email to info@bmtdx.com and roey@bmtdx.com
 const GOOGLE_SCRIPT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxymJ-tYHSLlnFcTMCsLOvUt6nCtIuV91zjtGN_qsYI2zU79iEIKftFaTRRTdw-Oaspag/exec';
 
 export default function RfqModal({ isOpen, onClose }) {
-  const { lang, _ } = useLanguage();
+  const { lang, _, isRtl } = useLanguage();
   const [success, setSuccess]       = useState(false);
   const [isSubmitting, setSubmitting] = useState(false);
   const [errorMsg, setErrorMsg]     = useState(null);
@@ -99,7 +94,7 @@ export default function RfqModal({ isOpen, onClose }) {
       setTimeout(() => { setSuccess(false); onClose(); }, 4000);
     } catch (err) {
       console.error('Google Sheets submission error:', err);
-      setErrorMsg(lang === 'he' ? 'אירעה שגיאה בעת שליחת הטופס. אנא פנו ישירות ל-info@bmtdx.com' : 'An error occurred while submitting the form. Please contact info@bmtdx.com');
+      setErrorMsg(_('rfq.errorMsg') || 'An error occurred while submitting the form. Please contact info@bmtdx.com');
     } finally {
       setSubmitting(false);
     }
@@ -117,6 +112,7 @@ export default function RfqModal({ isOpen, onClose }) {
       aria-modal="true"
       aria-labelledby="modal-title"
       aria-describedby="modal-desc"
+      dir={isRtl ? 'rtl' : 'ltr'}
     >
       {/* Backdrop */}
       <div
@@ -142,15 +138,13 @@ export default function RfqModal({ isOpen, onClose }) {
               {_('rfq.title')}
             </h2>
             <p id="modal-desc" className="text-slate-400 text-sm mt-1 font-light">
-              {lang === 'he'
-                ? 'מלאו את הפרטים ונחזור אליכם בהקדם האפשרי'
-                : 'Fill in the details and we will get back to you shortly'}
+              {_('rfq.sub')}
             </p>
           </div>
           <button
             onClick={onClose}
             className="text-slate-400 hover:text-slate-700 bg-slate-50 border border-slate-200 p-2.5 rounded-full transition focus:outline-none focus:ring-2 focus:ring-blue-500 shrink-0 mt-1"
-            aria-label={lang === 'he' ? 'סגור חלון' : 'Close dialog'}
+            aria-label={_('rfq.cancel')}
           >
             <X className="w-5 h-5" aria-hidden="true" />
           </button>
@@ -185,7 +179,7 @@ export default function RfqModal({ isOpen, onClose }) {
                 {/* Full Name */}
                 <div>
                   <label htmlFor="rfq-name" className={labelCls}>
-                    {_('rfq.name')} <span className="text-burgundy" aria-hidden="true">*</span>
+                    {_('rfq.name')}
                   </label>
                   <input
                     id="rfq-name" required type="text" name="name"
@@ -197,7 +191,7 @@ export default function RfqModal({ isOpen, onClose }) {
                 {/* Role */}
                 <div>
                   <label htmlFor="rfq-role" className={labelCls}>
-                    {_('rfq.role')} <span className="text-burgundy" aria-hidden="true">*</span>
+                    {_('rfq.role')}
                   </label>
                   <select
                     id="rfq-role" required name="role"
@@ -216,7 +210,7 @@ export default function RfqModal({ isOpen, onClose }) {
                 {/* Clinic / Company */}
                 <div className="md:col-span-2">
                   <label htmlFor="rfq-clinic" className={labelCls}>
-                    {_('rfq.clinic')} <span className="text-burgundy" aria-hidden="true">*</span>
+                    {_('rfq.clinic')}
                   </label>
                   <input
                     id="rfq-clinic" required type="text" name="organization"
@@ -228,7 +222,7 @@ export default function RfqModal({ isOpen, onClose }) {
                 {/* Email */}
                 <div>
                   <label htmlFor="rfq-email" className={labelCls}>
-                    {_('rfq.email')} <span className="text-burgundy" aria-hidden="true">*</span>
+                    {_('rfq.email')}
                   </label>
                   <input
                     id="rfq-email" required type="email" name="email"
@@ -240,7 +234,7 @@ export default function RfqModal({ isOpen, onClose }) {
                 {/* Phone */}
                 <div>
                   <label htmlFor="rfq-phone" className={labelCls}>
-                    {_('rfq.phone')} <span className="text-burgundy" aria-hidden="true">*</span>
+                    {_('rfq.phone')}
                   </label>
                   <input
                     id="rfq-phone" required type="tel" name="phone"
@@ -256,7 +250,7 @@ export default function RfqModal({ isOpen, onClose }) {
                   </label>
                   <textarea
                     id="rfq-message" name="message" rows={4}
-                    placeholder={lang === 'he' ? 'פרטו את בקשתכם (פרמטרים, כמויות ועוד)...' : 'Detail your request (parameters, quantities, etc.)...'}
+                    placeholder={_('rfq.messagePh')}
                     className={inputCls + ' resize-y'}
                   />
                 </div>
@@ -279,7 +273,7 @@ export default function RfqModal({ isOpen, onClose }) {
                   {isSubmitting ? (
                     <>
                       <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" aria-hidden="true" />
-                      <span>{lang === 'he' ? 'שולח...' : 'Sending...'}</span>
+                      <span>{_('rfq.sending')}</span>
                     </>
                   ) : (
                     _('rfq.submit')

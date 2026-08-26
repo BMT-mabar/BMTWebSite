@@ -6,10 +6,60 @@ import { getAssetPath } from '../utils/imagePath';
 
 export default function ClinicalPage() {
   const { lang, _ } = useLanguage();
-  const isHe = lang === 'he';
 
   const title = _('clinical.title');
   const desc = _('clinical.desc');
+
+  const sectionHeaders = {
+    drKidsTitle: {
+      he: 'מדריכים ומאמרי הדרכה מאת ד״ר אפי',
+      en: 'Clinical Guides & Articles by Dr. Effi',
+      de: 'Klinische Leitfäden & Artikel von Dr. Effi',
+      fr: 'Guides Cliniques et Articles du Dr. Effi',
+      ru: 'Клинические руководства и статьи д-ра Эффи',
+      ar: 'أدلة ومقالات إرشادية سريرية من د. إيفي'
+    },
+    drKidsSub: {
+      he: 'שיתוף פעולה מקצועי בין חברת BMT Diagnostics לד״ר אפי להנגשת הנחיות רפואיות ברורות ופשוטות להורים ולמטופלים.',
+      en: 'Educational collaboration with Dr. Effi providing clear clinical advice for parents and healthcare providers.',
+      de: 'Klinische Kooperation mit Dr. Effi für verständliche medizinische Anleitungen für Eltern und Patienten.',
+      fr: 'Collaboration éducative avec le Dr. Effi pour des conseils cliniques clairs destinés aux familles.',
+      ru: 'Клиническое сотрудничество с д-ром Эффи по доступным медицинским руководствам для пациентов.',
+      ar: 'تعاون مهني بين شركة BMT Diagnostics ود. إيفي لتقديم إرشادات طبية واضحة ومبسطة للمرضى.'
+    },
+    strepTitle: {
+      he: 'דלקות גרון, סטרפטוקוקוס ואבחון מהיר (Strep A)',
+      en: 'Throat Inflammation & Strep A Rapid Diagnostics',
+      de: 'Rachenentzündungen & Strep A Schnelldiagnostik',
+      fr: 'Inflammations Pharyngées & Diagnostic Rapide Strep A',
+      ru: 'Воспаления горла и экспресс-диагностика Strep A',
+      ar: 'التهابات الحلق، المكورات العقدية والتشخيص السريع (Strep A)'
+    },
+    strepSub: {
+      he: 'מדריכים רפואיים מקצועיים מקופות החולים ובתי החולים המובילים בישראל',
+      en: 'Clinical guides and articles from Israeli healthcare funds and pediatric medical centers',
+      de: 'Medizinische Leitfäden führender Krankenkassen und Kinderkliniken',
+      fr: 'Guides cliniques des principaux centres hospitaliers pédiatriques et caisses de santé',
+      ru: 'Клинические руководства больничных касс и ведущих детских медицинских центров',
+      ar: 'أدلة إرشادية طبية من صناديق المرضى والمستشفيات الرائدة'
+    },
+    gastroTitle: {
+      he: 'סקר סרטן המעי הגס (FOB) ומחלות דרכי העיכול (H. Pylori)',
+      en: 'Colorectal Cancer Screening & Gastroenterology',
+      de: 'Darmkrebs-Früherkennung (FOB) & Gastroenterologie (H. Pylori)',
+      fr: 'Dépistage Cancer Colorectal (FOB) & Gastroentérologie (H. Pylori)',
+      ru: 'Скрининг рака кишечника (FOB) и гастроэнтерология (H. Pylori)',
+      ar: 'مسح سرطان القولون (FOB) وأمراض الجهاز الهضمي (H. Pylori)'
+    },
+    gastroSub: {
+      he: 'מידע על חשיבות הגילוי המוקדם והנגשת הבדיקות בקרב הציבור הרחב',
+      en: 'Early detection guidelines from national cancer and gastrointestinal health associations',
+      de: 'Leitlinien zur Früherkennung nationaler Krebs- und Gastroenterologiegesellschaften',
+      fr: 'Recommandations pour le dépistage précoce des associations de lutte contre le cancer',
+      ru: 'Рекомендации по ранней диагностике от онкологических и гастроэнтерологических ассоциаций',
+      ar: 'إرشادات الكشف المبكر الصادرة عن جمعيات مكافحة السرطان وصحة الجهاز الهضمي'
+    }
+  };
 
   // Dr. Kids Articles collection with real screenshots from site
   const drKidsArticles = [
@@ -84,7 +134,14 @@ export default function ClinicalPage() {
   // Additional Medical Knowledge & Reference Articles with real website screenshots
   const strepArticles = [
     {
-      source: isHe ? 'מרכז שניידר לרפואת ילדים' : (lang === 'ar' ? 'مركز شنايدر الطبي للأطفال' : 'Schneider Children\'s Medical Center'),
+      source: {
+        he: 'מרכז שניידר לרפואת ילדים',
+        en: 'Schneider Children\'s Medical Center',
+        de: 'Schneider Children\'s Medical Center',
+        fr: 'Centre Médical Pédiatrique Schneider',
+        ru: 'Детский медцентр Шнайдер',
+        ar: 'مركز شنايدر الطبي للأطفال'
+      },
       title: {
         he: 'דלקות גרון וסטרפטוקוקוס בקרב ילדים',
         en: 'Throat Infections & Streptococcal Illness in Children',
@@ -105,7 +162,14 @@ export default function ClinicalPage() {
       img: '/schneider_ss.png'
     },
     {
-      source: isHe ? 'קופת חולים כללית' : (lang === 'ar' ? 'خدمات صحة كلاليت' : 'Clalit Health Services'),
+      source: {
+        he: 'קופת חולים כללית',
+        en: 'Clalit Health Services',
+        de: 'Clalit Gesundheitsdienste',
+        fr: 'Services de Santé Clalit',
+        ru: 'Больничная касса Клалит',
+        ar: 'خدمات صحة كلاليت'
+      },
       title: {
         he: 'דלקת גרון מקיף - ויראלי או חיידקי?',
         en: 'Comprehensive Sore Throat Guide - Viral vs Bacterial',
@@ -126,7 +190,14 @@ export default function ClinicalPage() {
       img: '/clalit_strep_ss.png'
     },
     {
-      source: isHe ? 'קופת חולים מאוחדת' : (lang === 'ar' ? 'صندوق المرضى مئوحيدت' : 'Meuhedet Health Services'),
+      source: {
+        he: 'קופת חולים מאוחדת',
+        en: 'Meuhedet Health Services',
+        de: 'Meuhedet Krankenkasse',
+        fr: 'Caisse de Santé Meuhedet',
+        ru: 'Больничная касса Меухедет',
+        ar: 'صندوق المرضى مئوحيدت'
+      },
       title: {
         he: 'על וירוסים, סטרפטוקוקים וחיות אחרות',
         en: 'On Viruses, Streptococci, and Diagnostics',
@@ -147,7 +218,14 @@ export default function ClinicalPage() {
       img: '/meuhedet_strep_ss.png'
     },
     {
-      source: isHe ? 'קופת חולים לאומית' : (lang === 'ar' ? 'صندوق المرضى لئوميت' : 'Leumit Health Services'),
+      source: {
+        he: 'קופת חולים לאומית',
+        en: 'Leumit Health Services',
+        de: 'Leumit Gesundheitsdienste',
+        fr: 'Services de Santé Leumit',
+        ru: 'Больничная касса Леумит',
+        ar: 'صندوق المرضى لئوميت'
+      },
       title: {
         he: 'דלקת גרון סטרפטוקוקלית - Strep Throat',
         en: 'Streptococcal Pharyngitis - Strep Throat',
@@ -168,7 +246,14 @@ export default function ClinicalPage() {
       img: '/leumit_strep_ss.png'
     },
     {
-      source: isHe ? 'קופת חולים מכבי' : (lang === 'ar' ? 'خدمات صحة مكابي' : 'Maccabi Healthcare'),
+      source: {
+        he: 'קופת חולים מכבי',
+        en: 'Maccabi Healthcare',
+        de: 'Maccabi Healthcare',
+        fr: 'Santé Maccabi',
+        ru: 'Медицинские услуги Маккаби',
+        ar: 'خدمات صحة مكابي'
+      },
       title: {
         he: 'זיהומי סטרפטוקוקוס',
         en: 'Streptococcal Infections Guide',
@@ -189,7 +274,14 @@ export default function ClinicalPage() {
       img: '/maccabi_strep_ss.png'
     },
     {
-      source: 'Infomed',
+      source: {
+        he: 'Infomed',
+        en: 'Infomed',
+        de: 'Infomed',
+        fr: 'Infomed',
+        ru: 'Infomed',
+        ar: 'Infomed'
+      },
       title: {
         he: 'בדיקת משטח גרון',
         en: 'Throat Culture & Rapid Swab Test',
@@ -210,7 +302,14 @@ export default function ClinicalPage() {
       img: '/infomed_strep_ss.png'
     },
     {
-      source: 'Ynet',
+      source: {
+        he: 'Ynet בריאות',
+        en: 'Ynet Health',
+        de: 'Ynet Gesundheit',
+        fr: 'Ynet Santé',
+        ru: 'Ynet Здоровье',
+        ar: 'Ynet صحة'
+      },
       title: {
         he: 'כתבת בריאות: עליה בתחלואת סטרפטוקוק',
         en: 'Health Report: Streptococcal Infection Trends',
@@ -234,7 +333,14 @@ export default function ClinicalPage() {
 
   const fobArticles = [
     {
-      source: isHe ? 'האגודה למלחמה בסרטן' : (lang === 'ar' ? 'جمعية مكافحة السرطان' : 'Israel Cancer Association'),
+      source: {
+        he: 'האגודה למלחמה בסרטן',
+        en: 'Israel Cancer Association',
+        de: 'Israel Cancer Association',
+        fr: 'Association de Lutte Contre le Cancer',
+        ru: 'Ассоциация по борьбе с раком',
+        ar: 'جمعية مكافحة السرطان'
+      },
       title: {
         he: 'גילוי מוקדם של סרטן המעי הגס',
         en: 'Early Detection of Colorectal Cancer',
@@ -258,7 +364,14 @@ export default function ClinicalPage() {
 
   const hpyloriArticles = [
     {
-      source: isHe ? 'קופת חולים מכבי' : (lang === 'ar' ? 'خدمات صحة مكابي' : 'Maccabi Healthcare Services'),
+      source: {
+        he: 'קופת חולים מכבי',
+        en: 'Maccabi Healthcare Services',
+        de: 'Maccabi Healthcare Services',
+        fr: 'Services de Santé Maccabi',
+        ru: 'Медицинские услуги Маккаби',
+        ar: 'خدمات صحة مكابي'
+      },
       title: {
         he: 'הליקובקטר פילורי: תסמינים, אבחון וטיפול',
         en: 'H. Pylori: Symptoms, Diagnostics & Treatment',
@@ -334,13 +447,11 @@ export default function ClinicalPage() {
                 <span>DR. KIDS • ד״ר אפי</span>
               </div>
               <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
-                {isHe ? 'מדריכים ומאמרי הדרכה מאת ד״ר אפי' : 'Clinical Guides & Articles by Dr. Effi'}
+                {sectionHeaders.drKidsTitle[lang] || sectionHeaders.drKidsTitle.en || sectionHeaders.drKidsTitle.he}
               </h2>
             </div>
             <p className="text-slate-500 text-sm md:text-base font-light max-w-xl">
-              {isHe 
-                ? 'שיתוף פעולה מקצועי בין חברת BMT Diagnostics לד״ר אפי להנגשת הנחיות רפואיות ברורות ופשוטות להורים ולמטופלים.'
-                : 'Educational collaboration with Dr. Effi providing clear clinical advice for parents and healthcare providers.'}
+              {sectionHeaders.drKidsSub[lang] || sectionHeaders.drKidsSub.en || sectionHeaders.drKidsSub.he}
             </p>
           </div>
 
@@ -392,10 +503,10 @@ export default function ClinicalPage() {
         <section>
           <div className="border-b border-slate-200 pb-6 mb-12">
             <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight mb-2">
-              {isHe ? 'דלקות גרון, סטרפטוקוקוס ואבחון מהיר (Strep A)' : 'Throat Inflammation & Strep A Rapid Diagnostics'}
+              {sectionHeaders.strepTitle[lang] || sectionHeaders.strepTitle.en || sectionHeaders.strepTitle.he}
             </h2>
             <p className="text-slate-500 text-sm md:text-base font-light">
-              {isHe ? 'מדריכים רפואיים מקצועיים מקופות החולים ובתי החולים המובילים בישראל' : 'Clinical guides and articles from Israeli healthcare funds and pediatric medical centers'}
+              {sectionHeaders.strepSub[lang] || sectionHeaders.strepSub.en || sectionHeaders.strepSub.he}
             </p>
           </div>
 
@@ -403,6 +514,7 @@ export default function ClinicalPage() {
             {strepArticles.map((art, idx) => {
               const artTitle = typeof art.title === 'object' ? (art.title[lang] || art.title.en || art.title.he) : art.title;
               const artDesc = typeof art.desc === 'object' ? (art.desc[lang] || art.desc.en || art.desc.he) : art.desc;
+              const artSource = typeof art.source === 'object' ? (art.source[lang] || art.source.en || art.source.he) : art.source;
               return (
                 <a
                   key={`strep-${idx}`}
@@ -414,7 +526,7 @@ export default function ClinicalPage() {
                   <div>
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-[10px] font-black uppercase tracking-wider bg-blue-50 text-blue-700 px-3 py-1 rounded-full border border-blue-100/60">
-                        {art.source}
+                        {artSource}
                       </span>
                       <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors" />
                     </div>
@@ -439,10 +551,10 @@ export default function ClinicalPage() {
         <section>
           <div className="border-b border-slate-200 pb-6 mb-12">
             <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight mb-2">
-              {isHe ? 'סקר סרטן המעי הגס (FOB) ומחלות דרכי העיכול (H. Pylori)' : 'Colorectal Cancer Screening & Gastroenterology'}
+              {sectionHeaders.gastroTitle[lang] || sectionHeaders.gastroTitle.en || sectionHeaders.gastroTitle.he}
             </h2>
             <p className="text-slate-500 text-sm md:text-base font-light">
-              {isHe ? 'מידע על חשיבות הגילוי המוקדם והנגשת הבדיקות בקרב הציבור הרחב' : 'Early detection guidelines from national cancer and gastrointestinal health associations'}
+              {sectionHeaders.gastroSub[lang] || sectionHeaders.gastroSub.en || sectionHeaders.gastroSub.he}
             </p>
           </div>
 
@@ -450,6 +562,7 @@ export default function ClinicalPage() {
             {[...fobArticles, ...hpyloriArticles].map((art, idx) => {
               const artTitle = typeof art.title === 'object' ? (art.title[lang] || art.title.en || art.title.he) : art.title;
               const artDesc = typeof art.desc === 'object' ? (art.desc[lang] || art.desc.en || art.desc.he) : art.desc;
+              const artSource = typeof art.source === 'object' ? (art.source[lang] || art.source.en || art.source.he) : art.source;
               return (
                 <a
                   key={`gastro-${idx}`}
@@ -461,7 +574,7 @@ export default function ClinicalPage() {
                   <div className="flex flex-col justify-between flex-grow">
                     <div>
                       <span className="text-xs font-black uppercase tracking-wider bg-emerald-50 text-emerald-800 px-3.5 py-1.5 rounded-full border border-emerald-100 inline-block mb-4">
-                        {art.source}
+                        {artSource}
                       </span>
                       <h3 className="text-xl font-extrabold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors leading-snug">
                         {artTitle}
