@@ -22,7 +22,7 @@ const translations = {
     },
     hero: { 
       title: 'מעבדה בזמן<br/><span style="color:#38BDF8;font-weight:900;">בשביל בריאות הציבור</span>', 
-      sub: 'חברת BMT Diagnostics הינה חברה ישראלית המפתחת, מייצרת ומשווקת למעלה מ-200 סוגי בדיקות מהירות לשימוש רחב, תוך עמידה בתקני ISO קפדניים.', 
+      sub: 'חברת BMT Diagnostics הינה חברה ישראלית בינלאומית המפתחת, מייצרת ומשווקת למעלה מ-200 סוגי בדיקות מהירות לשימוש רחב, תוך עמידה בתקני ISO קפדניים.', 
       btnB2b: 'לקטלוג לשימוש מקצועי', 
       btnB2c: 'למוצרי פארם' 
     },
@@ -38,10 +38,14 @@ const translations = {
     },
     trust: { 
       pat: 'פטנטים בינלאומיים רשומים',
+      patTitle: 'צפייה בתעודת פטנט רשום (תמונה)',
+      patAria: 'תעודת פטנט רשום - פתיחת תמונה',
       iso1: 'ISO 13485:2016 Certified', 
       iso1PdfTitle: 'צפייה בתעודת ISO 13485:2016 (PDF)',
       iso1PdfAria: 'תעודת ISO 13485:2016 - פתיחת קובץ PDF',
       iso2: 'ISO 27001 Security', 
+      iso2PdfTitle: 'צפייה בתעודת ISO 27001 (PDF)',
+      iso2PdfAria: 'תעודת ISO 27001 - פתיחת קובץ PDF',
       ce: 'ספק חיוני', 
       moh: 'אישורי משרד הבריאות (אמ"ר)' 
     },
@@ -416,7 +420,7 @@ const translations = {
     },
     hero: { 
       title: 'Lab In Real Time<br/><span style="color:#38BDF8;font-weight:900;">For Public Health</span>', 
-      sub: 'BMT Diagnostics is an Israeli MedTech company developing, manufacturing, and marketing over 200 rapid diagnostic tests for broad healthcare use under strict ISO quality standards.', 
+      sub: 'BMT Diagnostics is an international Israeli MedTech company developing, manufacturing, and marketing over 200 rapid diagnostic tests for broad healthcare use under strict ISO quality standards.', 
       btnB2b: 'Clinical Catalog', 
       btnB2c: 'Home Care Products' 
     },
@@ -432,10 +436,14 @@ const translations = {
     },
     trust: { 
       pat: 'Patented Diagnostics',
+      patTitle: 'View Registered Patent Certificate (Image)',
+      patAria: 'Registered Patent Certificate - Open Image',
       iso1: 'ISO 13485:2016 Certified', 
       iso1PdfTitle: 'View ISO 13485:2016 Certificate (PDF)',
       iso1PdfAria: 'ISO 13485:2016 Certificate - Open PDF',
       iso2: 'ISO 27001 Security', 
+      iso2PdfTitle: 'View ISO 27001 Certificate (PDF)',
+      iso2PdfAria: 'ISO 27001 Certificate - Open PDF',
       ce: 'Essential Supplier', 
       moh: 'Israeli MOH Permits' 
     },
@@ -810,7 +818,7 @@ const translations = {
     },
     hero: { 
       title: 'Labor In Echtzeit<br/><span style="color:#38BDF8;font-weight:900;">Für Die Öffentliche Gesundheit</span>', 
-      sub: 'BMT Diagnostics ist ein israelisches MedTech-Unternehmen, das über 200 Schnelldiagnostik-Tests unter strengsten ISO-Standards entwickelt, produziert und vertreibt.', 
+      sub: 'BMT Diagnostics ist ein internationales israelisches MedTech-Unternehmen, das über 200 Schnelldiagnostik-Tests unter strengsten ISO-Standards entwickelt, produziert und vertreibt.', 
       btnB2b: 'Klinischer Katalog', 
       btnB2c: 'Produkte für Zuhause' 
     },
@@ -826,10 +834,14 @@ const translations = {
     },
     trust: { 
       pat: 'Patentierte Diagnostik',
+      patTitle: 'Patenturkunde anzeigen (Bild)',
+      patAria: 'Patenturkunde - Bild öffnen',
       iso1: 'ISO 13485:2016 Zertifiziert', 
       iso1PdfTitle: 'ISO 13485:2016 Zertifikat anzeigen (PDF)',
       iso1PdfAria: 'ISO 13485:2016 Zertifikat - PDF öffnen',
       iso2: 'ISO 27001 Sicherheit', 
+      iso2PdfTitle: 'ISO 27001 Zertifikat anzeigen (PDF)',
+      iso2PdfAria: 'ISO 27001 Zertifikat - PDF öffnen',
       ce: 'Wichtiger Lieferant', 
       moh: 'MOH-Zulassungen' 
     },
@@ -1204,7 +1216,7 @@ const translations = {
     },
     hero: { 
       title: 'Laboratoire En Temps Réel<br/><span style="color:#38BDF8;font-weight:900;">Pour La Santé Publique</span>', 
-      sub: 'BMT Diagnostics est une société MedTech israélienne qui développe, fabrique et commercialise plus de 200 types de tests de diagnostic rapide selon les normes ISO les plus strictes.', 
+      sub: 'BMT Diagnostics est une société MedTech israélienne internationale qui développe, fabrique et commercialise plus de 200 types de tests de diagnostic rapide selon les normes ISO les plus strictes.', 
       btnB2b: 'Catalogue Clinique', 
       btnB2c: 'Produits d\'Autodiagnostic' 
     },
@@ -1220,10 +1232,14 @@ const translations = {
     },
     trust: { 
       pat: 'Diagnostics Brevetés',
+      patTitle: 'Voir le certificat de brevet (Image)',
+      patAria: 'Certificat de brevet - Ouvrir l\'image',
       iso1: 'Certifié ISO 13485:2016', 
       iso1PdfTitle: 'Voir le certificat ISO 13485:2016 (PDF)',
       iso1PdfAria: 'Certificat ISO 13485:2016 - Ouvrir le PDF',
       iso2: 'Sécurité ISO 27001', 
+      iso2PdfTitle: 'Voir le certificat ISO 27001 (PDF)',
+      iso2PdfAria: 'Certificat ISO 27001 - Ouvrir le PDF',
       ce: 'Fournisseur Essentiel', 
       moh: 'Autorisations Ministère de la Santé' 
     },
@@ -1598,7 +1614,7 @@ const translations = {
     },
     hero: { 
       title: 'Экспресс-диагностика<br/><span style="color:#38BDF8;font-weight:900;">Для общественного здоровья</span>', 
-      sub: 'BMT Diagnostics — израильская MedTech компания, разрабатывающая и производящая более 200 экспресс-тестов по строгим стандартам ISO.', 
+      sub: 'BMT Diagnostics — международная израильская MedTech компания, разрабатывающая и производящая более 200 экспресс-тестов по строгим стандартам ISO.', 
       btnB2b: 'Профессиональный каталог', 
       btnB2c: 'Домашние тесты' 
     },
@@ -1614,10 +1630,14 @@ const translations = {
     },
     trust: { 
       pat: 'Международные патенты',
+      patTitle: 'Посмотреть патентное свидетельство (Изображение)',
+      patAria: 'Патентное свидетельство - Открыть изображение',
       iso1: 'ISO 13485:2016 Сертифицировано', 
       iso1PdfTitle: 'Посмотреть сертификат ISO 13485:2016 (PDF)',
       iso1PdfAria: 'Сертификат ISO 13485:2016 - Открыть PDF',
       iso2: 'Безопасность ISO 27001', 
+      iso2PdfTitle: 'Посмотреть сертификат ISO 27001 (PDF)',
+      iso2PdfAria: 'Сертификат ISO 27001 - Открыть PDF',
       ce: 'Основной поставщик', 
       moh: 'Одобрено Минздравом Израиля' 
     },
@@ -1992,7 +2012,7 @@ const translations = {
     },
     hero: { 
       title: 'مختبر في الوقت الفعلي<br/><span style="color:#38BDF8;font-weight:900;">من أجل الصحة العامة</span>', 
-      sub: 'شركة BMT Diagnostics هي شركة تكنولوجيا طبية (MedTech) إسرائيلية تطور وتصنع وتسوق أكثر من 200 نوع من الفحوصات السريعة وفقاً لأعلى معايير الجودة ISO.', 
+      sub: 'شركة BMT Diagnostics هي شركة تكنولوجيا طبية (MedTech) إسرائيلية دولية تطور وتصنع وتسوق أكثر من 200 نوع من الفحوصات السريعة وفقاً لأعلى معايير الجودة ISO.', 
       btnB2b: 'الكتالوج الطبي', 
       btnB2c: 'منتجات الرعاية المنزلية' 
     },
@@ -2008,10 +2028,14 @@ const translations = {
     },
     trust: { 
       pat: 'براءات اختراع دولية',
+      patTitle: 'عرض شهادة براءة الاختراع المسجلة (صورة)',
+      patAria: 'شهادة براءة الاختراع - فتح الصورة',
       iso1: 'معتمد ISO 13485:2016', 
       iso1PdfTitle: 'عرض شهادة ISO 13485:2016 (PDF)',
       iso1PdfAria: 'شهادة ISO 13485:2016 - فتح ملف PDF',
       iso2: 'أمان ISO 27001', 
+      iso2PdfTitle: 'عرض شهادة ISO 27001 (PDF)',
+      iso2PdfAria: 'شهادة ISO 27001 - فتح ملف PDF',
       ce: 'مورد أساسي معتمد', 
       moh: 'موافقات وزارة الصحة' 
     },

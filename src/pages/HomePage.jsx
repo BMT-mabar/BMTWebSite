@@ -178,13 +178,21 @@ export default function HomePage({ onOpenRfq }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 text-center">
             
-            {/* Highlighted Registered Patents Badge */}
-            <div className="flex items-center gap-2 bg-blue-50/90 text-blue-900 border border-blue-200 px-3.5 py-1.5 rounded-full shadow-sm hover:bg-blue-100 hover:border-blue-300 transition-all duration-300 font-bold">
-              <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0" />
-              <span>{_('trust.pat')}</span>
-            </div>
+            {/* Clickable Registered Patents Certificate Link */}
+            <a 
+              href={getAssetPath('Patent cover.jpeg')}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-blue-50/90 text-blue-900 border border-blue-200 px-3.5 py-1.5 rounded-full shadow-sm hover:bg-blue-100 hover:border-blue-300 transition-all duration-300 font-bold group cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+              title={_('trust.patTitle')}
+              aria-label={_('trust.patAria')}
+            >
+              <ShieldCheck className="w-4 h-4 text-blue-600 group-hover:scale-110 transition-transform shrink-0" />
+              <span className="group-hover:underline underline-offset-4">{_('trust.pat')}</span>
+              <span className="text-[10px] font-bold bg-blue-200/80 text-blue-800 px-1.5 py-0.5 rounded border border-blue-300">IMG</span>
+            </a>
 
-            {/* Clickable Accessible ISO Certificate Link with PDF integration */}
+            {/* Clickable Accessible ISO 13485 Certificate Link with PDF integration */}
             <a 
               href={getAssetPath('ISO_40519_rev0.pdf')}
               target="_blank"
@@ -198,10 +206,19 @@ export default function HomePage({ onOpenRfq }) {
               <span className="text-[10px] font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded border border-blue-200">PDF</span>
             </a>
 
-            <div className="flex items-center gap-2 hover:text-blue-700 transition-colors">
-              <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0" />
-              <span>{_('trust.iso2')}</span>
-            </div>
+            {/* Clickable Accessible ISO 27001 Certificate Link with PDF integration */}
+            <a 
+              href={getAssetPath('ISO_27001.pdf')}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 hover:text-blue-700 transition-colors group cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg px-2 py-1"
+              title={_('trust.iso2PdfTitle')}
+              aria-label={_('trust.iso2PdfAria')}
+            >
+              <ShieldCheck className="w-4 h-4 text-blue-600 group-hover:scale-110 transition-transform shrink-0" />
+              <span className="group-hover:underline underline-offset-4">{_('trust.iso2')}</span>
+              <span className="text-[10px] font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded border border-blue-200">PDF</span>
+            </a>
 
             <div className="flex items-center gap-2 bg-emerald-50/80 text-emerald-900 border border-emerald-200 px-3 py-1 rounded-full shadow-sm">
               <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />

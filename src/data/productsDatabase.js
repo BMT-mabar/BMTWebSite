@@ -416,7 +416,7 @@ const productsDatabase = [
     id: 'fob-b2c', 
     category: ['b2c', 'b2b'], 
     subCat: 'Tumor', 
-    image: '/DSC_2078.JPG', 
+    image: '/FOB.jpeg', 
     img2: '/7290013882066.jpg', 
     isProfessionalOnly: false,
     isPatented: true,
@@ -512,7 +512,7 @@ const productsDatabase = [
     id: 'cea-afp-fob', 
     category: 'b2b', 
     subCat: 'Tumor', 
-    image: '/DSC_2078.JPG',
+    image: '/FOB.jpeg',
     title: { 
       he: 'CEA / AFP / Calprotectin Panel', 
       en: 'CEA / AFP / Calprotectin Panel', 

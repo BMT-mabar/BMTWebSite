@@ -214,7 +214,7 @@ export default function TestToEmrAnimation() {
                       src={getAssetPath('pending_1766070663274_.jpg')}
                       alt="FOB Diagnostic Cassette"
                       className="h-40 object-contain rounded-xl shadow-md border border-white/20 p-1 bg-white"
-                      onError={(e) => { e.target.src = getAssetPath('DSC_2078.JPG'); }}
+                      onError={(e) => { e.target.src = getAssetPath('FOB.jpeg'); }}
                     />
 
                     {/* Animated Neon Laser Scan Line */}
