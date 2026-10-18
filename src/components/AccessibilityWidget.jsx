@@ -201,9 +201,9 @@ export default function AccessibilityWidget() {
       guide: 'סרגל מדריך קריאה',
       guideDesc: 'פס אופקי העוקב אחר הסמן למיקוד הקריאה',
       reset: 'איפוס הגדרות נגישות',
-      statement: 'הצהרת נגישות ופרטיות',
-      statementTitle: 'הצהרת נגישות ופרטיות - BMT Diagnostics',
-      statementText: 'חברת BMT Diagnostics רואה בחשיבות עליונה את מתן השירות השוויוני, המכבד והנגיש לכלל לקוחותיה. אנו משקיעים מאמצים ומשאבים רבים על מנת להנגיש את אתר האינטרנט שלנו לאוכלוסיית אנשים עם מוגבלות, במטרה לאפשר חווית גלישה עצמאית, נוחה ובטוחה.\n\nהאתר מותאם להנחיות הנגישות בתקן הישראלי ת"י 5568 ברמה AA ומיישם את המלצות מסמך WCAG 2.1 הבינלאומי. האתר תומך בניווט מקלדת מלא, תיאורי תמונות (Alt Text), ומבנה כותרות תקין לטובת קוראי מסך. פרטיות הגולשים מוגנת באופן מוחלט ואיננו אוספים מידע אישי מזהה ללא אישור מפורש.\n\nבמידה ונתקלתם בקושי כלשהו בגלישה או שיש לכם הצעה לשיפור, אנא פנו אלינו בכתובת המייל: roey@bmtdx.com.',
+      statement: 'הצהרת נגישות תקנית (ת"י 5568)',
+      statementTitle: 'הצהרת נגישות - BMT Diagnostics Ltd',
+      statementText: 'חברת BMT Diagnostics (בי.אמ.טי דיאגנוסטיקס בע"מ) רואה בחשיבות עליונה את מתן השירות השוויוני, המכבד והנגיש לכלל לקוחותיה ואזרחי ישראל. אנו משקיעים מאמצים רבים להנגשת אתר האינטרנט לפי חוק שוויון זכויות לאנשים עם מוגבלות (תקנה 35 - שירותי אינטרנט), בהתאם לתקן הישראלי ת"י 5568 ברמה AA והנחיות WCAG 2.1 AA הבינלאומיות.\n\nהתאמות האתר כוללות:\n• ניווט מקלדת מלא (Tab, Shift+Tab, חיצים, Enter, Space, Escape)\n• תאימות לקוראי מסך (NVDA, JAWS, VoiceOver) ומבנה כותרות סמנטי\n• קישור עקיפת בלוקים (Skip to Main Content) בראש כל עמוד\n• תיאורי תמונות (Alt Text) מפורטים לכל מוצרי הדיאגנוסטיקה והלוגואים\n• טפסים מונגשים ומודאלים מוגני פוקוס (Focus Trap)\n• סרגל התאמות נגישות (ניגודיות, גודל טקסט, גופן דיסלקציה, ביטול אנימציות ועוד).\n\nהסדרי נגישות פיזיים:\nמתקני ומשרדי חברת BMT Diagnostics (רחוב האילן 12, פארק תעשיות אור עקיבא) משמשים כמפעל ייצור, מעבדות מחקר, פיתוח וייצור מוצרים רפואיים, ואינם פתוחים לקבלת קהל / אינם מהווים חנות קמעונאית. השירות ניתן בערוצים דיגיטליים, בדוא"ל ובטלפון. במידת הצורך בתיאום ביקור מקצועי מוסדי, ניתן לפנות מראש לרכז הנגישות לתיאום סידורי הגעה וליווי מונגש.\n\nפרטי רכז הנגישות ודרכי פנייה:\n• שם רכז הנגישות: רואי טמיר (Roey Tamir)\n• טלפון נייד ישיר / WhatsApp: 054-7448033 (972-54-7448033+)\n• טלפון משרד: 04-6396116 (972-4-6396116+)\n• דוא"ל: roey@bmtdx.com (וכן בכתובת: info@bmtdx.com)\n• כתובת למשלוח דואר: ת.ד 12, פארק תעשיות אור עקיבא, מיקוד 3060000\n• תאריך עדכון ובדיקת ההצהרה: אוקטובר 2024.',
       close: 'סגור תפריט',
       closeBtn: 'סגור'
     },
@@ -233,9 +233,9 @@ export default function AccessibilityWidget() {
       guide: 'Reading Guide Rule',
       guideDesc: 'A horizontal focus bar following your mouse cursor',
       reset: 'Reset All Settings',
-      statement: 'Accessibility & Privacy Policy',
-      statementTitle: 'Accessibility & Privacy Policy - BMT Diagnostics',
-      statementText: 'BMT Diagnostics is deeply committed to ensuring its services are accessible to all individuals, including people with disabilities. We believe website accessibility is a fundamental aspect of digital inclusion and have designed this platform to be highly navigable and readable.\n\nOur website complies with the Web Content Accessibility Guidelines (WCAG) 2.1 at Level AA. We ensure robust keyboard navigation support, clean screen-reader structures, readable contrast levels, and alternative text descriptions for all primary clinical visual media.\n\nIf you experience any difficulties or have feedback, please reach out to us at: info@bmtdx.com.',
+      statement: 'Accessibility Statement (IS 5568)',
+      statementTitle: 'Accessibility Statement - BMT Diagnostics Ltd',
+      statementText: 'BMT Diagnostics Ltd is firmly committed to ensuring its website and digital services are accessible to all individuals, including people with disabilities. Our platform complies with Israeli Standard IS 5568 Level AA and the W3C Web Content Accessibility Guidelines (WCAG 2.1 Level AA).\n\nKey features include:\n• Full keyboard navigation (Tab, Shift+Tab, Enter, Space, Escape)\n• Screen reader compatibility (NVDA, JAWS, VoiceOver) with clean semantic HTML\n• Skip to main content link on every page\n• Descriptive alternative text (Alt Text) for clinical products and media\n• Fully accessible modal dialogs with focus traps.\n\nPhysical Facilities Notice:\nOur facility at 12 HaIlan St., Or Akiva Industrial Park, Israel functions strictly as a medical device manufacturing facility, cleanrooms, and R&D laboratory, and does not operate as a retail storefront or offer walk-in public reception. Inquiries and client support are conducted via phone and digital channels.\n\nAccessibility Coordinator Contact:\n• Coordinator: Roey Tamir\n• Mobile / WhatsApp: +972-54-7448033\n• Office Phone: +972-4-6396116\n• Email: roey@bmtdx.com / info@bmtdx.com\n• Audited: October 2024.',
       close: 'Close Menu',
       closeBtn: 'Close'
     },
@@ -338,7 +338,7 @@ export default function AccessibilityWidget() {
           <div className="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
             <div>
               <h4 className="font-black text-lg sm:text-xl text-slate-900 leading-none">{curr.title}</h4>
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1 block">SavvyCheck Standard compliant</span>
+              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1 block">LabOnTime Standard compliant</span>
             </div>
             <div className="flex items-center gap-2">
               <button 

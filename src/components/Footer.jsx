@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MapPin, Phone, Mail, ArrowUpRight, ShieldCheck, X, AlertCircle, Scale, Lock, Stethoscope } from 'lucide-react';
+import { MapPin, Phone, Mail, ArrowUpRight, ShieldCheck, X, AlertCircle, Scale, Lock, Stethoscope, Accessibility } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { getAssetPath } from '../utils/imagePath';
 
 export default function Footer() {
   const { _, isRtl } = useLanguage();
   const navigate = useNavigate();
-  const [legalModal, setLegalModal] = useState(null); // 'privacy' | 'terms' | null
+  const [legalModal, setLegalModal] = useState(null); // 'privacy' | 'terms' | 'accessibility' | null
+
+  // Escape key handler to close legal modal (WCAG 2.1.2)
+  useEffect(() => {
+    if (!legalModal) return;
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') setLegalModal(null);
+    };
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [legalModal]);
 
   const handleNav = (path) => {
     navigate(path);
@@ -124,20 +134,28 @@ export default function Footer() {
               {_('footer.legal')}
             </p>
             
-            {/* Legal Documents Links */}
+            {/* Legal Documents Links (Israeli Standard 5568 / Regulation 35 Compliance) */}
             <div className="flex flex-wrap gap-4 pt-3 border-t border-slate-100 text-xs font-bold">
               <button
                 onClick={() => setLegalModal('privacy')}
-                className="text-blue-600 hover:text-blue-800 underline decoration-blue-300 underline-offset-4 transition-colors focus:outline-none"
+                className="text-blue-600 hover:text-blue-800 underline decoration-blue-300 underline-offset-4 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-1"
               >
                 {_('legal.privacyTitle')}
               </button>
               <span className="text-slate-300">•</span>
               <button
                 onClick={() => setLegalModal('terms')}
-                className="text-blue-600 hover:text-blue-800 underline decoration-blue-300 underline-offset-4 transition-colors focus:outline-none"
+                className="text-blue-600 hover:text-blue-800 underline decoration-blue-300 underline-offset-4 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-1"
               >
                 {_('legal.termsTitle')}
+              </button>
+              <span className="text-slate-300">•</span>
+              <button
+                onClick={() => setLegalModal('accessibility')}
+                className="text-emerald-700 hover:text-emerald-900 font-extrabold underline decoration-emerald-400 underline-offset-4 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded px-1 flex items-center gap-1"
+              >
+                <Accessibility className="w-3.5 h-3.5 text-emerald-600" />
+                <span>{_('legal.accessibilityTitle')}</span>
               </button>
             </div>
           </div>
@@ -154,6 +172,7 @@ export default function Footer() {
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md animate-fade-in"
           role="dialog"
           aria-modal="true"
+          aria-labelledby="legal-modal-title"
           dir={isRtl ? 'rtl' : 'ltr'}
         >
           <div className="bg-white rounded-[2.5rem] border border-slate-200 shadow-2xl max-w-3xl w-full p-6 sm:p-10 relative max-h-[88vh] overflow-y-auto flex flex-col justify-between">
@@ -161,7 +180,7 @@ export default function Footer() {
             {/* Close Button */}
             <button
               onClick={() => setLegalModal(null)}
-              className="absolute top-6 right-6 rtl:right-auto rtl:left-6 text-slate-400 hover:text-slate-700 bg-slate-100 hover:bg-slate-200 p-2.5 rounded-full transition-colors focus:outline-none z-10"
+              className="absolute top-6 right-6 rtl:right-auto rtl:left-6 text-slate-400 hover:text-slate-700 bg-slate-100 hover:bg-slate-200 p-2.5 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 z-10"
               aria-label="Close"
             >
               <X className="w-5 h-5" />
@@ -169,20 +188,27 @@ export default function Footer() {
 
             <div>
               {/* Segmented Modal Tabs */}
-              <div className="flex items-center gap-2 bg-slate-100 p-1.5 rounded-2xl mb-8 w-fit max-w-full">
+              <div className="flex flex-wrap items-center gap-2 bg-slate-100 p-1.5 rounded-2xl mb-8 w-fit max-w-full">
                 <button
                   onClick={() => setLegalModal('privacy')}
-                  className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all duration-300 ${legalModal === 'privacy' ? 'bg-white text-blue-900 shadow-md scale-102' : 'text-slate-500 hover:text-slate-900'}`}
+                  className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all duration-300 ${legalModal === 'privacy' ? 'bg-white text-blue-900 shadow-md scale-102' : 'text-slate-500 hover:text-slate-900'}`}
                 >
                   <ShieldCheck className="w-4 h-4 text-blue-600" />
                   <span>{_('legal.privacyTab')}</span>
                 </button>
                 <button
                   onClick={() => setLegalModal('terms')}
-                  className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all duration-300 ${legalModal === 'terms' ? 'bg-white text-blue-900 shadow-md scale-102' : 'text-slate-500 hover:text-slate-900'}`}
+                  className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all duration-300 ${legalModal === 'terms' ? 'bg-white text-blue-900 shadow-md scale-102' : 'text-slate-500 hover:text-slate-900'}`}
                 >
                   <Scale className="w-4 h-4 text-burgundy" />
                   <span>{_('legal.termsTab')}</span>
+                </button>
+                <button
+                  onClick={() => setLegalModal('accessibility')}
+                  className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all duration-300 ${legalModal === 'accessibility' ? 'bg-white text-blue-900 shadow-md scale-102' : 'text-slate-500 hover:text-slate-900'}`}
+                >
+                  <Accessibility className="w-4 h-4 text-emerald-600" />
+                  <span>{_('legal.accessibilityTab')}</span>
                 </button>
               </div>
 
@@ -286,6 +312,62 @@ export default function Footer() {
                     <p className="text-xs sm:text-sm">
                       {_('legal.termsS3Text')}
                     </p>
+                  </div>
+                </div>
+              )}
+
+              {/* TAB 3: ACCESSIBILITY STATEMENT (IS 5568 / WCAG 2.1 AA) */}
+              {legalModal === 'accessibility' && (
+                <div className="space-y-6 text-slate-600 text-sm leading-relaxed">
+                  <div className="border-b border-slate-100 pb-4">
+                    <h3 id="legal-modal-title" className="text-2xl font-black text-slate-900 mb-2 flex items-center gap-2.5">
+                      <Accessibility className="w-6 h-6 text-emerald-600 shrink-0" />
+                      <span>{_('legal.accessibilityTitle')}</span>
+                    </h3>
+                    <p className="text-xs text-slate-400 font-mono">
+                      {_('legal.accessibilityDocMeta')}
+                    </p>
+                  </div>
+
+                  {/* Commitment banner */}
+                  <div className="bg-emerald-50/80 border border-emerald-200/80 p-5 rounded-2xl text-emerald-950 font-medium text-xs sm:text-sm leading-relaxed">
+                    <strong className="block text-emerald-900 font-bold mb-1">{_('legal.accessibilityS1Title')}</strong>
+                    {_('legal.accessibilityS1Text')}
+                  </div>
+
+                  <div className="space-y-5">
+                    {/* S2: Technical Adjustments */}
+                    <div>
+                      <h4 className="font-extrabold text-slate-900 text-base mb-2 flex items-center gap-2">
+                        <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                        {_('legal.accessibilityS2Title')}
+                      </h4>
+                      <div className="text-xs sm:text-sm whitespace-pre-line text-slate-700 leading-relaxed bg-slate-50/80 p-4 sm:p-5 rounded-2xl border border-slate-200/70 font-sans">
+                        {_('legal.accessibilityS2Text')}
+                      </div>
+                    </div>
+
+                    {/* S3: Physical Facilities */}
+                    <div>
+                      <h4 className="font-extrabold text-slate-900 text-base mb-2 flex items-center gap-2">
+                        <MapPin className="w-4 h-4 text-blue-600" />
+                        {_('legal.accessibilityS3Title')}
+                      </h4>
+                      <div className="text-xs sm:text-sm text-slate-700 leading-relaxed bg-blue-50/40 p-4 sm:p-5 rounded-2xl border border-blue-100/70">
+                        {_('legal.accessibilityS3Text')}
+                      </div>
+                    </div>
+
+                    {/* S4: Coordinator & Contact */}
+                    <div>
+                      <h4 className="font-extrabold text-slate-900 text-base mb-2 flex items-center gap-2">
+                        <Phone className="w-4 h-4 text-emerald-600" />
+                        {_('legal.accessibilityS4Title')}
+                      </h4>
+                      <div className="text-xs sm:text-sm whitespace-pre-line text-slate-800 leading-relaxed bg-amber-50/40 p-4 sm:p-5 rounded-2xl border border-amber-200/60 font-medium">
+                        {_('legal.accessibilityS4Text')}
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}

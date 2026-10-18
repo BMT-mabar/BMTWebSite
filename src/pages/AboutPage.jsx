@@ -242,7 +242,7 @@ export default function AboutPage() {
                <div className="h-48 w-full relative overflow-hidden bg-slate-900">
                  <img 
                    src={getAssetPath('Gemini_Generated_Image_2ldwn72ldwn72ldw.png')} 
-                   alt="Cleanroom Manufacturing" 
+                   alt={_('about.c1Title')} 
                    className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700"
                    onError={(e) => { e.target.src = getAssetPath('solution_background.png'); }}
                  />
@@ -264,7 +264,7 @@ export default function AboutPage() {
                <div className="h-48 w-full relative overflow-hidden bg-slate-900">
                  <img 
                    src={getAssetPath('DSC_2098.JPG')} 
-                   alt="Clinical Portfolio" 
+                   alt={_('about.c2Title')} 
                    className="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-700"
                    onError={(e) => { e.target.style.display = 'none'; }}
                  />
@@ -286,7 +286,7 @@ export default function AboutPage() {
                <div className="h-48 w-full relative overflow-hidden bg-slate-900">
                  <img 
                    src={getAssetPath('LabOnTime platform.png')} 
-                   alt="Patented Innovation" 
+                   alt={_('about.c3Title')} 
                    className="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-700"
                    onError={(e) => { e.target.style.display = 'none'; }}
                  />
@@ -340,11 +340,14 @@ export default function AboutPage() {
             <div className="relative z-10 flex items-center justify-between">
               {milestones.map((item, idx) => {
                 const isActive = activeMilestoneIndex === idx;
+                const nodeTitle = typeof item.title === 'object' ? (item.title[lang] || item.title.he) : item.title;
                 return (
                   <button
                     key={item.year}
                     onClick={() => setActiveMilestoneIndex(idx)}
-                    className={`flex flex-col items-center group focus:outline-none transition-all duration-300`}
+                    aria-label={`${item.year}: ${nodeTitle}`}
+                    aria-pressed={isActive}
+                    className={`flex flex-col items-center group focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-2xl transition-all duration-300`}
                   >
                     <div className={`w-12 h-12 rounded-2xl flex items-center justify-center font-black text-sm transition-all duration-300 shadow-md ${
                       isActive 
@@ -378,16 +381,16 @@ export default function AboutPage() {
               <button
                 onClick={() => setActiveMilestoneIndex(prev => Math.max(0, prev - 1))}
                 disabled={activeMilestoneIndex === 0}
-                className="w-12 h-12 rounded-2xl bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 flex items-center justify-center border border-slate-200 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-                aria-label="Previous milestone"
+                className="w-12 h-12 rounded-2xl bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 flex items-center justify-center border border-slate-200 disabled:opacity-30 disabled:cursor-not-allowed transition-all focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label={isHe ? 'ציון דרך קודם' : 'Previous milestone'}
               >
                 <ChevronLeft className="w-5 h-5 rtl:rotate-180" />
               </button>
               <button
                 onClick={() => setActiveMilestoneIndex(prev => Math.min(milestones.length - 1, prev + 1))}
                 disabled={activeMilestoneIndex === milestones.length - 1}
-                className="w-12 h-12 rounded-2xl bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 flex items-center justify-center border border-slate-200 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-                aria-label="Next milestone"
+                className="w-12 h-12 rounded-2xl bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 flex items-center justify-center border border-slate-200 disabled:opacity-30 disabled:cursor-not-allowed transition-all focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label={isHe ? 'ציון דרך הבא' : 'Next milestone'}
               >
                 <ChevronRight className="w-5 h-5 rtl:rotate-180" />
               </button>

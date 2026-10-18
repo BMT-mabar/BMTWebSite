@@ -24,6 +24,20 @@ html {
   scroll-behavior: smooth;
 }
 
+/* --- ACCESSIBILITY: UNIVERSAL KEYBOARD FOCUS-VISIBLE (WCAG 2.4.7 / IS 5568 AA) --- */
+:focus-visible {
+  outline: 3px solid #005EAD !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 4px rgba(0, 94, 173, 0.25) !important;
+  border-radius: 6px;
+}
+
+body.accessibility-high-contrast :focus-visible {
+  outline: 3px solid #ffeb3b !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 4px rgba(255, 235, 59, 0.4) !important;
+}
+
 /* --- DYNAMIC ANIMATIONS & MICRO-INTERACTIONS --- */
 @keyframes fadeInUp {
   from {
@@ -41,21 +55,21 @@ html {
 }
 
 .btn-bouncy {
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, background-color 0.2s ease;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, background-color 0.2s ease;
 }
 .btn-bouncy:hover {
-  transform: translateY(-2px) scale(1.03);
+  transform: translateY(-1.5px);
 }
 .btn-bouncy:active {
-  transform: translateY(1px) scale(0.97);
+  transform: translateY(0);
 }
 
 .card-3d-lift {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
 }
 .card-3d-lift:hover {
-  transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 20px 40px -15px rgba(0, 94, 173, 0.12);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px -10px rgba(0, 94, 173, 0.10);
 }
 
 /* Premium scrollbar styling */

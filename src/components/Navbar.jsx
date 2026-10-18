@@ -12,15 +12,24 @@ export default function Navbar({ onOpenRfq }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef(null);
 
-  // Close mobile drawer when clicking outside
+  // Close mobile drawer when clicking outside or pressing Escape
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target) && isMobileMenuOpen) {
         setIsMobileMenuOpen(false);
       }
     };
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape' && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+    };
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, [isMobileMenuOpen]);
 
   const activeClass = (path) => {
@@ -52,11 +61,11 @@ export default function Navbar({ onOpenRfq }) {
           <button 
             onClick={() => handleNav('/')} 
             className="flex items-center gap-4 md:gap-6 focus:outline-none focus:ring-4 focus:ring-blue-500/10 rounded-2xl p-2 group" 
-            aria-label="Go to Home"
+            aria-label={isRtl ? 'דף הבית של BMT Diagnostics' : 'BMT Diagnostics Home'}
           >
             <img 
               src={getAssetPath('BMT Logo.jpg')} 
-              alt="BMT Diagnostics Logo" 
+              alt="BMT Diagnostics" 
               className="h-20 md:h-24 max-h-[95px] object-contain group-hover:opacity-90 transition-all duration-300 mix-blend-multiply filter drop-shadow-sm" 
               onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='block'; }}
             />
@@ -77,7 +86,7 @@ export default function Navbar({ onOpenRfq }) {
             <LanguageSelector />
             <button 
               onClick={onOpenRfq} 
-              className="bg-burgundy text-white px-8 py-3 rounded-full font-extrabold hover:bg-burgundy-600 transition-all shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-burgundy/30 text-[15px]"
+              className="bg-burgundy text-white px-7 py-2.5 rounded-xl font-bold hover:bg-burgundy-600 transition-all shadow-sm hover:shadow focus:outline-none focus:ring-4 focus:ring-burgundy/25 text-[15px]"
             >
               {_('nav.quote')}
             </button>

@@ -32,7 +32,7 @@ export default function ProductCard({ prod, lang, isRtl, _, nav }) {
         ) : (
           <img 
             src={getAssetPath(prod.image)} 
-            alt={prod.id} 
+            alt={prod.title[lang] || prod.title.he || prod.title.en || prod.id} 
             className="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-500 ease-out shadow-sm rounded-xl"
             onError={(e) => { e.target.style.display = 'none'; }} 
           />

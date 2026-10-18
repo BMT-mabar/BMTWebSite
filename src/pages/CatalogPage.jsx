@@ -270,6 +270,7 @@ export default function CatalogPage({ category, onOpenRfq }) {
                   placeholder={_('catalog.search')}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
+                  aria-label={_('catalog.search') || 'חיפוש מוצר'}
                   className="block w-full pl-16 pr-6 py-5 border border-slate-200 rounded-3xl bg-slate-50/50 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 focus:bg-white transition-all text-lg shadow-sm font-medium"
                 />
               </div>
@@ -280,7 +281,8 @@ export default function CatalogPage({ category, onOpenRfq }) {
                   <button 
                     key={sc} 
                     onClick={() => setFilter(sc)}
-                    className={`px-6 py-3 rounded-full text-sm font-extrabold transition-all duration-300 focus:outline-none ${filter === sc ? 'bg-burgundy text-white shadow-lg shadow-burgundy/15 scale-102' : 'bg-slate-50 border border-slate-200 text-slate-650 hover:bg-slate-100 hover:border-slate-350'}`}
+                    aria-pressed={filter === sc}
+                    className={`px-6 py-3 rounded-full text-sm font-extrabold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-burgundy ${filter === sc ? 'bg-burgundy text-white shadow-lg shadow-burgundy/15 scale-102' : 'bg-slate-50 border border-slate-200 text-slate-650 hover:bg-slate-100 hover:border-slate-350'}`}
                   >
                     {getSubCatName(sc)}
                   </button>
@@ -365,6 +367,7 @@ export default function CatalogPage({ category, onOpenRfq }) {
                   placeholder={_('catalog.tableSearchPh')}
                   value={tableSearch}
                   onChange={handleTableSearchChange}
+                  aria-label={_('catalog.tableSearchPh') || 'חיפוש בקטלוג המלא'}
                   className="block w-full pl-14 pr-5 py-4 border border-slate-200 rounded-2xl bg-slate-50/50 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 focus:bg-white transition-all text-base font-medium shadow-inner"
                 />
               </div>
@@ -372,6 +375,7 @@ export default function CatalogPage({ category, onOpenRfq }) {
                 <select
                   value={tableFilter}
                   onChange={(e) => handleTableFilterChange(e.target.value)}
+                  aria-label={isHe ? 'סינון לפי קטגוריה' : 'Filter by category'}
                   className="w-full bg-slate-50/50 border border-slate-200 p-4 rounded-2xl focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:bg-white outline-none transition text-sm font-extrabold appearance-none cursor-pointer pr-10 rtl:pr-4"
                 >
                   <option value="All">{_('catalog.allCategories')}</option>
@@ -387,6 +391,7 @@ export default function CatalogPage({ category, onOpenRfq }) {
                 <select
                   value={specimenFilter}
                   onChange={(e) => { setSpecimenFilter(e.target.value); setTablePage(1); }}
+                  aria-label={isHe ? 'סינון לפי סוג דגימה' : 'Filter by specimen type'}
                   className="w-full bg-slate-50/50 border border-slate-200 p-4 rounded-2xl focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:bg-white outline-none transition text-sm font-extrabold appearance-none cursor-pointer pr-10 rtl:pr-4"
                 >
                   <option value="All">{_('catalog.allSpecimens')}</option>

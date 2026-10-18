@@ -83,38 +83,38 @@ export default function HomePage({ onOpenRfq }) {
       </Helmet>
 
       {/* ═══════════════════════════════════════════════════════
-          HIGH-END OCEAN BLUE MEDTECH HERO SECTION
+          HIGH-END CLINICAL MEDTECH HERO SECTION
           ═══════════════════════════════════════════════════════ */}
       <section
         className="relative text-white overflow-hidden"
-        style={{ background: 'linear-gradient(135deg, #0267B5 0%, #01417A 100%)' }}
+        style={{ background: 'linear-gradient(135deg, #0066b2 0%, #004c8c 50%, #0284c7 100%)' }}
         aria-label="Hero Section"
       >
         {/* Seamless Full-Bleed Corporate Video Background */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <iframe
-            className="w-full h-[140%] -mt-[10%] object-cover opacity-35 filter brightness-105 saturate-110 border-0 pointer-events-none scale-110"
+            className="w-full h-[140%] -mt-[10%] object-cover opacity-75 md:opacity-85 filter brightness-110 saturate-105 border-0 pointer-events-none scale-105"
             src={`https://www.youtube.com/embed/${BMT_HERO_BG_YT}?autoplay=1&mute=1&loop=1&playlist=${BMT_HERO_BG_YT}&controls=0&showinfo=0&autohide=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1`}
             title="BMT Corporate Video Background"
             allow="autoplay; encrypted-media"
             loading="eager"
           />
-          {/* Full-Bleed Ocean Blue Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0267B5]/75 via-[#01417A]/85 to-[#01417A]/95 rtl:bg-gradient-to-l rtl:from-[#0267B5]/75 rtl:via-[#01417A]/85 rtl:to-[#01417A]/95" />
+          {/* Lighter, Luminous Medical Azure Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#005596]/80 via-[#004c8c]/65 to-[#00386b]/45 rtl:bg-gradient-to-l rtl:from-[#005596]/80 rtl:via-[#004c8c]/65 rtl:to-[#00386b]/45" />
         </div>
 
         {/* Content Container */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-4 lg:pt-6 xl:pt-8 pb-20 md:pb-28">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-6 lg:pt-8 xl:pt-10 pb-20 md:pb-28">
           <div className="max-w-3xl">
 
             {/* H1 Title */}
             <h1
-              className="text-4xl sm:text-5xl lg:text-[3.75rem] xl:text-[4rem] font-black leading-[1.12] mb-6 text-white tracking-tight drop-shadow-md"
+              className="text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-[3.75rem] font-black leading-[1.15] mb-6 text-white tracking-tight drop-shadow-md"
               dangerouslySetInnerHTML={{ __html: _('hero.title') }}
             />
 
             {/* Subtitle */}
-            <p className="text-lg sm:text-xl mb-10 leading-relaxed font-normal text-white max-w-2xl drop-shadow">
+            <p className="text-lg sm:text-xl mb-10 leading-relaxed font-normal text-sky-50 max-w-2xl drop-shadow-sm">
               {_('hero.sub')}
             </p>
 
@@ -123,32 +123,33 @@ export default function HomePage({ onOpenRfq }) {
               <button
                 id="hero-btn-b2b"
                 onClick={() => navigate('/catalog/b2b')}
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-extrabold text-base text-white bg-burgundy hover:brightness-110 transition-all duration-300 shadow-xl hover:shadow-burgundy/40 hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-white/40 btn-bouncy"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-bold text-base text-white bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 transition-all duration-200 shadow-lg shadow-emerald-950/20 hover:shadow-emerald-900/30 hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-emerald-400/40 border border-emerald-500/30"
               >
-                <Microscope className="w-5 h-5" aria-hidden="true" />
+                <Microscope className="w-5 h-5 text-emerald-100" aria-hidden="true" />
                 {_('hero.btnB2b')}
               </button>
               <button
                 id="hero-btn-b2c"
                 onClick={() => navigate('/catalog/b2c')}
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-bold text-base text-blue-700 bg-white hover:bg-slate-50 transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-white/40 btn-bouncy"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-bold text-base text-emerald-950 bg-emerald-50 hover:bg-emerald-100 transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-emerald-400/40 border-2 border-emerald-300"
               >
-                <Activity className="w-5 h-5 text-blue-500" aria-hidden="true" />
+                <Activity className="w-5 h-5 text-emerald-700" aria-hidden="true" />
                 {_('hero.btnB2c')}
               </button>
             </div>
 
-            {/* Micro Stats Row */}
-            <div className="mt-14 pt-6 border-t border-white/20 flex flex-wrap gap-8 sm:gap-12" aria-label="Key figures">
+            {/* Micro Stats & ISO Standards Row */}
+            <div className="mt-12 pt-6 border-t border-white/20 flex flex-wrap items-center gap-6 sm:gap-10" aria-label="Key figures and ISO Standards">
               {[
                 { value: _('stats.stat1Val') || '2004', label: _('stats.stat1Label') || 'Activity Since 2004' },
                 { value: _('stats.stat2Val') || '+200', label: _('stats.stat2Label') || 'Diagnostic Products' },
-                { value: _('stats.stat3Val') || '+40', label: _('stats.stat3Label') || 'Global Export Markets' },
-                { value: _('stats.stat4Val') || 'ISO', label: _('stats.stat4Label') || 'Certified Standards' },
+                { value: _('stats.stat3Val') || 'ISO 13485', label: _('stats.stat3Label') || 'Medical Devices IVD' },
+                { value: _('stats.stat4Val') || 'ISO 27001', label: _('stats.stat4Label') || 'Information Security' },
+                { value: _('stats.stat5Val') || 'ISO 9001', label: _('stats.stat5Label') || 'Quality Management' },
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col">
-                  <span className="text-2xl sm:text-3xl font-black text-white tracking-tight drop-shadow-md">{stat.value}</span>
-                  <span className="text-[11px] text-sky-100 font-semibold uppercase tracking-wider mt-0.5 drop-shadow-sm">{stat.label}</span>
+                  <span className="text-xl sm:text-2xl lg:text-3xl font-black text-white tracking-tight drop-shadow-sm">{stat.value}</span>
+                  <span className="text-[11px] sm:text-xs text-sky-100 font-semibold uppercase tracking-wider mt-0.5 drop-shadow-xs">{stat.label}</span>
                 </div>
               ))}
             </div>
@@ -156,40 +157,31 @@ export default function HomePage({ onOpenRfq }) {
           </div>
         </div>
 
-        {/* Crisp Pure White Wave Divider */}
+        {/* Clean Crisp Bottom Border Divider */}
         <div className="w-full overflow-hidden leading-none absolute bottom-0 left-0 right-0 z-20 pointer-events-none">
-          <svg
-            className="relative block w-full h-8 sm:h-12 text-slate-100/90"
-            viewBox="0 0 1200 120"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M0,0 C150,90 350,-40 500,60 C650,160 900,10 1200,40 L1200,120 L0,120 Z"
-              fill="currentColor"
-            />
-          </svg>
+          <div className="h-2 bg-gradient-to-r from-emerald-500 via-sky-400 to-emerald-500 opacity-80" />
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════
           CLEAN ELEGANT LIGHT TRUST & CERTIFICATION STRIP
           ═══════════════════════════════════════════════════════ */}
-      <section className="bg-slate-100/90 py-5 border-b border-slate-200/80 text-slate-700 text-xs md:text-sm font-semibold relative z-20">
+      <section className="bg-slate-100/95 py-4 border-b border-slate-200/80 text-slate-700 text-xs md:text-sm font-semibold relative z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 text-center">
+          <div className="flex flex-wrap items-center justify-center gap-5 md:gap-8 text-center">
             
             {/* Clickable Registered Patents Certificate Link */}
             <a 
               href={getAssetPath('Patent cover.jpeg')}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-blue-50/90 text-blue-900 border border-blue-200 px-3.5 py-1.5 rounded-full shadow-sm hover:bg-blue-100 hover:border-blue-300 transition-all duration-300 font-bold group cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex items-center gap-2 bg-white text-blue-900 border border-blue-200 px-3.5 py-1.5 rounded-lg shadow-xs hover:bg-blue-50 hover:border-blue-300 transition-all duration-200 font-bold group cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
               title={_('trust.patTitle')}
               aria-label={_('trust.patAria')}
             >
-              <ShieldCheck className="w-4 h-4 text-blue-600 group-hover:scale-110 transition-transform shrink-0" />
+              <ShieldCheck className="w-4 h-4 text-blue-600 group-hover:scale-105 transition-transform shrink-0" />
               <span className="group-hover:underline underline-offset-4">{_('trust.pat')}</span>
-              <span className="text-[10px] font-bold bg-blue-200/80 text-blue-800 px-1.5 py-0.5 rounded border border-blue-300">IMG</span>
+              <span className="text-[10px] font-bold bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded border border-blue-200">IMG</span>
             </a>
 
             {/* Clickable Accessible ISO 13485 Certificate Link with PDF integration */}
@@ -197,13 +189,13 @@ export default function HomePage({ onOpenRfq }) {
               href={getAssetPath('ISO_40519_rev0.pdf')}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:text-blue-700 transition-colors group cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg px-2 py-1"
+              className="flex items-center gap-2 bg-white text-slate-800 border border-slate-200 px-3.5 py-1.5 rounded-lg shadow-xs hover:text-blue-700 hover:border-blue-300 transition-all duration-200 group cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
               title={_('trust.iso1PdfTitle')}
               aria-label={_('trust.iso1PdfAria')}
             >
-              <Award className="w-4 h-4 text-blue-600 group-hover:scale-110 transition-transform shrink-0" />
+              <Award className="w-4 h-4 text-emerald-600 group-hover:scale-105 transition-transform shrink-0" />
               <span className="group-hover:underline underline-offset-4">{_('trust.iso1')}</span>
-              <span className="text-[10px] font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded border border-blue-200">PDF</span>
+              <span className="text-[10px] font-bold bg-emerald-50 text-emerald-700 px-1.5 py-0.5 rounded border border-emerald-200">PDF</span>
             </a>
 
             {/* Clickable Accessible ISO 27001 Certificate Link with PDF integration */}
@@ -211,21 +203,26 @@ export default function HomePage({ onOpenRfq }) {
               href={getAssetPath('ISO_27001.pdf')}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:text-blue-700 transition-colors group cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg px-2 py-1"
+              className="flex items-center gap-2 bg-white text-slate-800 border border-slate-200 px-3.5 py-1.5 rounded-lg shadow-xs hover:text-blue-700 hover:border-blue-300 transition-all duration-200 group cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
               title={_('trust.iso2PdfTitle')}
               aria-label={_('trust.iso2PdfAria')}
             >
-              <ShieldCheck className="w-4 h-4 text-blue-600 group-hover:scale-110 transition-transform shrink-0" />
+              <ShieldCheck className="w-4 h-4 text-blue-600 group-hover:scale-105 transition-transform shrink-0" />
               <span className="group-hover:underline underline-offset-4">{_('trust.iso2')}</span>
-              <span className="text-[10px] font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded border border-blue-200">PDF</span>
+              <span className="text-[10px] font-bold bg-blue-50 text-blue-700 px-1.5 py-0.5 rounded border border-blue-200">PDF</span>
             </a>
 
-            <div className="flex items-center gap-2 bg-emerald-50/80 text-emerald-900 border border-emerald-200 px-3 py-1 rounded-full shadow-sm">
+            <div className="flex items-center gap-2 bg-white text-slate-800 border border-slate-200 px-3.5 py-1.5 rounded-lg shadow-xs">
+              <Award className="w-4 h-4 text-blue-600 shrink-0" />
+              <span className="font-bold">ISO 9001:2015</span>
+            </div>
+
+            <div className="flex items-center gap-2 bg-emerald-50 text-emerald-900 border border-emerald-200 px-3 py-1.5 rounded-lg shadow-xs">
               <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
               <span className="font-bold">{_('trust.ce')}</span>
             </div>
 
-            <div className="flex items-center gap-2 hover:text-emerald-700 transition-colors">
+            <div className="flex items-center gap-2 text-slate-700 hover:text-emerald-700 transition-colors">
               <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
               <span>{_('trust.moh')}</span>
             </div>
@@ -291,7 +288,16 @@ export default function HomePage({ onOpenRfq }) {
               <div 
                 key={`pharma-1-${prod.id}-${idx}`}
                 onClick={() => navigate(`/product/${prod.id}`)}
-                className="shrink-0 w-[290px] sm:w-[320px] bg-white rounded-[2.5rem] border border-slate-200/80 shadow-md hover:shadow-2xl overflow-hidden cursor-pointer transition-all duration-300 card-3d-lift flex flex-col justify-between group"
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    navigate(`/product/${prod.id}`);
+                  }
+                }}
+                aria-label={`${_('home.viewDetails')}: ${prod.title[lang] || prod.title.en || prod.title.he}`}
+                className="shrink-0 w-[290px] sm:w-[320px] bg-white rounded-[2.5rem] border border-slate-200/80 shadow-md hover:shadow-2xl overflow-hidden cursor-pointer transition-all duration-300 card-3d-lift flex flex-col justify-between group focus:outline-none focus:ring-4 focus:ring-blue-500/40 text-start"
               >
                 <div className="h-56 w-full bg-slate-50 relative p-6 flex items-center justify-center overflow-hidden border-b border-slate-100">
                   <img 
@@ -343,7 +349,16 @@ export default function HomePage({ onOpenRfq }) {
               <div 
                 key={`pharma-2-${prod.id}-${idx}`}
                 onClick={() => navigate(`/product/${prod.id}`)}
-                className="shrink-0 w-[290px] sm:w-[320px] bg-white rounded-[2.5rem] border border-slate-200/80 shadow-md hover:shadow-2xl overflow-hidden cursor-pointer transition-all duration-300 card-3d-lift flex flex-col justify-between group"
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    navigate(`/product/${prod.id}`);
+                  }
+                }}
+                aria-label={`${_('home.viewDetails')}: ${prod.title[lang] || prod.title.en || prod.title.he}`}
+                className="shrink-0 w-[290px] sm:w-[320px] bg-white rounded-[2.5rem] border border-slate-200/80 shadow-md hover:shadow-2xl overflow-hidden cursor-pointer transition-all duration-300 card-3d-lift flex flex-col justify-between group focus:outline-none focus:ring-4 focus:ring-blue-500/40 text-start"
               >
                 <div className="h-56 w-full bg-slate-50 relative p-6 flex items-center justify-center overflow-hidden border-b border-slate-100">
                   <img 

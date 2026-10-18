@@ -88,10 +88,10 @@ export default function ProductPage({ onOpenRfq }) {
             {p.img2 && !isPlaceholder && (
               <div className="grid grid-cols-2 gap-6">
                 <div className="bg-slate-50/50 border border-slate-200/80 rounded-[2rem] p-6 h-40 flex items-center justify-center shadow-sm">
-                  <img src={getAssetPath(p.img2)} className="max-h-full object-contain hover:scale-103 transition duration-500 rounded-xl" alt="Angle 2" onError={(e) => { e.target.style.display = 'none'; }} />
+                  <img src={getAssetPath(p.img2)} className="max-h-full object-contain hover:scale-103 transition duration-500 rounded-xl" alt={`${productTitle} - ${isHe ? 'מבט מאחור' : 'Rear view'}`} onError={(e) => { e.target.style.display = 'none'; }} />
                 </div>
                 <div className="bg-slate-50/50 border border-slate-200/80 rounded-[2rem] p-6 h-40 flex items-center justify-center shadow-sm">
-                  <img src={getAssetPath(p.image)} className="max-h-full object-contain hover:scale-103 transition duration-500 rounded-xl" alt="Angle 1" onError={(e) => { e.target.style.display = 'none'; }} />
+                  <img src={getAssetPath(p.image)} className="max-h-full object-contain hover:scale-103 transition duration-500 rounded-xl" alt={`${productTitle} - ${isHe ? 'מבט קדמי' : 'Front view'}`} onError={(e) => { e.target.style.display = 'none'; }} />
                 </div>
               </div>
             )}

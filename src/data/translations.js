@@ -21,20 +21,22 @@ const translations = {
       quote: 'צור קשר' 
     },
     hero: { 
-      title: 'מעבדה בזמן<br/><span style="color:#38BDF8;font-weight:900;">בשביל בריאות הציבור</span>', 
-      sub: 'חברת BMT Diagnostics הינה חברה ישראלית בינלאומית המפתחת, מייצרת ומשווקת למעלה מ-200 סוגי בדיקות מהירות לשימוש רחב, תוך עמידה בתקני ISO קפדניים.', 
+      title: 'מעבדה בזמן אמת<br/><span style="color:#7DD3FC;font-weight:800;">למען בריאות הציבור</span>', 
+      sub: 'חברת BMT Diagnostics הינה חברה ישראלית המייצרת, משווקת ומוכרת בדיקות מהירות לשימוש רחב, תוך עמידה בתקני איכות רפואיים קפדניים.', 
       btnB2b: 'לקטלוג לשימוש מקצועי', 
       btnB2c: 'למוצרי פארם' 
     },
     stats: {
       stat1Val: '2004',
-      stat1Label: 'תחילת פעילות ב-2004',
+      stat1Label: 'פעילות מבוססת מ-2004',
       stat2Val: '+200',
-      stat2Label: 'פאנלים אבחוניים',
-      stat3Val: '+40',
-      stat3Label: 'מדינות יצוא',
-      stat4Val: 'ISO',
-      stat4Label: 'תקני איכות בינלאומיים'
+      stat2Label: 'בדיקות מהירות ופאנלים',
+      stat3Val: 'ISO 13485',
+      stat3Label: 'מכשור רפואי ו-IVD',
+      stat4Val: 'ISO 27001',
+      stat4Label: 'אבטחת מידע וסייבר',
+      stat5Val: 'ISO 9001',
+      stat5Label: 'מערכת ניהול איכות'
     },
     trust: { 
       pat: 'פטנטים בינלאומיים רשומים',
@@ -356,6 +358,17 @@ const translations = {
       termsS2Text: 'בדיקות המסומנות כ-"לשימוש מקצועי בלבד" (Professional Use Only) מיועדות לשימוש ע"י אנשי צוות רפואי מוסמך, מעבדות ובתי חולים בלבד. ביצוע כל בדיקה בפועל כפוף להוראות השימוש המצורפות לערכה (IFU) ולהנחיות משרד הבריאות.',
       termsS3Title: '3. הגבלת אחריות ודין חל',
       termsS3Text: 'חברת BMT Diagnostics לא תישא באחריות לכל נזק ישיר או עקיף הנובע משימוש או הסתמכות על מידע המופיע באתר. על תנאי שימוש אלו יחולו אך ורק דיני מדינת ישראל, וסמכות השיפוט הבלעדית בכל עניין נתונה לבתי המשפט המוסמכים במחוז חיפה / תל אביב.',
+      accessibilityTab: 'הצהרת נגישות',
+      accessibilityTitle: 'הצהרת נגישות (ת"י 5568 / WCAG 2.1 AA)',
+      accessibilityDocMeta: 'חברת בי.אמ.טי דיאגנוסטיקס בע"מ (BMT Diagnostics Ltd) • מסמך מבוקר Web001',
+      accessibilityS1Title: '1. מחויבות ועמידה בתקנים ובהוראות החוק',
+      accessibilityS1Text: 'חברת BMT Diagnostics רואה חשיבות עליונה במתן שירות שוויוני, מכבד, נגיש ודיגיטלי לכלל אזרחי ישראל, לרבות אנשים עם מוגבלויות. אתר אינטרנט זה מותאם ועומד בהוראות תקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע"ג-2013 (תקנה 35 - שירותי אינטרנט), ומיישם את המלצות התקן הישראלי ת"י 5568 ברמה AA, המבוסס על הנחיות הנגישות הבינלאומיות של ארגון W3C (מסמך WCAG 2.1 ברמה AA).',
+      accessibilityS2Title: '2. התאמות הנגישות שבוצעו באתר ובקוד המקור',
+      accessibilityS2Text: '• ניווט מקלדת מלא: תמיכה מלאה בניווט בלחיצה על מקש Tab, מקשי החצים, Enter, Space ו-Escape.\n• תמיכה בקוראי מסך: שימוש בתגיות סמנטיות תקינות (Header, Nav, Main, Footer), תגיות ARIA, מבנה כותרות היררכי (H1-H6) וקישורי עקיפת בלוקים (Skip to Main Content).\n• טקסט אלטרנטיבי (Alt Text): תמונות המוצרים, הלוגואים והתרשימים בעלי משמעות כוללים תיאור תוכני מפורט בשפת הדף.\n• טפסים מונגשים: שדות הקלט מקושרים לתוויות (Labels) מפורשות, עם חיווי שגיאות נגיש, מלכוד פוקוס במודאלים וסגירה ב-Escape.\n• סרגל נגישות ייעודי: אפשרות לשינוי ניגודיות (גבוהה/מונוכרום), הגדלת טקסט, גופן דיסלקציה, ריווח מוגבר, סמן מוגדל, סרגל קריאה וביטול אנימציות.\n• תאימות דפדפנים: האתר נבדק ונמצא תואם בדפדפנים הנפוצים: Google Chrome, Microsoft Edge, Mozilla Firefox, Apple Safari.',
+      accessibilityS3Title: '3. הסדרי נגישות פיזיים של מתקני החברה',
+      accessibilityS3Text: 'מתקני ומשרדי חברת BMT Diagnostics (רחוב האילן 12, פארק תעשיות אור עקיבא) משמשים כמפעל ייצור, מעבדות מחקר, פיתוח וייצור מוצרים רפואיים (IVD), ואינם פתוחים לקבלת קהל / אינם מהווים חנות קמעונאית. מתן המענה והשירות ללקוחות מתבצע באמצעים דיגיטליים, בדואר אלקטרוני ובטלפון. במידת הצורך בתיאום ביקור מקצועי מוסדי, ניתן לפנות מראש לרכז הנגישות לצורך תיאום סידורי הגעה וליווי מונגש.',
+      accessibilityS4Title: '4. פרטי רכז הנגישות ודרכי פנייה לבקשות ומשוב',
+      accessibilityS4Text: 'אם נתקלתם בקושי כלשהו בגלישה באתר או שיש לכם הצעה לשיפור הנגישות, אנו מזמינים אתכם לפנות ישירות לרכז הנגישות של החברה:\n• שם רכז הנגישות: רואי טמיר (Roey Tamir)\n• טלפון נייד ישיר / WhatsApp: 054-7448033 (972-54-7448033+)\n• טלפון משרד: 04-6396116 (972-4-6396116+)\n• דואר אלקטרוני: roey@bmtdx.com (וכן בכתובת: info@bmtdx.com)\n• כתובת למשלוח דואר: ת.ד 12, פארק תעשיות אור עקיבא, מיקוד 3060000\n• תאריך עדכון ובדיקת ההצהרה: אוקטובר 2024.',
       docId: 'מזהה תצורה: Web001 (מסמך מבוקר)',
       acknowledgeBtn: 'הבנתי וסגור'
     },
@@ -419,20 +432,22 @@ const translations = {
       quote: 'Contact Us' 
     },
     hero: { 
-      title: 'Lab In Real Time<br/><span style="color:#38BDF8;font-weight:900;">For Public Health</span>', 
-      sub: 'BMT Diagnostics is an international Israeli MedTech company developing, manufacturing, and marketing over 200 rapid diagnostic tests for broad healthcare use under strict ISO quality standards.', 
-      btnB2b: 'Clinical Catalog', 
-      btnB2c: 'Home Care Products' 
+      title: 'Lab In Real Time<br/><span style="color:#7DD3FC;font-weight:800;">For Public Health</span>', 
+      sub: 'BMT Diagnostics is an Israeli MedTech company developing, manufacturing, and marketing over 200 rapid diagnostic tests for broad healthcare use under strict medical quality standards.', 
+      btnB2b: 'Professional Catalog', 
+      btnB2c: 'Pharmacy Products' 
     },
     stats: {
       stat1Val: '2004',
-      stat1Label: 'Activity Since 2004',
+      stat1Label: 'Established in 2004',
       stat2Val: '+200',
-      stat2Label: 'Diagnostic Products',
-      stat3Val: '+40',
-      stat3Label: 'Global Export Markets',
-      stat4Val: 'ISO',
-      stat4Label: 'Certified Standards'
+      stat2Label: 'Rapid Diagnostic Tests',
+      stat3Val: 'ISO 13485',
+      stat3Label: 'Medical Devices Standard',
+      stat4Val: 'ISO 27001',
+      stat4Label: 'Information Security',
+      stat5Val: 'ISO 9001',
+      stat5Label: 'Quality Management'
     },
     trust: { 
       pat: 'Patented Diagnostics',
@@ -754,6 +769,17 @@ const translations = {
       termsS2Text: 'Products designated for Professional Use Only are intended solely for qualified healthcare personnel and clinical institutions. All testing must strictly adhere to the package insert Instructions for Use (IFU).',
       termsS3Title: '3. Limitation of Liability & Governing Law',
       termsS3Text: 'BMT Diagnostics is not liable for direct or consequential damages resulting from reliance on website content. These terms are governed solely by the laws of the State of Israel, with exclusive jurisdiction in relevant Israeli courts.',
+      accessibilityTab: 'Accessibility Statement',
+      accessibilityTitle: 'Accessibility Statement (IS 5568 / WCAG 2.1 AA)',
+      accessibilityDocMeta: 'BMT Diagnostics Ltd. • Controlled Document Web001',
+      accessibilityS1Title: '1. Standards Compliance & Legal Adherence',
+      accessibilityS1Text: 'BMT Diagnostics Ltd is committed to ensuring its website and digital services are accessible to all individuals, including people with disabilities, upholding equality, human dignity, and mutual respect. This website complies with the Equal Rights for Persons with Disabilities Regulations (Service Accessibility Adaptations), 2013 (Regulation 35 - Internet Services), and adheres to Israeli Standard IS 5568 Level AA, based on W3C Web Content Accessibility Guidelines (WCAG 2.1 Level AA).',
+      accessibilityS2Title: '2. Accessibility Features & Engineering',
+      accessibilityS2Text: '• Full keyboard navigation (Tab, Shift+Tab, Enter, Space, Escape, Arrows).\n• Screen reader compatibility (NVDA, JAWS, VoiceOver, TalkBack) with semantic HTML landmarks, proper heading hierarchy, and ARIA attributes.\n• Skip to main content link on every page.\n• Descriptive alternative text (Alt Text) for meaningful images and diagnostic products.\n• Accessible form controls with explicit labels, focus traps, and error announcements.\n• Dedicated accessibility widget with high contrast, dyslexia fonts, large text, and animation controls.',
+      accessibilityS3Title: '3. Physical Accessibility & Facilities Status',
+      accessibilityS3Text: 'The facilities and headquarters of BMT Diagnostics (12 HaIlan St., Or Akiva Industrial Park, Israel) function as an advanced manufacturing plant, cleanrooms, and R&D medical device laboratories and do not operate as a retail storefront or offer walk-in public reception. All customer support, consultations, and procurement services are conducted via digital channels, email, and phone. For pre-coordinated institutional visits, visitors may contact our accessibility coordinator in advance for assisted accommodations.',
+      accessibilityS4Title: '4. Accessibility Coordinator & Feedback',
+      accessibilityS4Text: 'If you encounter any accessibility barrier or have suggestions for improvement, please contact our Accessibility Coordinator:\n• Coordinator: Roey Tamir\n• Direct Mobile / WhatsApp: +972-54-7448033\n• Office Phone: +972-4-6396116\n• Email: roey@bmtdx.com (or info@bmtdx.com)\n• Postal Address: P.O. Box 12, Or Akiva Industrial Park, 3060000 Israel\n• Statement Last Audited: October 2024.',
       docId: 'Doc ID: Web001 (Controlled)',
       acknowledgeBtn: 'Acknowledge & Close'
     },
@@ -817,20 +843,22 @@ const translations = {
       quote: 'Kontakt' 
     },
     hero: { 
-      title: 'Labor In Echtzeit<br/><span style="color:#38BDF8;font-weight:900;">Für Die Öffentliche Gesundheit</span>', 
-      sub: 'BMT Diagnostics ist ein internationales israelisches MedTech-Unternehmen, das über 200 Schnelldiagnostik-Tests unter strengsten ISO-Standards entwickelt, produziert und vertreibt.', 
-      btnB2b: 'Klinischer Katalog', 
-      btnB2c: 'Produkte für Zuhause' 
+      title: 'Labor In Echtzeit<br/><span style="color:#7DD3FC;font-weight:800;">Für Die Öffentliche Gesundheit</span>', 
+      sub: 'BMT Diagnostics ist ein israelisches MedTech-Unternehmen, das über 200 Schnelldiagnostik-Tests unter strengsten medizinischen Qualitätsstandards entwickelt, produziert und vertreibt.', 
+      btnB2b: 'Fachkatalog', 
+      btnB2c: 'Apothekenprodukte' 
     },
     stats: {
       stat1Val: '2004',
-      stat1Label: 'Aktivität seit 2004',
+      stat1Label: 'Gegründet 2004',
       stat2Val: '+200',
-      stat2Label: 'Diagnostik-Panels',
-      stat3Val: '+40',
-      stat3Label: 'Exportmärkte weltweit',
-      stat4Val: 'ISO',
-      stat4Label: 'Zertifizierte Standards'
+      stat2Label: 'Diagnostische Tests',
+      stat3Val: 'ISO 13485',
+      stat3Label: 'Medizinprodukte-Standard',
+      stat4Val: 'ISO 27001',
+      stat4Label: 'Informationssicherheit',
+      stat5Val: 'ISO 9001',
+      stat5Label: 'Qualitätsmanagement'
     },
     trust: { 
       pat: 'Patentierte Diagnostik',
@@ -1152,6 +1180,17 @@ const translations = {
       termsS2Text: 'Produkte für Fachpersonal dürfen nur von qualifiziertem medizinischem Personal verwendet werden. Für alle Tests gilt strikt die beiliegende Packungsbeilage (IFU).',
       termsS3Title: '3. Haftungsbeschränkung & Gerichtsstand',
       termsS3Text: 'BMT Diagnostics haftet nicht für Schäden, die aus der Nutzung der Website entstehen. Es gilt ausschließlich das Recht des Staates Israel.',
+      accessibilityTab: 'Barrierefreiheitserklärung',
+      accessibilityTitle: 'Erklärung zur Barrierefreiheit (IS 5568 / WCAG 2.1 AA)',
+      accessibilityDocMeta: 'BMT Diagnostics Ltd. • Kontrolliertes Dokument Web001',
+      accessibilityS1Title: '1. Einhaltung von Standards & gesetzlichen Vorgaben',
+      accessibilityS1Text: 'BMT Diagnostics setzt sich für die barrierefreie Nutzung seiner Website und digitalen Angebote für alle Menschen ein. Diese Website entspricht dem israelischen Standard IS 5568 Stufe AA sowie den Richtlinien für barrierefreie Webinhalte (WCAG 2.1 Stufe AA).',
+      accessibilityS2Title: '2. Umgesetzte Barrierefreiheitsanpassungen',
+      accessibilityS2Text: '• Vollständige Tastaturnavigation (Tab, Shift+Tab, Enter, Leertaste, Esc).\n• Screenreader-Kompatibilität (NVDA, JAWS, VoiceOver) durch semantisches HTML und ARIA-Attribute.\n• Direktlink zum Hauptinhalt (Skip Link).\n• Beschreibende Alternativtexte (Alt-Tags) für Produktabbildungen.\n• Barrierefreie Formularfelder mit eindeutigen Labels.\n• Barrierefreiheits-Widget für Kontrast, Schriftgrößen und reduzierte Bewegung.',
+      accessibilityS3Title: '3. Physische Barrierefreiheit der Einrichtungen',
+      accessibilityS3Text: 'Die Einrichtungen von BMT Diagnostics (12 HaIlan St., Or Akiva Industrial Park, Israel) dienen als Produktionsstätte, Reinräume und Labore für Medizinprodukte und verfügen über keinen öffentlichen Publikumsverkehr oder Ladenverkauf. Betreuung und Anfragen erfolgen digital, telefonisch und per E-Mail. Bei institutionellen Fachbesuchen kontaktieren Sie bitte vorab unseren Barrierefreiheitsbeauftragten.',
+      accessibilityS4Title: '4. Ansprechpartner für Barrierefreiheit',
+      accessibilityS4Text: 'Bei Fragen oder Hinweisen zur Barrierefreiheit wenden Sie sich bitte an:\n• Beauftragter: Roey Tamir\n• Mobil / WhatsApp: +972-54-7448033\n• Telefon: +972-4-6396116\n• E-Mail: roey@bmtdx.com / info@bmtdx.com\n• Aktualisiert: Oktober 2024.',
       docId: 'Dokumenten-ID: Web001 (Kontrolliert)',
       acknowledgeBtn: 'Verstanden & Schließen'
     },
@@ -1215,20 +1254,22 @@ const translations = {
       quote: 'Contact' 
     },
     hero: { 
-      title: 'Laboratoire En Temps Réel<br/><span style="color:#38BDF8;font-weight:900;">Pour La Santé Publique</span>', 
-      sub: 'BMT Diagnostics est une société MedTech israélienne internationale qui développe, fabrique et commercialise plus de 200 types de tests de diagnostic rapide selon les normes ISO les plus strictes.', 
-      btnB2b: 'Catalogue Clinique', 
-      btnB2c: 'Produits d\'Autodiagnostic' 
+      title: 'Laboratoire En Temps Réel<br/><span style="color:#7DD3FC;font-weight:800;">Pour La Santé Publique</span>', 
+      sub: 'BMT Diagnostics est une société MedTech israélienne qui développe, fabrique et commercialise plus de 200 types de tests de diagnostic rapide selon des normes de qualité médicale strictes.', 
+      btnB2b: 'Catalogue Professionnel', 
+      btnB2c: 'Produits Pharmacie' 
     },
     stats: {
       stat1Val: '2004',
-      stat1Label: 'Activité depuis 2004',
+      stat1Label: 'Établi en 2004',
       stat2Val: '+200',
-      stat2Label: 'Panneaux Diagnostiques',
-      stat3Val: '+40',
-      stat3Label: 'Marchés d\'exportation',
-      stat4Val: 'ISO',
-      stat4Label: 'Normes Certifiées'
+      stat2Label: 'Tests Diagnostiques',
+      stat3Val: 'ISO 13485',
+      stat3Label: 'Norme Dispositifs Médicaux',
+      stat4Val: 'ISO 27001',
+      stat4Label: 'Sécurité de l\'Information',
+      stat5Val: 'ISO 9001',
+      stat5Label: 'Gestion de la Qualité'
     },
     trust: { 
       pat: 'Diagnostics Brevetés',
@@ -1550,6 +1591,17 @@ const translations = {
       termsS2Text: 'Les produits réservés aux professionnels doivent être manipulés exclusivement par du personnel de santé qualifié. L\'exécution de chaque test est soumise à la notice officielle (IFU).',
       termsS3Title: '3. Limitation de Responsabilité et Droit Applicable',
       termsS3Text: 'BMT Diagnostics décline toute responsabilité pour tout préjudice direct ou indirect résultant de la consultation du site. Les présentes conditions sont régies par le droit israélien.',
+      accessibilityTab: 'Accessibilité',
+      accessibilityTitle: 'Déclaration d\'Accessibilité Numérique (IS 5568 / WCAG 2.1 AA)',
+      accessibilityDocMeta: 'BMT Diagnostics Ltd. • Document Contrôlé Web001',
+      accessibilityS1Title: '1. Conformité aux Normes et Réglementations',
+      accessibilityS1Text: 'BMT Diagnostics s\'engage fermement à rendre ses services numériques accessibles à tous, y compris aux personnes en situation de handicap. Ce site est conforme à la norme israélienne IS 5568 niveau AA et aux recommandations internationales WCAG 2.1 niveau AA.',
+      accessibilityS2Title: '2. Dispositifs d\'Accessibilité Déployés',
+      accessibilityS2Text: '• Navigation complète au clavier (Tab, Maj+Tab, Entrée, Échap).\n• Compatibilité avec les lecteurs d\'écran (NVDA, JAWS, VoiceOver) via balises sémantiques et ARIA.\n• Lien d\'évitement direct vers le contenu principal (Skip Link).\n• Textes alternatifs (Alt) descriptifs sur tous les visuels produits.\n• Formulaires accessibles avec étiquettes associées et gestion des erreurs.\n• Outil d\'accessibilité intégré (contraste élevé, police pour dyslexie, taille de texte).',
+      accessibilityS3Title: '3. Dispositions d\'Accessibilité Physique',
+      accessibilityS3Text: 'Les installations de BMT Diagnostics (12 HaIlan St., Parc Industriel d\'Or Akiva, Israël) sont une usine de fabrication, des salles blanches et des laboratoires de recherche médicale fermés au public (aucune activité commerciale de détail sur place). L\'ensemble des services s\'effectue à distance. Pour des visites institutionnelles prévues, veuillez contacter notre référent accessibilité.',
+      accessibilityS4Title: '4. Référent Accessibilité et Contact',
+      accessibilityS4Text: 'Pour toute difficulté ou suggestion relative à l\'accessibilité :\n• Référent : Roey Tamir\n• Tél direct / WhatsApp : +972-54-7448033\n• Bureau : +972-4-6396116\n• E-mail : roey@bmtdx.com / info@bmtdx.com\n• Date de mise à jour : Octobre 2024.',
       docId: 'Réf. Document : Web001 (Contrôlé)',
       acknowledgeBtn: 'Compris et Fermer'
     },
@@ -1613,20 +1665,22 @@ const translations = {
       quote: 'Запрос цены' 
     },
     hero: { 
-      title: 'Экспресс-диагностика<br/><span style="color:#38BDF8;font-weight:900;">Для общественного здоровья</span>', 
-      sub: 'BMT Diagnostics — международная израильская MedTech компания, разрабатывающая и производящая более 200 экспресс-тестов по строгим стандартам ISO.', 
+      title: 'Экспресс-диагностика<br/><span style="color:#7DD3FC;font-weight:800;">Для общественного здоровья</span>', 
+      sub: 'BMT Diagnostics — израильская MedTech компания, разрабатывающая, производящая и реализующая более 200 экспресс-тестов по строгим медицинским стандартам качества.', 
       btnB2b: 'Профессиональный каталог', 
-      btnB2c: 'Домашние тесты' 
+      btnB2c: 'Аптечная продукция' 
     },
     stats: {
       stat1Val: '2004',
-      stat1Label: 'Основана в 2004 году',
+      stat1Label: 'Основана в 2004',
       stat2Val: '+200',
-      stat2Label: 'Клинических панелей',
-      stat3Val: '+40',
-      stat3Label: 'Стран экспорта',
-      stat4Val: 'ISO',
-      stat4Label: 'Международные стандарты'
+      stat2Label: 'Клинических тестов',
+      stat3Val: 'ISO 13485',
+      stat3Label: 'Стандарт медизделий',
+      stat4Val: 'ISO 27001',
+      stat4Label: 'Информационная безопасность',
+      stat5Val: 'ISO 9001',
+      stat5Label: 'Менеджмент качества'
     },
     trust: { 
       pat: 'Международные патенты',
@@ -1948,6 +2002,17 @@ const translations = {
       termsS2Text: 'Продукция с пометкой «Только для профессионалов» предназначена исключительно для квалифицированного медицинского персонала. Проведение тестов регулируется официальной инструкцией (IFU).',
       termsS3Title: '3. Ограничение ответственности и применимое право',
       termsS3Text: 'BMT Diagnostics не несет ответственности за любой ущерб, возникший в результате использования информации с сайта. Условия регулируются законодательством Государства Израиль.',
+      accessibilityTab: 'Доступность',
+      accessibilityTitle: 'Декларация о доступности (IS 5568 / WCAG 2.1 AA)',
+      accessibilityDocMeta: 'BMT Diagnostics Ltd. • Контролируемый документ Web001',
+      accessibilityS1Title: '1. Соответствие стандартам и законодательству',
+      accessibilityS1Text: 'Компания BMT Diagnostics стремится обеспечить равный и беспрепятственный доступ к информации для всех пользователей, включая людей с ограниченными возможностями. Сайт адаптирован в соответствии со стандартом Израиля IS 5568 (уровень AA) и международными стандартами WCAG 2.1 (уровень AA).',
+      accessibilityS2Title: '2. Реализованные функции доступности',
+      accessibilityS2Text: '• Полная навигация с клавиатуры (Tab, Enter, Пробел, Esc).\n• Поддержка программ экранного доступа (NVDA, JAWS, VoiceOver) благодаря семантическому коду и ARIA-разметке.\n• Ссылка быстрого перехода к основному содержимому (Skip to content).\n• Описательные текстовые альтернативы (Alt) для всех изображений продукции.\n• Доступные формы с четкими метками и захватом фокуса в диалоговых окнах.\n• Виджет доступности: высокая контрастность, монохром, шрифт для дислексии, масштабирование.',
+      accessibilityS3Title: '3. Физическая доступность помещений',
+      accessibilityS3Text: 'Помещения BMT Diagnostics (ул. Ха-Илан 12, промзона Ор-Акива, Израиль) являются производственным предприятием и медицинскими лабораториями закрытого цикла без приема посетителей и розничной торговли. Все обслуживание клиентов ведется дистанционно. При необходимости служебного визита свяжитесь с координатором доступности.',
+      accessibilityS4Title: '4. Координатор доступности и обратная связь',
+      accessibilityS4Text: 'При возникновении трудностей с доступом к информации обращайтесь:\n• Координатор: Рои Тамир (Roey Tamir)\n• Моб. / WhatsApp: +972-54-7448033\n• Офис: +972-4-6396116\n• E-mail: roey@bmtdx.com / info@bmtdx.com\n• Дата аудита декларации: Октябрь 2024 г.',
       docId: 'Идентификатор: Web001 (Контролируемый)',
       acknowledgeBtn: 'Понятно, закрыть'
     },
@@ -2011,20 +2076,22 @@ const translations = {
       quote: 'طلب تسعيرة' 
     },
     hero: { 
-      title: 'مختبر في الوقت الفعلي<br/><span style="color:#38BDF8;font-weight:900;">من أجل الصحة العامة</span>', 
-      sub: 'شركة BMT Diagnostics هي شركة تكنولوجيا طبية (MedTech) إسرائيلية دولية تطور وتصنع وتسوق أكثر من 200 نوع من الفحوصات السريعة وفقاً لأعلى معايير الجودة ISO.', 
+      title: 'مختبر في الوقت الفعلي<br/><span style="color:#7DD3FC;font-weight:800;">من أجل الصحة العامة</span>', 
+      sub: 'شركة BMT Diagnostics هي شركة تكنولوجيا طبية إسرائيلية تطور وتصنع وتسوق أكثر من 200 نوع من الفحوصات السريعة وفقاً لأعلى معايير الجودة الطبية.', 
       btnB2b: 'الكتالوج الطبي', 
-      btnB2c: 'منتجات الرعاية المنزلية' 
+      btnB2c: 'منتجات الصيدليات' 
     },
     stats: {
       stat1Val: '2004',
-      stat1Label: 'بدء النشاط عام 2004',
+      stat1Label: 'تأسست عام 2004',
       stat2Val: '+200',
-      stat2Label: 'فحوصات طبية سريرية',
-      stat3Val: '+40',
-      stat3Label: 'أسواق تصدير عالمية',
-      stat4Val: 'ISO',
-      stat4Label: 'معايير جودة دولية'
+      stat2Label: 'فحوصات سريعة وشاملة',
+      stat3Val: 'ISO 13485',
+      stat3Label: 'معيار الأجهزة الطبية',
+      stat4Val: 'ISO 27001',
+      stat4Label: 'أمن المعلومات',
+      stat5Val: 'ISO 9001',
+      stat5Label: 'إدارة الجودة'
     },
     trust: { 
       pat: 'براءات اختراع دولية',
@@ -2346,6 +2413,17 @@ const translations = {
       termsS2Text: 'المنتجات المخصصة للاستخدام المهني فقط موجهة للكوادر الطبية والمختبرات والمستشفيات المؤهلة. يخضع إجراء أي فحص لتعليمات النشرة المرفقة (IFU).',
       termsS3Title: '3. حدود المسؤولية والقانون المعمول به',
       termsS3Text: 'لا تتحمل شركة BMT Diagnostics أي مسؤولية عن أي أضرار مباشرة أو غير مباشرة ناتجة عن استخدام الموقع. تخضع هذه الشروط حصرياً لقوانين دولة إسرائيل.',
+      accessibilityTab: 'إمكانية الوصول',
+      accessibilityTitle: 'بيان إمكانية الوصول الرقمي (IS 5568 / WCAG 2.1 AA)',
+      accessibilityDocMeta: 'شركة بي.إم.تي ديادنوستيكس المحدودة (BMT Diagnostics Ltd) • وثيقة مراقبة Web001',
+      accessibilityS1Title: '1. الالتزام بالمعايير واللوائح القانونية',
+      accessibilityS1Text: 'تلتزم شركة BMT Diagnostics بضمان وصول متكافئ وشامل لخدماتها الرقمية لجميع أفراد المجتمع، بمن فيهم ذوو الإعاقة. يتوافق هذا الموقع مع المعيار الإسرائيلي IS 5568 بمستوى AA، ومبادئ النفاذ الرقمي الدولية WCAG 2.1 بمستوى AA.',
+      accessibilityS2Title: '2. ميزات وإجراءات إمكانية الوصول في الموقع',
+      accessibilityS2Text: '• تصفح كامل عبر لوحة المفاتيح (Tab, Shift+Tab, Enter, Space, Escape).\n• توافق تام مع قارئات الشاشة (NVDA, JAWS, VoiceOver) عبر وسوم HTML الدلالية وتقنيات ARIA.\n• رابط التخطي المباشر للمحتوى الرئيسي (Skip Link).\n• نصوص بديلة (Alt Text) وصفية لجميع صور المنتجات والمخططات.\n• نماذج اتصال مؤهلة نفاذياً وتتبع تركيز المؤشر.\n• قائمة مخصصة لخيارات الوصول (التباين العالي، خط لعسر القراءة، تكبير النصوص وإيقاف الحركة).',
+      accessibilityS3Title: '3. الترتيبات المكانية للمنشأة',
+      accessibilityS3Text: 'تُعد منشآت ومكاتب BMT Diagnostics (شارع هائيلان 12، المنطقة الصناعية أور عكيفا، إسرائيل) مصنعاً ومختبرات تخصصية لإنتاج المستلزمات الطبية وليست متجراً تجارياً أو مركزاً لاستقبال الجمهور العام. تُقدم جميع خدمات التواصل والدعم عبر القنوات الرقمية والهاتفية. للزيارات المؤسسية التخصصية المنسقة مسبقاً، يُرجى التنسيق المسبق مع مسؤول إمكانية الوصول.',
+      accessibilityS4Title: '4. مسؤول إمكانية الوصول وبيانات التواصل',
+      accessibilityS4Text: 'لأي استفسارات أو بلاغات عن عقبات في التصفح، يُرجى التواصل مباشرة مع مسؤول إمكانية الوصول:\n• المسؤول: روאי طمير (Roey Tamir)\n• هاتف محمول مباشر / واتساب: 972-54-7448033+\n• هاتف المكتب: 972-4-6396116+\n• البريد الإلكتروني: roey@bmtdx.com (وكذلك info@bmtdx.com)\n• تاريخ تحديث البيان: أكتوبر 2024.',
       docId: 'معرف الوثيقة: Web001 (مراقبة)',
       acknowledgeBtn: 'موافق وإغلاق'
     },

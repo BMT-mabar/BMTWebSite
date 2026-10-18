@@ -124,7 +124,7 @@ export default function SocialFloatingWidget() {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group relative flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full ${social.bg} ${social.shadow} transition-all duration-300 hover:scale-110 active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-500/40 btn-bouncy`}
+                className={`group relative flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full ${social.bg} ${social.shadow} transition-all duration-300 hover:scale-110 active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-500/50 btn-bouncy`}
                 aria-label={social.tooltip}
                 title={social.tooltip}
               >
@@ -132,7 +132,7 @@ export default function SocialFloatingWidget() {
                 
                 {/* Floating Tooltip Bubble */}
                 <span 
-                  className={`absolute ${isRtl ? 'right-12 sm:right-14' : 'left-12 sm:left-14'} whitespace-nowrap bg-slate-900/90 text-white text-[11px] font-bold px-3 py-1.5 rounded-xl backdrop-blur-md opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 shadow-lg`}
+                  className={`absolute ${isRtl ? 'right-12 sm:right-14' : 'left-12 sm:left-14'} whitespace-nowrap bg-slate-900/95 text-white text-[11px] font-bold px-3 py-1.5 rounded-xl backdrop-blur-md opacity-0 group-hover:opacity-100 group-focus:opacity-100 pointer-events-none transition-opacity duration-200 shadow-lg`}
                 >
                   {social.tooltip}
                 </span>
@@ -143,7 +143,7 @@ export default function SocialFloatingWidget() {
           {/* Minimize / Toggle button */}
           <button
             onClick={() => setIsExpanded(false)}
-            className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-800/80 hover:bg-slate-900 text-white flex items-center justify-center shadow-md hover:scale-105 transition-all text-xs focus:outline-none opacity-70 hover:opacity-100"
+            className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-800/80 hover:bg-slate-900 text-white flex items-center justify-center shadow-md hover:scale-105 transition-all text-xs focus:outline-none focus:ring-2 focus:ring-blue-400 opacity-70 hover:opacity-100"
             title={collapseTooltip}
             aria-label={collapseTooltip}
           >

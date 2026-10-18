@@ -409,10 +409,11 @@ export default function ClinicalPage() {
         style={{ background: 'linear-gradient(135deg, #0267B5 0%, #01417A 100%)' }}
       >
         {/* Blue Lab Team Background Image */}
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
           <img 
             src={getAssetPath('home-main-image.png')} 
-            alt="BMT Blue Healthcare Team" 
+            alt="" 
+            aria-hidden="true"
             className="w-full h-full object-cover opacity-30 mix-blend-overlay scale-105"
             onError={(e) => { e.target.style.display = 'none'; }}
           />

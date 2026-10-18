@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Smartphone, Globe, ShieldCheck, Microscope, Activity, Flame, Cpu, Eye, Check, Play, X, Video } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
@@ -15,6 +15,16 @@ export default function TechPage() {
   // Dynamic state to showcase interactive steps of the patent device
   const [activeStep, setActiveStep] = useState(1);
   const [activeVideoModal, setActiveVideoModal] = useState(null);
+
+  // Keyboard Escape listener to close video modal (WCAG 2.1.2)
+  useEffect(() => {
+    if (!activeVideoModal) return;
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') setActiveVideoModal(null);
+    };
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [activeVideoModal]);
 
   const stepHighlights = {
     1: {
@@ -336,14 +346,23 @@ export default function TechPage() {
                 <div 
                   key={vid.id}
                   onClick={() => setActiveVideoModal(vid.youtubeId)}
-                  className="group bg-white rounded-3xl border border-slate-200/80 shadow-md hover:shadow-2xl overflow-hidden cursor-pointer transition-all duration-300 card-3d-lift flex flex-col justify-between"
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setActiveVideoModal(vid.youtubeId);
+                    }
+                  }}
+                  aria-label={`${_('product.video')}: ${vidTitle}`}
+                  className="group bg-white rounded-3xl border border-slate-200/80 shadow-md hover:shadow-2xl overflow-hidden cursor-pointer transition-all duration-300 card-3d-lift flex flex-col justify-between focus:outline-none focus:ring-4 focus:ring-blue-500/40 text-start"
                 >
                   <div className="relative h-48 bg-slate-900 overflow-hidden">
                     <img 
                       src={`https://img.youtube.com/vi/${vid.youtubeId}/hqdefault.jpg`} 
                       alt={vidTitle}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
-                      onError={(e) => { e.target.src = '/LabOnTime Device.jpg'; }}
+                      onError={(e) => { e.target.src = getAssetPath('LabOnTime Device.jpg'); }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
                     
@@ -382,11 +401,16 @@ export default function TechPage() {
 
         {/* Video Lightbox Modal */}
         {activeVideoModal && (
-          <div className="fixed inset-0 z-[200] bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in">
+          <div 
+            className="fixed inset-0 z-[200] bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in"
+            role="dialog"
+            aria-modal="true"
+            aria-label={_('product.video')}
+          >
             <div className="relative w-full max-w-4xl bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-white/20">
               <button 
                 onClick={() => setActiveVideoModal(null)}
-                className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center backdrop-blur-md transition-all"
+                className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center backdrop-blur-md transition-all focus:outline-none focus:ring-2 focus:ring-white"
                 aria-label="Close video"
               >
                 <X className="w-5 h-5" />
