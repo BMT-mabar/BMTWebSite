@@ -460,18 +460,21 @@ export default function ClinicalPage() {
             {drKidsArticles.map(article => {
               const artTitle = typeof article.title === 'object' ? (article.title[lang] || article.title.en || article.title.he) : article.title;
               const artDesc = typeof article.desc === 'object' ? (article.desc[lang] || article.desc.en || article.desc.he) : article.desc;
+              const isHe = lang === 'he';
               return (
                 <a 
                   key={article.id}
                   href={article.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group bg-white rounded-[2.5rem] border border-slate-200/80 shadow-md hover:shadow-2xl overflow-hidden transition-all duration-300 card-3d-lift flex flex-col justify-between"
+                  aria-label={`${artTitle} - ${_('clinical.readDrKids')} (${isHe ? 'נפתח בלשונית חדשה' : 'opens in new tab'})`}
+                  className="group bg-white rounded-[2.5rem] border border-slate-200/80 shadow-md hover:shadow-2xl overflow-hidden transition-all duration-300 card-3d-lift flex flex-col justify-between focus:outline-none focus:ring-4 focus:ring-blue-500/30"
                 >
                   <div className="h-56 w-full bg-slate-100 relative overflow-hidden border-b border-slate-100">
                     <img 
                       src={getAssetPath(article.img)} 
-                      alt={artTitle}
+                      alt=""
+                      aria-hidden="true"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <span className="absolute top-4 right-4 rtl:right-4 rtl:left-auto bg-blue-600/90 backdrop-blur-md text-white text-[10px] font-black px-3.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
@@ -491,7 +494,7 @@ export default function ClinicalPage() {
 
                     <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-blue-600 group-hover:text-burgundy transition-colors">
                       <span>{_('clinical.readDrKids')}</span>
-                      <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true" />
                     </div>
                   </div>
                 </a>
@@ -516,20 +519,22 @@ export default function ClinicalPage() {
               const artTitle = typeof art.title === 'object' ? (art.title[lang] || art.title.en || art.title.he) : art.title;
               const artDesc = typeof art.desc === 'object' ? (art.desc[lang] || art.desc.en || art.desc.he) : art.desc;
               const artSource = typeof art.source === 'object' ? (art.source[lang] || art.source.en || art.source.he) : art.source;
+              const isHe = lang === 'he';
               return (
                 <a
                   key={`strep-${idx}`}
                   href={art.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group bg-white rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl overflow-hidden transition-all duration-300 flex flex-col justify-between p-6 card-3d-lift"
+                  aria-label={`${artTitle} (${artSource}) - ${_('clinical.readArticle')} (${isHe ? 'נפתח בלשונית חדשה' : 'opens in new tab'})`}
+                  className="group bg-white rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl overflow-hidden transition-all duration-300 flex flex-col justify-between p-6 card-3d-lift focus:outline-none focus:ring-4 focus:ring-blue-500/30"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-[10px] font-black uppercase tracking-wider bg-blue-50 text-blue-700 px-3 py-1 rounded-full border border-blue-100/60">
                         {artSource}
                       </span>
-                      <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors" />
+                      <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors" aria-hidden="true" />
                     </div>
                     <h3 className="font-extrabold text-slate-900 text-base mb-2 group-hover:text-blue-600 transition-colors leading-snug">
                       {artTitle}
@@ -540,7 +545,7 @@ export default function ClinicalPage() {
                   </div>
                   <div className="mt-5 pt-3 border-t border-slate-100 text-[11px] font-bold text-blue-600 group-hover:text-burgundy flex items-center justify-between">
                     <span>{_('clinical.readArticle')}</span>
-                    <span className="text-slate-300">→</span>
+                    <span className="text-slate-300" aria-hidden="true">→</span>
                   </div>
                 </a>
               );
@@ -564,13 +569,15 @@ export default function ClinicalPage() {
               const artTitle = typeof art.title === 'object' ? (art.title[lang] || art.title.en || art.title.he) : art.title;
               const artDesc = typeof art.desc === 'object' ? (art.desc[lang] || art.desc.en || art.desc.he) : art.desc;
               const artSource = typeof art.source === 'object' ? (art.source[lang] || art.source.en || art.source.he) : art.source;
+              const isHe = lang === 'he';
               return (
                 <a
                   key={`gastro-${idx}`}
                   href={art.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group bg-white rounded-[2.5rem] border border-slate-200/80 shadow-md hover:shadow-2xl overflow-hidden transition-all duration-300 flex flex-col sm:flex-row justify-between p-8 card-3d-lift gap-6"
+                  aria-label={`${artTitle} (${artSource}) - ${_('clinical.readArticle')} (${isHe ? 'נפתח בלשונית חדשה' : 'opens in new tab'})`}
+                  className="group bg-white rounded-[2.5rem] border border-slate-200/80 shadow-md hover:shadow-2xl overflow-hidden transition-all duration-300 flex flex-col sm:flex-row justify-between p-8 card-3d-lift gap-6 focus:outline-none focus:ring-4 focus:ring-blue-500/30"
                 >
                   <div className="flex flex-col justify-between flex-grow">
                     <div>
@@ -586,7 +593,7 @@ export default function ClinicalPage() {
                     </div>
                     <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-blue-600 group-hover:text-burgundy">
                       <span>{_('clinical.readArticle')}</span>
-                      <ArrowUpRight className="w-4 h-4" />
+                      <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
                     </div>
                   </div>
                 </a>

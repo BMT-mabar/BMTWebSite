@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { ShieldCheck, Microscope, Activity, Award, ArrowRight, ArrowLeft, CheckCircle, Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ShieldCheck, Microscope, Activity, Award, ArrowRight, ArrowLeft, CheckCircle, Calendar, ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import productsDatabase from '../data/productsDatabase';
 import { getAssetPath } from '../utils/imagePath';
@@ -61,6 +61,8 @@ export default function HomePage({ onOpenRfq }) {
   const logos = getPartnerLogos(_);
 
   const carouselRef = useRef(null);
+  const [isCarouselPaused, setIsCarouselPaused] = useState(false);
+  const [isMarqueePaused, setIsMarqueePaused] = useState(false);
 
   const scrollCarousel = (direction) => {
     if (carouselRef.current) {
@@ -98,6 +100,8 @@ export default function HomePage({ onOpenRfq }) {
             title="BMT Corporate Video Background"
             allow="autoplay; encrypted-media"
             loading="eager"
+            tabIndex={-1}
+            aria-hidden="true"
           />
           {/* Lighter, Luminous Medical Azure Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#005596]/80 via-[#004c8c]/65 to-[#00386b]/45 rtl:bg-gradient-to-l rtl:from-[#005596]/80 rtl:via-[#004c8c]/65 rtl:to-[#00386b]/45" />
@@ -253,25 +257,37 @@ export default function HomePage({ onOpenRfq }) {
 
             <div className="flex items-center gap-3">
               <button
+                type="button"
+                onClick={() => setIsCarouselPaused(!isCarouselPaused)}
+                className="w-12 h-12 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-center text-slate-700 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label={isCarouselPaused ? (_('accessibility.playCarousel') || 'הפעל גלילה אוטומטית') : (_('accessibility.pauseCarousel') || 'השהה גלילה אוטומטית')}
+                title={isCarouselPaused ? (_('accessibility.playCarousel') || 'הפעל גלילה אוטומטית') : (_('accessibility.pauseCarousel') || 'השהה גלילה אוטומטית')}
+              >
+                {isCarouselPaused ? <Play className="w-5 h-5 text-blue-600 fill-current" aria-hidden="true" /> : <Pause className="w-5 h-5 text-slate-700" aria-hidden="true" />}
+              </button>
+              <button
+                type="button"
                 onClick={() => scrollCarousel('left')}
-                className="w-12 h-12 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-center text-slate-700 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all active:scale-95 focus:outline-none"
-                aria-label="Scroll left"
+                className="w-12 h-12 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-center text-slate-700 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label={_('accessibility.scrollPrev') || 'גלול מוצרים אחורה'}
               >
-                <ChevronLeft className="w-6 h-6" />
+                <ChevronLeft className="w-6 h-6" aria-hidden="true" />
               </button>
               <button
+                type="button"
                 onClick={() => scrollCarousel('right')}
-                className="w-12 h-12 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-center text-slate-700 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all active:scale-95 focus:outline-none"
-                aria-label="Scroll right"
+                className="w-12 h-12 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-center text-slate-700 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label={_('accessibility.scrollNext') || 'גלול מוצרים קדימה'}
               >
-                <ChevronRight className="w-6 h-6" />
+                <ChevronRight className="w-6 h-6" aria-hidden="true" />
               </button>
               <button
+                type="button"
                 onClick={() => navigate('/catalog/b2c')}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-md transition-all active:scale-95 focus:outline-none"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-md transition-all active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <span>{_('nav.b2c')}</span>
-                {isRtl ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
+                {isRtl ? <ArrowLeft className="w-4 h-4" aria-hidden="true" /> : <ArrowRight className="w-4 h-4" aria-hidden="true" />}
               </button>
             </div>
           </div>
@@ -283,7 +299,10 @@ export default function HomePage({ onOpenRfq }) {
           className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth px-4 sm:px-6 lg:px-8 py-4"
           dir="ltr"
         >
-          <div className="flex gap-6 animate-infinite-scroll hover:pause-animation">
+          <div 
+            className="flex gap-6 animate-infinite-scroll hover:pause-animation"
+            style={{ animationPlayState: isCarouselPaused ? 'paused' : 'running' }}
+          >
             {pharmaProducts.map((prod, idx) => (
               <div 
                 key={`pharma-1-${prod.id}-${idx}`}
@@ -344,66 +363,59 @@ export default function HomePage({ onOpenRfq }) {
               </div>
             ))}
 
-            {/* Second Identical Set for Seamless Unbroken Looping */}
-            {pharmaProducts.map((prod, idx) => (
-              <div 
-                key={`pharma-2-${prod.id}-${idx}`}
-                onClick={() => navigate(`/product/${prod.id}`)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    navigate(`/product/${prod.id}`);
-                  }
-                }}
-                aria-label={`${_('home.viewDetails')}: ${prod.title[lang] || prod.title.en || prod.title.he}`}
-                className="shrink-0 w-[290px] sm:w-[320px] bg-white rounded-[2.5rem] border border-slate-200/80 shadow-md hover:shadow-2xl overflow-hidden cursor-pointer transition-all duration-300 card-3d-lift flex flex-col justify-between group focus:outline-none focus:ring-4 focus:ring-blue-500/40 text-start"
-              >
-                <div className="h-56 w-full bg-slate-50 relative p-6 flex items-center justify-center overflow-hidden border-b border-slate-100">
-                  <img 
-                    src={getAssetPath(prod.image)} 
-                    alt={prod.title[lang] || prod.title.en || prod.title.he} 
-                    className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500"
-                    onError={(e) => { e.target.src = getAssetPath('LabOnTime Device.jpg'); }}
-                  />
-                  <span className={`absolute top-4 right-4 rtl:right-4 rtl:left-auto text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm ${prod.isProfessionalOnly ? 'bg-blue-600 text-white' : 'bg-emerald-500 text-white'}`}>
-                    {prod.isProfessionalOnly ? _('product.professionalOnly') : _('product.selfUse')}
-                  </span>
-                  {(prod.isPatented || prod.id.includes('strep') || prod.id.includes('covid-otc') || prod.id.includes('fob-b2c') || prod.id.includes('h-pylori')) && (
-                    <span className="absolute top-4 left-4 rtl:left-4 rtl:right-auto text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm bg-gradient-to-r from-burgundy to-burgundy-600 text-white flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-300 animate-pulse"></span>
-                      <span>
-                        {prod.patentBadge 
-                          ? (typeof prod.patentBadge === 'object' ? (prod.patentBadge[lang] || prod.patentBadge.he || prod.patentBadge.en) : prod.patentBadge)
-                          : _('product.patentBadge')}
+            {/* Second Identical Set for Seamless Unbroken Looping (Hidden from Screen Readers & Tab Order) */}
+            <div aria-hidden="true" className="flex gap-6 pointer-events-none select-none">
+              {pharmaProducts.map((prod, idx) => (
+                <div 
+                  key={`pharma-2-${prod.id}-${idx}`}
+                  tabIndex={-1}
+                  className="shrink-0 w-[290px] sm:w-[320px] bg-white rounded-[2.5rem] border border-slate-200/80 shadow-md overflow-hidden flex flex-col justify-between text-start"
+                >
+                  <div className="h-56 w-full bg-slate-50 relative p-6 flex items-center justify-center overflow-hidden border-b border-slate-100">
+                    <img 
+                      src={getAssetPath(prod.image)} 
+                      alt="" 
+                      className="max-h-full max-w-full object-contain"
+                      onError={(e) => { e.target.src = getAssetPath('LabOnTime Device.jpg'); }}
+                    />
+                    <span className={`absolute top-4 right-4 rtl:right-4 rtl:left-auto text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm ${prod.isProfessionalOnly ? 'bg-blue-600 text-white' : 'bg-emerald-500 text-white'}`}>
+                      {prod.isProfessionalOnly ? _('product.professionalOnly') : _('product.selfUse')}
+                    </span>
+                    {(prod.isPatented || prod.id.includes('strep') || prod.id.includes('covid-otc') || prod.id.includes('fob-b2c') || prod.id.includes('h-pylori')) && (
+                      <span className="absolute top-4 left-4 rtl:left-4 rtl:right-auto text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm bg-gradient-to-r from-burgundy to-burgundy-600 text-white flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-300"></span>
+                        <span>
+                          {prod.patentBadge 
+                            ? (typeof prod.patentBadge === 'object' ? (prod.patentBadge[lang] || prod.patentBadge.he || prod.patentBadge.en) : prod.patentBadge)
+                            : _('product.patentBadge')}
+                        </span>
                       </span>
-                    </span>
-                  )}
-                </div>
-
-                <div className="p-6 flex flex-col justify-between flex-grow">
-                  <div>
-                    <h3 className="font-extrabold text-slate-900 text-base md:text-lg mb-2 leading-snug group-hover:text-blue-600 transition-colors line-clamp-2">
-                      {prod.title[lang] || prod.title.en || prod.title.he}
-                    </h3>
-                    <p className="text-slate-500 text-xs leading-relaxed line-clamp-2 font-normal">
-                      {prod.shortDesc[lang] || prod.shortDesc.en || prod.shortDesc.he}
-                    </p>
+                    )}
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
-                    <span className="text-[11px] font-extrabold text-slate-400">
-                      {prod.specs?.barcode ? `Barcode: ${prod.specs.barcode}` : 'BMT OTC'}
-                    </span>
-                    <span className="inline-flex items-center gap-1 text-xs font-black text-blue-600 group-hover:text-burgundy transition-colors">
-                      <span>{_('home.viewDetails')}</span>
-                      {isRtl ? <ArrowLeft className="w-3.5 h-3.5" /> : <ArrowRight className="w-3.5 h-3.5" />}
-                    </span>
+                  <div className="p-6 flex flex-col justify-between flex-grow">
+                    <div>
+                      <div className="font-extrabold text-slate-900 text-base md:text-lg mb-2 leading-snug line-clamp-2">
+                        {prod.title[lang] || prod.title.en || prod.title.he}
+                      </div>
+                      <p className="text-slate-500 text-xs leading-relaxed line-clamp-2 font-normal">
+                        {prod.shortDesc[lang] || prod.shortDesc.en || prod.shortDesc.he}
+                      </p>
+                    </div>
+
+                    <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                      <span className="text-[11px] font-extrabold text-slate-400">
+                        {prod.specs?.barcode ? `Barcode: ${prod.specs.barcode}` : 'BMT OTC'}
+                      </span>
+                      <span className="inline-flex items-center gap-1 text-xs font-black text-blue-600">
+                        <span>{_('home.viewDetails')}</span>
+                        {isRtl ? <ArrowLeft className="w-3.5 h-3.5" /> : <ArrowRight className="w-3.5 h-3.5" />}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -468,7 +480,7 @@ export default function HomePage({ onOpenRfq }) {
                   {_('home.strepDesc')}
                 </p>
 
-                <div className="flex gap-3 mt-6" role="list">
+                <div className="flex gap-3 mt-6">
                   <div className="bg-blue-50 px-4 py-3.5 rounded-2xl border border-blue-100/80 flex-1 text-center flex items-center justify-center shadow-inner">
                     <span className="text-sm sm:text-base font-black text-blue-900 leading-tight">
                       {_('home.strepSpec')}
@@ -530,7 +542,7 @@ export default function HomePage({ onOpenRfq }) {
                   {_('home.fitDesc')}
                 </p>
 
-                <div className="flex gap-3 mt-6" role="list">
+                <div className="flex gap-3 mt-6">
                   <div className="bg-blue-50 px-4 py-3 rounded-xl border border-blue-100/80 flex-1 text-center">
                     <span className="block text-base sm:text-lg font-black text-blue-900 leading-tight mb-1">{_('home.atHomeTag')}</span>
                     <span className="text-[10px] font-bold text-blue-600 tracking-wider block leading-tight">{_('home.fitAcc')}</span>
@@ -726,9 +738,19 @@ export default function HomePage({ onOpenRfq }) {
           <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight mt-1 mb-2">
             {_('home.partnersTitle')}
           </h2>
-          <p className="text-slate-500 text-sm font-medium max-w-xl mx-auto">
+          <p className="text-slate-500 text-sm font-medium max-w-xl mx-auto mb-4">
             {_('home.partnersSub')}
           </p>
+          <button
+            type="button"
+            onClick={() => setIsMarqueePaused(!isMarqueePaused)}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-slate-200 shadow-xs text-xs font-bold text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+            aria-label={isMarqueePaused ? (_('accessibility.playPartners') || 'הפעל תנועת שותפויות') : (_('accessibility.pausePartners') || 'השהה תנועת שותפויות')}
+            title={isMarqueePaused ? (_('accessibility.playPartners') || 'הפעל תנועת שותפויות') : (_('accessibility.pausePartners') || 'השהה תנועת שותפויות')}
+          >
+            {isMarqueePaused ? <Play className="w-3.5 h-3.5 text-blue-600 fill-current" aria-hidden="true" /> : <Pause className="w-3.5 h-3.5 text-slate-700" aria-hidden="true" />}
+            <span>{isMarqueePaused ? (_('accessibility.playPartners') || 'הפעל תנועה') : (_('accessibility.pausePartners') || 'השהה תנועה')}</span>
+          </button>
         </div>
 
         {/* The Carousel Marquee Wrapper */}
@@ -736,7 +758,10 @@ export default function HomePage({ onOpenRfq }) {
           <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-slate-50 via-slate-50/80 to-transparent z-25 pointer-events-none" />
           <div className="absolute inset-y-0 right-0 w-28 bg-gradient-to-l from-slate-50 via-slate-50/80 to-transparent z-25 pointer-events-none" />
 
-          <div className="animate-infinite-scroll flex gap-10">
+          <div 
+            className="animate-infinite-scroll flex gap-10 hover:pause-animation"
+            style={{ animationPlayState: isMarqueePaused ? 'paused' : 'running' }}
+          >
             {logos.map((logo, idx) => (
               <div 
                 key={`logo-1-${idx}`} 
@@ -758,27 +783,32 @@ export default function HomePage({ onOpenRfq }) {
                 </div>
               </div>
             ))}
-            {logos.map((logo, idx) => (
-              <div 
-                key={`logo-2-${idx}`} 
-                className="flex items-center gap-6 bg-white border border-slate-200/90 px-10 py-7 rounded-[2.5rem] shadow-lg group shrink-0 min-w-[380px] hover:border-blue-500 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
-              >
-                <div className="shrink-0 flex items-center justify-center w-32 h-32 md:w-36 md:h-36 bg-slate-50 rounded-3xl p-4 border border-slate-100 shadow-sm group-hover:scale-105 transition-transform">
-                  {logo.imgUrl ? (
-                    <img 
-                      src={getAssetPath(logo.imgUrl)} 
-                      alt={logo.name} 
-                      className="w-full h-full object-contain transition-all duration-300 filter drop-shadow-sm"
-                      onError={(e) => { e.target.style.display = 'none'; }}
-                    />
-                  ) : null}
+            
+            {/* Second Identical Set for Seamless Unbroken Looping (Hidden from Screen Readers & Tab Order) */}
+            <div aria-hidden="true" className="flex gap-10 pointer-events-none select-none">
+              {logos.map((logo, idx) => (
+                <div 
+                  key={`logo-2-${idx}`} 
+                  tabIndex={-1}
+                  className="flex items-center gap-6 bg-white border border-slate-200/90 px-10 py-7 rounded-[2.5rem] shadow-lg shrink-0 min-w-[380px]"
+                >
+                  <div className="shrink-0 flex items-center justify-center w-32 h-32 md:w-36 md:h-36 bg-slate-50 rounded-3xl p-4 border border-slate-100 shadow-sm">
+                    {logo.imgUrl ? (
+                      <img 
+                        src={getAssetPath(logo.imgUrl)} 
+                        alt="" 
+                        className="w-full h-full object-contain filter drop-shadow-sm"
+                        onError={(e) => { e.target.style.display = 'none'; }}
+                      />
+                    ) : null}
+                  </div>
+                  <div className="text-start">
+                    <div className="text-base md:text-lg font-black text-slate-900 tracking-tight leading-snug">{logo.name}</div>
+                    <div className="text-xs md:text-sm font-extrabold text-blue-600 tracking-wider uppercase mt-1.5 leading-snug">{logo.label}</div>
+                  </div>
                 </div>
-                <div className="text-start">
-                  <div className="text-base md:text-lg font-black text-slate-900 tracking-tight leading-snug">{logo.name}</div>
-                  <div className="text-xs md:text-sm font-extrabold text-blue-600 tracking-wider uppercase mt-1.5 leading-snug">{logo.label}</div>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>

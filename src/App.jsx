@@ -13,6 +13,7 @@ import ProductPage from './pages/ProductPage';
 import TechPage from './pages/TechPage';
 import ClinicalPage from './pages/ClinicalPage';
 import AboutPage from './pages/AboutPage';
+import AccessibilityPage from './pages/AccessibilityPage';
 
 // ScrollToTop observer: automatically resets window scroll coordinate on navigation changes
 function ScrollToTop() {
@@ -37,7 +38,7 @@ export default function App() {
             {/* Skip-to-content link — visible on keyboard focus (WCAG 2.4.1 / Israeli T"I 5568) */}
             <a
               href="#main-content"
-              className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[200] focus:bg-blue-700 focus:text-white focus:px-6 focus:py-3 focus:rounded-full focus:font-extrabold focus:shadow-xl focus:ring-4 focus:ring-white focus:outline-none transition-all"
+              className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:start-4 focus:z-[200] focus:bg-blue-700 focus:text-white focus:px-6 focus:py-3 focus:rounded-full focus:font-extrabold focus:shadow-xl focus:ring-4 focus:ring-white focus:outline-none transition-all"
             >
               דלג לתוכן הראשי / Skip to main content
             </a>
@@ -57,6 +58,7 @@ export default function App() {
                 <Route path="/product/:id" element={<ProductPage onOpenRfq={() => setIsRfqOpen(true)} />} />
                 <Route path="/tech" element={<TechPage />} />
                 <Route path="/clinical" element={<ClinicalPage />} />
+                <Route path="/accessibility" element={<AccessibilityPage onOpenRfq={() => setIsRfqOpen(true)} />} />
                 
                 {/* Routing Fallback */}
                 <Route path="*" element={<Navigate to="/" replace />} />

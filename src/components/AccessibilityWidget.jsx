@@ -1,28 +1,68 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Accessibility, HelpCircle, Check, X, ShieldAlert, RotateCcw, Link, Type, Compass, MousePointer, ZoomIn } from 'lucide-react';
+import { createPortal } from 'react-dom';
+import { useNavigate } from 'react-router-dom';
+import { Accessibility, HelpCircle, Check, X, ShieldAlert, RotateCcw, Link, Type, Compass, MousePointer } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
+const STORAGE_KEY = 'bmt_accessibility_preferences';
+
+const loadSavedPrefs = () => {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch (e) {
+    return {};
+  }
+};
+
 export default function AccessibilityWidget() {
-  const { lang, _, isRtl } = useLanguage();
+  const navigate = useNavigate();
+  const { lang, isRtl } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const widgetRef = useRef(null);
+  const triggerBtnRef = useRef(null);
+
+  // Load preferences from local storage if previously selected
+  const saved = useRef(loadSavedPrefs()).current;
 
   // States
-  const [highContrast, setHighContrast] = useState(false);
-  const [largeText, setLargeText] = useState(false);
-  const [dyslexia, setDyslexia] = useState(false);
-  const [spacing, setSpacing] = useState(false);
-  const [reduceMotion, setReduceMotion] = useState(false);
-  const [monochrome, setMonochrome] = useState(false);
-  const [highlightLinks, setHighlightLinks] = useState(false);
-  const [highlightTitles, setHighlightTitles] = useState(false);
-  const [bigCursor, setBigCursor] = useState(false);
-  const [zoomLevel, setZoomLevel] = useState(100); // 100, 110, 120
-  const [readingGuide, setReadingGuide] = useState(false);
+  const [highContrast, setHighContrast] = useState(!!saved.highContrast);
+  const [largeText, setLargeText] = useState(!!saved.largeText);
+  const [dyslexia, setDyslexia] = useState(!!saved.dyslexia);
+  const [spacing, setSpacing] = useState(!!saved.spacing);
+  const [reduceMotion, setReduceMotion] = useState(!!saved.reduceMotion);
+  const [monochrome, setMonochrome] = useState(!!saved.monochrome);
+  const [highlightLinks, setHighlightLinks] = useState(!!saved.highlightLinks);
+  const [highlightTitles, setHighlightTitles] = useState(!!saved.highlightTitles);
+  const [bigCursor, setBigCursor] = useState(!!saved.bigCursor);
+  const [zoomLevel, setZoomLevel] = useState(saved.zoomLevel || 100); // 100, 110, 120
+  const [readingGuide, setReadingGuide] = useState(!!saved.readingGuide);
   const [showStatement, setShowStatement] = useState(false);
 
   // Coordinates for the reading guide line
   const [mouseY, setMouseY] = useState(0);
+
+  // Persist preferences to localStorage
+  useEffect(() => {
+    try {
+      const prefs = {
+        highContrast,
+        largeText,
+        dyslexia,
+        spacing,
+        reduceMotion,
+        monochrome,
+        highlightLinks,
+        highlightTitles,
+        bigCursor,
+        zoomLevel,
+        readingGuide
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+    } catch (e) {
+      // ignore in private browsing or disabled storage
+    }
+  }, [highContrast, largeText, dyslexia, spacing, reduceMotion, monochrome, highlightLinks, highlightTitles, bigCursor, zoomLevel, readingGuide]);
 
   // Toggle Accessibility High Contrast Style on Body
   useEffect(() => {
@@ -34,12 +74,15 @@ export default function AccessibilityWidget() {
     }
   }, [highContrast]);
 
-  // Toggle Accessibility Large Text Style on Body
+  // Toggle Accessibility Large Text Style on both Root and Body
   useEffect(() => {
+    const root = document.documentElement;
     const body = document.body;
     if (largeText) {
+      root.classList.add('accessibility-large-text');
       body.classList.add('accessibility-large-text');
     } else {
+      root.classList.remove('accessibility-large-text');
       body.classList.remove('accessibility-large-text');
     }
   }, [largeText]);
@@ -143,7 +186,11 @@ export default function AccessibilityWidget() {
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
   }, []);
 
   // Keyboard escape to close
@@ -152,11 +199,20 @@ export default function AccessibilityWidget() {
       if (e.key === 'Escape') {
         setIsOpen(false);
         setShowStatement(false);
+        triggerBtnRef.current?.focus();
       }
     };
     document.addEventListener('keydown', handleEscape);
     return () => document.removeEventListener('keydown', handleEscape);
   }, []);
+
+  // Body scroll lock when widget panel or statement modal is open
+  useEffect(() => {
+    if (isOpen || showStatement) {
+      document.body.style.overflow = 'hidden';
+      return () => { document.body.style.overflow = ''; };
+    }
+  }, [isOpen, showStatement]);
 
   // Reset all accessibility configurations
   const resetAll = () => {
@@ -171,6 +227,11 @@ export default function AccessibilityWidget() {
     setBigCursor(false);
     setZoomLevel(100);
     setReadingGuide(false);
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch {
+      // ignore storage access errors
+    }
   };
 
   // Localized texts
@@ -308,7 +369,7 @@ export default function AccessibilityWidget() {
   const curr = t[lang] || t.en;
 
   return (
-    <div className={`fixed bottom-4 sm:bottom-6 ${isRtl ? 'right-4 sm:right-6' : 'left-4 sm:left-6'} z-[90] flex items-end justify-start font-sans`} ref={widgetRef} dir={isRtl ? 'rtl' : 'ltr'}>
+    <div className={`fixed bottom-4 sm:bottom-6 ${isRtl ? 'right-4 sm:right-6' : 'left-4 sm:left-6'} ${isOpen ? 'z-[9995]' : 'z-[90]'} flex items-end justify-start font-sans accessibility-widget-root`} ref={widgetRef} dir={isRtl ? 'rtl' : 'ltr'}>
       
       {/* Horizontal Focused Reading Guide Overlay */}
       {readingGuide && (
@@ -318,10 +379,20 @@ export default function AccessibilityWidget() {
         />
       )}
 
+      {/* Backdrop overlay — clicking outside immediately closes the panel */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-slate-950/40 backdrop-blur-[2px] z-[9990] animate-fade-in"
+          onClick={() => setIsOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Floating Accessibility Trigger Button */}
       <button
+        ref={triggerBtnRef}
         onClick={() => setIsOpen(!isOpen)}
-        className="w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#005EAD] to-[#008AE6] text-white flex items-center justify-center shadow-[0_8px_30px_rgba(0,94,173,0.3)] hover:shadow-[0_8px_30px_rgba(16,185,129,0.4)] hover:from-[#10b981] hover:to-[#059669] transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-500/50 hover:scale-105 active:scale-95 floating-widget-btn relative shrink-0"
+        className="w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#005EAD] to-[#008AE6] text-white flex items-center justify-center shadow-[0_8px_30px_rgba(0,94,173,0.3)] hover:shadow-[0_8px_30px_rgba(16,185,129,0.4)] hover:from-[#10b981] hover:to-[#059669] transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-500/50 hover:scale-105 active:scale-95 floating-widget-btn relative shrink-0 z-[9996]"
         aria-label={curr.btnLabel}
         aria-expanded={isOpen}
         aria-haspopup="true"
@@ -332,38 +403,47 @@ export default function AccessibilityWidget() {
 
       {/* Accessibility Settings Panel Overlay */}
       {isOpen && (
-        <div className={`absolute bottom-16 sm:bottom-18 ${isRtl ? 'right-0' : 'left-0'} w-[320px] sm:w-[420px] max-w-[90vw] bg-white/95 backdrop-blur-2xl border border-slate-200/80 rounded-[2.5rem] shadow-2xl p-5 sm:p-8 animate-in slide-in-from-bottom-4 duration-300 origin-bottom-${isRtl ? 'right' : 'left'} z-20`}>
-          
-          {/* Header Title with quick reset */}
-          <div className="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
+        <div 
+          role="region"
+          aria-label={curr.title}
+          className={`absolute bottom-16 sm:bottom-20 ${isRtl ? 'right-0' : 'left-0'} w-[320px] sm:w-[420px] max-w-[calc(100vw-2rem)] max-h-[min(82vh,calc(100dvh-6rem))] flex flex-col bg-white/98 backdrop-blur-2xl border border-slate-200/90 rounded-[2.5rem] shadow-2xl p-5 sm:p-7 animate-in slide-in-from-bottom-4 duration-300 origin-bottom-${isRtl ? 'right' : 'left'} z-[9995] overflow-hidden accessibility-widget-panel`}
+        >
+          {/* Header Title with quick reset and prominent close button */}
+          <div className="flex justify-between items-center mb-3 pb-3 border-b border-slate-100 shrink-0 bg-white accessibility-widget-header">
             <div>
-              <h4 className="font-black text-lg sm:text-xl text-slate-900 leading-none">{curr.title}</h4>
+              <h2 className="font-black text-lg sm:text-xl text-slate-900 leading-none">{curr.title}</h2>
               <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1 block">LabOnTime Standard compliant</span>
             </div>
             <div className="flex items-center gap-2">
               <button 
+                type="button"
                 onClick={resetAll}
                 className="text-slate-500 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-slate-300 p-2 rounded-xl bg-slate-100 hover:bg-red-50 transition-colors flex items-center gap-1.5 text-xs font-bold"
                 title={curr.reset}
+                aria-label={curr.reset}
               >
-                <RotateCcw className="w-3.5 h-3.5" />
+                <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
                 <span className="hidden sm:inline">{isRtl ? 'איפוס' : 'Reset'}</span>
               </button>
               <button 
+                type="button"
                 onClick={() => setIsOpen(false)} 
-                className="text-slate-400 hover:text-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-300 p-1.5 rounded-xl hover:bg-slate-100 transition-colors accessibility-close-btn"
+                className="text-slate-700 hover:text-slate-950 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2 sm:px-3 rounded-xl bg-slate-100 hover:bg-slate-200 transition-colors accessibility-close-btn flex items-center gap-1.5 font-bold text-xs shrink-0"
                 aria-label={curr.close}
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
+                <span className="inline">{curr.close}</span>
               </button>
             </div>
           </div>
 
           {/* Quick Adjustment Grid */}
-          <div className="space-y-3.5 max-h-[50vh] overflow-y-auto pr-1">
+          <div className="space-y-3.5 overflow-y-auto flex-grow pr-1">
             
             {/* Setting 1: High Contrast */}
             <button 
+              type="button"
+              aria-pressed={highContrast}
               onClick={() => setHighContrast(!highContrast)}
               className={`w-full flex items-center justify-between p-3.5 rounded-2xl border text-start transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 ${highContrast ? 'border-slate-900 bg-slate-900 text-white' : 'border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-800'}`}
             >
@@ -372,12 +452,14 @@ export default function AccessibilityWidget() {
                 <span className={`block text-[10px] mt-0.5 font-medium ${highContrast ? 'text-slate-300' : 'text-slate-400'}`}>{curr.contrastDesc}</span>
               </div>
               <div className={`w-5 h-5 rounded-full flex items-center justify-center border transition-all ${highContrast ? 'bg-white border-white text-slate-900' : 'bg-white border-slate-300'}`}>
-                {highContrast && <Check className="w-3 h-3" />}
+                {highContrast && <Check className="w-3 h-3" aria-hidden="true" />}
               </div>
             </button>
 
             {/* Setting 2: Grayscale Monochrome */}
             <button 
+              type="button"
+              aria-pressed={monochrome}
               onClick={() => setMonochrome(!monochrome)}
               className={`w-full flex items-center justify-between p-3.5 rounded-2xl border text-start transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 ${monochrome ? 'border-slate-900 bg-slate-900 text-white' : 'border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-800'}`}
             >
@@ -386,58 +468,64 @@ export default function AccessibilityWidget() {
                 <span className={`block text-[10px] mt-0.5 font-medium ${monochrome ? 'text-slate-300' : 'text-slate-400'}`}>{curr.monochromeDesc}</span>
               </div>
               <div className={`w-5 h-5 rounded-full flex items-center justify-center border transition-all ${monochrome ? 'bg-white border-white text-slate-900' : 'bg-white border-slate-300'}`}>
-                {monochrome && <Check className="w-3 h-3" />}
+                {monochrome && <Check className="w-3 h-3" aria-hidden="true" />}
               </div>
             </button>
 
             {/* Setting 3: Highlight Links */}
             <button 
+              type="button"
+              aria-pressed={highlightLinks}
               onClick={() => setHighlightLinks(!highlightLinks)}
               className={`w-full flex items-center justify-between p-3.5 rounded-2xl border text-start transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 ${highlightLinks ? 'border-slate-900 bg-slate-900 text-white' : 'border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-800'}`}
             >
               <div className="max-w-[75%] flex items-start gap-2.5">
-                <Link className={`w-4 h-4 mt-0.5 shrink-0 ${highlightLinks ? 'text-emerald-400' : 'text-emerald-600'}`} />
+                <Link className={`w-4 h-4 mt-0.5 shrink-0 ${highlightLinks ? 'text-emerald-400' : 'text-emerald-600'}`} aria-hidden="true" />
                 <div>
                   <span className="block font-extrabold text-xs sm:text-sm">{curr.links}</span>
                   <span className={`block text-[10px] mt-0.5 font-medium ${highlightLinks ? 'text-slate-300' : 'text-slate-400'}`}>{curr.linksDesc}</span>
                 </div>
               </div>
               <div className={`w-5 h-5 rounded-full flex items-center justify-center border transition-all ${highlightLinks ? 'bg-white border-white text-slate-900' : 'bg-white border-slate-300'}`}>
-                {highlightLinks && <Check className="w-3 h-3" />}
+                {highlightLinks && <Check className="w-3 h-3" aria-hidden="true" />}
               </div>
             </button>
 
             {/* Setting 4: Highlight Headings */}
             <button 
+              type="button"
+              aria-pressed={highlightTitles}
               onClick={() => setHighlightTitles(!highlightTitles)}
               className={`w-full flex items-center justify-between p-3.5 rounded-2xl border text-start transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 ${highlightTitles ? 'border-slate-900 bg-slate-900 text-white' : 'border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-800'}`}
             >
               <div className="max-w-[75%] flex items-start gap-2.5">
-                <Type className={`w-4 h-4 mt-0.5 shrink-0 ${highlightTitles ? 'text-emerald-400' : 'text-emerald-600'}`} />
+                <Type className={`w-4 h-4 mt-0.5 shrink-0 ${highlightTitles ? 'text-emerald-400' : 'text-emerald-600'}`} aria-hidden="true" />
                 <div>
                   <span className="block font-extrabold text-xs sm:text-sm">{curr.titles}</span>
                   <span className={`block text-[10px] mt-0.5 font-medium ${highlightTitles ? 'text-slate-300' : 'text-slate-400'}`}>{curr.titlesDesc}</span>
                 </div>
               </div>
               <div className={`w-5 h-5 rounded-full flex items-center justify-center border transition-all ${highlightTitles ? 'bg-white border-white text-slate-900' : 'bg-white border-slate-300'}`}>
-                {highlightTitles && <Check className="w-3 h-3" />}
+                {highlightTitles && <Check className="w-3 h-3" aria-hidden="true" />}
               </div>
             </button>
 
             {/* Setting 5: Large Mouse Cursor */}
             <button 
+              type="button"
+              aria-pressed={bigCursor}
               onClick={() => setBigCursor(!bigCursor)}
               className={`w-full flex items-center justify-between p-3.5 rounded-2xl border text-start transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 ${bigCursor ? 'border-slate-900 bg-slate-900 text-white' : 'border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-800'}`}
             >
               <div className="max-w-[75%] flex items-start gap-2.5">
-                <MousePointer className={`w-4 h-4 mt-0.5 shrink-0 ${bigCursor ? 'text-emerald-400' : 'text-emerald-600'}`} />
+                <MousePointer className={`w-4 h-4 mt-0.5 shrink-0 ${bigCursor ? 'text-emerald-400' : 'text-emerald-600'}`} aria-hidden="true" />
                 <div>
                   <span className="block font-extrabold text-xs sm:text-sm">{curr.cursor}</span>
                   <span className={`block text-[10px] mt-0.5 font-medium ${bigCursor ? 'text-slate-300' : 'text-slate-400'}`}>{curr.cursorDesc}</span>
                 </div>
               </div>
               <div className={`w-5 h-5 rounded-full flex items-center justify-center border transition-all ${bigCursor ? 'bg-white border-white text-slate-900' : 'bg-white border-slate-300'}`}>
-                {bigCursor && <Check className="w-3 h-3" />}
+                {bigCursor && <Check className="w-3 h-3" aria-hidden="true" />}
               </div>
             </button>
 
@@ -447,12 +535,14 @@ export default function AccessibilityWidget() {
                 <span className="block font-extrabold text-xs sm:text-sm text-slate-800">{curr.zoom}</span>
                 <span className="block text-[10px] mt-0.5 font-medium text-slate-400 leading-tight">{curr.zoomDesc}</span>
               </div>
-              <div className="flex gap-1.5 shrink-0">
+              <div className="flex gap-1.5 shrink-0" role="group" aria-label={curr.zoom}>
                 {[100, 110, 120].map((zoomVal) => (
                   <button
                     key={zoomVal}
+                    type="button"
+                    aria-pressed={zoomLevel === zoomVal}
                     onClick={() => setZoomLevel(zoomVal)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-black transition-all ${zoomLevel === zoomVal ? 'bg-slate-950 text-white shadow-md' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'}`}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-black transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 ${zoomLevel === zoomVal ? 'bg-slate-950 text-white shadow-md' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'}`}
                   >
                     {zoomVal}%
                   </button>
@@ -462,23 +552,27 @@ export default function AccessibilityWidget() {
 
             {/* Setting 7: Focused Reading Guide */}
             <button 
+              type="button"
+              aria-pressed={readingGuide}
               onClick={() => setReadingGuide(!readingGuide)}
               className={`w-full flex items-center justify-between p-3.5 rounded-2xl border text-start transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 ${readingGuide ? 'border-slate-900 bg-slate-900 text-white' : 'border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-800'}`}
             >
               <div className="max-w-[75%] flex items-start gap-2.5">
-                <Compass className={`w-4 h-4 mt-0.5 shrink-0 ${readingGuide ? 'text-emerald-400' : 'text-emerald-600'}`} />
+                <Compass className={`w-4 h-4 mt-0.5 shrink-0 ${readingGuide ? 'text-emerald-400' : 'text-emerald-600'}`} aria-hidden="true" />
                 <div>
                   <span className="block font-extrabold text-xs sm:text-sm">{curr.guide}</span>
                   <span className={`block text-[10px] mt-0.5 font-medium ${readingGuide ? 'text-slate-300' : 'text-slate-400'}`}>{curr.guideDesc}</span>
                 </div>
               </div>
               <div className={`w-5 h-5 rounded-full flex items-center justify-center border transition-all ${readingGuide ? 'bg-white border-white text-slate-900' : 'bg-white border-slate-300'}`}>
-                {readingGuide && <Check className="w-3 h-3" />}
+                {readingGuide && <Check className="w-3 h-3" aria-hidden="true" />}
               </div>
             </button>
 
             {/* Setting 8: Large Text font scaling */}
             <button 
+              type="button"
+              aria-pressed={largeText}
               onClick={() => setLargeText(!largeText)}
               className={`w-full flex items-center justify-between p-3.5 rounded-2xl border text-start transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 ${largeText ? 'border-slate-900 bg-slate-900 text-white' : 'border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-800'}`}
             >
@@ -487,12 +581,14 @@ export default function AccessibilityWidget() {
                 <span className={`block text-[10px] mt-0.5 font-medium ${largeText ? 'text-slate-300' : 'text-slate-400'}`}>{curr.textDesc}</span>
               </div>
               <div className={`w-5 h-5 rounded-full flex items-center justify-center border transition-all ${largeText ? 'bg-white border-white text-slate-900' : 'bg-white border-slate-300'}`}>
-                {largeText && <Check className="w-3 h-3" />}
+                {largeText && <Check className="w-3 h-3" aria-hidden="true" />}
               </div>
             </button>
 
             {/* Setting 9: Dyslexia Friendly Font */}
             <button 
+              type="button"
+              aria-pressed={dyslexia}
               onClick={() => setDyslexia(!dyslexia)}
               className={`w-full flex items-center justify-between p-3.5 rounded-2xl border text-start transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 ${dyslexia ? 'border-slate-900 bg-slate-900 text-white' : 'border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-800'}`}
             >
@@ -501,12 +597,14 @@ export default function AccessibilityWidget() {
                 <span className={`block text-[10px] mt-0.5 font-medium ${dyslexia ? 'text-slate-300' : 'text-slate-400'}`}>{curr.dyslexiaDesc}</span>
               </div>
               <div className={`w-5 h-5 rounded-full flex items-center justify-center border transition-all ${dyslexia ? 'bg-white border-white text-slate-900' : 'bg-white border-slate-300'}`}>
-                {dyslexia && <Check className="w-3 h-3" />}
+                {dyslexia && <Check className="w-3 h-3" aria-hidden="true" />}
               </div>
             </button>
 
             {/* Setting 10: Extra Spacing */}
             <button 
+              type="button"
+              aria-pressed={spacing}
               onClick={() => setSpacing(!spacing)}
               className={`w-full flex items-center justify-between p-3.5 rounded-2xl border text-start transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 ${spacing ? 'border-slate-900 bg-slate-900 text-white' : 'border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-800'}`}
             >
@@ -515,12 +613,14 @@ export default function AccessibilityWidget() {
                 <span className={`block text-[10px] mt-0.5 font-medium ${spacing ? 'text-slate-300' : 'text-slate-400'}`}>{curr.spacingDesc}</span>
               </div>
               <div className={`w-5 h-5 rounded-full flex items-center justify-center border transition-all ${spacing ? 'bg-white border-white text-slate-900' : 'bg-white border-slate-300'}`}>
-                {spacing && <Check className="w-3 h-3" />}
+                {spacing && <Check className="w-3 h-3" aria-hidden="true" />}
               </div>
             </button>
 
             {/* Setting 11: Reduce Motion */}
             <button 
+              type="button"
+              aria-pressed={reduceMotion}
               onClick={() => setReduceMotion(!reduceMotion)}
               className={`w-full flex items-center justify-between p-3.5 rounded-2xl border text-start transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 ${reduceMotion ? 'border-slate-900 bg-slate-900 text-white' : 'border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-800'}`}
             >
@@ -529,44 +629,87 @@ export default function AccessibilityWidget() {
                 <span className={`block text-[10px] mt-0.5 font-medium ${reduceMotion ? 'text-slate-300' : 'text-slate-400'}`}>{curr.motionDesc}</span>
               </div>
               <div className={`w-5 h-5 rounded-full flex items-center justify-center border transition-all ${reduceMotion ? 'bg-white border-white text-slate-900' : 'bg-white border-slate-300'}`}>
-                {reduceMotion && <Check className="w-3 h-3" />}
+                {reduceMotion && <Check className="w-3 h-3" aria-hidden="true" />}
               </div>
             </button>
 
             {/* Accessibility statement button */}
             <button 
+              type="button"
               onClick={() => setShowStatement(true)}
               className="w-full flex items-center gap-3 p-3.5 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-800 font-extrabold text-xs sm:text-sm transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500"
             >
-              <HelpCircle className="w-5 h-5 text-emerald-600 shrink-0" />
+              <HelpCircle className="w-5 h-5 text-emerald-600 shrink-0" aria-hidden="true" />
               <span>{curr.statement}</span>
+            </button>
+          </div>
+
+          {/* Pinned Bottom Close & Apply Button */}
+          <div className="pt-3 border-t border-slate-100 mt-2 shrink-0 bg-white accessibility-widget-footer">
+            <button
+              type="button"
+              onClick={() => setIsOpen(false)}
+              className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl font-black text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
+            >
+              <Check className="w-4 h-4" aria-hidden="true" />
+              <span>{isRtl ? 'סיום וסגירת תפריט נגישות' : 'Close Accessibility Menu'}</span>
             </button>
           </div>
         </div>
       )}
 
-      {/* Modal Dialog: Accessibility Statement Details */}
-      {showStatement && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={() => setShowStatement(false)}></div>
-          <div className="bg-white rounded-[3rem] w-full max-w-2xl relative z-10 overflow-hidden shadow-2xl border border-slate-100 animate-in zoom-in-95 p-8 md:p-12">
-            <div className="flex items-center gap-4 text-emerald-600 mb-6">
-              <ShieldAlert className="w-8 h-8 flex-shrink-0" />
-              <h4 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">{curr.statementTitle}</h4>
+      {/* Modal Dialog: Accessibility Statement Details (WCAG 4.1.2 / 2.1.2) */}
+      {showStatement && typeof document !== 'undefined' && createPortal(
+        <div 
+          className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="widget-statement-title"
+          aria-describedby="widget-statement-desc"
+        >
+          {/* Backdrop overlay — clicking outside immediately closes the modal */}
+          <div 
+            className="fixed inset-0 bg-slate-900/75 backdrop-blur-md animate-fade-in" 
+            onClick={() => setShowStatement(false)} 
+            aria-hidden="true" 
+          />
+          <div className="bg-white rounded-[2.5rem] w-full max-w-2xl relative z-10 overflow-hidden shadow-2xl border border-slate-100 animate-in zoom-in-95 flex flex-col max-h-[min(90vh,calc(100dvh-2.5rem))] my-auto accessibility-modal-card">
+            <div className="flex items-center justify-between p-6 sm:px-8 border-b border-slate-100 shrink-0 bg-white sticky top-0 z-20">
+              <div className="flex items-center gap-3 text-emerald-600">
+                <ShieldAlert className="w-7 h-7 flex-shrink-0" aria-hidden="true" />
+                <h3 id="widget-statement-title" className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">{curr.statementTitle}</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowStatement(false)}
+                className="text-slate-400 hover:text-slate-700 bg-slate-100 hover:bg-slate-200 p-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 shrink-0 ms-3"
+                aria-label={curr.closeBtn}
+              >
+                <X className="w-5 h-5" aria-hidden="true" />
+              </button>
             </div>
-            <div className="text-slate-600 text-sm md:text-base leading-relaxed whitespace-pre-line font-medium overflow-y-auto max-h-[50vh] pr-4 mb-8">
+            <div id="widget-statement-desc" className="text-slate-600 text-sm sm:text-base leading-relaxed whitespace-pre-line font-medium overflow-y-auto flex-grow p-6 sm:p-8">
               {curr.statementText}
             </div>
-            <div className="flex justify-end">
+            <div className="p-5 sm:px-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 shrink-0 bg-slate-50/80">
+              <button
+                type="button"
+                onClick={() => { setShowStatement(false); setIsOpen(false); navigate('/accessibility'); }}
+                className="text-emerald-700 hover:text-emerald-900 font-extrabold text-sm underline underline-offset-4 focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded px-1 cursor-pointer"
+              >
+                {isRtl ? 'מעבר לעמוד הצהרת הנגישות המלאה ←' : 'Go to Full Accessibility Statement Page →'}
+              </button>
               <button 
+                type="button"
                 onClick={() => setShowStatement(false)} 
-                className="bg-slate-950 hover:bg-emerald-600 text-white font-bold px-8 py-3 rounded-2xl transition focus:outline-none focus:ring-4 focus:ring-emerald-500/30"
+                className="w-full sm:w-auto bg-slate-950 hover:bg-emerald-600 text-white font-bold px-8 py-3 rounded-2xl transition focus:outline-none focus:ring-4 focus:ring-emerald-500/30"
               >
                 {curr.closeBtn}
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

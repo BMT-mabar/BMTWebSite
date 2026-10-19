@@ -136,17 +136,17 @@ export default function ProductPage({ onOpenRfq }) {
             {p.specs && (
               <div className="bg-white border border-slate-200/80 rounded-[2.5rem] p-8 md:p-10 mb-12 shadow-md relative overflow-hidden">
                 <div aria-hidden="true" className="absolute top-0 right-0 w-32 h-32 bg-blue-500/[0.01] rounded-full blur-[40px] pointer-events-none" />
-                <h4 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-8 flex items-center gap-2">
-                  <FileText className="w-4.5 h-4.5 text-blue-600"/> 
+                <h2 className="text-xs font-black uppercase tracking-widest text-slate-600 mb-8 flex items-center gap-2">
+                  <FileText className="w-4.5 h-4.5 text-blue-600" aria-hidden="true" /> 
                   {_('product.specs')}
-                </h4>
+                </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-8 gap-x-6">
                   {Object.entries(p.specs).map(([key, value]) => {
                     const specValue = typeof value === 'object' ? (value[lang] || value.en || value.he) : (_(`specsVal.${value}`) || value);
                     return (
                       <div key={key} className="min-w-0 break-words border-b border-slate-100 pb-4 sm:border-0 sm:pb-0">
                         <div className="text-2xl font-black text-slate-900 leading-none mb-2 tracking-tight">{specValue}</div>
-                        <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{_(`specs.${key}`) || key}</div>
+                        <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{_(`specs.${key}`) || key}</div>
                       </div>
                     );
                   })}
@@ -159,7 +159,7 @@ export default function ProductPage({ onOpenRfq }) {
               onClick={onOpenRfq} 
               className="bg-burgundy text-white px-8 py-5 rounded-full font-extrabold hover:brightness-110 transition-all duration-300 shadow-lg hover:shadow-xl text-center flex items-center justify-center gap-3 text-lg group focus:outline-none focus:ring-4 focus:ring-burgundy/30 btn-bouncy"
             >
-              <Mail className="w-5 h-5 group-hover:scale-105 transition-transform"/> {_('product.contact')}
+              <Mail className="w-5 h-5 group-hover:scale-105 transition-transform" aria-hidden="true" /> {_('product.contact')}
             </button>
 
           </div>
@@ -174,10 +174,10 @@ export default function ProductPage({ onOpenRfq }) {
           <div className="max-w-4xl mx-auto px-4 relative z-10">
             <div className="text-center mb-16">
               <div className="w-16 h-16 bg-white border border-slate-200 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-md">
-                <PlayCircle className="w-8 h-8 text-burgundy" />
+                <PlayCircle className="w-8 h-8 text-burgundy" aria-hidden="true" />
               </div>
               <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">{_('product.video')}</h2>
-              <div className="w-12 h-1 bg-burgundy mx-auto mt-5 rounded-full" />
+              <div className="w-12 h-1 bg-burgundy mx-auto mt-5 rounded-full" aria-hidden="true" />
             </div>
             
             <div className="rounded-[3rem] overflow-hidden shadow-2xl border border-slate-200/80 bg-slate-950 p-2 md:p-3">
@@ -186,7 +186,7 @@ export default function ProductPage({ onOpenRfq }) {
                   <iframe 
                     className="w-full h-full"
                     src={`https://www.youtube.com/embed/${youtubeId}?autoplay=0&rel=0`}
-                    title="Product Demonstration"
+                    title={`${productTitle} - ${_('product.video')}`}
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
@@ -194,7 +194,12 @@ export default function ProductPage({ onOpenRfq }) {
                 </div>
               ) : p.videoFile ? (
                 <div className="w-full aspect-video rounded-[2.5rem] overflow-hidden">
-                  <video controls className="w-full h-full object-cover" poster={!isPlaceholder ? p.image : undefined}>
+                  <video 
+                    controls 
+                    className="w-full h-full object-cover" 
+                    poster={!isPlaceholder ? p.image : undefined}
+                    aria-label={`${productTitle} - ${_('product.video')}`}
+                  >
                      <source src={p.videoFile} type="video/mp4" />
                   </video>
                 </div>
@@ -213,7 +218,7 @@ export default function ProductPage({ onOpenRfq }) {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-2 bg-blue-600/10 text-blue-700 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4">
-                <Sparkles className="w-4 h-4 text-blue-600" />
+                <Sparkles className="w-4 h-4 text-blue-600" aria-hidden="true" />
                 {_('product.fobSectionBadge')}
               </div>
               <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight mb-4">
@@ -229,7 +234,7 @@ export default function ProductPage({ onOpenRfq }) {
               <div className="bg-white rounded-[2.5rem] p-8 md:p-10 border border-red-100 shadow-md flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-3 text-red-600 font-extrabold text-sm uppercase tracking-wider mb-6">
-                    <XCircle className="w-5 h-5" />
+                    <XCircle className="w-5 h-5" aria-hidden="true" />
                     <span>{_('product.fobOldTag')}</span>
                   </div>
                   <h3 className="text-2xl font-black text-slate-800 mb-6">
@@ -237,21 +242,21 @@ export default function ProductPage({ onOpenRfq }) {
                   </h3>
                   <ul className="space-y-4 text-sm text-slate-500 font-medium">
                     <li className="flex items-start gap-3">
-                      <span className="w-6 h-6 rounded-full bg-red-50 text-red-500 flex items-center justify-center font-bold shrink-0 mt-0.5">1</span>
+                      <span className="w-6 h-6 rounded-full bg-red-50 text-red-500 flex items-center justify-center font-bold shrink-0 mt-0.5" aria-hidden="true">1</span>
                       <span>{_('product.fobOld1')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="w-6 h-6 rounded-full bg-red-50 text-red-500 flex items-center justify-center font-bold shrink-0 mt-0.5">2</span>
+                      <span className="w-6 h-6 rounded-full bg-red-50 text-red-500 flex items-center justify-center font-bold shrink-0 mt-0.5" aria-hidden="true">2</span>
                       <span>{_('product.fobOld2')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="w-6 h-6 rounded-full bg-red-50 text-red-500 flex items-center justify-center font-bold shrink-0 mt-0.5">3</span>
+                      <span className="w-6 h-6 rounded-full bg-red-50 text-red-500 flex items-center justify-center font-bold shrink-0 mt-0.5" aria-hidden="true">3</span>
                       <span>{_('product.fobOld3')}</span>
                     </li>
                   </ul>
                 </div>
                 <div className="mt-8 pt-6 border-t border-slate-100 flex items-center gap-2 text-slate-400 text-xs">
-                  <Clock className="w-4 h-4 text-red-400" />
+                  <Clock className="w-4 h-4 text-red-400" aria-hidden="true" />
                   <span>{_('product.fobOldDuration')}</span>
                 </div>
               </div>
@@ -262,7 +267,7 @@ export default function ProductPage({ onOpenRfq }) {
                 
                 <div>
                   <div className="flex items-center gap-3 text-sky-400 font-extrabold text-sm uppercase tracking-wider mb-6">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                    <CheckCircle2 className="w-5 h-5 text-emerald-400" aria-hidden="true" />
                     <span>{_('product.fobBmtTag')}</span>
                   </div>
                   <h3 className="text-2xl font-black text-white mb-6">
@@ -270,26 +275,26 @@ export default function ProductPage({ onOpenRfq }) {
                   </h3>
                   <ul className="space-y-4 text-sm text-slate-200 font-medium">
                     <li className="flex items-start gap-3">
-                      <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold shrink-0 mt-0.5">✓</span>
+                      <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold shrink-0 mt-0.5" aria-hidden="true">✓</span>
                       <span>{_('product.fobBmt1')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold shrink-0 mt-0.5">✓</span>
+                      <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold shrink-0 mt-0.5" aria-hidden="true">✓</span>
                       <span>{_('product.fobBmt2')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold shrink-0 mt-0.5">✓</span>
+                      <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold shrink-0 mt-0.5" aria-hidden="true">✓</span>
                       <span>{_('product.fobBmt3')}</span>
                     </li>
                   </ul>
                 </div>
                 <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-sky-200 text-xs">
                   <div className="flex items-center gap-2">
-                    <Smartphone className="w-4 h-4 text-sky-400" />
+                    <Smartphone className="w-4 h-4 text-sky-400" aria-hidden="true" />
                     <span>{_('product.fobBmtDuration')}</span>
                   </div>
                   <div className="flex items-center gap-1.5 text-emerald-400 font-bold">
-                    <ShieldCheck className="w-4 h-4" />
+                    <ShieldCheck className="w-4 h-4" aria-hidden="true" />
                     <span>{_('product.fobBmtNoLab')}</span>
                   </div>
                 </div>
@@ -307,7 +312,7 @@ export default function ProductPage({ onOpenRfq }) {
           <div className="max-w-5xl mx-auto px-4 relative z-10">
             <div className="text-center mb-20">
               <div className="w-20 h-20 bg-blue-50 border border-blue-100 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-md">
-                 <FileBadge className="w-10 h-10 text-blue-600"/>
+                 <FileBadge className="w-10 h-10 text-blue-600" aria-hidden="true" />
               </div>
               <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">{_('product.comparison')}</h2>
               <p className="text-slate-650 text-xl max-w-2xl mx-auto font-light leading-relaxed">{_('product.compSub')}</p>
@@ -315,28 +320,29 @@ export default function ProductPage({ onOpenRfq }) {
             
             <div className="bg-white rounded-[3rem] border border-slate-200/80 p-4 md:p-12 overflow-x-auto shadow-md">
               <table className="w-full text-start border-collapse min-w-[700px]">
+                <caption className="sr-only">{_('product.comparison')}</caption>
                 <thead>
                   <tr>
-                    <th className="p-6 text-slate-500 font-extrabold tracking-widest uppercase text-xs md:text-sm border-b border-slate-150 w-1/3 text-start">{_('product.metric')}</th>
-                    <th className="p-6 font-black text-2xl md:text-3xl text-blue-900 bg-blue-50/60 rounded-t-3xl border-b border-blue-100 text-center tracking-tight w-1/3 shadow-sm">{_('product.us')}</th>
-                    <th className="p-6 text-slate-500 font-extrabold tracking-widest uppercase text-xs md:text-sm border-b border-slate-150 text-center w-1/3">{_('product.them')}</th>
+                    <th scope="col" className="p-6 text-slate-500 font-extrabold tracking-widest uppercase text-xs md:text-sm border-b border-slate-150 w-1/3 text-start">{_('product.metric')}</th>
+                    <th scope="col" className="p-6 font-black text-2xl md:text-3xl text-blue-900 bg-blue-50/60 rounded-t-3xl border-b border-blue-100 text-center tracking-tight w-1/3 shadow-sm">{_('product.us')}</th>
+                    <th scope="col" className="p-6 text-slate-500 font-extrabold tracking-widest uppercase text-xs md:text-sm border-b border-slate-150 text-center w-1/3">{_('product.them')}</th>
                   </tr>
                 </thead>
                 <tbody className="font-semibold text-slate-800">
                   <tr className="hover:bg-slate-50/50 transition-colors">
-                    <td className="p-6 md:p-10 border-b border-slate-100 flex items-center gap-5 text-lg text-start"><Users className="w-6 h-6 text-blue-600 shrink-0"/> {_('product.handsOn')}</td>
+                    <th scope="row" className="p-6 md:p-10 border-b border-slate-100 flex items-center gap-5 text-lg text-start font-semibold text-slate-800"><Users className="w-6 h-6 text-blue-600 shrink-0" aria-hidden="true" /> {_('product.handsOn')}</th>
                     <td className="p-6 md:p-10 font-black text-5xl text-blue-900 bg-blue-50/60 border-b border-blue-100 text-center">
                       {p.comparison.us.steps === 'no step' ? _('specsVal.noStep') : p.comparison.us.steps}
                     </td>
                     <td className="p-6 md:p-10 text-slate-500 border-b border-slate-100 text-center text-xl font-bold">{p.comparison.them.steps}</td>
                   </tr>
                   <tr className="hover:bg-slate-50/50 transition-colors">
-                    <td className="p-6 md:p-10 border-b border-slate-100 flex items-center gap-5 text-lg text-start"><Activity className="w-6 h-6 text-blue-600 shrink-0"/> {_('product.time')}</td>
+                    <th scope="row" className="p-6 md:p-10 border-b border-slate-100 flex items-center gap-5 text-lg text-start font-semibold text-slate-800"><Activity className="w-6 h-6 text-blue-600 shrink-0" aria-hidden="true" /> {_('product.time')}</th>
                     <td className="p-6 md:p-10 font-black text-3xl text-blue-900 bg-blue-50/60 border-b border-blue-100 text-center">{p.comparison.us.time}</td>
                     <td className="p-6 md:p-10 text-slate-500 border-b border-slate-100 text-center text-xl font-bold">{p.comparison.them.time}</td>
                   </tr>
                   <tr className="hover:bg-slate-50/50 transition-colors">
-                    <td className="p-6 md:p-10 flex items-center gap-5 text-lg text-start"><Beaker className="w-6 h-6 text-blue-600 shrink-0"/> {_('product.risk')}</td>
+                    <th scope="row" className="p-6 md:p-10 flex items-center gap-5 text-lg text-start font-semibold text-slate-800"><Beaker className="w-6 h-6 text-blue-600 shrink-0" aria-hidden="true" /> {_('product.risk')}</th>
                     <td className="p-6 md:p-10 font-black text-emerald-600 bg-blue-50/60 rounded-b-3xl text-center text-xl shadow-inner">{_('product.zeroTransfers')}</td>
                     <td className="p-6 md:p-10 text-burgundy text-center font-black text-xl">{_('product.fourTransfers')}</td>
                   </tr>

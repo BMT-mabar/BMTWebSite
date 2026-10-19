@@ -90,58 +90,50 @@ body.accessibility-high-contrast :focus-visible {
   background: #94a3b8;
 }
 
-/* --- ACCESSIBILITY SUPPORT STYLING --- */
+/* --- ACCESSIBILITY SUPPORT STYLING (WCAG 2.1 AA / IS 5568) --- */
+html.accessibility-large-text,
 body.accessibility-large-text {
-  font-size: 1.15rem;
-}
-body.accessibility-large-text h1 {
-  font-size: 1.15em !important;
-  line-height: 1.25 !important;
-}
-body.accessibility-large-text h2 {
-  font-size: 1.15em !important;
-}
-body.accessibility-large-text h3 {
-  font-size: 1.15em !important;
-}
-body.accessibility-large-text p {
-  font-size: 1.15em !important;
+  font-size: 118% !important;
 }
 
 /* High Contrast mode classes */
 body.accessibility-high-contrast {
-  background-color: #0d0e12 !important;
+  background-color: #0b0c10 !important;
   color: #ffffff !important;
 }
+
 body.accessibility-high-contrast main,
 body.accessibility-high-contrast section,
-body.accessibility-high-contrast div:not(.floating-widget),
+body.accessibility-high-contrast div:not(.accessibility-widget-root):not(.accessibility-widget-root *):not(.floating-widget):not(.floating-widget *),
 body.accessibility-high-contrast footer,
 body.accessibility-high-contrast header,
 body.accessibility-high-contrast nav {
-  background-color: #0d0e12 !important;
+  background-color: #0b0c10 !important;
   color: #ffffff !important;
   border-color: #3f4454 !important;
 }
-body.accessibility-high-contrast h1,
-body.accessibility-high-contrast h2,
-body.accessibility-high-contrast h3,
-body.accessibility-high-contrast h4,
-body.accessibility-high-contrast h5,
-body.accessibility-high-contrast h6,
-body.accessibility-high-contrast span,
-body.accessibility-high-contrast p,
-body.accessibility-high-contrast li,
-body.accessibility-high-contrast td,
-body.accessibility-high-contrast th,
-body.accessibility-high-contrast label {
+
+body.accessibility-high-contrast h1:not(.accessibility-widget-root *),
+body.accessibility-high-contrast h2:not(.accessibility-widget-root *),
+body.accessibility-high-contrast h3:not(.accessibility-widget-root *),
+body.accessibility-high-contrast h4:not(.accessibility-widget-root *),
+body.accessibility-high-contrast h5:not(.accessibility-widget-root *),
+body.accessibility-high-contrast h6:not(.accessibility-widget-root *),
+body.accessibility-high-contrast span:not(.accessibility-widget-root *),
+body.accessibility-high-contrast p:not(.accessibility-widget-root *),
+body.accessibility-high-contrast li:not(.accessibility-widget-root *),
+body.accessibility-high-contrast td:not(.accessibility-widget-root *),
+body.accessibility-high-contrast th:not(.accessibility-widget-root *),
+body.accessibility-high-contrast label:not(.accessibility-widget-root *) {
   color: #ffffff !important;
   background-image: none !important;
 }
-body.accessibility-high-contrast a,
-body.accessibility-high-contrast button:not(.bg-red-800):not(.bg-white) {
+
+body.accessibility-high-contrast a:not(.accessibility-widget-root *),
+body.accessibility-high-contrast button:not(.accessibility-widget-root *):not(.bg-red-800):not(.bg-white) {
   color: #ffeb3b !important;
 }
+
 body.accessibility-high-contrast input,
 body.accessibility-high-contrast select,
 body.accessibility-high-contrast textarea {
@@ -150,12 +142,39 @@ body.accessibility-high-contrast textarea {
   border-color: #ffeb3b !important;
 }
 
+/* Dedicated High Contrast Styling for Accessibility Widget & Statement Modal */
+body.accessibility-high-contrast .accessibility-widget-panel {
+  background-color: #111318 !important;
+  border: 2px solid #ffeb3b !important;
+  box-shadow: 0 0 35px rgba(255, 235, 59, 0.25) !important;
+  color: #ffffff !important;
+}
+body.accessibility-high-contrast .accessibility-widget-panel * {
+  border-color: #475569 !important;
+}
+body.accessibility-high-contrast .accessibility-widget-header {
+  background-color: #111318 !important;
+}
+body.accessibility-high-contrast .accessibility-widget-footer {
+  background-color: #111318 !important;
+}
+body.accessibility-high-contrast .accessibility-modal-card {
+  background-color: #111318 !important;
+  border: 2px solid #ffeb3b !important;
+  color: #ffffff !important;
+}
+body.accessibility-high-contrast .accessibility-modal-card div {
+  background-color: #111318 !important;
+  color: #ffffff !important;
+}
+
 /* --- ADVANCED ACCESSIBILITY SUPPORT STYLING --- */
 
-/* Dyslexia-Friendly Font (highly legible Comic Sans MS or system-ui fallback) */
+/* Dyslexia-Friendly Font (highly legible typography with Hebrew support) */
 body.accessibility-dyslexia,
 body.accessibility-dyslexia * {
-  font-family: 'Comic Sans MS', 'system-ui', -apple-system, sans-serif !important;
+  font-family: 'OpenDyslexic', 'Rubik', 'Segoe UI', 'Comic Sans MS', sans-serif !important;
+  letter-spacing: 0.03em !important;
 }
 
 /* Extra Text Spacing */
@@ -169,9 +188,9 @@ body.accessibility-spacing * {
 /* Reduce/Pause Animations & Transitions */
 body.accessibility-reduce-motion,
 body.accessibility-reduce-motion * {
-  animation-duration: 0s !important;
+  animation-duration: 0.001s !important;
   animation-iteration-count: 1 !important;
-  transition-duration: 0s !important;
+  transition-duration: 0.001s !important;
   scroll-behavior: auto !important;
 }
 
@@ -180,9 +199,9 @@ body.accessibility-monochrome {
   filter: grayscale(100%) !important;
 }
 
-/* Highlight Links */
+/* Highlight Links — strictly for site links and buttons, preserving widget & language controls */
 body.accessibility-highlight-links a,
-body.accessibility-highlight-links button:not(.floating-widget-btn):not(.accessibility-close-btn) {
+body.accessibility-highlight-links button:not(.accessibility-widget-root *):not(.floating-widget-btn):not(.accessibility-close-btn):not(.language-selector-trigger):not(.language-dropdown-menu *) {
   outline: 3px dashed #10b981 !important;
   outline-offset: 3px !important;
   background-color: #0f172a !important;
@@ -191,13 +210,51 @@ body.accessibility-highlight-links button:not(.floating-widget-btn):not(.accessi
   font-weight: 800 !important;
 }
 
-/* Highlight Titles */
-body.accessibility-highlight-titles h1,
-body.accessibility-highlight-titles h2,
-body.accessibility-highlight-titles h3,
-body.accessibility-highlight-titles h4,
-body.accessibility-highlight-titles h5,
-body.accessibility-highlight-titles h6 {
+/* Language Selector Dropdown (100% Solid & High-Contrast Safe) */
+.language-dropdown-menu {
+  background-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+body.accessibility-high-contrast .language-selector-trigger {
+  background-color: #0b0c10 !important;
+  border-color: #ffeb3b !important;
+  color: #ffffff !important;
+}
+
+body.accessibility-high-contrast .language-selector-trigger span {
+  color: #ffffff !important;
+}
+
+body.accessibility-high-contrast .language-dropdown-menu {
+  background-color: #0b0c10 !important;
+  border: 2px solid #ffeb3b !important;
+  box-shadow: 0 0 30px rgba(255, 235, 59, 0.35) !important;
+}
+
+body.accessibility-high-contrast .language-dropdown-menu button {
+  color: #ffffff !important;
+}
+
+body.accessibility-high-contrast .language-dropdown-menu button:hover,
+body.accessibility-high-contrast .language-dropdown-menu button:focus {
+  background-color: #1e293b !important;
+  color: #ffeb3b !important;
+}
+
+body.accessibility-high-contrast .language-dropdown-menu button[aria-selected="true"] {
+  background-color: #1e293b !important;
+  color: #ffeb3b !important;
+  border-inline-start-color: #ffeb3b !important;
+}
+
+/* Highlight Titles — excludes accessibility widget header */
+body.accessibility-highlight-titles h1:not(.accessibility-widget-root *),
+body.accessibility-highlight-titles h2:not(.accessibility-widget-root *),
+body.accessibility-highlight-titles h3:not(.accessibility-widget-root *),
+body.accessibility-highlight-titles h4:not(.accessibility-widget-root *),
+body.accessibility-highlight-titles h5:not(.accessibility-widget-root *),
+body.accessibility-highlight-titles h6:not(.accessibility-widget-root *) {
   background-color: #fef08a !important;
   color: #0f172a !important;
   padding: 2px 6px !important;
@@ -206,22 +263,18 @@ body.accessibility-highlight-titles h6 {
   display: inline-block !important;
 }
 
-/* Big Cursor */
+/* Big Cursor with precise hotspot */
 body.accessibility-big-cursor,
 body.accessibility-big-cursor * {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' fill='black' stroke='white' stroke-width='1.5'%3E%3Cpath d='M4.5 3v15.25l3.8-3.8 2.7 6.4 2.8-1.2-2.7-6.4 5.2-.2L4.5 3z'/%3E%3C/svg%3E"), auto !important;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' fill='black' stroke='white' stroke-width='1.5'%3E%3Cpath d='M4.5 3v15.25l3.8-3.8 2.7 6.4 2.8-1.2-2.7-6.4 5.2-.2L4.5 3z'/%3E%3C/svg%3E") 2 2, auto !important;
 }
 
 /* Zoom Levels */
 body.accessibility-zoom-110 {
   zoom: 1.1;
-  -moz-transform: scale(1.1);
-  -moz-transform-origin: 0 0;
 }
 body.accessibility-zoom-120 {
   zoom: 1.2;
-  -moz-transform: scale(1.2);
-  -moz-transform-origin: 0 0;
 }
 
 @keyframes infiniteScroll {

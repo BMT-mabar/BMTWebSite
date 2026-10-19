@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Helmet } from 'react-helmet-async';
-import { Smartphone, Globe, ShieldCheck, Microscope, Activity, Flame, Cpu, Eye, Check, Play, X, Video } from 'lucide-react';
+import { Check, Play, X, Video } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import TestToEmrAnimation from '../components/TestToEmrAnimation';
 import { getAssetPath } from '../utils/imagePath';
@@ -16,14 +17,18 @@ export default function TechPage() {
   const [activeStep, setActiveStep] = useState(1);
   const [activeVideoModal, setActiveVideoModal] = useState(null);
 
-  // Keyboard Escape listener to close video modal (WCAG 2.1.2)
+  // Keyboard Escape listener and body scroll lock to close video modal (WCAG 2.1.2)
   useEffect(() => {
     if (!activeVideoModal) return;
+    document.body.style.overflow = 'hidden';
     const handleEscape = (e) => {
       if (e.key === 'Escape') setActiveVideoModal(null);
     };
     document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
+    return () => {
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', handleEscape);
+    };
   }, [activeVideoModal]);
 
   const stepHighlights = {
@@ -192,9 +197,9 @@ export default function TechPage() {
   return (
     <div className="animate-fade-in bg-slate-50 pb-24 min-h-screen">
       <Helmet>
-        <title>{`Technology & Innovation | BMT Diagnostics`}</title>
+        <title>{`${title || 'Technology & Innovation'} | BMT Diagnostics`}</title>
         <meta name="description" content={desc} />
-        <meta property="og:title" content="Technology & Innovation | BMT Diagnostics" />
+        <meta property="og:title" content={`${title || 'Technology & Innovation'} | BMT Diagnostics`} />
         <meta property="og:description" content={desc} />
         <meta property="og:image" content="/LabOnTime Device.jpg" />
         <meta name="keywords" content="Innovation, Digital Health, Strep A Pen, Bio-safety, EMR Integration, MedTech, חדשנות רפואית" />
@@ -206,10 +211,11 @@ export default function TechPage() {
         style={{ background: 'linear-gradient(135deg, #0267B5 0%, #01417A 100%)' }}
       >
         {/* Blue Lab Team Background Image ("האנשים בכחול") */}
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
           <img 
             src={getAssetPath('home-main-image.png')} 
-            alt="BMT Blue Healthcare Team" 
+            alt="" 
+            aria-hidden="true"
             className="w-full h-full object-cover opacity-30 mix-blend-overlay scale-105"
             onError={(e) => { e.target.style.display = 'none'; }}
           />
@@ -262,9 +268,9 @@ export default function TechPage() {
             <div className="lg:col-span-6 flex flex-col space-y-6 justify-center">
               {/* LabOnTime Platform Showcase Image - Prominent Top Position */}
               <div className="bg-gradient-to-br from-slate-50 to-blue-50/50 border border-slate-200/90 rounded-[2.5rem] p-6 shadow-sm flex flex-col items-center text-center">
-                <h4 className="text-lg md:text-xl font-black text-slate-900 mb-4 tracking-tight">
+                <h3 className="text-lg md:text-xl font-black text-slate-900 mb-4 tracking-tight">
                   {_('tech.deviceCardTitle')}
-                </h4>
+                </h3>
                 <div className="w-full bg-white p-4 rounded-2xl border border-slate-200/90 shadow-sm flex items-center justify-center">
                   <img 
                     src={getAssetPath('LabOnTime platform.png')} 
@@ -295,20 +301,22 @@ export default function TechPage() {
                   <button
                     key={s.num}
                     role="tab"
+                    id={`step-tab-${s.num}`}
+                    aria-controls={`step-panel-${s.num}`}
                     aria-selected={activeStep === s.num}
                     onClick={() => setActiveStep(s.num)}
-                    className={`w-full text-start p-6 rounded-2xl border transition-all duration-300 flex gap-5 items-start focus:outline-none ${activeStep === s.num ? 'bg-blue-50/80 border-blue-200 shadow-sm' : 'bg-white border-slate-200/70 hover:bg-slate-50'}`}
+                    className={`w-full text-start p-6 rounded-2xl border transition-all duration-300 flex gap-5 items-start focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 ${activeStep === s.num ? 'bg-blue-50/80 border-blue-200 shadow-sm' : 'bg-white border-slate-200/70 hover:bg-slate-50'}`}
                   >
                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-black text-lg shrink-0 ${activeStep === s.num ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-500'}`}>
                       {s.num}
                     </div>
                     <div>
                       <h3 className="text-lg md:text-xl font-extrabold text-slate-900 mb-1">{s.title}</h3>
-                      <p className="text-slate-500 text-sm leading-relaxed font-normal">{s.desc}</p>
+                      <p className="text-slate-600 text-sm leading-relaxed font-normal">{s.desc}</p>
                       
                       {activeStep === s.num && (
                         <div className="mt-4 pt-3 border-t border-blue-100/50 flex items-center gap-2 text-xs font-bold text-blue-700">
-                          <Check className="w-3.5 h-3.5 text-blue-600" />
+                          <Check className="w-3.5 h-3.5 text-blue-600" aria-hidden="true" />
                           <span>{s.highlight}</span>
                         </div>
                       )}
@@ -324,13 +332,13 @@ export default function TechPage() {
         <TestToEmrAnimation />
 
         {/* --- HIGH-TECH VIDEO GALLERY GRID --- */}
-        <section className="mb-24">
+        <section className="mb-24" aria-labelledby="gallery-heading">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 bg-sky-100 border border-sky-200 text-sky-800 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest mb-3">
-              <Video className="w-4 h-4 text-sky-600" />
+              <Video className="w-4 h-4 text-sky-600" aria-hidden="true" />
               {galleryHeadings.badge[lang] || galleryHeadings.badge.en || galleryHeadings.badge.he}
             </div>
-            <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
+            <h2 id="gallery-heading" className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
               {galleryHeadings.title[lang] || galleryHeadings.title.en || galleryHeadings.title.he}
             </h2>
             <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto mt-3 font-light">
@@ -343,21 +351,14 @@ export default function TechPage() {
               const vidTitle = vid.title[lang] || vid.title.en || vid.title.he;
               const vidDesc = vid.desc[lang] || vid.desc.en || vid.desc.he;
               return (
-                <div 
+                <button
+                  type="button"
                   key={vid.id}
                   onClick={() => setActiveVideoModal(vid.youtubeId)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      setActiveVideoModal(vid.youtubeId);
-                    }
-                  }}
                   aria-label={`${_('product.video')}: ${vidTitle}`}
-                  className="group bg-white rounded-3xl border border-slate-200/80 shadow-md hover:shadow-2xl overflow-hidden cursor-pointer transition-all duration-300 card-3d-lift flex flex-col justify-between focus:outline-none focus:ring-4 focus:ring-blue-500/40 text-start"
+                  className="group bg-white rounded-3xl border border-slate-200/80 shadow-md hover:shadow-2xl overflow-hidden cursor-pointer transition-all duration-300 card-3d-lift flex flex-col justify-between focus:outline-none focus:ring-4 focus:ring-blue-500/40 text-start w-full"
                 >
-                  <div className="relative h-48 bg-slate-900 overflow-hidden">
+                  <div className="relative h-48 bg-slate-900 overflow-hidden w-full">
                     <img 
                       src={`https://img.youtube.com/vi/${vid.youtubeId}/hqdefault.jpg`} 
                       alt={vidTitle}
@@ -374,59 +375,68 @@ export default function TechPage() {
                     {/* Play Button Overlay */}
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="w-14 h-14 rounded-full bg-burgundy/90 text-white flex items-center justify-center shadow-xl group-hover:scale-110 group-hover:bg-burgundy transition-all duration-300 border-2 border-white/40 btn-bouncy">
-                        <Play className="w-6 h-6 fill-current translate-x-0.5" />
+                        <Play className="w-6 h-6 fill-current translate-x-0.5" aria-hidden="true" />
                       </div>
                     </div>
                   </div>
 
-                  <div className="p-6 flex flex-col flex-grow justify-between">
+                  <div className="p-6 flex flex-col flex-grow justify-between w-full">
                     <div>
                       <h3 className="font-extrabold text-slate-900 text-lg mb-2 leading-snug group-hover:text-blue-600 transition-colors">
                         {vidTitle}
                       </h3>
-                      <p className="text-slate-500 text-xs leading-relaxed font-normal">
+                      <p className="text-slate-600 text-xs leading-relaxed font-normal">
                         {vidDesc}
                       </p>
                     </div>
                     <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-blue-600 group-hover:text-burgundy transition-colors">
                       <span>{_('product.video')}</span>
-                      <Play className="w-3.5 h-3.5" />
+                      <Play className="w-3.5 h-3.5" aria-hidden="true" />
                     </div>
                   </div>
-                </div>
+                </button>
               );
             })}
           </div>
         </section>
 
-        {/* Video Lightbox Modal */}
-        {activeVideoModal && (
+        {/* Video Lightbox Modal (WCAG 2.1.2) */}
+        {activeVideoModal && typeof document !== 'undefined' && createPortal(
           <div 
-            className="fixed inset-0 z-[200] bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in"
+            className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
             role="dialog"
             aria-modal="true"
             aria-label={_('product.video')}
           >
-            <div className="relative w-full max-w-4xl bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-white/20">
+            {/* Backdrop overlay — clicking outside immediately closes the video */}
+            <div 
+              className="fixed inset-0 bg-slate-950/85 backdrop-blur-md animate-fade-in"
+              onClick={() => setActiveVideoModal(null)}
+              aria-hidden="true"
+            />
+
+            <div className="relative z-10 w-full max-w-4xl bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-white/20 animate-in zoom-in-95 my-auto">
               <button 
+                type="button"
                 onClick={() => setActiveVideoModal(null)}
-                className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center backdrop-blur-md transition-all focus:outline-none focus:ring-2 focus:ring-white"
-                aria-label="Close video"
+                className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center backdrop-blur-md transition-all focus:outline-none focus:ring-2 focus:ring-white"
+                aria-label={isHe ? 'סגור סרטון' : 'Close video'}
               >
-                <X className="w-5 h-5" />
+                <X className="w-5 h-5" aria-hidden="true" />
               </button>
               <div className="aspect-video w-full">
                 <iframe
                   className="w-full h-full"
                   src={`https://www.youtube.com/embed/${activeVideoModal}?autoplay=1`}
-                  title="YouTube video player"
+                  title={isHe ? 'סרטון הדגמה BMT' : 'BMT Product Demonstration Video'}
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
               </div>
             </div>
-          </div>
+          </div>,
+          document.body
         )}
 
       </div>

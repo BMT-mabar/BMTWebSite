@@ -20,13 +20,13 @@ export default function ProductCard({ prod, lang, isRtl, _, nav }) {
   return (
     <button 
       onClick={() => nav('product', prod)} 
-      className="text-start group bg-white rounded-[2.5rem] shadow-md hover:shadow-2xl border border-slate-200/80 hover:border-blue-300/80 overflow-hidden transition-all duration-500 card-3d-lift flex flex-col focus:outline-none focus:ring-4 focus:ring-blue-500/10 w-full h-full relative"
-      aria-label={`View details for ${prod.title[lang] || prod.title.en || prod.title.he}`}
+      className="text-start group bg-white rounded-[2.5rem] shadow-md hover:shadow-2xl border border-slate-200/80 hover:border-blue-300/80 overflow-hidden transition-all duration-500 card-3d-lift flex flex-col focus:outline-none focus:ring-4 focus:ring-blue-500/20 w-full h-full relative"
+      aria-label={`${_('home.viewDetails') || (isRtl ? 'פרטי מוצר' : 'View details')}: ${prod.title[lang] || prod.title.en || prod.title.he}`}
     >
       <div className="h-60 w-full overflow-hidden bg-gradient-to-b from-slate-50/80 to-blue-50/20 flex items-center justify-center p-8 relative border-b border-slate-100/80">
         {isPlaceholder ? (
           <div className="text-center opacity-30 group-hover:opacity-85 transition duration-500 transform group-hover:scale-105">
-            <Icon className="w-16 h-16 mx-auto text-blue-900 mb-3" strokeWidth={1.5} />
+            <Icon className="w-16 h-16 mx-auto text-blue-900 mb-3" strokeWidth={1.5} aria-hidden="true" />
             <div className="font-extrabold text-blue-900 tracking-widest text-[10px] uppercase">BMT Diagnostics</div>
           </div>
         ) : (
@@ -87,7 +87,7 @@ export default function ProductCard({ prod, lang, isRtl, _, nav }) {
              </span>
           )}
           <span className={`font-extrabold text-sm flex items-center gap-1.5 transition-all ${isRtl ? 'flex-row-reverse' : ''} text-blue-600 group-hover:text-burgundy group-hover:bg-burgundy/5 px-4 py-2 rounded-xl border border-transparent group-hover:border-burgundy/10`}>
-            {_('product.view')} {isRtl ? <ArrowLeft className="w-4 h-4"/> : <ArrowRight className="w-4 h-4"/>}
+            {_('product.view')} {isRtl ? <ArrowLeft className="w-4 h-4" aria-hidden="true" /> : <ArrowRight className="w-4 h-4" aria-hidden="true" />}
           </span>
         </div>
       </div>

@@ -263,7 +263,7 @@ export default function CatalogPage({ category, onOpenRfq }) {
             <div className="mb-16 max-w-5xl mx-auto">
               <div className="relative mb-8 shadow-sm group">
                 <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
-                  <Search className="h-6 w-6 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
+                  <Search className="h-6 w-6 text-slate-400 group-focus-within:text-blue-500 transition-colors" aria-hidden="true" />
                 </div>
                 <input
                   type="text"
@@ -280,6 +280,7 @@ export default function CatalogPage({ category, onOpenRfq }) {
                 {subCats.map(sc => (
                   <button 
                     key={sc} 
+                    type="button"
                     onClick={() => setFilter(sc)}
                     aria-pressed={filter === sc}
                     className={`px-6 py-3 rounded-full text-sm font-extrabold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-burgundy ${filter === sc ? 'bg-burgundy text-white shadow-lg shadow-burgundy/15 scale-102' : 'bg-slate-50 border border-slate-200 text-slate-650 hover:bg-slate-100 hover:border-slate-350'}`}
@@ -308,10 +309,11 @@ export default function CatalogPage({ category, onOpenRfq }) {
               <div className="bg-slate-50 border border-slate-200 rounded-3xl p-12 text-center max-w-2xl mx-auto mb-16">
                 <p className="text-slate-500 font-medium mb-4">{_('catalog.noItemsFound')}</p>
                 <button
+                  type="button"
                   onClick={() => { setSearchTerm(''); setFilter('All'); }}
                   className="inline-flex items-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm"
                 >
-                  <RotateCcw className="w-4 h-4" />
+                  <RotateCcw className="w-4 h-4" aria-hidden="true" />
                   <span>{_('catalog.resetFilters')}</span>
                 </button>
               </div>
@@ -328,7 +330,7 @@ export default function CatalogPage({ category, onOpenRfq }) {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-slate-100 pb-8 mb-10">
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl border border-blue-100/50 flex items-center justify-center shadow-sm shrink-0">
-                  <FileSpreadsheet className="w-7 h-7 text-blue-600" />
+                  <FileSpreadsheet className="w-7 h-7 text-blue-600" aria-hidden="true" />
                 </div>
                 <div>
                   <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
@@ -346,10 +348,11 @@ export default function CatalogPage({ category, onOpenRfq }) {
                 </span>
                 {(tableSearch || tableFilter !== 'All' || specimenFilter !== 'All') && (
                   <button
+                    type="button"
                     onClick={resetTableFilters}
                     className="text-xs text-slate-500 hover:text-blue-600 flex items-center gap-1 border border-slate-200 px-3 py-2 rounded-xl bg-slate-50 font-bold transition"
                   >
-                    <RotateCcw className="w-3.5 h-3.5" />
+                    <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
                     <span>{_('catalog.resetFilters')}</span>
                   </button>
                 )}
@@ -360,7 +363,7 @@ export default function CatalogPage({ category, onOpenRfq }) {
             <div className="grid md:grid-cols-12 gap-4 mb-8">
               <div className="md:col-span-6 relative group">
                 <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
-                  <Search className="h-5 w-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
+                  <Search className="h-5 w-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" aria-hidden="true" />
                 </div>
                 <input
                   type="text"
@@ -403,10 +406,13 @@ export default function CatalogPage({ category, onOpenRfq }) {
               </div>
             </div>
 
-            {/* The Clinical Table */}
+            {/* The Clinical Table (WCAG 1.3.1 Data Tables & 2.4.4 Contextual Actions) */}
             <div className="overflow-x-auto rounded-3xl border border-slate-200 shadow-inner bg-slate-50/20">
               <table className="min-w-full divide-y divide-slate-200">
-                <thead className="bg-slate-50 text-slate-700 font-extrabold text-xs uppercase tracking-widest text-start">
+                <caption className="sr-only">
+                  {_('catalog.fullTableTitle') || (isHe ? 'טבלת קטלוג מוצרים דיאגנוסטיים מלאה' : 'Full Diagnostic Product Catalog Table')}
+                </caption>
+                <thead className="bg-slate-50 text-slate-750 font-extrabold text-xs uppercase tracking-widest text-start">
                   <tr>
                     <th scope="col" className="px-6 py-5 text-start w-24 font-black">
                       {_('catalog.colCatNo')}
@@ -450,7 +456,7 @@ export default function CatalogPage({ category, onOpenRfq }) {
                           <td className="px-6 py-4 font-bold text-slate-900">
                             <div>{mainTitle}</div>
                             {subTitle && (
-                              <div className="text-xs text-slate-400 font-normal font-mono">{subTitle}</div>
+                              <div className="text-xs text-slate-500 font-normal font-mono">{subTitle}</div>
                             )}
                           </td>
                           <td className="px-6 py-4">
@@ -464,7 +470,8 @@ export default function CatalogPage({ category, onOpenRfq }) {
                           <td className="px-6 py-4 text-center">
                             <button
                               onClick={() => handleRequestQuote(p.catNo, mainTitle)}
-                              className="bg-burgundy hover:brightness-110 text-white font-extrabold text-xs px-4 py-2 rounded-xl transition shadow-sm btn-bouncy"
+                              className="bg-burgundy hover:brightness-110 text-white font-extrabold text-xs px-4 py-2 rounded-xl transition shadow-sm btn-bouncy focus:outline-none focus:ring-2 focus:ring-burgundy/40"
+                              aria-label={`${_('catalog.rfqAction')} - ${mainTitle} (${p.catNo})`}
                             >
                               {_('catalog.rfqAction')}
                             </button>
@@ -487,11 +494,12 @@ export default function CatalogPage({ category, onOpenRfq }) {
             {totalPages > 1 && (
               <div className="flex items-center justify-between mt-8 text-sm font-semibold text-slate-600">
                 <button
+                  type="button"
                   disabled={tablePage === 1}
                   onClick={() => setTablePage(prev => Math.max(1, prev - 1))}
-                  className="inline-flex items-center gap-2 border border-slate-200 bg-white text-slate-650 hover:bg-slate-55 px-5 py-3 rounded-2xl transition disabled:opacity-55 disabled:cursor-not-allowed font-bold"
+                  className="inline-flex items-center gap-2 border border-slate-200 bg-white text-slate-650 hover:bg-slate-55 px-5 py-3 rounded-2xl transition disabled:opacity-55 disabled:cursor-not-allowed font-bold focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  <ChevronLeft className="w-4 h-4 rtl:rotate-180" /> {_('catalog.prevPage')}
+                  <ChevronLeft className="w-4 h-4 rtl:rotate-180" aria-hidden="true" /> {_('catalog.prevPage')}
                 </button>
 
                 <div className="font-mono text-slate-500 text-xs">
@@ -499,11 +507,12 @@ export default function CatalogPage({ category, onOpenRfq }) {
                 </div>
 
                 <button
+                  type="button"
                   disabled={tablePage === totalPages}
                   onClick={() => setTablePage(prev => Math.min(totalPages, prev + 1))}
-                  className="inline-flex items-center gap-2 border border-slate-200 bg-white text-slate-650 hover:bg-slate-55 px-5 py-3 rounded-2xl transition disabled:opacity-55 disabled:cursor-not-allowed font-bold"
+                  className="inline-flex items-center gap-2 border border-slate-200 bg-white text-slate-650 hover:bg-slate-55 px-5 py-3 rounded-2xl transition disabled:opacity-55 disabled:cursor-not-allowed font-bold focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  {_('catalog.nextPage')} <ChevronRight className="w-4 h-4 rtl:rotate-180" />
+                  {_('catalog.nextPage')} <ChevronRight className="w-4 h-4 rtl:rotate-180" aria-hidden="true" />
                 </button>
               </div>
             )}
@@ -525,9 +534,10 @@ export default function CatalogPage({ category, onOpenRfq }) {
             <a
               href={category === 'b2b' ? getAssetPath('BMT-Products-Catalogue.pdf') : getAssetPath('BMT-Products-Catalogue2.pdf')}
               download
+              aria-label={`${category === 'b2b' ? _('catalog.downloadB2bPdf') : _('catalog.downloadB2cPdf')} (PDF)`}
               className="inline-flex items-center gap-3 bg-burgundy text-white hover:bg-burgundy-650 font-extrabold px-10 py-5 rounded-full transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-burgundy/30 text-sm md:text-base uppercase tracking-wider"
             >
-              <FileSpreadsheet className="w-5 h-5 text-white/95" />
+              <FileSpreadsheet className="w-5 h-5 text-white/95" aria-hidden="true" />
               <span>{_('catalog.downloadPdfBtn')}</span>
             </a>
           </div>
@@ -545,8 +555,9 @@ export default function CatalogPage({ category, onOpenRfq }) {
             {_('about.sub')}
           </p>
           <button 
+            type="button"
             onClick={onOpenRfq} 
-            className="relative z-10 bg-burgundy text-white px-10 py-5 rounded-full font-extrabold hover:brightness-110 transition-all duration-300 shadow-lg text-base md:text-lg btn-bouncy"
+            className="relative z-10 bg-burgundy text-white px-10 py-5 rounded-full font-extrabold hover:brightness-110 transition-all duration-300 shadow-lg text-base md:text-lg btn-bouncy focus:outline-none focus:ring-4 focus:ring-burgundy/30"
           >
             {_('nav.quote')}
           </button>

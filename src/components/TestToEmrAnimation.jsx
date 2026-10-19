@@ -9,8 +9,14 @@ export default function TestToEmrAnimation() {
   const [activeStep, setActiveStep] = useState(1);
   const [scanProgress, setScanProgress] = useState(0);
 
-  // Auto progression scan line ticker
+  // Auto progression scan line ticker (respects reduced motion preference)
   useEffect(() => {
+    const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isWidgetReducedMotion = typeof document !== 'undefined' && document.body.classList.contains('accessibility-reduce-motion');
+    if (prefersReducedMotion || isWidgetReducedMotion) {
+      return;
+    }
+
     const interval = setInterval(() => {
       setScanProgress((prev) => {
         if (prev >= 100) {
@@ -100,10 +106,12 @@ export default function TestToEmrAnimation() {
           {steps.map((step) => {
             const isActive = activeStep === step.id;
             return (
-              <div
+              <button
+                type="button"
                 key={step.id}
                 onClick={() => setActiveStep(step.id)}
-                className={`cursor-pointer p-6 rounded-3xl transition-all duration-300 border ${
+                aria-pressed={isActive}
+                className={`text-start w-full cursor-pointer p-6 rounded-3xl transition-all duration-300 border focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                   isActive
                     ? 'bg-white border-blue-500 shadow-md ring-2 ring-blue-500/20 translate-x-1'
                     : 'bg-white/75 border-slate-200/90 hover:bg-white hover:border-slate-300'
@@ -154,7 +162,7 @@ export default function TestToEmrAnimation() {
                     </div>
                   </div>
                 )}
-              </div>
+              </button>
             );
           })}
         </div>

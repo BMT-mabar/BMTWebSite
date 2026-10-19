@@ -20,6 +20,16 @@ const translations = {
       clinical: 'מאמרים', 
       quote: 'צור קשר' 
     },
+    accessibility: {
+      pauseCarousel: 'השהה גלילה אוטומטית',
+      playCarousel: 'הפעל גלילה אוטומטית',
+      scrollPrev: 'גלול מוצרים אחורה',
+      scrollNext: 'גלול מוצרים קדימה',
+      pausePartners: 'השהה תנועת שותפויות',
+      playPartners: 'הפעל תנועת שותפויות',
+      openMenu: 'פתח תפריט ניווט',
+      closeMenu: 'סגור תפריט ניווט'
+    },
     hero: { 
       title: 'מעבדה בזמן אמת<br/><span style="color:#7DD3FC;font-weight:800;">למען בריאות הציבור</span>', 
       sub: 'חברת BMT Diagnostics הינה חברה ישראלית המייצרת, משווקת ומוכרת בדיקות מהירות לשימוש רחב, תוך עמידה בתקני איכות רפואיים קפדניים.', 
@@ -430,6 +440,16 @@ const translations = {
       tech: 'Innovation', 
       clinical: 'Articles', 
       quote: 'Contact Us' 
+    },
+    accessibility: {
+      pauseCarousel: 'Pause automatic scrolling',
+      playCarousel: 'Resume automatic scrolling',
+      scrollPrev: 'Scroll products backwards',
+      scrollNext: 'Scroll products forwards',
+      pausePartners: 'Pause partners marquee',
+      playPartners: 'Resume partners marquee',
+      openMenu: 'Open navigation menu',
+      closeMenu: 'Close navigation menu'
     },
     hero: { 
       title: 'Lab In Real Time<br/><span style="color:#7DD3FC;font-weight:800;">For Public Health</span>', 

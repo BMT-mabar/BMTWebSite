@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import { MapPin, Phone, Mail, ArrowUpRight, ShieldCheck, X, AlertCircle, Scale, Lock, Stethoscope, Accessibility } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
@@ -8,16 +9,59 @@ export default function Footer() {
   const { _, isRtl } = useLanguage();
   const navigate = useNavigate();
   const [legalModal, setLegalModal] = useState(null); // 'privacy' | 'terms' | 'accessibility' | null
+  const modalRef = useRef(null);
+  const lastFocusRef = useRef(null);
 
-  // Escape key handler to close legal modal (WCAG 2.1.2)
+  // Focus restore & escape key handler to close legal modal (WCAG 2.1.2)
   useEffect(() => {
-    if (!legalModal) return;
-    const handleEscape = (e) => {
-      if (e.key === 'Escape') setLegalModal(null);
-    };
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
+    if (legalModal) {
+      lastFocusRef.current = document.activeElement;
+      document.body.style.overflow = 'hidden';
+
+      const raf = requestAnimationFrame(() => {
+        const first = modalRef.current?.querySelector('button:not([disabled]), [tabindex]:not([tabindex="-1"])');
+        first?.focus();
+      });
+
+      const handleEscape = (e) => {
+        if (e.key === 'Escape') setLegalModal(null);
+      };
+      document.addEventListener('keydown', handleEscape);
+
+      return () => {
+        cancelAnimationFrame(raf);
+        document.body.style.overflow = '';
+        document.removeEventListener('keydown', handleEscape);
+      };
+    } else {
+      lastFocusRef.current?.focus();
+    }
   }, [legalModal]);
+
+  // Focus trap for modal (WCAG 2.4.3)
+  const handleKeyDown = useCallback((e) => {
+    if (!legalModal) return;
+    if (e.key === 'Tab') {
+      const el = modalRef.current;
+      if (!el) return;
+      const nodes = Array.from(el.querySelectorAll('button:not([disabled]), [tabindex]:not([tabindex="-1"]), a[href]'));
+      if (!nodes.length) return;
+      const first = nodes[0];
+      const last = nodes[nodes.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  }, [legalModal]);
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [handleKeyDown]);
 
   const handleNav = (path) => {
     navigate(path);
@@ -25,7 +69,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative bg-gradient-to-b from-slate-50 to-blue-50/20 text-slate-600 overflow-hidden z-10 border-t border-slate-200">
+    <footer className="relative bg-gradient-to-b from-slate-50 to-blue-50/20 text-slate-600 overflow-hidden border-t border-slate-200">
       {/* Brand Dual Stripe Divider on top edge */}
       <div className="h-1.5 w-full bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600"></div>
       <div className="h-[2px] w-full bg-burgundy"></div>
@@ -62,10 +106,10 @@ export default function Footer() {
 
           {/* Quick Navigation Links */}
           <div className="md:col-span-3">
-            <h4 className="text-slate-900 font-extrabold mb-8 text-sm md:text-base tracking-widest uppercase flex items-center gap-2">
-              <span className="w-1.5 h-3 bg-burgundy rounded-full"></span>
+            <h2 className="text-slate-900 font-extrabold mb-8 text-sm md:text-base tracking-widest uppercase flex items-center gap-2">
+              <span className="w-1.5 h-3 bg-burgundy rounded-full" aria-hidden="true"></span>
               {_('footer.linksTitle')}
-            </h4>
+            </h2>
             <ul className="space-y-4 font-bold text-base">
               <li>
                 <button 
@@ -97,15 +141,26 @@ export default function Footer() {
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-350 group-hover:w-full"></span>
                 </button>
               </li>
+              <li>
+                <button 
+                  onClick={() => handleNav('/accessibility')} 
+                  className="relative py-1 text-slate-650 hover:text-emerald-700 transition-colors text-start focus:outline-none group inline-flex items-center gap-1.5 font-bold"
+                >
+                  <Accessibility className="w-3.5 h-3.5 text-emerald-600 shrink-0" aria-hidden="true" />
+                  <span>{_('legal.accessibilityTab')}</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-0.5" />
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-350 group-hover:w-full"></span>
+                </button>
+              </li>
             </ul>
           </div>
 
           {/* Contact Details */}
           <div className="md:col-span-4">
-            <h4 className="text-slate-900 font-extrabold mb-8 text-sm md:text-base tracking-widest uppercase flex items-center gap-2">
-              <span className="w-1.5 h-3 bg-blue-600 rounded-full"></span>
+            <h2 className="text-slate-900 font-extrabold mb-8 text-sm md:text-base tracking-widest uppercase flex items-center gap-2">
+              <span className="w-1.5 h-3 bg-blue-600 rounded-full" aria-hidden="true"></span>
               {_('footer.contactTitle')}
-            </h4>
+            </h2>
             <ul className="space-y-5 font-bold text-base text-slate-500">
               <li className="flex items-start gap-4">
                 <MapPin className="w-5 h-5 text-burgundy flex-shrink-0 mt-0.5" /> 
@@ -151,8 +206,9 @@ export default function Footer() {
               </button>
               <span className="text-slate-300">•</span>
               <button
-                onClick={() => setLegalModal('accessibility')}
+                onClick={() => handleNav('/accessibility')}
                 className="text-emerald-700 hover:text-emerald-900 font-extrabold underline decoration-emerald-400 underline-offset-4 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded px-1 flex items-center gap-1"
+                aria-label={_('legal.accessibilityTitle')}
               >
                 <Accessibility className="w-3.5 h-3.5 text-emerald-600" />
                 <span>{_('legal.accessibilityTitle')}</span>
@@ -167,50 +223,74 @@ export default function Footer() {
       </div>
 
       {/* Comprehensive MedTech Legal Modal */}
-      {legalModal && (
+      {legalModal && typeof document !== 'undefined' && createPortal(
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md animate-fade-in"
+          className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
           role="dialog"
           aria-modal="true"
           aria-labelledby="legal-modal-title"
           dir={isRtl ? 'rtl' : 'ltr'}
         >
-          <div className="bg-white rounded-[2.5rem] border border-slate-200 shadow-2xl max-w-3xl w-full p-6 sm:p-10 relative max-h-[88vh] overflow-y-auto flex flex-col justify-between">
-            
-            {/* Close Button */}
-            <button
-              onClick={() => setLegalModal(null)}
-              className="absolute top-6 right-6 rtl:right-auto rtl:left-6 text-slate-400 hover:text-slate-700 bg-slate-100 hover:bg-slate-200 p-2.5 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 z-10"
-              aria-label="Close"
-            >
-              <X className="w-5 h-5" />
-            </button>
+          {/* Backdrop overlay — clicking outside immediately closes the modal */}
+          <div 
+            className="fixed inset-0 bg-slate-950/80 backdrop-blur-md animate-fade-in"
+            onClick={() => setLegalModal(null)}
+            aria-hidden="true"
+          />
 
-            <div>
-              {/* Segmented Modal Tabs */}
-              <div className="flex flex-wrap items-center gap-2 bg-slate-100 p-1.5 rounded-2xl mb-8 w-fit max-w-full">
+          <div 
+            ref={modalRef}
+            className="bg-white rounded-[2.5rem] border border-slate-200 shadow-2xl max-w-3xl w-full relative z-10 max-h-[min(90vh,calc(100dvh-2.5rem))] my-auto flex flex-col overflow-hidden animate-in zoom-in-95 accessibility-modal-card"
+          >
+            
+            {/* Pinned Top Bar: Segmented Tabs & Prominent Close Button (Never scrolls away, never covered) */}
+            <div className="p-4 sm:px-8 border-b border-slate-100 flex items-center justify-between shrink-0 bg-white z-30 sticky top-0 shadow-xs">
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 bg-slate-100 p-1 sm:p-1.5 rounded-2xl max-w-full" role="tablist">
                 <button
+                  type="button"
+                  role="tab"
+                  aria-selected={legalModal === 'privacy'}
                   onClick={() => setLegalModal('privacy')}
-                  className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all duration-300 ${legalModal === 'privacy' ? 'bg-white text-blue-900 shadow-md scale-102' : 'text-slate-500 hover:text-slate-900'}`}
+                  className={`flex items-center gap-2 px-3 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all duration-300 ${legalModal === 'privacy' ? 'bg-white text-blue-900 shadow-md' : 'text-slate-500 hover:text-slate-900'}`}
                 >
-                  <ShieldCheck className="w-4 h-4 text-blue-600" />
+                  <ShieldCheck className="w-4 h-4 text-blue-600" aria-hidden="true" />
                   <span>{_('legal.privacyTab')}</span>
                 </button>
                 <button
+                  type="button"
+                  role="tab"
+                  aria-selected={legalModal === 'terms'}
                   onClick={() => setLegalModal('terms')}
-                  className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all duration-300 ${legalModal === 'terms' ? 'bg-white text-blue-900 shadow-md scale-102' : 'text-slate-500 hover:text-slate-900'}`}
+                  className={`flex items-center gap-2 px-3 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all duration-300 ${legalModal === 'terms' ? 'bg-white text-blue-900 shadow-md' : 'text-slate-500 hover:text-slate-900'}`}
                 >
-                  <Scale className="w-4 h-4 text-burgundy" />
+                  <Scale className="w-4 h-4 text-burgundy" aria-hidden="true" />
                   <span>{_('legal.termsTab')}</span>
                 </button>
                 <button
+                  type="button"
+                  role="tab"
+                  aria-selected={legalModal === 'accessibility'}
                   onClick={() => setLegalModal('accessibility')}
-                  className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all duration-300 ${legalModal === 'accessibility' ? 'bg-white text-blue-900 shadow-md scale-102' : 'text-slate-500 hover:text-slate-900'}`}
+                  className={`flex items-center gap-2 px-3 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all duration-300 ${legalModal === 'accessibility' ? 'bg-white text-blue-900 shadow-md' : 'text-slate-500 hover:text-slate-900'}`}
                 >
-                  <Accessibility className="w-4 h-4 text-emerald-600" />
+                  <Accessibility className="w-4 h-4 text-emerald-600" aria-hidden="true" />
                   <span>{_('legal.accessibilityTab')}</span>
                 </button>
               </div>
+
+              {/* Close Button */}
+              <button
+                type="button"
+                onClick={() => setLegalModal(null)}
+                className="text-slate-500 hover:text-slate-800 bg-slate-100 hover:bg-slate-200 p-2 sm:p-2.5 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 ms-2 shrink-0"
+                aria-label={isRtl ? 'סגור חלון' : 'Close window'}
+              >
+                <X className="w-5 h-5" aria-hidden="true" />
+              </button>
+            </div>
+
+            {/* Scrollable Content Body */}
+            <div className="p-6 sm:p-10 overflow-y-auto flex-grow">
 
               {/* TAB 1: PRIVACY POLICY */}
               {legalModal === 'privacy' && (
@@ -373,22 +453,24 @@ export default function Footer() {
               )}
             </div>
 
-            {/* Modal Bottom Status & Action */}
-            <div className="mt-8 pt-5 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+            {/* Modal Bottom Pinned Status & Action */}
+            <div className="p-4 sm:px-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 shrink-0 bg-slate-50/90 z-20">
               <div className="text-xs text-slate-400 font-mono flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span className="w-2 h-2 rounded-full bg-emerald-500" aria-hidden="true"></span>
                 <span>{_('legal.docId')}</span>
               </div>
               <button
+                type="button"
                 onClick={() => setLegalModal(null)}
-                className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-2xl font-bold text-sm transition focus:outline-none shadow-md btn-bouncy"
+                className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-2xl font-bold text-sm transition focus:outline-none focus:ring-4 focus:ring-blue-500/20 shadow-md btn-bouncy"
               >
                 {_('legal.acknowledgeBtn')}
               </button>
             </div>
 
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </footer>
   );

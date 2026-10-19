@@ -117,6 +117,7 @@ export default function SocialFloatingWidget() {
         <div className="flex flex-col items-center gap-2.5 animate-in fade-in slide-in-from-bottom-3 duration-300">
           {socialLinks.map((social) => {
             const Icon = social.icon;
+            const newTabNotice = isRtl ? 'נפתח בלשונית חדשה' : 'opens in new tab';
 
             return (
               <a
@@ -125,10 +126,10 @@ export default function SocialFloatingWidget() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`group relative flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full ${social.bg} ${social.shadow} transition-all duration-300 hover:scale-110 active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-500/50 btn-bouncy`}
-                aria-label={social.tooltip}
+                aria-label={`${social.tooltip} (${newTabNotice})`}
                 title={social.tooltip}
               >
-                <Icon className="w-4 h-4 sm:w-5 sm:h-5 fill-current shrink-0" />
+                <Icon className="w-4 h-4 sm:w-5 sm:h-5 fill-current shrink-0" aria-hidden="true" />
                 
                 {/* Floating Tooltip Bubble */}
                 <span 
@@ -142,22 +143,26 @@ export default function SocialFloatingWidget() {
 
           {/* Minimize / Toggle button */}
           <button
+            type="button"
             onClick={() => setIsExpanded(false)}
             className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-800/80 hover:bg-slate-900 text-white flex items-center justify-center shadow-md hover:scale-105 transition-all text-xs focus:outline-none focus:ring-2 focus:ring-blue-400 opacity-70 hover:opacity-100"
             title={collapseTooltip}
             aria-label={collapseTooltip}
+            aria-expanded="true"
           >
-            <Share2 className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+            <Share2 className="w-3 h-3 sm:w-3.5 sm:h-3.5" aria-hidden="true" />
           </button>
         </div>
       ) : (
         <button
+          type="button"
           onClick={() => setIsExpanded(true)}
           className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-all focus:outline-none focus:ring-4 focus:ring-blue-500/40 btn-bouncy"
           title={expandTooltip}
           aria-label={expandTooltip}
+          aria-expanded="false"
         >
-          <Share2 className="w-4 h-4 sm:w-5 sm:h-5" />
+          <Share2 className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
         </button>
       )}
     </div>

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import LanguageSelector from './LanguageSelector';
@@ -25,11 +25,21 @@ export default function Navbar({ onOpenRfq }) {
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
       window.removeEventListener("keydown", handleKeyDown);
     };
+  }, [isMobileMenuOpen]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      return () => { document.body.style.overflow = ''; };
+    }
   }, [isMobileMenuOpen]);
 
   const activeClass = (path) => {
@@ -73,13 +83,13 @@ export default function Navbar({ onOpenRfq }) {
           </button>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex items-center space-x-8 rtl:space-x-reverse">
-            <button onClick={() => handleNav('/about')} className={activeClass('/about')}>{_('nav.about')}</button>
-            <button onClick={() => handleNav('/catalog/b2b')} className={activeClass('/catalog/b2b')}>{_('nav.b2b')}</button>
-            <button onClick={() => handleNav('/catalog/b2c')} className={activeClass('/catalog/b2c')}>{_('nav.b2c')}</button>
-            <button onClick={() => handleNav('/tech')} className={activeClass('/tech')}>{_('nav.tech')}</button>
-            <button onClick={() => handleNav('/clinical')} className={activeClass('/clinical')}>{_('nav.clinical')}</button>
-          </div>
+          <ul className="hidden lg:flex items-center space-x-8 rtl:space-x-reverse" role="list">
+            <li><button onClick={() => handleNav('/about')} className={activeClass('/about')}>{_('nav.about')}</button></li>
+            <li><button onClick={() => handleNav('/catalog/b2b')} className={activeClass('/catalog/b2b')}>{_('nav.b2b')}</button></li>
+            <li><button onClick={() => handleNav('/catalog/b2c')} className={activeClass('/catalog/b2c')}>{_('nav.b2c')}</button></li>
+            <li><button onClick={() => handleNav('/tech')} className={activeClass('/tech')}>{_('nav.tech')}</button></li>
+            <li><button onClick={() => handleNav('/clinical')} className={activeClass('/clinical')}>{_('nav.clinical')}</button></li>
+          </ul>
 
           {/* Desktop Action & Language Dropdown */}
           <div className="hidden lg:flex items-center gap-6">
@@ -98,11 +108,11 @@ export default function Navbar({ onOpenRfq }) {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="text-slate-800 p-3 bg-slate-50 rounded-2xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              aria-label={isMobileMenuOpen ? 'סגור תפריט' : 'פתח תפריט'}
+              aria-label={isMobileMenuOpen ? (_('accessibility.closeMenu') || (isRtl ? 'סגור תפריט' : 'Close menu')) : (_('accessibility.openMenu') || (isRtl ? 'פתח תפריט' : 'Open menu'))}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-menu"
             >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMobileMenuOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
             </button>
           </div>
         </div>
@@ -110,23 +120,32 @@ export default function Navbar({ onOpenRfq }) {
 
       {/* Mobile Drawer */}
       {isMobileMenuOpen && (
-        <div id="mobile-menu" className="lg:hidden bg-white border-t border-slate-100 shadow-2xl absolute w-full left-0 z-40 animate-in slide-in-from-top-2" role="region" aria-label="Mobile navigation menu">
-          <div className="flex flex-col p-6 space-y-3 text-lg font-bold text-slate-800 max-h-[80vh] overflow-y-auto">
-            <button onClick={() => handleNav('/')} className={activeMobileClass('/')}>{_('nav.home')}</button>
-            <button onClick={() => handleNav('/about')} className={activeMobileClass('/about')}>{_('nav.about')}</button>
-            <button onClick={() => handleNav('/catalog/b2b')} className={activeMobileClass('/catalog/b2b')}>{_('nav.b2b')}</button>
-            <button onClick={() => handleNav('/catalog/b2c')} className={activeMobileClass('/catalog/b2c')}>{_('nav.b2c')}</button>
-            <button onClick={() => handleNav('/tech')} className={activeMobileClass('/tech')}>{_('nav.tech')}</button>
-            <button onClick={() => handleNav('/clinical')} className={activeMobileClass('/clinical')}>{_('nav.clinical')}</button>
-            
-            <button 
-              onClick={() => { setIsMobileMenuOpen(false); onOpenRfq(); }} 
-              className="bg-burgundy text-white text-center py-4 rounded-full mt-6 shadow-md text-lg focus:outline-none focus:ring-4 focus:ring-burgundy/30 font-extrabold"
-            >
-              {_('nav.quote')}
-            </button>
+        <>
+          <div 
+            className="fixed inset-0 top-24 md:top-32 bg-slate-950/40 backdrop-blur-[2px] z-30 lg:hidden animate-fade-in"
+            onClick={() => setIsMobileMenuOpen(false)}
+            aria-hidden="true"
+          />
+          <div id="mobile-menu" className="lg:hidden bg-white border-t border-slate-100 shadow-2xl absolute w-full left-0 z-40 animate-in slide-in-from-top-2" role="region" aria-label="Mobile navigation menu">
+            <div className="p-6 max-h-[80vh] overflow-y-auto">
+              <ul className="flex flex-col space-y-3 text-lg font-bold text-slate-800" role="list">
+                <li><button onClick={() => handleNav('/')} className={activeMobileClass('/') + ' w-full'}>{_('nav.home')}</button></li>
+                <li><button onClick={() => handleNav('/about')} className={activeMobileClass('/about') + ' w-full'}>{_('nav.about')}</button></li>
+                <li><button onClick={() => handleNav('/catalog/b2b')} className={activeMobileClass('/catalog/b2b') + ' w-full'}>{_('nav.b2b')}</button></li>
+                <li><button onClick={() => handleNav('/catalog/b2c')} className={activeMobileClass('/catalog/b2c') + ' w-full'}>{_('nav.b2c')}</button></li>
+                <li><button onClick={() => handleNav('/tech')} className={activeMobileClass('/tech') + ' w-full'}>{_('nav.tech')}</button></li>
+                <li><button onClick={() => handleNav('/clinical')} className={activeMobileClass('/clinical') + ' w-full'}>{_('nav.clinical')}</button></li>
+              </ul>
+              
+              <button 
+                onClick={() => { setIsMobileMenuOpen(false); onOpenRfq(); }} 
+                className="bg-burgundy text-white text-center py-4 rounded-full mt-6 shadow-md text-lg focus:outline-none focus:ring-4 focus:ring-burgundy/30 font-extrabold w-full"
+              >
+                {_('nav.quote')}
+              </button>
+            </div>
           </div>
-        </div>
+        </>
       )}
     </nav>
   );

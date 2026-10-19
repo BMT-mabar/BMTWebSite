@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Factory, TestTube, Briefcase, CheckCircle, Users, Milestone, Award, Flame, Calendar, Play, Video, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
+import { Video, Milestone, ChevronLeft, ChevronRight, Award, CheckCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { getAssetPath } from '../utils/imagePath';
 
@@ -172,10 +172,11 @@ export default function AboutPage() {
         style={{ background: 'linear-gradient(135deg, #0267B5 0%, #01417A 100%)' }}
       >
         {/* Blue Lab Team Background Image ("האנשים בכחול") */}
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
           <img 
-            src="/home-main-image.png" 
-            alt="BMT Blue Healthcare Team" 
+            src={getAssetPath('home-main-image.png')} 
+            alt="" 
+            aria-hidden="true"
             className="w-full h-full object-cover opacity-30 mix-blend-overlay scale-105"
             onError={(e) => { e.target.style.display = 'none'; }}
           />
@@ -199,7 +200,7 @@ export default function AboutPage() {
       </section>
 
       {/* --- HERO INTRO COMPANY VIDEO PLAYER (Sleek & Elegant Sizing) --- */}
-      <section className="max-w-3xl mx-auto px-4 -mt-10 sm:-mt-14 relative z-20 mb-20">
+      <section className="max-w-3xl mx-auto px-4 -mt-10 sm:-mt-14 relative z-20 mb-20" aria-label="Company Overview Video">
         <div className="bg-slate-900 rounded-[2rem] overflow-hidden border-4 border-white shadow-2xl relative group">
           <div className="aspect-video w-full">
             <iframe
@@ -214,7 +215,7 @@ export default function AboutPage() {
           <div className="bg-slate-950 p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-white/10 text-white">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-xl bg-burgundy flex items-center justify-center text-white shrink-0 shadow-md">
-                <Video className="w-4 h-4" />
+                <Video className="w-4 h-4" aria-hidden="true" />
               </div>
               <div className="text-start">
                 <div className="text-sm sm:text-base font-extrabold text-white">
@@ -233,7 +234,10 @@ export default function AboutPage() {
       </section>
 
       {/* Core Company Strengths Grid with High-Res Visual Image Banners */}
-      <section className="max-w-7xl mx-auto px-4 relative z-20 mb-24">
+      <section className="max-w-7xl mx-auto px-4 relative z-20 mb-24" aria-labelledby="core-strengths-heading">
+        <h2 id="core-strengths-heading" className="sr-only">
+          {isHe ? 'יתרונות ויכולות הליבה של החברה' : 'Core Company Capabilities & Strengths'}
+        </h2>
         <div className="grid md:grid-cols-3 gap-8">
           
           {/* Strength 1: Manufacturing Excellence */}
@@ -319,7 +323,7 @@ export default function AboutPage() {
           {/* Section Title */}
           <div className="text-center mb-10">
             <div className="inline-flex items-center gap-2 bg-blue-600 text-white text-xs font-black px-4 py-2 rounded-full uppercase tracking-widest mb-3 shadow-md">
-              <Milestone className="w-4 h-4 text-sky-200" />
+              <Milestone className="w-4 h-4 text-sky-200" aria-hidden="true" />
               {_('about.milestoneBadge')}
             </div>
             <h2 className="text-2xl md:text-4xl font-black tracking-tight text-slate-900">
@@ -379,20 +383,22 @@ export default function AboutPage() {
             {/* Navigation Chevron Buttons */}
             <div className="flex items-center gap-3 shrink-0">
               <button
+                type="button"
                 onClick={() => setActiveMilestoneIndex(prev => Math.max(0, prev - 1))}
                 disabled={activeMilestoneIndex === 0}
                 className="w-12 h-12 rounded-2xl bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 flex items-center justify-center border border-slate-200 disabled:opacity-30 disabled:cursor-not-allowed transition-all focus:outline-none focus:ring-2 focus:ring-blue-500"
                 aria-label={isHe ? 'ציון דרך קודם' : 'Previous milestone'}
               >
-                <ChevronLeft className="w-5 h-5 rtl:rotate-180" />
+                <ChevronLeft className="w-5 h-5 rtl:rotate-180" aria-hidden="true" />
               </button>
               <button
+                type="button"
                 onClick={() => setActiveMilestoneIndex(prev => Math.min(milestones.length - 1, prev + 1))}
                 disabled={activeMilestoneIndex === milestones.length - 1}
                 className="w-12 h-12 rounded-2xl bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 flex items-center justify-center border border-slate-200 disabled:opacity-30 disabled:cursor-not-allowed transition-all focus:outline-none focus:ring-2 focus:ring-blue-500"
                 aria-label={isHe ? 'ציון דרך הבא' : 'Next milestone'}
               >
-                <ChevronRight className="w-5 h-5 rtl:rotate-180" />
+                <ChevronRight className="w-5 h-5 rtl:rotate-180" aria-hidden="true" />
               </button>
             </div>
           </div>
@@ -405,7 +411,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4">
            <div className="text-center mb-20">
              <div className="inline-flex items-center gap-2 bg-burgundy/5 border border-burgundy/10 text-burgundy text-xs font-bold px-5 py-2 rounded-full uppercase tracking-widest mb-6 shadow-sm">
-               <Award className="w-4 h-4 text-burgundy" />
+               <Award className="w-4 h-4 text-burgundy" aria-hidden="true" />
                {_('about.leaderBadge')}
              </div>
              <h2 id="team-heading" className="text-3xl md:text-5xl font-black text-slate-900 mb-6 text-center tracking-tight">
@@ -425,19 +431,19 @@ export default function AboutPage() {
                   </div>
                   <ul className="space-y-4 text-slate-600 text-sm leading-relaxed font-normal">
                     <li className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-burgundy shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-burgundy shrink-0 mt-0.5" aria-hidden="true" />
                       <span>{_('about.n1')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-burgundy shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-burgundy shrink-0 mt-0.5" aria-hidden="true" />
                       <span>{_('about.n2')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-burgundy shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-burgundy shrink-0 mt-0.5" aria-hidden="true" />
                       <span>{_('about.n3')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-burgundy shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-burgundy shrink-0 mt-0.5" aria-hidden="true" />
                       <span>{_('about.n4')}</span>
                     </li>
                   </ul>
@@ -453,19 +459,19 @@ export default function AboutPage() {
                   </div>
                   <ul className="space-y-4 text-slate-600 text-sm leading-relaxed font-normal">
                     <li className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" aria-hidden="true" />
                       <span>{_('about.i1')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" aria-hidden="true" />
                       <span>{_('about.i2')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" aria-hidden="true" />
                       <span>{_('about.i3')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" aria-hidden="true" />
                       <span>{_('about.i4')}</span>
                     </li>
                   </ul>
@@ -481,19 +487,19 @@ export default function AboutPage() {
                   </div>
                   <ul className="space-y-4 text-slate-600 text-sm leading-relaxed font-normal">
                     <li className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" aria-hidden="true" />
                       <span>{_('about.r1')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" aria-hidden="true" />
                       <span>{_('about.r2')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" aria-hidden="true" />
                       <span>{_('about.r3')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" aria-hidden="true" />
                       <span>{_('about.r4')}</span>
                     </li>
                   </ul>
